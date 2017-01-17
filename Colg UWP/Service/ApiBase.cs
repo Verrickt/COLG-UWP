@@ -25,7 +25,8 @@ namespace Colg_UWP.Service
             using (HttpClient client = HttpClientManager.CreateClient())
             using (CancellationTokenSource cts = new CancellationTokenSource())
             {
-                Debug.WriteLine($"Requesting Page: {uri}");
+                Debug.WriteLine($"Thread {Environment.CurrentManagedThreadId}" +
+                    $" is Requesting{Environment.NewLine}{uri}");
                 if (content == null)
                 {
                     content = new Dictionary<string, string>()
@@ -36,7 +37,8 @@ namespace Colg_UWP.Service
                 HttpFormUrlEncodedContent _content = new HttpFormUrlEncodedContent(content);
                 var response = await client.PostAsync(new Uri(uri), _content).AsTask(false, cts.Token);
                 response.EnsureSuccessStatusCode();
-                Debug.WriteLine($"Response received");
+                Debug.WriteLine($"Thread {Environment.CurrentManagedThreadId} " +
+                    $"has received response {Environment.NewLine}{uri}");
                 return await response.Content.ReadAsStringAsync().AsTask(false);
             }
         }
