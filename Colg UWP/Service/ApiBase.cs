@@ -15,12 +15,12 @@ namespace Colg_UWP.Service
 
     public class ApiBase
     {
-        public static async Task<string> GetPost(string uri)
+        protected static async Task<string> GetPost(string uri)
         {
             return await GetPost(uri, null).ConfigureAwait(false);
         }
 
-        public static async Task<string> GetPost(string uri, Dictionary<string, string> content)
+        protected static async Task<string> GetPost(string uri, Dictionary<string, string> content)
         {
             using (HttpClient client = HttpClientManager.CreateClient())
             using (CancellationTokenSource cts = new CancellationTokenSource())
