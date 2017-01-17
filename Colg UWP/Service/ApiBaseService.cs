@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace Colg_UWP.Service
 {
@@ -30,9 +31,10 @@ namespace Colg_UWP.Service
                     return JObject.Parse(json);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Debug.WriteLine($"Exceptoin thown at ApiBaseService.GetJson{Environment.NewLine}" +
+                    $"{e.ToString()}");
                 return null;
             }
         }
