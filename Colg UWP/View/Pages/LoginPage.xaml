@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="Colg_UWP.View.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Colg_UWP.View.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="using:Colg_UWP.ViewModel"
+    xmlns:model="using:Colg_UWP.Model"
+    xmlns:controls="using:Colg_UWP.View.Controls"
+    Loaded="LoginPage_OnLoaded"
+    mc:Ignorable="d"
+    >
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+            <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" SelectedItem="{x:Bind VM.QuickLoginData,Mode=TwoWay,Converter={StaticResource GenericObjectConverter}}"
+                  SelectionChanged="SavedLoginDatas_OnSelectionChanged"  >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:LoginData">
+                        <controls:UserLoginTemplate></controls:UserLoginTemplate>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel>
+                <TextBox Text="{x:Bind VM.CurrentUserName,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
+                </TextBox>
+                <PasswordBox Password="{x:Bind VM.CurrentPassword,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
+                <ComboBox Name="SecurityQuestionComboBox" Margin="10,5" SelectedItem="{x:Bind VM.CurrentQuestion,Mode=TwoWay,Converter={StaticResource GenericObjectConverter}}" HorizontalAlignment="Stretch" ItemsSource="{x:Bind VM.SecurityQuestions}"   PlaceholderText="安全提问(未设置请忽略)"></ComboBox>
+                <TextBox  Margin="10,5" Visibility="{x:Bind VM.ShowAnswerTextBox,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}"  PlaceholderText="问题答案"></TextBox>
+                <StackPanel  Margin="10,5" Orientation="Horizontal">
+                    <CheckBox Margin="10,5" IsChecked="{x:Bind VM.AutoLogin,Mode=TwoWay}"  Content="记住我" IsThreeState="False"></CheckBox>
+                    <Button Content="登陆" Name="LoginButton" Click="LoginButton_OnClick" ></Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </RelativePanel>
+</Page>

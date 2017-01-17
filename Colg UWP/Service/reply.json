@@ -1,0 +1,266 @@
+﻿{
+  "Version": "4",
+  "Charset": "UTF-8",
+  "Variables": 
+  
+  {
+    "cookiepre": "5KaR_6d30_",
+    "auth": null,
+    "saltkey": "fNeotv7N",
+    "member_uid": "0",
+    "member_username": "",
+    "member_avatar": "http://ucenter.colg.cn/000/00/00/00_avatar_small.jpg",
+    "groupid": "7",
+    "formhash": "092acf77",
+    "ismoderator": "0",
+    "readaccess": "1",
+    "notice": {
+      "newpush": "0",
+      "newpm": "0",
+      "newprompt": "0",
+      "newmypost": "0"
+    },
+    "thread": {
+      "tid": "4525462",
+      "fid": "14",
+      "posttableid": "0",
+      "typeid": "0",
+      "sortid": "0",
+      "readperm": "0",
+      "price": "0",
+      "author": "石头酱",
+      "authorid": "468362",
+      "subject": "有旅游达人吗？现在有能帮我规划一条旅游路线的app吗？",
+      "dateline": "1472036980",
+      "lastpost": "2016-8-24 20:39",
+      "lastposter": "海带S",
+      "views": "82",
+      "replies": "28",
+      "displayorder": "0",
+      "highlight": "0",
+      "digest": "0",
+      "rate": "0",
+      "special": "0",
+      "attachment": "0",
+      "moderated": "0",
+      "closed": "0",
+      "stickreply": "0",
+      "recommends": "0",
+      "recommend_add": "0",
+      "recommend_sub": "0",
+      "heats": "16",
+      "status": "0",
+      "isgroup": "0",
+      "favtimes": "0",
+      "sharetimes": "0",
+      "stamp": "-1",
+      "icon": "-1",
+      "pushedaid": "0",
+      "cover": "0",
+      "replycredit": "34",
+      "relatebytag": "0",
+      "maxposition": "29",
+      "bgcolor": "",
+      "comments": "0",
+      "hidden": "0",
+      "threadtable": "forum_thread",
+      "threadtableid": "0",
+      "posttable": "forum_post",
+      "addviews": "3",
+      "allreplies": "28",
+      "is_archived": "",
+      "archiveid": "0",
+      "subjectenc": "%E6%9C%89%E6%97%85%E6%B8%B8%E8%BE%BE%E4%BA%BA%E5%90%97%EF%BC%9F%E7%8E%B0%E5%9C%A8%E6%9C%89%E8%83%BD%E5%B8%AE%E6%88%91%E8%A7%84%E5%88%92%E4%B8%80%E6%9D%A1%E6%97%85%E6%B8%B8%E8%B7%AF%E7%BA%BF%E7%9A%84app%E5%90%97%EF%BC%9F",
+      "short_subject": "有旅游达人吗？现在有能帮我规划一条旅游路线的app吗？ ...",
+      "replycredit_rule": {
+        "tid": "4525462",
+        "extcredits": "2",
+        "extcreditstype": "1",
+        "times": "30",
+        "membertimes": "1",
+        "random": "80",
+        "remaining": "17"
+      },
+      "recommendlevel": "0",
+      "heatlevel": "0",
+      "relay": "0",
+      "ordertype": "0",
+      "recommend": "0"
+    },
+    "fid": "14",
+    "postlist": [
+      {
+        "pid": "78701743",
+        "tid": "4525462",
+        "first": "1",
+        "author": "石头酱",
+        "authorid": "468362",
+        "dateline": "2016-8-24 19:09",
+        "message": "就是输入出发地和多个目的地，能帮我规划出旅游路线来的那种，有吗？
+        池塘有旅游达人帮我规划的话，有大量积分奉上 现在人在深圳，想去云南，四川，重庆。
+        另外，广西也近，如果值得去的话，加上广西也行。 一个人卖屁股穷游的那种，就万把块钱，预计9月初开始去
+        \n \n
+        \n大家有什么好建议或者小技巧可以告诉我的话，那是最好不过了","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"1","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"1","dbdateline":"1472036980","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78701787","tid":"4525462","first":"0","author":"天弓院真爱","authorid":"1196384","dateline":"2016-8-24 19:11","message":"有出国吗","anonymous":"0","attachment":"0","status":"264","replycredit":"0","position":"2","username":"天弓院真爱","adminid":"0","groupid":"65","memberstatus":"0","number":"2","dbdateline":"1472037112","groupiconid":"13","authoravatar":"http://ucenter.colg.cn/001/19/63/84_avatar_small.jpg"},{"pid":"78701807","tid":"4525462","first":"0","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:13","message":"
+        天弓院真爱
+        发表于 2016
+        -8 -24
+        19: 11
+        有出国吗
+
+        \n国内，现在在深圳，只去云南四川成都，广西顺路也可以去一下","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"3","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"3","dbdateline":"1472037201","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78702116","tid":"4525462","first":"0","author":"海带S","authorid":"323935","dateline":"2016-8-24 19:31","message":"马蜂窝http://www.mafengwo.cn/
+        \n
+        \n \n5月份去台湾的时候全靠它
+        各种路线，然后你再结合游记，自己修改成适合自己的
+        ","anonymous":"0","attachment":"0","status":"0","replycredit":"0","position":"4","username":"海带S","adminid":"0","groupid":"62","memberstatus":"0","number":"4","dbdateline":"1472038275","groupiconid":"10","authoravatar":"http: //ucenter.colg.cn/000/32/39/35_avatar_small.jpg"},{"pid":"78702179","tid":"4525462","first":"0","author":"千夜琉璃忆江南","authorid":"1404869","dateline":"2016-8-24 19:35","message":"拿分帮顶","anonymous":"0","attachment":"0","status":"0","replycredit":"2","position":"5","username":"千夜琉璃忆江南","adminid":"0","groupid":"62","memberstatus":"0","number":"5","dbdateline":"1472038535","groupiconid":"10","authoravatar":"http://ucenter.colg.cn/001/40/48/69_avatar_small.jpg"},{"pid":"78702190","tid":"4525462","first":"0","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:36","message":"
+        海带S
+        发表于 2016
+        -8 -24
+        19: 31
+        马蜂窝http: //www.mafengwo.cn/
+        \n
+        \n \n5月份去台湾的时候全靠它
+
+        \n出去拿分，100分奉上","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"6","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"6","dbdateline":"1472038569","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78702433","tid":"4525462","first":"0","author":"天弓院真爱","authorid":"1196384","dateline":"2016-8-24 19:52","message":"看来解决了","anonymous":"0","attachment":"0","status":"0","replycredit":"2","position":"7","username":"天弓院真爱","adminid":"0","groupid":"65","memberstatus":"0","number":"7","dbdateline":"1472039561","groupiconid":"13","authoravatar":"http://ucenter.colg.cn/001/19/63/84_avatar_small.jpg"},{"pid":"78702458","tid":"4525462","first":"0","author":"眼镜","authorid":"324857","dateline":"2016-8-24 19:54","message":"感觉多逛下 涂牛 这类网站 然后百度地图看看路线。
+        自己花个10天半月规划下更有意义","anonymous":"0","attachment":"0","status":"0","replycredit":"2","position":"8","username":"眼镜","adminid":"0","groupid":"64","memberstatus":"0","number":"8","dbdateline":"1472039692","groupiconid":"12","authoravatar":"http: //ucenter.colg.cn/000/32/48/57_avatar_small.jpg"},{"pid":"78702504","tid":"4525462","first":"0","author":"封兽鵺°","authorid":"1183054","dateline":"2016-8-24 19:57","message":"帮顶","anonymous":"0","attachment":"0","status":"1024","replycredit":"2","position":"9","username":"封兽鵺°","adminid":"0","groupid":"62","memberstatus":"0","number":"9","dbdateline":"1472039843","groupiconid":"10","authoravatar":"http://ucenter.colg.cn/001/18/30/54_avatar_small.jpg"},{"pid":"78702506","tid":"4525462","first":"0","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:57","message":"
+        天弓院真爱
+        发表于 2016
+        -8 -24
+        19: 52
+        看来解决了
+
+        \n没有，只是有好的推荐或者建议，我给分而已","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"10","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"10","dbdateline":"1472039849","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78702516","tid":"4525462","first":"0","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:58","message":"
+        眼镜
+        发表于 2016
+        -8 -24
+        19: 54
+        感觉多逛下 涂牛
+        这类网站 然后百度地图看看路线。
+        自己花个10天半月规划下更有意义 ...
+
+        \n先参考下大家意见再自己规划啊","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"11","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"11","dbdateline":"1472039886","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78702548","tid":"4525462","first":"0","author":"_银河眼","authorid":"1028462","dateline":"2016-8-24 20:00","message":"广西没啥玩的其实","anonymous":"0","attachment":"0","status":"8","replycredit":"2","position":"12","username":"_银河眼","adminid":"0","groupid":"64","memberstatus":"0","number":"12","dbdateline":"1472040011","groupiconid":"12","authoravatar":"http://ucenter.colg.cn/001/02/84/62_avatar_small.jpg"},{"pid":"78702560","tid":"4525462","first":"0","author":"_银河眼","authorid":"1028462","dateline":"2016-8-24 20:00","message":"去柳州看看柳江，然后嗦几碗粉吧","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"13","username":"_银河眼","adminid":"0","groupid":"64","memberstatus":"0","number":"13","dbdateline":"1472040054","groupiconid":"12","authoravatar":"http://ucenter.colg.cn/001/02/84/62_avatar_small.jpg"},{"pid":"78702649","tid":"4525462","first":"0","author":"石头酱","authorid":"468362","dateline":"2016-8-24 20:05","message":"
+        _银河眼
+        发表于 2016
+        -8 -24
+        20: 00
+        去柳州看看柳江，然后嗦几碗粉吧
+
+        \n其实我最想去的是去重庆看看所谓的3D城市","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"14","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"14","dbdateline":"1472040323","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78702673","tid":"4525462","first":"0","author":"yuzhe0000","authorid":"1449622","dateline":"2016-8-24 20:07","message":"帮顶","anonymous":"0","attachment":"0","status":"1024","replycredit":"2","position":"15","username":"yuzhe0000","adminid":"0","groupid":"60","memberstatus":"0","number":"15","dbdateline":"1472040420","groupiconid":"8","authoravatar":"http://ucenter.colg.cn/001/44/96/22_avatar_small.jpg"},{"pid":"78702713","tid":"4525462","first":"0","author":"wind6875","authorid":"296151","dateline":"2016-8-24 20:09","message":"拿分先","anonymous":"0","attachment":"0","status":"1024","replycredit":"0","position":"16","username":"wind6875","adminid":"0","groupid":"63","memberstatus":"0","number":"16","dbdateline":"1472040567","groupiconid":"11","authoravatar":"http://ucenter.colg.cn/000/29/61/51_avatar_small.jpg"},{"pid":"78702721","tid":"4525462","first":"0","author":"qinzhili10","authorid":"193316","dateline":"2016-8-24 20:09","message":"坐汽车还是火车 自驾还是什么 是想走走看看 还是去景点玩","anonymous":"0","attachment":"0","status":"0","replycredit":"0","position":"17","username":"qinzhili10","adminid":"0","groupid":"63","memberstatus":"0","number":"17","dbdateline":"1472040594","groupiconid":"11","authoravatar":"http://ucenter.colg.cn/000/19/33/16_avatar_small.jpg"},{"pid":"78702748","tid":"4525462","first":"0","author":"sumimasan","authorid":"353469","dateline":"2016-8-24 20:12","message":"来拿分。","anonymous":"0","attachment":"0","status":"1024","replycredit":"2","position":"18","username":"sumimasan","adminid":"0","groupid":"64","memberstatus":"0","number":"18","dbdateline":"1472040750","groupiconid":"12","authoravatar":"http://ucenter.colg.cn/000/35/34/69_avatar_small.jpg"},{"pid":"78702798","tid":"4525462","first":"0","author":"石头酱","authorid":"468362","dateline":"2016-8-24 20:16","message":"
+        qinzhili10
+        发表于 2016
+        -8 -24
+        20: 09
+        坐汽车还是火车 自驾还是什么
+        是想走走看看 还是去景点玩
+
+        \n飞机或者火车吧！，就是想走走看看，值得去的景点也去看看","anonymous":"0","attachment":"0","status":"8","replycredit":"0","position":"19","username":"石头酱","adminid":"0","groupid":"65","memberstatus":"0","number":"19","dbdateline":"1472040972","groupiconid":"13","authoravatar":"http: //ucenter.colg.cn/000/46/83/62_avatar_small.jpg"},{"pid":"78702812","tid":"4525462","first":"0","author":"RHS","authorid":"1251830","dateline":"2016-8-24 20:17","message":"降温前不要来重庆~","anonymous":"0","attachment":"0","status":"0","replycredit":"2","position":"20","username":"RHS","adminid":"0","groupid":"62","memberstatus":"0","number":"20","dbdateline":"1472041054","groupiconid":"10","authoravatar":"http://ucenter.colg.cn/001/25/18/30_avatar_small.jpg"}],"allowpostcomment":["2"],"comments":{"78701787":[{"id":"9083178","tid":"4525462","pid":"78701787","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:13","comment":"国内，现在在深圳，只去云南四川成都，广西顺路也可以去一下","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}],"78702116":[{"id":"9083270","tid":"4525462","pid":"78702116","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:36","comment":"出去拿分，100分奉上","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}],"78702190":[{"id":"9083525","tid":"4525462","pid":"78702190","author":"海带S","authorid":"323935","dateline":"2016-8-24 20:39","comment":"么么哒","avatar":"http://ucenter.colg.cn/000/32/39/35_avatar_small.jpg"}],"78702433":[{"id":"9083356","tid":"4525462","pid":"78702433","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:57","comment":"没有，只是有好的推荐或者建议，我给分而已","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}],"78702458":[{"id":"9083360","tid":"4525462","pid":"78702458","author":"石头酱","authorid":"468362","dateline":"2016-8-24 19:58","comment":"先参考下大家意见再自己规划啊","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}],"78702560":[{"id":"9083393","tid":"4525462","pid":"78702560","author":"石头酱","authorid":"468362","dateline":"2016-8-24 20:05","comment":"其实我最想去的是去重庆看看所谓的3D城市","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}],"78702721":[{"id":"9083439","tid":"4525462","pid":"78702721","author":"石头酱","authorid":"468362","dateline":"2016-8-24 20:16","comment":"飞机或者火车吧！，就是想走走看看，值得去的景点也去看看","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}],"78702812":[{"id":"9083458","tid":"4525462","pid":"78702812","author":"石头酱","authorid":"468362","dateline":"2016-8-24 20:21","comment":"突然想起来重庆好像是四大火炉之一","avatar":"http://ucenter.colg.cn/000/46/83/62_avatar_small.jpg"}]},"commentcount":{"78701787":"1","78702116":"1","78702190":"1","78702433":"1","78702458":"1","78702560":"1","78702721":"1","78702812":"1"},"ppp":"20","setting_rewriterule":{"portal_topic":"topic-{name}.html","portal_article":"article-{id}-{page}.html","forum_forumdisplay":"forum-{fid}-{page}.html","forum_viewthread":"thread-{tid}-{page}-{prevpage}.html","group_group":"group-{fid}-{page}.html","home_space":"space-{user}-{value}.html","home_blog":"blog-{uid}-{blogid}.html","forum_archiver":"{action}-{value}.html","plugin":"{pluginid}-{module}.html"},"setting_rewritestatus":["forum_forumdisplay","forum_viewthread"],"forum_threadpay":"","cache_custominfo_postno":["#",""],"forum":{"password":"0"},"app_video":{"on":"0"},"tt":{"fid":"14","description":"","password":"","icon":"http://static.colg.cn/bankuaitubiao/chitang.gif","redirect":"","attachextensions":"","creditspolicy":{"post":{"rid":"1","rulename":"发表主题","action":"post","cycletype":"4","cycletime":"0","rewardnum":"0","norepeat":"0","extcredits1":"2","extcredits2":"0","extcredits3":"0","extcredits4":"0","extcredits5":"0","extcredits6":"0","extcredits7":"0","extcredits8":"0","fids":"47,149,151,214,217,219,290,313,319,330,344,347,350,352,359,362,343,367,388,404,405,376,176,380,243,370,401,59,426,394,171,14"},"reply":{"rid":"2","rulename":"发表回复","action":"reply","cycletype":"4","cycletime":"0","rewardnum":"0","norepeat":"0","extcredits1":"0","extcredits2":"0","extcredits3":"2","extcredits4":"0","extcredits5":"0","extcredits6":"0","extcredits7":"0","extcredits8":"0","fids":"47,149,151,214,217,219,290,313,319,330,344,347,350,352,359,362,343,367,388,404,405,376,176,380,109,243,370,401,59,426,171,14"}},"formulaperm":"a:5:{i:0;s:0:\"\";i:1;s:0:\"\";s:7:\"message\";s:0:\"\";s:5:\"medal\";N;s:5:\"users\";s:0:\"\";}","moderators":"熊娃娃花子\t六条命的猫\t時音\tbomb","rules":"
+        \"\"
+
+        \r\n \r\n这里是个五行缺水的地方
+        \r\n1、请勿屠版、挖坟、刷分、纯表、商业性广告、无期限回复可见等，会死。 \r\n2、转帖请在标题中注明，尊重他人著作权。
+        \r\n3、擦边、H、血腥、暴力、反动、标题党等主题必须死。 \r\n4、其他具体细则遵循道德法律等相关准则，钻空子没意义。
+        \r\n5、最终解释权归COLG所有 \r\n自暴贴请用
+        【hide=d3】我是内容【/hide ]
+        】代码设置3天内隐藏（使用时【】替换为方括号） ...3天后不解除糖果会被没收的...
+        \r\n我管你TM的是老会员还是水王，再在池塘开战、闹事，见一个BAN一个。 \r\n不要把咖啡屋和事务所以及其它版块的争吵带回池塘来，我嫌脏\u0026nbsp;
+        \u0026nbsp;池塘的精神是有原则的理解和有底线的包容\u0026nbsp; \u0026nbsp;
+        切记 \r\n
+        \r\n绝对禁止任何低俗的东西出现在池塘\u0026nbsp; \u0026nbsp;
+        不合群请自觉离开\u0026nbsp; \u0026nbsp;
+        勿谈国事","threadtypes":[],"threadsorts":[],"viewperm":"\t10\t11\t58\t81\t82\t59\t83\t60\t61\t62\t63\t64\t65\t66\t38\t67\t74\t80\t84\t91\t17\t22\t23\t48\t50\t56\t57\t68\t70\t71\t73\t75\t76\t85\t86\t87\t88\t89\t90\t25\t32\t34\t44\t51\t52\t69\t79\t1\t2\t3\t7\t8\t","postperm":"\t11\t58\t81\t82\t59\t83\t60\t61\t62\t63\t64\t65\t66\t38\t67\t74\t80\t84\t91\t17\t22\t23\t48\t50\t56\t57\t68\t70\t71\t73\t75\t76\t85\t86\t87\t88\t89\t90\t25\t32\t34\t44\t51\t52\t69\t79\t1\t2\t3\t8\t","replyperm":"\t11\t58\t81\t82\t59\t83\t60\t61\t62\t63\t64\t65\t66\t38\t67\t74\t80\t84\t91\t17\t22\t23\t48\t50\t56\t57\t68\t70\t71\t73\t75\t76\t85\t86\t87\t88\t89\t90\t25\t32\t34\t44\t51\t52\t69\t79\t1\t2\t3\t8\t","getattachperm":"\t11\t58\t81\t82\t59\t83\t60\t61\t62\t63\t64\t65\t66\t38\t67\t74\t80\t84\t91\t17\t22\t23\t48\t50\t56\t57\t68\t70\t71\t73\t75\t76\t85\t86\t87\t88\t89\t90\t25\t32\t34\t44\t51\t52\t69\t79\t1\t2\t3\t7\t8\t","postattachperm":"\t11\t58\t81\t82\t59\t83\t60\t61\t62\t63\t64\t65\t66\t38\t67\t74\t80\t84\t91\t17\t22\t23\t48\t50\t56\t57\t68\t70\t71\t73\t75\t76\t85\t86\t87\t88\t89\t90\t25\t32\t34\t44\t51\t52\t69\t79\t1\t2\t3\t8\t","postimageperm":"\t58\t81\t82\t59\t83\t60\t61\t62\t63\t64\t65\t66\t38\t67\t74\t80\t84\t91\t17\t22\t23\t48\t50\t56\t57\t68\t70\t71\t73\t75\t76\t85\t86\t87\t88\t89\t90\t25\t32\t34\t44\t51\t52\t69\t79\t1\t2\t3\t8\t","spviewperm":"","seotitle":" { subject }
+        _Colg池塘_沃特碧聚集地","keywords":"Colg池塘,
+        Colg聊天区,
+        水区,
+        沃特碧休闲交流社区","seodescription":"Colg池塘是个五行缺水的地方,
+        聊天吹水,
+        放松心情。池塘的精神是有原则的理解和有底线的包容。豆芽在这里陪你谈天说地、洗地背锅，Colg是所有沃特碧的家。","supe_pushsetting":"a:
+        2: {
+          s:
+          6: \"status\";s:1:\"0\";s:6:\"filter\";a:4:{s:5:\"views\";s:1:\"0\";s:7:\"replies\";s:1:\"0\";s:6:\"digest\";s:1:\"0\";s:12:\"displayorder\";s:1:\"0\";}}",
+          "modrecommend": {
+            "open": "1",
+            "sort": "0",
+            "num": "10",
+            "imagenum": "1",
+            "imagewidth": "200",
+            "imageheight": "150",
+            "maxlength": "0",
+            "cachelife": "900",
+            "dateline": "0"
+          },
+          "threadplugin": [ ],
+          "replybg": "",
+          "extra": "a:2:{s:9:\"namecolor\";s:0:\"\";s:9:\"iconwidth\";s:2:\"45\";}",
+          "jointype": "0",
+          "gviewperm": "0",
+          "membernum": "0",
+          "dateline": "0",
+          "lastupdate": "0",
+          "activity": "0",
+          "founderuid": "0",
+          "foundername": "",
+          "banner": "",
+          "groupnum": "0",
+          "commentitem": "",
+          "relatedgroup": "",
+          "picstyle": "0",
+          "widthauto": "1",
+          "noantitheft": "0",
+          "noforumhidewater": "0",
+          "noforumrecommend": "0",
+          "livetid": "0",
+          "price": "0",
+          "fup": "4",
+          "type": "forum",
+          "name": "池塘",
+          "status": "1",
+          "displayorder": "1",
+          "styleid": "0",
+          "threads": "663900",
+          "posts": "9968364",
+          "todayposts": "2174",
+          "yesterdayposts": "2314",
+          "rank": "2",
+          "oldrank": "2",
+          "lastpost": "4525558\t这个人是谁啊，求名字\t1472042637\t军师",
+          "domain": "",
+          "allowsmilies": "1",
+          "allowhtml": "0",
+          "allowbbcode": "1",
+          "allowimgcode": "1",
+          "allowmediacode": "1",
+          "allowanonymous": "0",
+          "allowpostspecial": "21",
+          "allowspecialonly": "0",
+          "allowappend": "0",
+          "alloweditrules": "1",
+          "allowfeed": "0",
+          "allowside": "0",
+          "recyclebin": "1",
+          "modnewposts": "0",
+          "jammer": "0",
+          "disablewatermark": "0",
+          "inheritedmod": "1",
+          "autoclose": "60",
+          "forumcolumns": "4",
+          "catforumcolumns": "0",
+          "threadcaches": "0",
+          "alloweditpost": "1",
+          "simple": "0",
+          "modworks": "1",
+          "allowglobalstick": "1",
+          "level": "0",
+          "commoncredits": "0",
+          "archive": "0",
+          "recommend": "0",
+          "favtimes": "533",
+          "sharetimes": "0",
+          "disablethumb": "0",
+          "disablecollect": "0",
+          "ismoderator": "0",
+          "threadtableid": "0",
+          "allowreply": "",
+          "allowpost": "",
+          "allowpostattach": ""
+        }
+      }
+  }

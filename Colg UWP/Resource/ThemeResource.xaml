@@ -1,0 +1,21 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Colg_UWP.Resource">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default"></ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <Style x:Key="ForumViewThreadTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Gray"></Setter>
+            </Style>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <Style x:Key="ForumViewThreadTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"></Setter>
+            </Style>
+        </ResourceDictionary>
+</ResourceDictionary.ThemeDictionaries>
+
+
+</ResourceDictionary>
