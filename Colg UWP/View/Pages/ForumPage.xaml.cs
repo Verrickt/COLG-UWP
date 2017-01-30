@@ -45,7 +45,6 @@ namespace Colg_UWP.View.Pages
            
             VM = VM ?? new ForumVM();
             VM.Forum = e.Parameter as Forum;
-            ContentFrame.Navigate(typeof(DisplayPage));
             base.OnNavigatedTo(e);
         }
 

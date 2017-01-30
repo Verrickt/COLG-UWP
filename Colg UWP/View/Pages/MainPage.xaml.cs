@@ -30,6 +30,7 @@ namespace Colg_UWP.View.Pages
         {
             EnableGlobalBackRequest();
             MenuFrame.Navigate(typeof(HomePage));
+            ContentFrame.Navigate(typeof(DisplayPage));
         }
 
         private void EnableGlobalBackRequest()
