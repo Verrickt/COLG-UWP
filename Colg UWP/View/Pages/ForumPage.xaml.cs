@@ -18,7 +18,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class ForumPage : MenuPage
     {
-        private bool _discussionVisible;
 
         public ForumPage()
         {
@@ -55,36 +54,11 @@ namespace Colg_UWP.View.Pages
 
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
-            var discussion = _isDiscussionListVisible;
-            var frame = _isInnerFrameVisible;
-            if (discussion && frame)
-            {
-                if (InnerFrame.CanGoBack)
-                {
-                    InnerFrame.GoBack();
-                }
-                else
-                {
-                    this.Frame.GoBack();
-                }
-            }
-            if (discussion && !frame)
-            {
-                this.Frame.GoBack();
-            }
-            if (!discussion && frame)
-            {
-                ShowDiscussionList(true);
-                HideInnerFrame();
-            }
+           
             e.Handled = true;
         }
 
-        private bool _isDiscussionListVisible
-            =>
-            _discussionVisible = DiscussionListGrid.Visibility == Visibility.Visible;
-
-        private bool _isInnerFrameVisible => InnerFrame.Visibility == Visibility.Visible;
+      
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -103,70 +77,63 @@ namespace Colg_UWP.View.Pages
 
             if (VM.CheckForPermission(discussion.ReadPermission))
             {
-                if (!_isInnerFrameVisible)
-                {
-                    if (this.Width<=(double)Application.Current.Resources["NormalMinWidth"])
-                    {
-                        HideDiscussionList();
-                        ShowInnerFrame();
-                    }
-                }
-                InnerFrame.Navigate(typeof(DiscussionView), discussion);
+               
+                ContentFrame.Navigate(typeof(DiscussionView), discussion);
             }
         }
 
 
-        private void HideInnerFrame()
-        {
-            this.InnerFrame.Visibility=Visibility.Collapsed;
-        }
+        //private void HideInnerFrame()
+        //{
+        //    this.InnerFrame.Visibility=Visibility.Collapsed;
+        //}
 
-        private void HideDiscussionList()
-        {
-            this.DiscussionListGrid.Visibility=Visibility.Collapsed;
-        }
+        //private void HideDiscussionList()
+        //{
+        //    this.DiscussionListGrid.Visibility=Visibility.Collapsed;
+        //}
 
-        private void ShowDiscussionList(bool stretch)
-        {
-            DiscussionListGrid.Visibility=Visibility.Visible;
-            if (stretch)
-            {
-                DiscussionListGrid.Width = RelativeLayoutGrid.Width;
-            }
-            else
-            {
-                DiscussionListGrid.Width = 450d;
-            }
-        }
+        //private void ShowDiscussionList(bool stretch)
+        //{
+        //    DiscussionListGrid.Visibility=Visibility.Visible;
+        //    if (stretch)
+        //    {
+        //        DiscussionListGrid.Width = RelativeLayoutGrid.Width;
+        //    }
+        //    else
+        //    {
+        //        DiscussionListGrid.Width = 450d;
+        //    }
+        //}
 
-        private void ShowInnerFrame()
-        {
-            InnerFrame.Visibility = Visibility.Visible;
-        }
+        //private void ShowInnerFrame()
+        //{
+        //    InnerFrame.Visibility = Visibility.Visible;
+        //}
 
       
 
         private void ForumPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Size size = e.NewSize;
-            if (size.Width > (double)Application.Current.Resources["NormalMinWidth"])
-            {
-                ShowInnerFrame();
-                ShowDiscussionList(false);
-            }
-            else
-            {
-                if (!String.IsNullOrEmpty(InnerFrame.CurrentSourcePageType?.Name))
-                {
-                    HideDiscussionList();
-                    ShowInnerFrame();
-                }
-                else
-                {
-                    ShowDiscussionList(true);
-                    HideInnerFrame();
-                }
-            }
+        //    Size size = e.NewSize;
+        //    if (size.Width > (double)Application.Current.Resources["NormalMinWidth"])
+        //    {
+        //        ShowInnerFrame();
+        //        ShowDiscussionList(false);
+        //    }
+        //    else
+        //    {
+        //        if (!String.IsNullOrEmpty(InnerFrame.CurrentSourcePageType?.Name))
+        //        {
+        //            HideDiscussionList();
+        //            ShowInnerFrame();
+        //        }
+        //        else
+        //        {
+        //            ShowDiscussionList(true);
+        //            HideInnerFrame();
+        //        }
+        //    }
         }
     }
 }
