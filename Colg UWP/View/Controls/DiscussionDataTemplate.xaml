@@ -29,7 +29,7 @@
                 <Run Text="{x:Bind Post.TimePosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
             </TextBlock>
 
-            <TextBlock Grid.Row="2" Foreground="#999999" TextWrapping="Wrap">
+            <TextBlock Visibility="{x:Bind Post.LastPoster,Converter={StaticResource NullabilityToVisibilityConverter}}" Grid.Row="2" Foreground="#999999" TextWrapping="Wrap">
                 <Run Text="{x:Bind Post.LastPoster}"></Run>
                 <Run Text="最后回复于"></Run>
                 <Run Text="{x:Bind Post.TimeLastPosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
