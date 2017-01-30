@@ -12,26 +12,35 @@
     mc:Ignorable="d"
     >
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-            <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CommandBar Grid.Row="0">
+            <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
+        </CommandBar>
+        <RelativePanel Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" 
                   SelectionChanged="SavedLoginDatas_OnSelectionChanged"  >
-               
-            </ListView>
-            <StackPanel>
-                <TextBox Text="{x:Bind VM.CurrentLogin.Username,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
-                </TextBox>
-                <PasswordBox Password="{x:Bind VM.CurrentLogin.Password,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
-                <ComboBox Name="SecurityQuestionComboBox" Margin="10,5" 
+
+                </ListView>
+                <StackPanel>
+                    <TextBox Text="{x:Bind VM.CurrentLogin.Username,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
+                    </TextBox>
+                    <PasswordBox Password="{x:Bind VM.CurrentLogin.Password,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
+                    <ComboBox Name="SecurityQuestionComboBox" Margin="10,5" 
                           HorizontalAlignment="Stretch" 
                           SelectedIndex="{x:Bind VM.CurrentLogin.QuestionID,Mode=TwoWay}"
                           ItemsSource="{x:Bind VM.SecurityQuestions}"   
                           PlaceholderText="安全提问(未设置请忽略)"></ComboBox>
-                <TextBox  Margin="10,5"  Text="{x:Bind VM.CurrentLogin.Answer,Mode=TwoWay}"  PlaceholderText="问题答案"></TextBox>
-                <StackPanel  Margin="10,5" Orientation="Horizontal">
-                    <Button Content="登陆" Name="LoginButton" Click="LoginButton_OnClick" ></Button>
+                    <TextBox  Margin="10,5"  Text="{x:Bind VM.CurrentLogin.Answer,Mode=TwoWay}"  PlaceholderText="问题答案"></TextBox>
+                    <StackPanel  Margin="10,5" Orientation="Horizontal">
+                        <Button Content="登陆" Name="LoginButton" Click="LoginButton_OnClick" ></Button>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </RelativePanel>
+        </RelativePanel>
+    </Grid>
 </local:MenuPage>

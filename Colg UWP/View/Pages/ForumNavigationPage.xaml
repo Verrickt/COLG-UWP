@@ -18,75 +18,84 @@
         </DataTemplate>
 
     </Page.Resources>
-    <SemanticZoom>
-        <SemanticZoom.ZoomedInView>
-            <ListView Name="ZoomInView" SizeChanged="ZoomInView_OnSizeChanged"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CommandBar Grid.Row="0">
+            <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
+        </CommandBar>
+        <SemanticZoom Grid.Row="1">
+            <SemanticZoom.ZoomedInView>
+                <ListView Name="ZoomInView" SizeChanged="ZoomInView_OnSizeChanged"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   ItemsSource="{x:Bind ForumSource.View,Mode=OneWay}"
                   SelectionMode="None" IsItemClickEnabled="True"
                   ItemClick="ListView_ItemClick">
 
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                        <Setter Property="Margin" Value="10"></Setter>
-                        <Setter Property="Padding" Value="0"></Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Forum">
-                        <Grid Padding="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+                            <Setter Property="Padding" Value="0"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Forum">
+                            <Grid Padding="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                           Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
 
-                            </Grid.RowDefinitions>
+                                </Grid.RowDefinitions>
 
-                            <TextBlock HorizontalAlignment="Left" Margin="5" Text="{x:Bind Name}"
+                                <TextBlock HorizontalAlignment="Left" Margin="5" Text="{x:Bind Name}"
                                    Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="WrapWholeWords">
-                            </TextBlock>
-                            <RelativePanel Grid.Row="1">
-                                <StackPanel Margin="5,0" Orientation="Horizontal" Height="24"
+                                </TextBlock>
+                                <RelativePanel Grid.Row="1">
+                                    <StackPanel Margin="5,0" Orientation="Horizontal" Height="24"
                                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                                         RelativePanel.AlignRightWithPanel="True">
-                                    <FontIcon Glyph="&#xE15F;" FontFamily="Segoe MDL2 Assets" Height="24" Width="24"></FontIcon>
-                                    <TextBlock Text="{x:Bind PostToday}" Margin="5,0,0,0"></TextBlock>
-                                </StackPanel>
-                            </RelativePanel>
-                        </Grid>
+                                        <FontIcon Glyph="&#xE15F;" FontFamily="Segoe MDL2 Assets" Height="24" Width="24"></FontIcon>
+                                        <TextBlock Text="{x:Bind PostToday}" Margin="5,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                </RelativePanel>
+                            </Grid>
 
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-               <ListView.GroupStyle>
-                   <GroupStyle HeaderTemplate="{StaticResource ZoomedInGroupHeaderTemplate}"></GroupStyle>
-                </ListView.GroupStyle>
-            </ListView>
-        </SemanticZoom.ZoomedInView>
-        <SemanticZoom.ZoomedOutView>
-            <ListView Name="ZoomOutView" ItemsSource="{x:Bind ForumSource.View.CollectionGroups,Mode=OneWay}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" ></StackPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="ICollectionViewGroup">
-                        <TextBlock Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Group.(model:ForumContainer.Catagory),Mode=OneWay}"></TextBlock>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </SemanticZoom.ZoomedOutView>
-    </SemanticZoom>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource ZoomedInGroupHeaderTemplate}"></GroupStyle>
+                    </ListView.GroupStyle>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
+            <SemanticZoom.ZoomedOutView>
+                <ListView Name="ZoomOutView" ItemsSource="{x:Bind ForumSource.View.CollectionGroups,Mode=OneWay}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" ></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="ICollectionViewGroup">
+                            <TextBlock Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Group.(model:ForumContainer.Catagory),Mode=OneWay}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>
+    </Grid>
 </local:MenuPage>
 
 
