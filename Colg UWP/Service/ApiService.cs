@@ -21,7 +21,7 @@ namespace Colg_UWP.Service
         public static async Task InitAsync()
         {
             _userData = await UserDataManager.GetUserData().ConfigureAwait(false);
-            _loginDatas = await LoginDataManager.GetLoginDatas().ConfigureAwait(false);
+            _loginDatas = await LoginDataManager.GetLoginDatasAsync().ConfigureAwait(false);
         }
 
         #region User
@@ -207,19 +207,19 @@ namespace Colg_UWP.Service
         #endregion
 
         #region Article
-        public static async Task<NewsContainer> NewsByTypeId(string pid)
+        public static async Task<ArticleContainer> NewsByTypeId(string pid)
         {
             var newsJson = await GetJson(ApiUrl.NewsList(pid, 1)).ConfigureAwait(false);
             int maxCount = Int32.Parse(newsJson["INFO"]["count"].ToString());
-            return new NewsContainer { Id = pid, MaxCount = maxCount };
+            return new ArticleContainer { Id = pid, MaxCount = maxCount };
         }
-        public static async Task<List<News>> NewsList(string aid, int page)
+        public static async Task<List<Article>> NewsList(string aid, int page)
         {
             var newsJson = await GetJson(ApiUrl.NewsList(aid, page)).ConfigureAwait(false);
             var newsArray = newsJson["DATA"].ToArray();
             return NewsListFromArray(newsArray);
         }
-        public static async Task InitNewsContent(News news)
+        public static async Task InitNewsContent(Article news)
         {
             var json = await GetJson(ApiUrl.NewsContent(news.Id));
             news.Content = json["DATA"]["content"].ToString();
@@ -265,7 +265,6 @@ namespace Colg_UWP.Service
             _userData.HomeUrl = null;
             _userData.UserName = username;
             _userData.ReadPermission = readAccessLevel;
-            _userData.FormHash = formhash;
             var currentLoginData = _loginDatas.SingleOrDefault(x => x.UserName == username);
             if (currentLoginData != null)
             {
@@ -273,36 +272,6 @@ namespace Colg_UWP.Service
             }
         }
 
-        private static List<News> NewsListFromArray(JToken[] array)
-        {
-            List<News> news = new List<News>();
-            foreach (var articleObj in array)
-            {
-                string article = articleObj["article_id"].ToString();
-                string title = articleObj["title"].ToString();
-                int comments = Int32.Parse(articleObj["comment_nums"].ToString());
-                string remark = articleObj["remark"].ToString();
-                var date =
-                    StringToDateTime(articleObj["create_time"].ToString());
-
-                string imageUri = articleObj["image"] != null
-                    ? articleObj["image"].ToString()
-                    : articleObj["image_url"].ToString();
-                imageUri = new String(imageUri.TakeWhile(x => x != '&').ToArray());
-
-                news.Add(new News
-                {
-                    Id = article,
-                    Date = date,
-                    Title = title,
-                    Image = imageUri,
-                    Comments = comments,
-                    Remark = remark
-                }
-                    );
-            }
-            return news;
-        }
 
         private static List<Discussion> PostListFromArray(JToken[] array, Dictionary<string, string> catagoryDict)
         {
@@ -320,10 +289,10 @@ namespace Colg_UWP.Service
                 string typeId = thread["typeid"]?.ToString();
                 string dateline = thread["dateline"].Value<string>();
                 int readpermission = Convert.ToInt32(thread["readperm"]?.Value<string>());
-                DateTime? timePosted = StringToDateTime(dateline);
+                DateTime? timePosted = Helper.StringToDateTime(dateline);
 
 
-                DateTime? lastReplyTime = StringToDateTime(strLastReplyTime);
+                DateTime? lastReplyTime = Helper.StringToDateTime(strLastReplyTime);
 
                 string catagory = "其他";
 
@@ -354,32 +323,10 @@ namespace Colg_UWP.Service
             return postList;
         }
 
-        private static DateTime? StringToDateTime(string str)
-        {
-            DateTime d;
-
-            long tick;
-            if (long.TryParse(str, out tick))
-            {
-                d = DateTimeOffset.FromUnixTimeSeconds(tick).DateTime;
-                return d.ToLocalTime();
-            }
-            else
-            {
-                if (DateTime.TryParse(str + " +08:00", out d))
-                {
-                    return d.ToLocalTime();
-                }
-                else
-                {
-                    return null;
-                }
+        
 
 
-            }
-
-
-        }
+       
 
         private static List<Reply> ReplyFromArray(JToken[] postlist)
         {
@@ -430,4 +377,3 @@ namespace Colg_UWP.Service
             return str1 ?? str2;
         }
     }
-}

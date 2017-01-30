@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using Colg_UWP.Util;
 
 namespace Colg_UWP.Service
 {
@@ -33,7 +34,7 @@ namespace Colg_UWP.Service
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"Exceptoin thown at ApiBaseService.GetJson{Environment.NewLine}" +
+                Logging.WriteLine($"Exceptoin thown at ApiBaseService.GetJson{Environment.NewLine}" +
                     $"{e.ToString()}");
                 return null;
             }

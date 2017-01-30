@@ -24,16 +24,15 @@ namespace Colg_UWP.View.Pages
                 VM = new ArticleVM();
             }
 
-            var news = e.Parameter as Model.News;
-            VM.News = news;
+            var article = e.Parameter as Model.Article;
+            VM.Article = article;
             base.OnNavigatedTo(e);
         }
 
         private async void Page_Loading(FrameworkElement sender, object args)
         {
-            //ProgressRing.Visibility = Visibility.Visible;
             await VM.InitAsync();
-            //ProgressRing.Visibility = Visibility.Collapsed;
+            this.Bindings.Update();
         }
     }
 }

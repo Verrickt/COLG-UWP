@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Helper;
+using Colg_UWP.Util;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
 using Colg_UWP.ViewModel;
@@ -29,14 +29,15 @@ namespace Colg_UWP.View.Pages
         public MySpace()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         public MySpaceVM VM;
 
         private async void LogOutButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var result = await ApiService.LogOut();
-            if (result==null)
+            var result = await VM.LogoutAsync();
+            
             {
                 this.Frame.GoBack();
                 this.Frame.Navigate(typeof(LoginPage));
@@ -48,7 +49,6 @@ namespace Colg_UWP.View.Pages
             if (e.NavigationMode==NavigationMode.New)
             {
                 VM = new MySpaceVM();
-                VM.InitAsync();
             }
             base.OnNavigatedTo(e);
         }

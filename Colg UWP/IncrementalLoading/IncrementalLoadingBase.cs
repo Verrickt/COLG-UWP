@@ -29,12 +29,8 @@ namespace Colg_UWP.IncrementalLoading
     {
         #region IList
 
-        public event EventHandler<DataFilledEventArgs<T>> DataFilled;
 
-        protected void OnDataFilled(T t)
-        {
-            DataFilled?.Invoke(this, new DataFilledEventArgs<T>(t));
-        }
+     
 
         public int Add(object value)
         {
@@ -210,12 +206,5 @@ namespace Colg_UWP.IncrementalLoading
         #endregion
     }
 
-    public class DataFilledEventArgs<T>:EventArgs
-    {
-        public T Data { get; set; }
-        public DataFilledEventArgs(T data)
-        {
-            this.Data = data;
-        }
-    }
+   
 }

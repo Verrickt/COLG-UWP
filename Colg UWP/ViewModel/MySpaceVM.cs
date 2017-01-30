@@ -1,30 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Colg_UWP.Helper;
+using Colg_UWP.Util;
 using Colg_UWP.Model;
+using Colg_UWP.Service;
 
 namespace Colg_UWP.ViewModel
 {
     public class MySpaceVM:VMBase
     {
-        public UserData _userData;
+        private UserData _userData;
 
         public UserData UserData
         {
             get { return _userData; }
-            set { _userData = value;OnPropertyChanged(); }
+            set { SetProperty(ref _userData, value); }
         }
 
-        /// <summary>
-        /// Retrive current user data from local storage
-        /// </summary>
-        /// <returns></returns>
-        public async Task InitAsync()
+        public ObservableCollection<string> Credits { get; set; }
+
+        public MySpaceVM()
         {
-             UserData = await UserDataManager.GetUserData();
+            UserData = UserDataManager.GetUserData();
+            Credits = new ObservableCollection<string>(UserData.Credits);
+
+        }
+
+
+        public async Task<bool> LogoutAsync()
+        {
+            var(result,message)=await LoginService.LogoutAsync();
+
+            InAppNotifier.Show(message);
+
+            return result;
         }
     }
 }

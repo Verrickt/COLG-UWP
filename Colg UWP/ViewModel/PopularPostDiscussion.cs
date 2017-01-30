@@ -13,7 +13,7 @@ namespace Colg_UWP.ViewModel
         public ObservableCollection<Discussion> PopularPosts
         {
             get { return _popularPosts; }
-            set { _popularPosts = value;OnPropertyChanged(); }
+            set { SetProperty(ref _popularPosts, value); }
         }
 
         public Discussion SelectedPost { get; set; }
@@ -25,7 +25,7 @@ namespace Colg_UWP.ViewModel
 
         public async Task RefreshAsync()
         {
-            List<Discussion> list = await ApiService.PopularPostList();
+            List<Discussion> list = await DiscussionService.GetPopularDiscussionsAsync();
             PopularPosts.Clear();
             list.ForEach(post => PopularPosts?.Add(post));
         }

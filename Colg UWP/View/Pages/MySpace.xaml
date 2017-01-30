@@ -17,7 +17,7 @@
         <Border BorderThickness="0" Background="{ThemeResource SystemControlBackgroundAccentBrush}" >
             <StackPanel Margin="25" Orientation="Horizontal">
                 <Image Height="100" Width="100" Stretch="UniformToFill" 
-                       Source="{x:Bind VM.UserData.AvatarUrl,Mode=OneWay}"
+                       
                        ></Image>
                 <StackPanel  Margin="25,0" >
                     <TextBlock Name="UserName" HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.UserData.UserName,Mode=OneWay}"></TextBlock>
@@ -31,8 +31,9 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <TextBlock Grid.Row="1">
-            还没想好要显示些什么(ง •_•)ง
-        </TextBlock>
+        <Grid Grid.Row="1">
+            <ItemsControl ItemsSource ="{x:Bind VM.Credits,Mode=OneWay}">
+            </ItemsControl>
+        </Grid>
     </Grid>
 </Page>

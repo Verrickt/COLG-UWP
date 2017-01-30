@@ -26,12 +26,14 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
+    <NoWarn>
+    </NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -101,23 +103,30 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helper\InAppNotifier.cs" />
-    <Compile Include="Helper\ExtensionMethods.cs" />
-    <Compile Include="Helper\HttpClientManager.cs" />
-    <Compile Include="Helper\LoginDataManager.cs" />
-    <Compile Include="Helper\SettingManager.cs" />
-    <Compile Include="Helper\StorageHelper.cs" />
-    <Compile Include="Helper\UserDataManager.cs" />
+    <Compile Include="Resource\DateTimeToCompressedStringConverter.cs" />
+    <Compile Include="Util\InAppNotifier.cs" />
+    <Compile Include="Util\ExtensionMethods.cs" />
+    <Compile Include="Util\HttpClientManager.cs" />
+    <Compile Include="Util\Logging.cs" />
+    <Compile Include="Util\LoginDataManager.cs" />
+    <Compile Include="Util\RelayCommand.cs" />
+    <Compile Include="Util\SettingManager.cs" />
+    <Compile Include="Util\StorageHelper.cs" />
+    <Compile Include="Util\UserDataManager.cs" />
     <Compile Include="IncrementalLoading\IncrementalLoading.cs" />
     <Compile Include="IncrementalLoading\IncrementalLoadingBase.cs" />
-    <Compile Include="Model\News.cs" />
-    <Compile Include="Model\NewsContainer.cs" />
+    <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\ArticleContainer.cs" />
     <Compile Include="Model\Forum.cs" />
     <Compile Include="Model\UserData.cs" />
     <Compile Include="Model\LoginData.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Resource\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Resource\DateTime2Diff.cs" />
+    <Compile Include="Resource\DateTimeToDiffConverter.cs" />
+    <Compile Include="Service\ArticleService.cs" />
+    <Compile Include="Service\DiscussionService.cs" />
+    <Compile Include="Service\ForumService.cs" />
+    <Compile Include="Service\Helper.cs" />
     <Compile Include="Service\Html2Markdown.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\Reply.cs" />
@@ -127,8 +136,10 @@
     <Compile Include="Resource\NullabilityToVisibilityConverter.cs" />
     <Compile Include="Service\ApiBase.cs" />
     <Compile Include="Service\ApiBaseService.cs" />
-    <Compile Include="Service\ApiService.cs" />
     <Compile Include="Service\ApiUrl.cs" />
+    <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\ReplyService.cs" />
+    <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModel\ArticleVM.cs" />
     <Compile Include="ViewModel\ForumNaviVM.cs" />
     <Compile Include="ViewModel\ForumVM.cs" />
@@ -138,7 +149,7 @@
     <Compile Include="ViewModel\MySpaceVM.cs" />
     <Compile Include="ViewModel\PopularPostDiscussion.cs" />
     <Compile Include="ViewModel\DiscussionVM.cs" />
-    <Compile Include="ViewModel\LoginPageVM.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\VMBase.cs" />
     <Compile Include="View\Controls\CommentBox.xaml.cs">
       <DependentUpon>CommentBox.xaml</DependentUpon>
@@ -146,14 +157,17 @@
     <Compile Include="View\Controls\InAppNotification.xaml.cs">
       <DependentUpon>InAppNotification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\NewsTemplate.xaml.cs">
-      <DependentUpon>NewsTemplate.xaml</DependentUpon>
+    <Compile Include="View\Controls\ArticleTemplate.xaml.cs">
+      <DependentUpon>ArticleTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\PostControl.xaml.cs">
       <DependentUpon>PostControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\PostTemplate.xaml.cs">
-      <DependentUpon>PostTemplate.xaml</DependentUpon>
+    <Compile Include="View\Controls\DiscussionDataTemplate.xaml.cs">
+      <DependentUpon>DiscussionDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\ToastNotification.xaml.cs">
+      <DependentUpon>ToastNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\UserLoginTemplate.xaml.cs">
       <DependentUpon>UserLoginTemplate.xaml</DependentUpon>
@@ -161,11 +175,14 @@
     <Compile Include="View\Pages\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\ForumNavi.xaml.cs">
-      <DependentUpon>ForumNavi.xaml</DependentUpon>
+    <Compile Include="View\Pages\DisplayPage.xaml.cs">
+      <DependentUpon>DisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\ForumView.xaml.cs">
-      <DependentUpon>ForumView.xaml</DependentUpon>
+    <Compile Include="View\Pages\ForumNavigationPage.xaml.cs">
+      <DependentUpon>ForumNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\ForumPage.xaml.cs">
+      <DependentUpon>ForumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -183,8 +200,11 @@
     <Compile Include="View\Pages\PopularPostView.xaml.cs">
       <DependentUpon>PopularPostView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\PostView.xaml.cs">
-      <DependentUpon>PostView.xaml</DependentUpon>
+    <Compile Include="View\Pages\DiscussionView.xaml.cs">
+      <DependentUpon>DiscussionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\NewReplyPage.xaml.cs">
+      <DependentUpon>NewReplyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RichTextblockTest.xaml.cs">
       <DependentUpon>RichTextblockTest.xaml</DependentUpon>
@@ -216,6 +236,10 @@
     <Content Include="Assets\Square310x310Logo.scale-150.png" />
     <Content Include="Assets\Square310x310Logo.scale-200.png" />
     <Content Include="Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
     <Content Include="Assets\Square44x44Logo.scale-100.png" />
     <Content Include="Assets\Square44x44Logo.scale-125.png" />
     <Content Include="Assets\Square44x44Logo.scale-150.png" />
@@ -223,6 +247,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
     <Content Include="Assets\Square71x71Logo.scale-100.png" />
     <Content Include="Assets\Square71x71Logo.scale-125.png" />
@@ -265,10 +290,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Controls\CommentBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -277,7 +298,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\NewsTemplate.xaml">
+    <Page Include="View\Controls\ArticleTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,7 +306,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\PostTemplate.xaml">
+    <Page Include="View\Controls\DiscussionDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\ToastNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,11 +322,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\ForumNavi.xaml">
+    <Page Include="View\Pages\DisplayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\ForumView.xaml">
+    <Page Include="View\Pages\ForumNavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\ForumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,7 +354,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\PostView.xaml">
+    <Page Include="View\Pages\DiscussionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\NewReplyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -347,6 +380,9 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

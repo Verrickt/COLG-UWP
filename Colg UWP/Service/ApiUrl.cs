@@ -8,7 +8,7 @@ namespace Colg_UWP.Service
 
         private static string _postNewDiscussion = _baseUrl+"&module=newthread&fid={0}&topicsubmit=1";
 
-        private static int _itemsPerPage = 20;
+        private static int _itemsPerPage = 15;
         private static string _discussionList = _baseUrl+"&module=forumdisplay&submodule=checkpost&fid={0}&page={1}&tpp={2}&orderby=lastpost";
         private static string _replyList = _baseUrl+"&module=viewthread&submodule=checkpost&tid={0}&page={1}&ppp={2}&orderby=lastp";
         private static string _forumList = _baseUrl+"&module=forumindexcustom";
@@ -44,10 +44,10 @@ namespace Colg_UWP.Service
         /// <param name="page">Page of the list</param>
         /// <returns></returns>
 
-        public static string NewsList(string pid,int page)=>String.Format(_newsList,pid,page);
+        public static string ArticleList(string pid,int page)=>String.Format(_newsList,pid,page);
         public static string Logout => _logout;
         public static string Login => _login;
         public static string Home() => _home;
-        public static string NewsContent(string aid) => String.Format(_newsContent, aid);
+        public static string ArticleContent(string aid) => String.Format(_newsContent, aid);
     }
 }

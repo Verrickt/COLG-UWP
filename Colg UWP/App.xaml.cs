@@ -8,8 +8,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Helper;
-using Colg_UWP.Service;
 
 namespace Colg_UWP
 {
@@ -33,7 +31,7 @@ namespace Colg_UWP
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override  void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             //if (System.Diagnostics.Debugger.IsAttached)
@@ -41,8 +39,8 @@ namespace Colg_UWP
             //    this.DebugSettings.EnableFrameRateCounter = true;
             //}
 #endif
+            await InitializeTask();
             Frame rootFrame = Window.Current.Content as Frame;
-            InAppNotifier.Dispatcher = Window.Current.Dispatcher;
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
 
@@ -50,7 +48,7 @@ namespace Colg_UWP
                 statusBar.HideAsync();
             }
 
-            ApiService.InitAsync();
+            //ApiService.InitAsync();
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -104,21 +102,33 @@ namespace Colg_UWP
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-            await Task.WhenAll(SuspendingTasks());
+            await SuspendingTask();
             deferral.Complete();
         }
 
-        private List<Task> SuspendingTasks()
+
+        private async Task InitializeTask()
         {
-            return new List<Task>()
-            {
-                UserDataManager.SaveUserData(),
-                LoginDataManager.SaveLoginDatas()
-            }
-            ;
+            await Task.WhenAll(
+                new[]
+                {
+                    Util.Logging.InitializationAsync(),
+                    Util.UserDataManager.InitializationAsync(),
+                    Util.LoginDataManager.InitializtionAsync()
+                }
+            );
+            await Service.LoginService.AutoLoginAsync();
         }
 
-      
-        
+        private async Task SuspendingTask()
+        {
+            await Task.WhenAll(new []
+            {
+                 Util.UserDataManager.SaveUserData(),
+                Util.LoginDataManager.SaveLoginDatasAsync()
+            });
+        }
+
+
     }
 }

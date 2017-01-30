@@ -10,10 +10,10 @@ namespace Colg_UWP.ViewModel
             {
                 return new List<MenuVM>()
                 {
-                    new MenuVM() {DisplayName="主页",Glyph="\uE10F",TargetPageType=typeof(View.Pages.HomePage) },
-                    new MenuVM() {DisplayName="论坛",Glyph="\uE8BD",TargetPageType=typeof(View.Pages.ForumNavi) },
-                    new MenuVM() {DisplayName="热门讨论",Glyph="\uE8F2",TargetPageType = typeof(View.Pages.PopularPostView)},
-                    new MenuVM() {DisplayName="个人中心",Glyph="\uE187",TargetPageType = typeof(View.Pages.LoginPage)}
+                    new MenuVM() {DisplayName="主页",Glyph="\uE10F",TargetPage=typeof(View.Pages.HomePage) },
+                    new MenuVM() {DisplayName="论坛",Glyph="\uE8BD",TargetPage=typeof(View.Pages.ForumNavigationPage) },
+                    new MenuVM() {DisplayName="热门讨论",Glyph="\uE8F2",TargetPage = typeof(View.Pages.PopularPostView)},
+                    new MenuVM() {DisplayName="个人中心",Glyph="\uE187",TargetPage = typeof(View.Pages.LoginPage)}
                 };
             }
         }

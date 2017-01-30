@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Colg_UWP"
-    RequestedTheme="Dark">
+    >
     <Application.Resources>
             <ResourceDictionary Source="Resource\AppResource.xaml"></ResourceDictionary>
     </Application.Resources>

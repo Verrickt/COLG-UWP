@@ -19,7 +19,6 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <ProgressBar IsIndeterminate="True" Visibility="{x:Bind VM.ReplyList.IsLoading,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}"></ProgressBar>
-        <markdown:MarkdownTextBlock Markdown="{x:Bind VM.Subject,Mode=OneWay}"></markdown:MarkdownTextBlock>
         <ListView Grid.Row="1"   x:Name="ReplyList" 
                   ItemsSource="{x:Bind VM.ReplyList,Mode=OneWay}" 
                   RightTapped="Replys_RightTapped" 
@@ -59,7 +58,7 @@
             </ListView.ItemTemplate>
 
         </ListView>
-        <Grid  Visibility="{x:Bind VM.ShowCommentBox,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Margin="10" Grid.Row="2" Name="ReplyGrid">
+        <!--<Grid  Visibility="{x:Bind VM.ShowCommentBox,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Margin="10" Grid.Row="2" Name="ReplyGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -80,6 +79,6 @@
                 Grid.Row="1" Grid.Column="1"
                     Margin="10,5"
                         Name="Cancel" Click="Cancel_OnClick">取消</Button>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

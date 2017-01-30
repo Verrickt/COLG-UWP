@@ -14,8 +14,14 @@ namespace Colg_UWP.Model
         public string AvatarUrl { get; set; }
         public string GroupTitle { get; set; }
         public int ReadPermission { get; set; }
-        public Dictionary<string,string> Credits { get; set; }
-        public string FormHash { get; set; }
+        public List<string> Credits { get; set; }
+        public DateTimeOffset? TimeRegisted { get; set; }
+
+        public UserData()
+        {
+             Credits = new List<string>();
+        }
+
         public override string ToString()
         {
             return

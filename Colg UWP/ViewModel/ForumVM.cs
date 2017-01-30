@@ -1,4 +1,6 @@
-﻿using Colg_UWP.Model;
+﻿using Windows.UI.Text.Core;
+using Colg_UWP.Model;
+using Colg_UWP.Util;
 
 namespace Colg_UWP.ViewModel
 {
@@ -7,19 +9,45 @@ namespace Colg_UWP.ViewModel
     {
         public string ForumId { get; set; }
         private Forum _forum;
-        public Forum Forum { get { return _forum; } set { _forum = value; OnPropertyChanged(); } }
-        private IncrementalList<Discussion,Forum> _postList;
+        public Forum Forum { get { return _forum; } set { SetProperty(ref _forum, value);Refresh(); } }
+        private IncrementalList<Discussion,Forum> _discussionList;
 
-        public IncrementalList<Discussion, Forum> PostList
+        private static UserData _userData { get; set; }
+
+        static ForumVM()
         {
-            get { return _postList; }
-            set { _postList = value; OnPropertyChanged(); }
+            _userData = UserDataManager.GetUserData();
         }
 
-        public void Refresh()
+        public ForumVM()
+        {
+            RefreshCommand = new RelayCommand(Refresh, () => true);
+        }
+
+        public bool CheckForPermission(int readPermission)
+        {
+            if (readPermission <= 0 || _userData.ReadPermission >= readPermission)
+            {
+                return true;
+            }
+            else
+            {
+                InAppNotifier.Show($"抱歉，本帖要求阅读权限高于{readPermission}才能浏览");
+                return false;
+            }
+        }
+
+        public RelayCommand RefreshCommand { get; set; }
+        public IncrementalList<Discussion, Forum> DiscussionList
+        {
+            get { return _discussionList; }
+            set { SetProperty(ref _discussionList, value); }
+        }
+
+        private void Refresh()
         {
             Forum.Refresh();
-            PostList = new IncrementalList<Discussion, Forum>(Forum);
+            DiscussionList = new IncrementalList<Discussion, Forum>(Forum);
         }
 
 

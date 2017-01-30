@@ -18,14 +18,14 @@
                 <RowDefinition Height="*"></RowDefinition>
 
             </Grid.RowDefinitions>
-            <TextBlock Margin="20" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" Text="{x:Bind VM.News.Title}" Grid.Row="0"></TextBlock>
+            <TextBlock Margin="20" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" Text="{x:Bind VM.Article.Title}" Grid.Row="0"></TextBlock>
             <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal">
-                <TextBlock Margin="10" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind VM.News.Date,Mode=OneWay}" ></TextBlock>
-                <TextBlock Margin="10" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind VM.News.Author,Mode=OneWay}"></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind VM.Article.Date,Mode=OneWay}" ></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind VM.Article.Author,Mode=OneWay}"></TextBlock>
 
             </StackPanel>
 
-            <htmlblock:HtmlBlock Margin="10" HorizontalAlignment="Center" Grid.Row="2" Source="{x:Bind VM.News.Content,Mode=OneWay}" ></htmlblock:HtmlBlock>
+            <htmlblock:HtmlBlock Margin="10" HorizontalAlignment="Center" Grid.Row="2" Source="{x:Bind VM.Article.Content,Mode=OneWay}" ></htmlblock:HtmlBlock>
         </Grid>
     
     </ScrollViewer>

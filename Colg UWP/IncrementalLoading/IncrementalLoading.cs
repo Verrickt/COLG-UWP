@@ -20,18 +20,18 @@ namespace Colg_UWP.IncrementalLoading
     // To create your own Infinite List, you can create a class like this one that doesn't have 'generator' or 'maxcount', 
     //  and instead downloads items from a live data source in LoadMoreItemsOverrideAsync.
     public class IncrementalList<T1,T2> : IncrementalLoadingBase<T1>
-        where T2:Model.IIncrementalLoadable<T1>
+        where T2:IIncrementalLoad<T1>
     {
-       
 
-        public Func<Task<List<T1>>> Generator;
+
+        public Func<Task<(int, List<T1>)>> _loadMore;
 
         
 
         public IncrementalList(T2 source)
         {
             this._maxCount = source.MaxCount;
-            this.Generator = source.LoadMore;
+            this._loadMore = source.LoadMore;
         }
 
         private bool _isLoading { get; set; }
@@ -55,19 +55,12 @@ namespace Colg_UWP.IncrementalLoading
             await Task.Delay(10);
 
             // This code simply generates
-                List<T1> values =new List<T1>(toGenerate) ;
             try
             {
-                values = await Generator();
-                if (this._count==0)
-                {
-                    T1 t = values[0];
-                    values.RemoveAt(0);
-                    OnDataFilled(t);
-                }
-                _count += values.Count;
-
-                return values;
+                (int newMaxCount,var items) = await _loadMore();
+                _count += items.Count;
+                this._maxCount = newMaxCount;
+                return items;
             }
             catch (Exception)
             {
@@ -76,7 +69,6 @@ namespace Colg_UWP.IncrementalLoading
             finally
             {
                 IsLoading = false;
-                
             }
         }
 

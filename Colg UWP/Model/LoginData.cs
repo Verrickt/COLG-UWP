@@ -14,5 +14,12 @@ namespace Colg_UWP.Model
         public string FirstChar => UserName?.FirstOrDefault().ToString();
         public int QuestionId { get; set; }
         public string QuestionAnswer { get; set; }
+
+        public bool IsActive { get; set; }//indicated weather this logindata is used now
+
+        public override string ToString()
+        {
+            return $"UserName {UserName} Password {Password} QuestionID {QuestionId} Answer {QuestionAnswer}";
+        }
     }
 }

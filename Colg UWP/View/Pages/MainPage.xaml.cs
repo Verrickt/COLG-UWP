@@ -26,23 +26,22 @@ namespace Colg_UWP.View.Pages
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private  void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            EnableBackRequest();
+            EnableGlobalBackRequest();
             MyFrame.Navigate(typeof(HomePage));
             Title.Text = VM.TopMenuItems[0].DisplayName;
-            await ApiService.InitAsync();
-            await ApiService.AutoLogin().ConfigureAwait(false);
+           
 
         }
 
-        public void EnableBackRequest()
+        public void EnableGlobalBackRequest()
         {
             MyFrame.Navigated += MyFrame_Navigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
-        public void DisableBackRequest()
+        public void DisableGlobalBackRequest()
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
             MyFrame.Navigated -= MyFrame_Navigated;
@@ -65,28 +64,29 @@ namespace Colg_UWP.View.Pages
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            DisableBackRequest();
+            DisableGlobalBackRequest();
         }
 
         private void Menu_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clicked = e.ClickedItem as MenuVM;
-            if (MySplitView.DisplayMode!=SplitViewDisplayMode.Inline)
+            bool 
+                keepPaneOpen= MySplitView.DisplayMode==SplitViewDisplayMode.CompactInline;
+            MySplitView.IsPaneOpen = keepPaneOpen;
+            if (clicked.TargetPage==null)
             {
-                MySplitView.IsPaneOpen = false;
-            }
-            if (clicked.TargetPageType==null)
-            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 new ContentDialog()
                 {
                     Content = "施工中(=ﾟωﾟ)=",
                     PrimaryButtonText = "Got it"
                 }.ShowAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
             else
             {
                 Title.Text = clicked.DisplayName;
-                MyFrame.Navigate(clicked.TargetPageType);
+                MyFrame.Navigate(clicked.TargetPage);
             }
           
         }

@@ -23,12 +23,12 @@ namespace Colg_UWP.View.Pages
 
        
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.NavigationMode==NavigationMode.New)
             {
                 VM = new HomeVM();
-                VM.RefreshAsync();
+                await VM.RefreshAsync();
             }
             base.OnNavigatedTo(e);
         }
@@ -36,7 +36,7 @@ namespace Colg_UWP.View.Pages
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var clicked = e.ClickedItem as Model.News;
+            var clicked = e.ClickedItem as Model.Article;
             this.Frame.Navigate(typeof(ArticlePage), clicked);
         }
 

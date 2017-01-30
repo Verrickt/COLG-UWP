@@ -11,7 +11,7 @@ using Windows.Web.Http.Headers;
 
 namespace Colg_UWP.Service
 {
-    using Colg_UWP.Helper;
+    using Colg_UWP.Util;
 
     public class ApiBase
     {
@@ -25,8 +25,7 @@ namespace Colg_UWP.Service
             using (HttpClient client = HttpClientManager.CreateClient())
             using (CancellationTokenSource cts = new CancellationTokenSource())
             {
-                Debug.WriteLine($"Thread {Environment.CurrentManagedThreadId}" +
-                    $" is Requesting{Environment.NewLine}{uri}");
+                Util.Logging.WriteLine($"Request {Environment.NewLine}{uri}");
                 if (content == null)
                 {
                     content = new Dictionary<string, string>()
@@ -37,8 +36,7 @@ namespace Colg_UWP.Service
                 HttpFormUrlEncodedContent _content = new HttpFormUrlEncodedContent(content);
                 var response = await client.PostAsync(new Uri(uri), _content).AsTask(false, cts.Token);
                 response.EnsureSuccessStatusCode();
-                Debug.WriteLine($"Thread {Environment.CurrentManagedThreadId} " +
-                    $"has received response {Environment.NewLine}{uri}");
+                Util.Logging.WriteLine($"response received {Environment.NewLine}{uri}");
                 return await response.Content.ReadAsStringAsync().AsTask(false);
             }
         }

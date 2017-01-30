@@ -25,7 +25,7 @@
             </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate  x:DataType="model:Discussion" >
-                    <controls:PostTemplate ></controls:PostTemplate>
+                    <controls:DiscussionDataTemplate ></controls:DiscussionDataTemplate>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>

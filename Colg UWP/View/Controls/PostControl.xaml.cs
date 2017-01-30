@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Colg_UWP.Model;
 using Colg_UWP.ViewModel;
-using Colg_UWP.Helper;
+using Colg_UWP.Util;
 using UniversalMarkdown;
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -54,24 +54,7 @@ namespace Colg_UWP.View.Controls
             Windows.System.Launcher.LaunchUriAsync(new Uri(e.Link));
         }
 
-        private async void Send_OnClick(object sender, RoutedEventArgs e)
-        {
-            var result = await VM.PostNewReply();
-            string message = result ? "回复成功" : "回复失败";
-            InAppNotifier.Show(result, "回复成功", "回复失败", null, "请先登录");
-        }
-
-        private void Cancel_OnClick(object sender, RoutedEventArgs e)
-        {
-            VM.CancelPostNewReply();
-        }
-
-        private void ReplyButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            VM.ShowCommentBox = true;
-        }
-
-
+       
 
 
     }

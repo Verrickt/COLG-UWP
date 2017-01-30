@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Colg_UWP.IncrementalLoading;
 
 namespace Colg_UWP.ViewModel
@@ -8,54 +9,70 @@ namespace Colg_UWP.ViewModel
 
     public class HomeVM : VMBase
     {
-        private IncrementalList<News,NewsContainer> _news;
-        private IncrementalList<News, NewsContainer> _hotNews;
-        private IncrementalList<News, NewsContainer> _prospective;
+        private IncrementalList<Article,ArticleContainer> _news;
+        private IncrementalList<Article, ArticleContainer> _hotNews;
+        private IncrementalList<Article, ArticleContainer> _prospective;
 
-        public IncrementalList<News, NewsContainer> News
+        public IncrementalList<Article, ArticleContainer> News
         {
             get { return _news; }
             set
             {
-                _news = value;
-                OnPropertyChanged();
+                SetProperty(ref _news, value);
             }
         }
 
-        public IncrementalList<News, NewsContainer> HotNews
+        public IncrementalList<Article, ArticleContainer> HotNews
         {
             get { return _hotNews; }
             set
             {
-                _hotNews = value;
-                OnPropertyChanged();
+                SetProperty(ref _hotNews, value);
             }
         }
 
-        public IncrementalList<News, NewsContainer> Prospective
+        public IncrementalList<Article, ArticleContainer> Prospective
         {
             get { return _prospective; }
             set
             {
-                _prospective = value;
-                OnPropertyChanged();
+                SetProperty(ref _prospective, value);
+            }
+        }
+
+        private ArticleContainer _newsList;
+        private ArticleContainer _hotNewsList;
+        private ArticleContainer _prospectiveList;
+
+        private bool _initialized = false;
+        private List<ArticleContainer> _containers = new List<ArticleContainer>(3);
+
+
+        private async Task InitAsync()
+        {
+            if (!_initialized)
+            {
+                _newsList = _newsList ?? await ArticleService.GetArticleContainerAsync("1");
+                _prospectiveList = _prospectiveList ?? await ArticleService.GetArticleContainerAsync("16");
+                _hotNewsList = _hotNewsList ?? await ArticleService.GetArticleContainerAsync("17");
+                _containers.Add(_newsList);
+                _containers.Add(_prospectiveList);
+                _containers.Add(_hotNewsList);
+
+                _initialized = true;
             }
         }
 
 
-        private NewsContainer _newsList;
-        private NewsContainer _hotNewsList;
-        private NewsContainer _prospectiveList;
-
-       
         public async Task RefreshAsync()
         {
-            _newsList =_newsList??await ApiService.NewsByTypeId("1");
-            _prospectiveList = _prospectiveList??await ApiService.NewsByTypeId("16");
-            _hotNewsList = _hotNewsList??await ApiService.NewsByTypeId("17");
-            News = new IncrementalList<News, NewsContainer>(_newsList);
-            Prospective = new IncrementalList<News, NewsContainer>(_prospectiveList);
-            HotNews = new IncrementalList<News, NewsContainer>(_hotNewsList);
+            await InitAsync();
+
+            _containers.ForEach(c=>c.Refresh());
+           
+            News = new IncrementalList<Article, ArticleContainer>(_newsList);
+            Prospective = new IncrementalList<Article, ArticleContainer>(_prospectiveList);
+            HotNews = new IncrementalList<Article, ArticleContainer>(_hotNewsList);
         }
     }
 }

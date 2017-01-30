@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Helper;
+using Colg_UWP.Util;
 using Colg_UWP.Service;
 using Colg_UWP.ViewModel;
 
@@ -31,19 +31,18 @@ namespace Colg_UWP.View.Pages
             this.InitializeComponent();
         }
 
-        private ViewModel.LoginPageVM VM;
+        private ViewModel.LoginVM VM;
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var res = await VM.Login();
+            var succeed = await VM.CurrentLogin.LoginAsync();
 
-            string title = res ? "登录成功" : "登录失败";
-            InAppNotifier.Show(title, null);
-            if (res)
+            if (succeed)
             {
                 JumpToUserSpace();
-
             }
+
+          
         }
 
 
@@ -51,7 +50,7 @@ namespace Colg_UWP.View.Pages
         {
             if (e.NavigationMode == NavigationMode.New)
             {
-                VM = new LoginPageVM();
+                VM = new LoginVM();
             }
             base.OnNavigatedTo(e);
         }
@@ -65,7 +64,6 @@ namespace Colg_UWP.View.Pages
             }
             else
             {
-                await VM.InitAsync();
                 this.Bindings.Update();
             }
         }
@@ -79,13 +77,13 @@ namespace Colg_UWP.View.Pages
 
         private async void SavedLoginDatas_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var res = await VM.QuickLogin();
-            string title = res ? "登录成功" : "登录失败";
-            InAppNotifier.Show(title, null);
-            if (res)
-            {
-                JumpToUserSpace();
-            }
+            //var res = await VM.QuickLogin();
+            //string title = res ? "登录成功" : "登录失败";
+            //InAppNotifier.Show(title, null);
+            //if (res)
+            //{
+            //    JumpToUserSpace();
+            //}
         }
 
 

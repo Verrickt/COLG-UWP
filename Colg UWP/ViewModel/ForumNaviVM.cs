@@ -20,13 +20,13 @@ namespace Colg_UWP.ViewModel
         public ObservableCollection<ForumContainer> ForumContainers
         {
             get { return _forumContainers; }
-            set { _forumContainers = value;OnPropertyChanged(); }
+            set { SetProperty(ref _forumContainers, value); }
         }
 
 
         public async Task InitAsync()
         {
-            Forums = await ApiService.ForumListAsync();
+            Forums = await ForumService.GetForumsAsync();
             var containers = Forums.GroupBy(x => x.Catagory, (catagory, grouped) => new ForumContainer
             {
                 Catagory = catagory,

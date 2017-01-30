@@ -5,7 +5,7 @@ using System.Linq;
 namespace Colg_UWP.Service
 {
     using HtmlAgilityPack;
-    using Colg_UWP.Helper;
+    using Colg_UWP.Util;
   
 
     public static class Html2Markdown

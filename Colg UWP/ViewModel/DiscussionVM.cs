@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using Colg_UWP.Helper;
+﻿using System;
+using System.Threading.Tasks;
+using Colg_UWP.Util;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
 
@@ -9,15 +10,14 @@ namespace Colg_UWP.ViewModel
 
     public class DiscussionVM : VMBase
     {
-        public string ThreadId { get; set; }
+        public string DiscussionID { get; set; }
 
         public Discussion Discussion
         {
             get { return _discussion; }
             set
             {
-                _discussion = value;
-                OnPropertyChanged();
+                SetProperty(ref _discussion, value);
                 Refresh();
             }
         }
@@ -27,69 +27,53 @@ namespace Colg_UWP.ViewModel
         public string ReplyMessage
         {
             get { return _replyMessage; }
-            set { _replyMessage = value;OnPropertyChanged(); }
+            set { SetProperty(ref _replyMessage, value); }
         }
 
         public string QuotedId { get; set; } = null;
 
-        public IncrementalList<Reply,Discussion> ReplyList
+        public IncrementalList<Reply, Discussion> ReplyList
         {
             get { return _replyList; }
-            private set
-            {
-                _replyList = value;
-                OnPropertyChanged();
-            }
+            private set { SetProperty(ref _replyList, value); }
         }
 
+        public RelayCommand RefreshCommand { get; set; }
 
-
-        private IncrementalList<Reply,Discussion> _replyList;
+        private IncrementalList<Reply, Discussion> _replyList;
         private string _replyMessage;
-        private bool _showCommentBox;
+       
 
-        public bool ShowCommentBox
-        {
-            get { return _showCommentBox; }
-            set { _showCommentBox = value; OnPropertyChanged();}
-        }
-
-        private string _subject;
-
-        public string Subject
-        {
-            get { return _subject; }
-            set { _subject = value;OnPropertyChanged(); }
-        }
+       
 
         public DiscussionVM()
         {
-            
+            ReplyMessage = String.Empty;
+            RefreshCommand = new RelayCommand(Refresh, () => true);
         }
 
-        public void Refresh()
+        private void Refresh()
         {
             Discussion.Refresh();
-            ReplyList = new IncrementalList<Reply,Discussion>(Discussion);
-            ReplyList.DataFilled += (s, e) => Subject = e.Data.Markdown;
+            ReplyList = new IncrementalList<Reply, Discussion>(Discussion);
         }
+
 
         
 
-        public void CancelPostNewReply()
+        public async Task<bool> PostNewReplyAsync()
         {
-            ShowCommentBox = false;
-        }
+            (bool status,string message)= await ReplyService.PostNewReplyAsync(Discussion.Id, ReplyMessage);
 
-        public async Task<bool> PostNewReply()
-        {
-            string errorMessage = await ApiService.PostNewReply(Discussion.Id, ReplyMessage);
-            var result = errorMessage == null;
-            if (result)
+            if (!status)
             {
-                ShowCommentBox = false;
+                InAppNotifier.Show(message);
             }
-            return result;
+            else
+            {
+                ReplyMessage = string.Empty;
+            }
+            return status;
         }
     }
 }

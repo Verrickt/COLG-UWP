@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Colg_UWP.Model
 {
-    public class Forum:ModelBase,IIncrementalLoadable<Discussion>
+    public class Forum:ModelBase,IIncrementalLoad<Discussion>
     {
         public int MaxCount { get; set; }
-        public Func<Task<List<Discussion>>> LoadMore { get; set; }
+        public Func<Task<(int,List<Discussion>)>> LoadMore { get; set; }
         public void Refresh()
         {
             Page = 1;
@@ -23,7 +23,7 @@ namespace Colg_UWP.Model
 
         public Forum()
         {
-            LoadMore = () => ApiService.PostListAsync(Id, Page++);
+            LoadMore = () => DiscussionService.GetDiscussionsAsync(Id, Page++);
         }
 
         
