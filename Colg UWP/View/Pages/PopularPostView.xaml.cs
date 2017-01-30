@@ -10,7 +10,7 @@ namespace Colg_UWP.View.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PopularPostView : Page
+    public sealed partial class PopularPostView : MenuPage
     {
         public PopularPostDiscussion VM { get; set; }
 
@@ -22,7 +22,7 @@ namespace Colg_UWP.View.Pages
 
         private void PostList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Frame.Navigate(typeof(DiscussionView), VM.SelectedPost);
+            ContentFrame.Navigate(typeof(DiscussionView), VM.SelectedPost);
         }
 
         private async void PopularPostView_OnLoading(FrameworkElement sender, object args)
