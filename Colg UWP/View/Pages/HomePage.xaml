@@ -15,58 +15,69 @@
             <controls:ArticleTemplate></controls:ArticleTemplate>
         </DataTemplate>
     </Page.Resources>
-    <Pivot Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <PivotItem>
-            <PivotItem.Header>
-                <TextBlock Style="{StaticResource BodyTextBlockStyle }" Margin="12,0,0,0" >首页</TextBlock>
-            </PivotItem.Header>
-                <GridView SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.News,Mode=OneWay}" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" SelectionMode="None">
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="Margin" Value="10"></Setter>
-                    </Style>
-                </GridView.ItemContainerStyle>
-
-            </GridView>
-        </PivotItem>
-        <PivotItem>
-            <PivotItem.Header>
-                <TextBlock Style="{StaticResource BodyTextBlockStyle }"> 资讯</TextBlock>
-            </PivotItem.Header>
-            <GridView Name="HotNews" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" IsItemClickEnabled="True" SelectionMode="None">
-
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="Margin" Value="10"></Setter>
-                    </Style>
-                </GridView.ItemContainerStyle>
-
-            </GridView>
-        </PivotItem>
-        <PivotItem>
-            <PivotItem.Header>
-                <TextBlock Style="{StaticResource BodyTextBlockStyle }">前瞻</TextBlock>
-            </PivotItem.Header>
-            <GridView Name="Prospective" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
-
-                <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="Margin" Value="10"></Setter>
-                </Style>
-                </GridView.ItemContainerStyle>
-            </GridView>
-        </PivotItem>
-    </Pivot>
-    <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CommandBar  Grid.Row="0">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
+            </CommandBar.PrimaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+        <Pivot Grid.Row="1">
+
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle }" Margin="12,0,0,0" >首页</TextBlock>
+                </PivotItem.Header>
+                <GridView SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.News,Mode=OneWay}" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" SelectionMode="None">
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+
+                </GridView>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle }"> 资讯</TextBlock>
+                </PivotItem.Header>
+                <GridView Name="HotNews" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" IsItemClickEnabled="True" SelectionMode="None">
+
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+
+                </GridView>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle }">前瞻</TextBlock>
+                </PivotItem.Header>
+                <GridView Name="Prospective" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
+
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                </GridView>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+    
 </local:MenuPage>
+
+
+
+
 
 
 
