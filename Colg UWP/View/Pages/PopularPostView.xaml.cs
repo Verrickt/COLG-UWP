@@ -22,7 +22,7 @@ namespace Colg_UWP.View.Pages
 
         private void PostList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(DiscussionView), VM.SelectedPost);
+            ContentFrame.Navigate(typeof(DiscussionPage), VM.SelectedPost);
         }
 
         private async void PopularPostView_OnLoading(FrameworkElement sender, object args)

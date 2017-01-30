@@ -72,7 +72,7 @@ namespace Colg_UWP.View.Pages
             if (VM.CheckForPermission(discussion.ReadPermission))
             {
                
-                ContentFrame.Navigate(typeof(DiscussionView), discussion);
+                ContentFrame.Navigate(typeof(DiscussionPage), discussion);
             }
         }
 
