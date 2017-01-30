@@ -98,6 +98,6 @@
             </SplitView.Content>
         </SplitView>
 
-        <Frame Background="Blue" Grid.Row="1" Grid.Column="1" Name="MainContentFrame"></Frame>
+        <Frame Background="Blue" Grid.Row="1" Grid.Column="1" Name="MainContentFrame" Navigated="MainContentFrame_OnNavigated" ></Frame>
     </Grid>
 </Page>

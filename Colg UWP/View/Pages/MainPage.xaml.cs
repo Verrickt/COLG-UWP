@@ -33,13 +33,13 @@ namespace Colg_UWP.View.Pages
             Title.Text = VM.TopMenuItems[0].DisplayName;
         }
 
-        public void EnableGlobalBackRequest()
+        private void EnableGlobalBackRequest()
         {
             MenuFrame.Navigated += MenuFrameNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
-        public void DisableGlobalBackRequest()
+        private void DisableGlobalBackRequest()
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
             MenuFrame.Navigated -= MenuFrameNavigated;
@@ -47,17 +47,36 @@ namespace Colg_UWP.View.Pages
 
         private void MenuFrameNavigated(object sender, NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = ((Frame)sender).CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            UpdateBackButtonVisibility();
+        }
+
+        private void MainContentFrame_OnNavigated(object sender, NavigationEventArgs e)
+        {
+            UpdateBackButtonVisibility();
+        }
+
+        private void UpdateBackButtonVisibility()
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                _canGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = MenuFrame;
-            if (rootFrame != null && rootFrame.CanGoBack)
+           
+            if (ContentFrame.CanGoBack)
             {
-                e.Handled = true;
-                rootFrame.GoBack();
+                ContentFrame.GoBack();
             }
+            else
+            {
+                if (MenuFrame.CanGoBack)
+                {
+                    MenuFrame.GoBack();
+                }
+            }
+
+            e.Handled = true;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -88,5 +107,9 @@ namespace Colg_UWP.View.Pages
             }
           
         }
+
+      
+
+        private bool _canGoBack => MainContentFrame.CanGoBack || MenuFrame.CanGoBack;
     }
 }

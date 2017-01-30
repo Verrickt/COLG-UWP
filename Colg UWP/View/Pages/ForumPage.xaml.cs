@@ -42,13 +42,10 @@ namespace Colg_UWP.View.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var frame = (Frame) Window.Current.Content;
-            var page = (MainPage) frame.Content;
-            page.DisableGlobalBackRequest();
+           
             VM = VM ?? new ForumVM();
             VM.Forum = e.Parameter as Forum;
             ContentFrame.Navigate(typeof(DisplayPage));
-            EnableLocalBackRequest();
             base.OnNavigatedTo(e);
         }
 
@@ -62,10 +59,7 @@ namespace Colg_UWP.View.Pages
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            DisableLocalBackRequest();
-            var frame = (Frame) Window.Current.Content;
-            var page = (MainPage) frame.Content;
-            page.EnableGlobalBackRequest();
+          
             base.OnNavigatedFrom(e);
         }
 
