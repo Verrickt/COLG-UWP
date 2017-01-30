@@ -20,22 +20,22 @@
     </Page.Resources>
     <SemanticZoom>
         <SemanticZoom.ZoomedInView>
-            <GridView Name="ZoomInView" SizeChanged="ZoomInView_OnSizeChanged"
+            <ListView Name="ZoomInView" SizeChanged="ZoomInView_OnSizeChanged"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   ItemsSource="{x:Bind ForumSource.View,Mode=OneWay}"
                   SelectionMode="None" IsItemClickEnabled="True"
                   ItemClick="ListView_ItemClick">
 
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
                         <Setter Property="Margin" Value="10"></Setter>
                         <Setter Property="Padding" Value="0"></Setter>
                     </Style>
-                </GridView.ItemContainerStyle>
-                <GridView.ItemTemplate>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:Forum">
                         <Grid Padding="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                           Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
@@ -59,11 +59,11 @@
                         </Grid>
 
                     </DataTemplate>
-                </GridView.ItemTemplate>
-               <GridView.GroupStyle>
+                </ListView.ItemTemplate>
+               <ListView.GroupStyle>
                    <GroupStyle HeaderTemplate="{StaticResource ZoomedInGroupHeaderTemplate}"></GroupStyle>
-               </GridView.GroupStyle>
-            </GridView>
+                </ListView.GroupStyle>
+            </ListView>
         </SemanticZoom.ZoomedInView>
         <SemanticZoom.ZoomedOutView>
             <ListView Name="ZoomOutView" ItemsSource="{x:Bind ForumSource.View.CollectionGroups,Mode=OneWay}">

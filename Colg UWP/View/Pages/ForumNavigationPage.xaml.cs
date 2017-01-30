@@ -40,20 +40,20 @@ namespace Colg_UWP.View.Pages
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clicked = e.ClickedItem as Forum;
-            this.MenuFrame.Navigate(typeof(ForumPage), clicked);
+            this.ContentFrame.Navigate(typeof(ForumPage), clicked);
         }
 
 
         private void ZoomInView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var gridview = sender as GridView;
-            var wrapgrid = gridview.ItemsPanelRoot as ItemsWrapGrid;
-            int margin = 10;
-            int n = (int) (e.NewSize.Width/(300 + margin));
-            if (n!=0)
-            {
-                wrapgrid.ItemWidth = e.NewSize.Width/n - margin;
-            }
+            //var gridview = sender as GridView;
+            //var wrapgrid = gridview.ItemsPanelRoot as ItemsWrapGrid;
+            //int margin = 10;
+            //int n = (int) (e.NewSize.Width/(300 + margin));
+            //if (n!=0)
+            //{
+            //    wrapgrid.ItemWidth = e.NewSize.Width/n - margin;
+            //}
         }
     }
 }
