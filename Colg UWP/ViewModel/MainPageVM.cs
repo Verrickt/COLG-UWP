@@ -12,7 +12,7 @@ namespace Colg_UWP.ViewModel
                 {
                     new MenuVM() {DisplayName="主页",Glyph="\uE10F",TargetPage=typeof(View.Pages.HomePage) },
                     new MenuVM() {DisplayName="论坛",Glyph="\uE8BD",TargetPage=typeof(View.Pages.ForumNavigationPage) },
-                    new MenuVM() {DisplayName="热门讨论",Glyph="\uE8F2",TargetPage = typeof(View.Pages.PopularPostView)},
+                    new MenuVM() {DisplayName="热门讨论",Glyph="\uE8F2",TargetPage = typeof(View.Pages.PopularPostPage)},
                     new MenuVM() {DisplayName="个人中心",Glyph="\uE187",TargetPage = typeof(View.Pages.LoginPage)}
                 };
             }
