@@ -56,13 +56,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <RelativePanel HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"  >
+        <RelativePanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"  >
             <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0" Name="Humburger" Click="Humburger_Click" Height="48" Width="48"  RelativePanel.AlignVerticalCenterWithPanel="True">
                 <Button.Content>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" ></FontIcon>
                 </Button.Content>
             </Button>
-            <TextBlock Margin="24,0,0,0" FontWeight="Bold" Name="Title" RelativePanel.RightOf="Humburger" RelativePanel.AlignVerticalCenterWithPanel="True">Title</TextBlock>
         </RelativePanel>
 
         <SplitView Background="Green" Name="MySplitView" Grid.Row="1" Grid.Column="0"  OpenPaneLength="240" DisplayMode="CompactOverlay" CompactPaneLength="48">
@@ -73,7 +72,6 @@
                             <DataTemplate >
                                 <RelativePanel Width="240" Height="48"  >
                                     <Grid RelativePanel.AlignVerticalCenterWithPanel="True" Name="GlyphGrid" RelativePanel.AlignLeftWithPanel="True" Width="48" Height="48">
-                                        <Rectangle Visibility="Collapsed" HorizontalAlignment="Left" Width="8" Fill="{ThemeResource SystemControlBackgroundAccentBrush}"></Rectangle>
                                         <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="{Binding Glyph}" ></FontIcon>
                                     </Grid>
                                     <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GlyphGrid" Margin="24,0,0,0" Text="{Binding DisplayName }" VerticalAlignment="Center"></TextBlock>
@@ -93,11 +91,11 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame Name="MenuFrame">
+                <Frame Name="MenuFrame" Margin="0,-48,0,0">
                 </Frame>
             </SplitView.Content>
         </SplitView>
 
-        <Frame Background="Blue" Grid.Row="1" Grid.Column="1" Name="MainContentFrame" Navigated="MainContentFrame_OnNavigated" ></Frame>
+        <Frame Margin="0,-48,0,0" Background="Blue" Grid.Row="1" Grid.Column="1" Name="MainContentFrame" Navigated="MainContentFrame_OnNavigated" ></Frame>
     </Grid>
 </Page>

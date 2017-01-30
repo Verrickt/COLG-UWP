@@ -30,7 +30,6 @@ namespace Colg_UWP.View.Pages
         {
             EnableGlobalBackRequest();
             MenuFrame.Navigate(typeof(HomePage));
-            Title.Text = VM.TopMenuItems[0].DisplayName;
         }
 
         private void EnableGlobalBackRequest()
@@ -102,7 +101,6 @@ namespace Colg_UWP.View.Pages
             }
             else
             {
-                Title.Text = clicked.DisplayName;
                 MenuFrame.Navigate(clicked.TargetPage);
             }
           
