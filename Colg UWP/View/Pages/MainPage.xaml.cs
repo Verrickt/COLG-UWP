@@ -14,7 +14,7 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        public Frame ContentFrame => this.MainContentFrame;
 
         public MainPage()
         {
@@ -29,32 +29,30 @@ namespace Colg_UWP.View.Pages
         private  void Page_Loaded(object sender, RoutedEventArgs e)
         {
             EnableGlobalBackRequest();
-            MyFrame.Navigate(typeof(HomePage));
+            MenuFrame.Navigate(typeof(HomePage));
             Title.Text = VM.TopMenuItems[0].DisplayName;
-           
-
         }
 
         public void EnableGlobalBackRequest()
         {
-            MyFrame.Navigated += MyFrame_Navigated;
+            MenuFrame.Navigated += MenuFrameNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
         public void DisableGlobalBackRequest()
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
-            MyFrame.Navigated -= MyFrame_Navigated;
+            MenuFrame.Navigated -= MenuFrameNavigated;
         }
 
-        private void MyFrame_Navigated(object sender, NavigationEventArgs e)
+        private void MenuFrameNavigated(object sender, NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = ((Frame)sender).CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = MyFrame;
+            Frame rootFrame = MenuFrame;
             if (rootFrame != null && rootFrame.CanGoBack)
             {
                 e.Handled = true;
@@ -86,7 +84,7 @@ namespace Colg_UWP.View.Pages
             else
             {
                 Title.Text = clicked.DisplayName;
-                MyFrame.Navigate(clicked.TargetPage);
+                MenuFrame.Navigate(clicked.TargetPage);
             }
           
         }

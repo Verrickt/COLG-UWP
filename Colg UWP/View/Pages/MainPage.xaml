@@ -47,13 +47,27 @@
             </VisualStateGroup>
 
         </VisualStateManager.VisualStateGroups>
-        
-          
-        <SplitView  Name="MySplitView" Grid.Row="0"  OpenPaneLength="240" DisplayMode="CompactOverlay" CompactPaneLength="48">
-            <SplitView.Pane>
-                <StackPanel Margin="0,48,0,0">
-                 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <RelativePanel HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"  >
+            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0" Name="Humburger" Click="Humburger_Click" Height="48" Width="48"  RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Button.Content>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" ></FontIcon>
+                </Button.Content>
+            </Button>
+            <TextBlock Margin="24,0,0,0" FontWeight="Bold" Name="Title" RelativePanel.RightOf="Humburger" RelativePanel.AlignVerticalCenterWithPanel="True">Title</TextBlock>
+        </RelativePanel>
 
+        <SplitView Background="Green" Name="MySplitView" Grid.Row="1" Grid.Column="0"  OpenPaneLength="240" DisplayMode="CompactOverlay" CompactPaneLength="48">
+            <SplitView.Pane>
+                <StackPanel>
                     <ListView  Name="Menu" IsItemClickEnabled="True" ItemClick="Menu_ItemClick" SelectionMode="None" ItemsSource="{Binding TopMenuItems}">
                         <ListView.ItemTemplate>
                             <DataTemplate >
@@ -79,17 +93,11 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame Name="MyFrame">
+                <Frame Name="MenuFrame">
                 </Frame>
             </SplitView.Content>
         </SplitView>
-        <RelativePanel HorizontalAlignment="Left" VerticalAlignment="Top"  >
-            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0" Name="Humburger" Click="Humburger_Click" Height="48" Width="48"  RelativePanel.AlignVerticalCenterWithPanel="True">
-                <Button.Content>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" ></FontIcon>
-                </Button.Content>
-            </Button>
-            <TextBlock Margin="24,0,0,0" FontWeight="Bold" Name="Title" RelativePanel.RightOf="Humburger" RelativePanel.AlignVerticalCenterWithPanel="True">Title</TextBlock>
-        </RelativePanel>
+
+        <Frame Background="Blue" Grid.Row="1" Grid.Column="1" Name="MainContentFrame"></Frame>
     </Grid>
 </Page>
