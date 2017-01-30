@@ -40,7 +40,7 @@ namespace Colg_UWP.View.Pages
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clicked = e.ClickedItem as Forum;
-            this.ContentFrame.Navigate(typeof(ForumPage), clicked);
+            this.Frame.Navigate(typeof(ForumPage), clicked);
         }
 
 
