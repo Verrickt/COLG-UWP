@@ -11,7 +11,7 @@ namespace Colg_UWP.View.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HomePage : Page
+    public sealed partial class HomePage : MenuPage
     {
         public HomePage()
         {
@@ -21,7 +21,6 @@ namespace Colg_UWP.View.Pages
 
         public HomeVM VM;
 
-       
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -37,7 +36,7 @@ namespace Colg_UWP.View.Pages
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clicked = e.ClickedItem as Model.Article;
-            this.Frame.Navigate(typeof(ArticlePage), clicked);
+            ContentFrame.Navigate(typeof(ArticlePage), clicked);
         }
 
         private void GridView_SizeChanged(object sender, SizeChangedEventArgs e)

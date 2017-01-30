@@ -194,6 +194,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Pages\MenuPage.cs" />
     <Compile Include="View\Pages\MySpace.xaml.cs">
       <DependentUpon>MySpace.xaml</DependentUpon>
     </Compile>
