@@ -48,14 +48,14 @@ namespace Colg_UWP.View.Pages
 
         private void PostList_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var gridview = sender as GridView;
-            var wrapgrid = (ItemsWrapGrid)gridview.ItemsPanelRoot;
-            int margin = 10;
-            int n = (int)(e.NewSize.Width / (400 + margin));
-            if (n != 0)
-            {
-                wrapgrid.ItemWidth = e.NewSize.Width / n - margin;
-            }
+            //var gridview = sender as GridView;
+            //var wrapgrid = (ItemsWrapGrid)gridview.ItemsPanelRoot;
+            //int margin = 10;
+            //int n = (int)(e.NewSize.Width / (400 + margin));
+            //if (n != 0)
+            //{
+            //    wrapgrid.ItemWidth = e.NewSize.Width / n - margin;
+            //}
         }
     }
 }

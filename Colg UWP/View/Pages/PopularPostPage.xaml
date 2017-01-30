@@ -12,30 +12,35 @@
     Loading="PopularPostView_OnLoading"
     >
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <GridView  Name="PostList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="Single" SizeChanged="PostList_OnSizeChanged"
-                   SelectedItem="{x:Bind VM.SelectedPost,Mode=TwoWay,Converter={StaticResource 'GenericObjectConverter'}}" SelectionChanged="PostList_SelectionChanged">
-            <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="Margin" Value="10"></Setter>
-                    <Setter Property="Padding" Value="0"></Setter>
-                </Style>
-            </GridView.ItemContainerStyle>
-            <GridView.ItemTemplate>
-                <DataTemplate  x:DataType="model:Discussion" >
-                    <controls:DiscussionDataTemplate ></controls:DiscussionDataTemplate>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-        
-    </Grid>
-    
-    <Page.BottomAppBar>
-        <CommandBar>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CommandBar Grid.Row="0">
             <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_OnClick"></AppBarButton>
             <AppBarButton Name="Top" Icon="Up" Label="回到最上" Click="Top_OnClick"  ></AppBarButton>
         </CommandBar>
-    </Page.BottomAppBar>
+        <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <ListView  Name="PostList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="Single" SizeChanged="PostList_OnSizeChanged"
+                   SelectedItem="{x:Bind VM.SelectedPost,Mode=TwoWay,Converter={StaticResource 'GenericObjectConverter'}}" SelectionChanged="PostList_SelectionChanged">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Margin" Value="10"></Setter>
+                        <Setter Property="Padding" Value="0"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate  x:DataType="model:Discussion" >
+                        <controls:DiscussionDataTemplate ></controls:DiscussionDataTemplate>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </Grid>
+
+   
 </local:MenuPage>
