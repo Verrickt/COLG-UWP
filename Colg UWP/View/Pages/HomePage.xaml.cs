@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -42,16 +43,17 @@ namespace Colg_UWP.View.Pages
         private void GridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var gridview = sender as GridView;
-            var wrapgrid = (ItemsWrapGrid) gridview.ItemsPanelRoot;
-            double margin = 10;
-            double newWidth = e.NewSize.Width;
-            double itemWidth = wrapgrid.ItemWidth;
-
-            int n = (int) (newWidth/(400d + margin));
-            if (n != 0)
+            var wrapgrid = (ItemsWrapGrid)gridview.ItemsPanelRoot;
+            double desiredWidth = 275;
+            double margin = 0;
+            double actualWidth = desiredWidth + margin;
+            int count = (int) (e.NewSize.Width / actualWidth);
+            if (count==0)
             {
-                wrapgrid.ItemWidth = newWidth/n - margin;
+                count = 1;
             }
+            wrapgrid.ItemWidth = e.NewSize.Width / count - margin;
+
         }
 
 
