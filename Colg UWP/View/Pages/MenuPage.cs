@@ -12,6 +12,6 @@ namespace Colg_UWP.View.Pages
     {
         protected Frame ContentFrame => _mainPage.ContentFrame;
 
-
+        protected override CommandBar CommandBar => _mainPage.MenuCommandBar;
     }
 }

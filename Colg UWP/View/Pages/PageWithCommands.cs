@@ -22,10 +22,31 @@ namespace Colg_UWP.View.Pages
             }
         }
 
-        public virtual IObservableVector<ICommandBarElement> PrimaryCommands { get; private set; }
+        public virtual IObservableVector<ICommandBarElement> PrimaryCommands
+        {
+            set
+            {
+                UpdateCommands(CommandBar.PrimaryCommands,value);
+            }
+        }
 
-        public virtual IObservableVector<ICommandBarElement> SecondaryCommands { get; private set; }
+        public virtual IObservableVector<ICommandBarElement> SecondaryCommands
+        {
+            set
+            {
+                UpdateCommands(CommandBar.SecondaryCommands,value);
+            }
+        }
+
+        protected virtual CommandBar CommandBar => _mainPage.ContentCommandBar;
 
         public virtual string Title { get; private set; }
+
+        protected void UpdateCommands(IObservableVector<ICommandBarElement> source,
+            IObservableVector<ICommandBarElement> commands)
+        {
+            source.Clear();
+            commands.ToList().ForEach(source.Add);
+        }
     }
 }
