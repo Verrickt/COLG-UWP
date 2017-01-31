@@ -30,7 +30,6 @@ namespace Colg_UWP.View.Pages
                 VM = new HomeVM();
                 await VM.RefreshAsync();
             }
-            Container.AppBarButtons = OverrideCommandBar.PrimaryCommands;
             base.OnNavigatedTo(e);
         }
 
@@ -62,7 +61,5 @@ namespace Colg_UWP.View.Pages
         {
             await VM.RefreshAsync();
         }
-
-        public override string Title { get; set; } = "我的首页";
     }
 }

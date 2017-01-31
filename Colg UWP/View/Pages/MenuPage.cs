@@ -5,33 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace Colg_UWP.View.Pages
 {
-    public abstract class MenuPage : Page
+    public class MenuPage:Page
     {
-        private MainPage _mainPage
+        protected Frame ContentFrame
         {
             get
             {
-                var frame = (Frame) Window.Current.Content;
-                return (MainPage) frame.Content;
+                var frame = (Frame)Window.Current.Content;
+                var page = (MainPage)frame.Content;
+                return page.ContentFrame;
             }
         }
 
-        protected ContainerPage Container => _mainPage.MenuContainer;
-
-        protected Frame ContentFrame => _mainPage.ContentContainer.Frame;
-
-        protected new Frame Frame => _mainPage.MenuContainer.Frame;
-
-        public abstract string Title { get; set; }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            Container.TitleText = Title;
-            base.OnNavigatedTo(e);
-        }
+       
     }
 }

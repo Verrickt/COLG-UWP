@@ -57,7 +57,5 @@ namespace Colg_UWP.View.Pages
             //    wrapgrid.ItemWidth = e.NewSize.Width / n - margin;
             //}
         }
-
-        public override string Title { get; set; } = "热门讨论帖";
     }
 }

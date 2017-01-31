@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0" Visibility="Collapsed">
+        <CommandBar Grid.Row="0">
             <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
         </CommandBar>
         <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

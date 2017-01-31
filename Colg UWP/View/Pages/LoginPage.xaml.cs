@@ -86,6 +86,6 @@ namespace Colg_UWP.View.Pages
             //}
         }
 
-        public override string Title { get; set; } = "登陆";
+
     }
 }

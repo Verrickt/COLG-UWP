@@ -91,11 +91,11 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <local:ContainerPage x:Name="MenuPage" Margin="0,-48,0,0">
-                </local:ContainerPage>
+                <Frame Name="MenuFrame" Margin="0,-48,0,0">
+                </Frame>
             </SplitView.Content>
         </SplitView>
 
-        <local:ContainerPage Margin="0,-48,0,0" Background="Blue" Grid.Row="1" Grid.Column="1" x:Name="ContentPage" ></local:ContainerPage>
+        <Frame Margin="0,-48,0,0" Background="Blue" Grid.Row="1" Grid.Column="1" Name="MainContentFrame" Navigated="MainContentFrame_OnNavigated" ></Frame>
     </Grid>
 </Page>
