@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Colg_UWP.View.Pages
 {
@@ -47,6 +48,15 @@ namespace Colg_UWP.View.Pages
         {
             source.Clear();
             commands.ToList().ForEach(source.Add);
+        }
+
+        public virtual CommandBar LocalCommandBar { get; set; }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            PrimaryCommands = LocalCommandBar.PrimaryCommands;
+            SecondaryCommands = LocalCommandBar.SecondaryCommands;
+            base.OnNavigatedTo(e);
         }
     }
 }
