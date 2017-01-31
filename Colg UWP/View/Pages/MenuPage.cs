@@ -8,18 +8,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.View.Pages
 {
-    public class MenuPage:Page
+    public class MenuPage:PageWithCommands
     {
-        protected Frame ContentFrame
-        {
-            get
-            {
-                var frame = (Frame)Window.Current.Content;
-                var page = (MainPage)frame.Content;
-                return page.ContentFrame;
-            }
-        }
+        protected Frame ContentFrame => _mainPage.ContentFrame;
 
-       
+
     }
 }

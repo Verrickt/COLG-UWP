@@ -11,7 +11,7 @@ namespace Colg_UWP.View.Pages
 {
     public class PageWithCommands : Page
     {
-        private MainPage _mainPage
+        protected MainPage _mainPage
         {
             get
             {
