@@ -23,40 +23,32 @@ namespace Colg_UWP.View.Pages
             }
         }
 
-        public virtual IObservableVector<ICommandBarElement> PrimaryCommands
-        {
-            set
-            {
-                UpdateCommands(CommandBar.PrimaryCommands,value);
-            }
-        }
-
-        public virtual IObservableVector<ICommandBarElement> SecondaryCommands
-        {
-            set
-            {
-                UpdateCommands(CommandBar.SecondaryCommands,value);
-            }
-        }
+        
 
         protected virtual CommandBar CommandBar => _mainPage.ContentCommandBar;
 
         public virtual string Title { get; private set; }
 
-        protected void UpdateCommands(IObservableVector<ICommandBarElement> source,
-            IObservableVector<ICommandBarElement> commands)
+        private void UpdateCommands(CommandBar target,CommandBar local)
         {
-            source.Clear();
-            commands.ToList().ForEach(source.Add);
+            void Update(IObservableVector<ICommandBarElement> source,
+            IObservableVector<ICommandBarElement> commands)
+            {
+                source.Clear();
+                commands.ToList().ForEach(source.Add);
+            }
+
+            Update(target.PrimaryCommands, local.PrimaryCommands);
+            Update(target.SecondaryCommands, local.SecondaryCommands);
+
         }
 
         public virtual CommandBar LocalCommandBar { get; set; }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            PrimaryCommands = LocalCommandBar.PrimaryCommands;
-            SecondaryCommands = LocalCommandBar.SecondaryCommands;
-            base.OnNavigatedTo(e);
+           UpdateCommands(CommandBar,LocalCommandBar);
+           base.OnNavigatedTo(e);
         }
     }
 }
