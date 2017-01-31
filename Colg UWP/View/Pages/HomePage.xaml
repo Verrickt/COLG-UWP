@@ -22,13 +22,18 @@
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle }">
     
 </Style>
+        <CommandBar x:Name="OverrideCommandBar"  Visibility="Collapsed" Grid.Row="0">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions >
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <CommandBar  Grid.Row="0">
+        <CommandBar Visibility="Collapsed" Grid.Row="0">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>

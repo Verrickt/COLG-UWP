@@ -45,6 +45,7 @@ namespace Colg_UWP.View.Pages
            
             VM = VM ?? new ForumVM();
             VM.Forum = e.Parameter as Forum;
+            Title = VM.Forum.Name;
             base.OnNavigatedTo(e);
         }
 
@@ -128,5 +129,7 @@ namespace Colg_UWP.View.Pages
         //        }
         //    }
         }
+
+        public override string Title { get; set; }
     }
 }

@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0">
+        <CommandBar Grid.Row="0" Visibility="Collapsed">
             <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_OnClick"></AppBarButton>
             <AppBarButton Name="Top" Icon="Up" Label="回到最上" Click="Top_OnClick"  ></AppBarButton>
         </CommandBar>

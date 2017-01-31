@@ -23,7 +23,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0">
+        <CommandBar Grid.Row="0" Visibility="Collapsed">
             <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
         </CommandBar>
         <SemanticZoom Grid.Row="1">

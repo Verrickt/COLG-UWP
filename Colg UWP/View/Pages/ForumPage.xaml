@@ -26,7 +26,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <CommandBar Grid.Row="0" 
+            <CommandBar Grid.Row="0" Visibility="Collapsed"
                     >
                 <AppBarButton IsEnabled="False" Icon="Add" Label="发帖"></AppBarButton>
                 <AppBarButton Name="Refresh"  Icon="Refresh" Label="刷新"

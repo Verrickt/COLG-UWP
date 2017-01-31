@@ -14,7 +14,9 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public Frame ContentFrame => this.MainContentFrame;
+        public ContainerPage MenuContainer => this.MenuPage;
+
+        public ContainerPage ContentContainer => this.ContentPage;
 
         public MainPage()
         {
@@ -29,20 +31,21 @@ namespace Colg_UWP.View.Pages
         private  void Page_Loaded(object sender, RoutedEventArgs e)
         {
             EnableGlobalBackRequest();
-            MenuFrame.Navigate(typeof(HomePage));
-            ContentFrame.Navigate(typeof(DisplayPage));
+            MenuPage.Frame.Navigate(typeof(HomePage));
+            ContentPage.Frame.Navigate(typeof(DisplayPage));
         }
 
         private void EnableGlobalBackRequest()
         {
-            MenuFrame.Navigated += MenuFrameNavigated;
+            MenuPage.Frame.Navigated += MenuFrameNavigated;
+            ContentPage.Frame.Navigated += ContentFrame_Navigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
         private void DisableGlobalBackRequest()
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
-            MenuFrame.Navigated -= MenuFrameNavigated;
+            MenuPage.Frame.Navigated -= MenuFrameNavigated;
         }
 
         private void MenuFrameNavigated(object sender, NavigationEventArgs e)
@@ -50,7 +53,7 @@ namespace Colg_UWP.View.Pages
             UpdateBackButtonVisibility();
         }
 
-        private void MainContentFrame_OnNavigated(object sender, NavigationEventArgs e)
+        private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
         {
             UpdateBackButtonVisibility();
         }
@@ -64,15 +67,15 @@ namespace Colg_UWP.View.Pages
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
            
-            if (ContentFrame.CanGoBack)
+            if (ContentPage.Frame.CanGoBack)
             {
-                ContentFrame.GoBack();
+                ContentPage.Frame.GoBack();
             }
             else
             {
-                if (MenuFrame.CanGoBack)
+                if (MenuPage.Frame.CanGoBack)
                 {
-                    MenuFrame.GoBack();
+                    MenuPage.Frame.GoBack();
                 }
             }
 
@@ -102,13 +105,13 @@ namespace Colg_UWP.View.Pages
             }
             else
             {
-                MenuFrame.Navigate(clicked.TargetPage);
+                MenuPage.Frame.Navigate(clicked.TargetPage);
             }
           
         }
 
       
 
-        private bool _canGoBack => MainContentFrame.CanGoBack || MenuFrame.CanGoBack;
+        private bool _canGoBack => ContentPage.Frame.CanGoBack || MenuPage.Frame.CanGoBack;
     }
 }

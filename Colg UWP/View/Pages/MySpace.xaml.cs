@@ -53,6 +53,6 @@ namespace Colg_UWP.View.Pages
             base.OnNavigatedTo(e);
         }
 
-    
+        public override string Title { get; set; } = "个人空间";
     }
 }
