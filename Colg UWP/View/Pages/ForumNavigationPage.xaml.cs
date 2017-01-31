@@ -29,13 +29,11 @@ namespace Colg_UWP.View.Pages
                 VM = new ForumNaviVM();
                 await VM.InitAsync();
             }
-
+            LocalCommandBar = MyCommandBar;
             base.OnNavigatedTo(e);
         }
 
 
-       
-    
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {

@@ -22,18 +22,15 @@
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle }">
     
 </Style>
-    </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions >
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <CommandBar  Grid.Row="0">
+        <CommandBar x:Name="MyCommandBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-        <Pivot Grid.Row="1"  >
+    </Page.Resources>
+  
+
+        <Pivot  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
 
             <PivotItem>
                 <PivotItem.Header>
@@ -62,8 +59,6 @@
                 </GridView>
             </PivotItem>
         </Pivot>
-    </Grid>
-    
 </local:MenuPage>
 
 

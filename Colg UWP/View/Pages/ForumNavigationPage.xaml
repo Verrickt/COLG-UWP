@@ -16,17 +16,12 @@
         <DataTemplate x:Key="ZoomedInGroupHeaderTemplate" x:DataType="model:ForumContainer">
             <TextBlock Text="{x:Bind Catagory}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}"/>
         </DataTemplate>
-
-    </Page.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0">
+        <CommandBar x:Name="MyCommandBar" >
             <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
         </CommandBar>
-        <SemanticZoom Grid.Row="1">
+    </Page.Resources>
+   
+        <SemanticZoom >
             <SemanticZoom.ZoomedInView>
                 <ListView Name="ZoomInView" SizeChanged="ZoomInView_OnSizeChanged"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
@@ -95,7 +90,6 @@
                 </ListView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
-    </Grid>
 </local:MenuPage>
 
 

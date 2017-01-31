@@ -30,6 +30,7 @@ namespace Colg_UWP.View.Pages
                 VM = new HomeVM();
                 await VM.RefreshAsync();
             }
+            LocalCommandBar = MyCommandBar;
             base.OnNavigatedTo(e);
         }
 
