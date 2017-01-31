@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.View.Pages
 {
-    public class MenuPage:PageWithCommands
+    abstract class MenuPage:PageWithCommands
     {
         protected Frame ContentFrame => _mainPage.ContentFrame;
 
