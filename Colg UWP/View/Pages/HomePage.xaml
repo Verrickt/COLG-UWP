@@ -16,7 +16,8 @@
         </DataTemplate>
             <Style TargetType="GridViewItem">
                 <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                <Setter Property="Margin" Value="0,5"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="MinHeight" Value="200"></Setter>
             </Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle }">
     
@@ -36,14 +37,14 @@
 
             <PivotItem>
                 <PivotItem.Header>
-                    <TextBlock  >首页</TextBlock>
+                    <TextBlock Margin="5,0,0,0" >首页</TextBlock>
                 </PivotItem.Header>
                 <GridView SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.News,Mode=OneWay}" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" SelectionMode="None">
                 </GridView>
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
-                    <TextBlock Style="{StaticResource BodyTextBlockStyle }"> 资讯</TextBlock>
+                    <TextBlock> 资讯</TextBlock>
                 </PivotItem.Header>
                 <GridView Name="HotNews" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" IsItemClickEnabled="True" SelectionMode="None">
 
@@ -53,7 +54,7 @@
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
-                    <TextBlock Style="{StaticResource BodyTextBlockStyle }">前瞻</TextBlock>
+                    <TextBlock >前瞻</TextBlock>
                 </PivotItem.Header>
                 <GridView Name="Prospective" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
 

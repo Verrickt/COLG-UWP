@@ -45,7 +45,7 @@ namespace Colg_UWP.View.Pages
             var gridview = sender as GridView;
             var wrapgrid = (ItemsWrapGrid)gridview.ItemsPanelRoot;
             double desiredWidth = 275;
-            double margin = 0;
+            double margin = 5;
             double actualWidth = desiredWidth + margin;
             int count = (int) (e.NewSize.Width / actualWidth);
             if (count==0)
