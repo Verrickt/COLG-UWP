@@ -31,6 +31,8 @@ namespace Colg_UWP.View.Pages
             this.InitializeComponent();
         }
 
+        public override CommandBar LocalCommandBar => MyCommandBar;
+
         private ViewModel.LoginVM VM;
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
@@ -85,7 +87,6 @@ namespace Colg_UWP.View.Pages
             //    JumpToUserSpace();
             //}
         }
-
 
     }
 }

@@ -128,5 +128,7 @@ namespace Colg_UWP.View.Pages
         //        }
         //    }
         }
+
+        public override CommandBar LocalCommandBar =>MyCommandBar;
     }
 }

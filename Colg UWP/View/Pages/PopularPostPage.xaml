@@ -11,17 +11,13 @@
     mc:Ignorable="d"
     Loading="PopularPostView_OnLoading"
     >
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0">
+<Page.Resources>
+        <CommandBar x:Name="MyCommandBar">
             <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_OnClick"></AppBarButton>
             <AppBarButton Name="Top" Icon="Up" Label="回到最上" Click="Top_OnClick"  ></AppBarButton>
         </CommandBar>
-        <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    </Page.Resources>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <ListView  Name="PostList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="Single" SizeChanged="PostList_OnSizeChanged"
                    SelectedItem="{x:Bind VM.SelectedPost,Mode=TwoWay,Converter={StaticResource 'GenericObjectConverter'}}" SelectionChanged="PostList_SelectionChanged">
                 <ListView.ItemContainerStyle>
@@ -40,7 +36,6 @@
             </ListView>
 
         </Grid>
-    </Grid>
 
    
 </local:MenuPage>

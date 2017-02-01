@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -10,35 +10,36 @@ using Colg_UWP.ViewModel;
 namespace Colg_UWP.View.Pages
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class ForumNavigationPage : MenuPage
     {
         public ForumNavigationPage()
         {
-            this.NavigationCacheMode = NavigationCacheMode.Required;
-            this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
+            InitializeComponent();
         }
 
         private ForumNaviVM VM;
 
+        public override CommandBar LocalCommandBar => MyCommandBar;
+
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode==NavigationMode.New)
+            if (e.NavigationMode == NavigationMode.New)
             {
                 VM = new ForumNaviVM();
                 await VM.InitAsync();
             }
-            LocalCommandBar = MyCommandBar;
             base.OnNavigatedTo(e);
         }
-
 
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clicked = e.ClickedItem as Forum;
-            this.Frame.Navigate(typeof(ForumPage), clicked);
+            Frame.Navigate(typeof(ForumPage), clicked);
         }
 
 
@@ -53,5 +54,6 @@ namespace Colg_UWP.View.Pages
             //    wrapgrid.ItemWidth = e.NewSize.Width/n - margin;
             //}
         }
+
     }
 }

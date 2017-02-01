@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Colg_UWP.View.Pages
 {
-    abstract class PageWithCommands : Page
+    public abstract class PageWithCommands : Page
     {
         protected MainPage _mainPage
         {
@@ -43,7 +43,7 @@ namespace Colg_UWP.View.Pages
 
         }
 
-        public abstract CommandBar LocalCommandBar { get; set; }
+        public abstract CommandBar LocalCommandBar { get;  }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

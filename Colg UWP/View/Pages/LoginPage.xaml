@@ -11,16 +11,12 @@
     Loaded="LoginPage_OnLoaded"
     mc:Ignorable="d"
     >
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0">
+<Page.Resources>
+        <CommandBar x:Name="MyCommandBar" >
             <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
         </CommandBar>
-        <RelativePanel Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    </Page.Resources>
+        <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                 <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" 
                   SelectionChanged="SavedLoginDatas_OnSelectionChanged"  >
@@ -42,5 +38,4 @@
                 </StackPanel>
             </StackPanel>
         </RelativePanel>
-    </Grid>
 </local:MenuPage>

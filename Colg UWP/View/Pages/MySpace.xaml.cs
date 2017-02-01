@@ -32,6 +32,8 @@ namespace Colg_UWP.View.Pages
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
+        public override CommandBar LocalCommandBar => MyCommandBar;
+
         public MySpaceVM VM;
 
         private async void LogOutButton_OnClick(object sender, RoutedEventArgs e)
@@ -53,6 +55,5 @@ namespace Colg_UWP.View.Pages
             base.OnNavigatedTo(e);
         }
 
-    
     }
 }

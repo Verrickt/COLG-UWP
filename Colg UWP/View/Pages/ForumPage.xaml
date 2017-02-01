@@ -13,26 +13,23 @@
     SizeChanged="ForumPage_OnSizeChanged"
     >
     
-    
-    <Grid Name="RelativeLayoutGrid"  >
-       
-     
-       
+    <Page.Resources>
+        <CommandBar x:Name="MyCommandBar"
+                    >
+            <AppBarButton IsEnabled="False" Icon="Add" Label="发帖"></AppBarButton>
+            <AppBarButton Name="Refresh"  Icon="Refresh" Label="刷新"
+                              Command="{x:Bind VM.RefreshCommand}"
+                              ></AppBarButton>
+        </CommandBar>
+
+    </Page.Resources>
         <Grid  Grid.Column="0"
             VerticalAlignment="Stretch"
-            Name="DiscussionListGrid"
             >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <CommandBar Grid.Row="0" 
-                    >
-                <AppBarButton IsEnabled="False" Icon="Add" Label="发帖"></AppBarButton>
-                <AppBarButton Name="Refresh"  Icon="Refresh" Label="刷新"
-                              Command="{x:Bind VM.RefreshCommand}"
-                              ></AppBarButton>
-            </CommandBar>
             <ProgressBar Grid.Row="1" IsIndeterminate="True" Visibility="{x:Bind VM.DiscussionList.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
             <ListView   Grid.Row="1" x:Name="DiscussionList" 
                       ItemsSource="{x:Bind VM.DiscussionList, Mode=OneWay}" 
@@ -55,13 +52,4 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid  >
-
-       
-
-    </Grid>
-   
-    
-  
-
-    
 </local:MenuPage>

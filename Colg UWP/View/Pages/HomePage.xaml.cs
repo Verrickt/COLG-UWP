@@ -22,6 +22,8 @@ namespace Colg_UWP.View.Pages
 
         public HomeVM VM;
 
+        public override CommandBar LocalCommandBar => MyCommandBar;
+
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -30,7 +32,6 @@ namespace Colg_UWP.View.Pages
                 VM = new HomeVM();
                 await VM.RefreshAsync();
             }
-            LocalCommandBar = MyCommandBar;
             base.OnNavigatedTo(e);
         }
 
@@ -62,5 +63,6 @@ namespace Colg_UWP.View.Pages
         {
             await VM.RefreshAsync();
         }
+
     }
 }

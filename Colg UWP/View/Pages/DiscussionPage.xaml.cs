@@ -45,12 +45,10 @@ namespace Colg_UWP.View.Pages
                 var post = e.Parameter as Discussion;
                 VM.Discussion = post;
             }
-            LocalCommandBar = MyCommandBar;
             base.OnNavigatedTo(e);
         }
 
-
-
+        public override CommandBar LocalCommandBar => MyCommandBar;
         private void Replys_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             ListView listview = sender as ListView;
