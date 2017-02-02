@@ -9,26 +9,18 @@
     xmlns:model="using:Colg_UWP.Model"
     xmlns:appstudio="using:AppStudio.Uwp.Controls"
     mc:Ignorable="d"
-    Loading="PopularPostView_OnLoading"
     >
 <Page.Resources>
         <CommandBar x:Name="MyCommandBar">
-            <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_OnClick"></AppBarButton>
-            <AppBarButton Name="Top" Icon="Up" Label="回到最上" Click="Top_OnClick"  ></AppBarButton>
+            <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Command="{x:Bind VM.}"></AppBarButton>
         </CommandBar>
-    </Page.Resources>
+       </Page.Resources>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <ListView  Name="PostList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="Single" SizeChanged="PostList_OnSizeChanged"
-                   SelectedItem="{x:Bind VM.SelectedPost,Mode=TwoWay,Converter={StaticResource 'GenericObjectConverter'}}" SelectionChanged="PostList_SelectionChanged">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="Margin" Value="10"></Setter>
-                        <Setter Property="Padding" Value="0"></Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
+            <ListView  Name="DiscussionList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="None"
+                       IsItemClickEnabled="True" ItemClick="DiscussionList_OnItemClick"
+                        ItemContainerStyle="{StaticResource DiscussionItemStyle}"
+                       >
+                       <ListView.ItemTemplate>
                     <DataTemplate  x:DataType="model:Discussion" >
                         <controls:DiscussionDataTemplate ></controls:DiscussionDataTemplate>
                     </DataTemplate>
@@ -36,6 +28,4 @@
             </ListView>
 
         </Grid>
-
-   
 </local:MenuPage>

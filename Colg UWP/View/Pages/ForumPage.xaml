@@ -17,34 +17,24 @@
         <CommandBar x:Name="MyCommandBar"
                     >
             <AppBarButton IsEnabled="False" Icon="Add" Label="发帖"></AppBarButton>
-            <AppBarButton Name="Refresh"  Icon="Refresh" Label="刷新"
+            <AppBarButton Icon="Refresh" Label="刷新"
                               Command="{x:Bind VM.RefreshCommand}"
                               ></AppBarButton>
         </CommandBar>
-
+       
     </Page.Resources>
-        <Grid  Grid.Column="0"
+        <Grid  
             VerticalAlignment="Stretch"
             >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <ProgressBar Grid.Row="1" IsIndeterminate="True" Visibility="{x:Bind VM.DiscussionList.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
-            <ListView   Grid.Row="1" x:Name="DiscussionList" 
+           
+            <ProgressBar  IsIndeterminate="True" Visibility="{x:Bind VM.DiscussionList.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
+            <ListView    x:Name="DiscussionList" 
                       ItemsSource="{x:Bind VM.DiscussionList, Mode=OneWay}" 
                       ItemClick="DiscussionList_OnItemClick"
                        ScrollViewer.VerticalScrollMode="Auto"
                           IsItemClickEnabled="True"
+                         ItemContainerStyle="{StaticResource DiscussionItemStyle}"
                           >
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Margin" Value="0,2"></Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate  x:DataType="model:Discussion">
                         <control:DiscussionDataTemplate/>
