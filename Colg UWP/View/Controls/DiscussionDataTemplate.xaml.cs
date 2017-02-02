@@ -6,7 +6,7 @@ namespace Colg_UWP.View.Controls
 {
     public sealed partial class DiscussionDataTemplate : UserControl
     {
-        public Model.Discussion Post
+        public Model.Discussion Disucssion
         {
             get { return this.DataContext as Model.Discussion; }
         }

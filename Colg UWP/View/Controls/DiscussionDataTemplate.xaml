@@ -20,24 +20,24 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Margin="0" 
-            Text="{x:Bind Post.Subject}" TextWrapping="WrapWholeWords" ></TextBlock>
+            Text="{x:Bind Disucssion.Subject}" TextWrapping="WrapWholeWords" ></TextBlock>
 
            
             <TextBlock Grid.Row="1" Foreground="#999999"  TextWrapping="Wrap">
-                <Run Text="{x:Bind Post.Author}"></Run>
+                <Run Text="{x:Bind Disucssion.Author}"></Run>
                 <Run Text="发表于"></Run>
-                <Run Text="{x:Bind Post.TimePosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
+                <Run Text="{x:Bind Disucssion.TimePosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
             </TextBlock>
 
-            <TextBlock Visibility="{x:Bind Post.LastPoster,Converter={StaticResource NullabilityToVisibilityConverter}}" Grid.Row="2" Foreground="#999999" TextWrapping="Wrap">
-                <Run Text="{x:Bind Post.LastPoster}"></Run>
+            <TextBlock Visibility="{x:Bind Disucssion.LastPoster,Converter={StaticResource NullabilityToVisibilityConverter}}" Grid.Row="2" Foreground="#999999" TextWrapping="Wrap">
+                <Run Text="{x:Bind Disucssion.LastPoster}"></Run>
                 <Run Text="最后回复于"></Run>
-                <Run Text="{x:Bind Post.TimeLastPosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
+                <Run Text="{x:Bind Disucssion.TimeLastPosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
             </TextBlock>
 
 
         <TextBlock Grid.Row="3" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}">
-                <Run Text="{x:Bind Post.Reply}"></Run>
+                <Run Text="{x:Bind Disucssion.Reply}"></Run>
                 <Run Text="条回复"></Run>
         </TextBlock>
 
