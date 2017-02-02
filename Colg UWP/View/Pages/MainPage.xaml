@@ -93,18 +93,20 @@
             <SplitView.Content>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="48"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <CommandBar Margin="0,-48,0,0" Name="Main_MenuCommandBar" Grid.Row="0" ></CommandBar>
-                    <Frame Grid.Row="1" Name="Main_MenuFrame" >
+                    <TextBlock Name="Menu_TitleTextBlock" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0"></TextBlock>
+                    <CommandBar  Name="Main_MenuCommandBar" Grid.Row="2" ></CommandBar>
+                    <Frame Grid.Row="1"  Name="Main_MenuFrame" >
                     </Frame>
                 </Grid>
             </SplitView.Content>
         </SplitView>
 
-        <Frame  Background="Blue" Grid.Row="1" Grid.Column="1" Name="Main_ContentFrame" Navigated="MainContentFrame_OnNavigated" ></Frame>
-        
-        <CommandBar Name="Main_ContentCommandBar" Grid.Row="0" Grid.Column="1"></CommandBar>
+        <Frame  Background="Blue" Grid.Row="1" Grid.Column="1" Name="Main_ContentFrame" Navigated="Main_ContentFrame_OnNavigated" ></Frame>
+        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Name="Main_ContentTitleTextBlock"></TextBlock>
+        <CommandBar Name="Main_ContentCommandBar" Grid.Row="2" Grid.Column="1"></CommandBar>
     </Grid>
 </Page>

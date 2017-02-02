@@ -20,6 +20,11 @@ namespace Colg_UWP.View.Pages
 
         public CommandBar MenuCommandBar => this.Main_MenuCommandBar;
 
+        public TextBlock MenuTitleTextBlock => this.MenuTitleTextBlock;
+
+        public TextBlock ContentTitleTextBlock => this.ContentTitleTextBlock;
+
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -54,7 +59,7 @@ namespace Colg_UWP.View.Pages
             UpdateBackButtonVisibility();
         }
 
-        private void MainContentFrame_OnNavigated(object sender, NavigationEventArgs e)
+        private void Main_ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             UpdateBackButtonVisibility();
         }

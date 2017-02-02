@@ -12,7 +12,7 @@
     >
 <Page.Resources>
         <CommandBar x:Name="MyCommandBar">
-            <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Command="{x:Bind VM.}"></AppBarButton>
+            <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
         </CommandBar>
        </Page.Resources>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

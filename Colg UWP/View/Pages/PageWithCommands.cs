@@ -23,7 +23,7 @@ namespace Colg_UWP.View.Pages
             }
         }
 
-        
+        protected virtual TextBlock TitleTextBlock => _mainPage.MenuTitleTextBlock;
 
         protected virtual CommandBar CommandBar => _mainPage.ContentCommandBar;
 
@@ -43,10 +43,16 @@ namespace Colg_UWP.View.Pages
 
         }
 
+        private void UpdateTitle()
+        {
+            TitleTextBlock.Text = Title;
+        }
+
         public abstract CommandBar LocalCommandBar { get;  }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+           UpdateTitle();
            UpdateCommands(CommandBar,LocalCommandBar);
            base.OnNavigatedTo(e);
         }
