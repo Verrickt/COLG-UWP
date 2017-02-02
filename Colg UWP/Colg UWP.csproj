@@ -166,6 +166,9 @@
     <Compile Include="View\Controls\DiscussionDataTemplate.xaml.cs">
       <DependentUpon>DiscussionDataTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\ReplyDataTemplate.xaml.cs">
+      <DependentUpon>ReplyDataTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\ToastNotification.xaml.cs">
       <DependentUpon>ToastNotification.xaml</DependentUpon>
     </Compile>
@@ -309,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\DiscussionDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\ReplyDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

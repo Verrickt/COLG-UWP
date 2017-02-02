@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     xmlns:markdown="using:UniversalMarkdown"
     xmlns:model="using:Colg_UWP.Model"
-    >
+    xmlns:controls="using:Colg_UWP.View.Controls">
 
     <Page.Resources>
         <MenuFlyout x:Name="ReplyFlyout">
@@ -33,6 +33,20 @@
             </AppBarButton>
 
         </CommandBar>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Margin" Value="0,0,5,0"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ContentPresenter></ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Page.Resources>
 
 
@@ -47,63 +61,17 @@
                      Visibility="{x:Bind VM.ReplyList.IsLoading,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}">
         </ProgressBar>
 
-        <ListView Grid.Row="1" x:Name="ReplyList"
+        <ListView x:Name="ReplyList"
                   ItemsSource="{x:Bind VM.ReplyList,Mode=OneWay}"
                   IsItemClickEnabled="True"
                   SelectionMode="Single"
                   RightTapped="Replys_RightTapped"
                    >
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                    <Setter Property="Margin" Value="0,0,5,0"></Setter>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <ContentPresenter></ContentPresenter>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-
+         
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Reply" >
-                    <Grid 
-                        BorderBrush=
-                        "{ThemeResource SystemControlBackgroundChromeMediumBrush}"
-                        BorderThickness="0,0,0,2"
-                        Margin="0" Padding="10" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <RelativePanel Grid.Row="0">
-                            <StackPanel RelativePanel.AlignVerticalCenterWithPanel="True"
-                                        RelativePanel.AlignLeftWithPanel="True">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image VerticalAlignment="Center" Height="40" Width="40" Margin="0,0,10,0"
-                                           Source="{x:Bind Avatar,Mode=OneWay}">
-                                    </Image>
-                                    <TextBlock VerticalAlignment="Center" 
-                                               Text="{x:Bind Author,Mode=OneWay}"></TextBlock>
-                                    <TextBlock VerticalAlignment="Center" Margin="5,0" 
-                                               Text="{x:Bind TimeReplied,Mode=OneWay,Converter={StaticResource DateTimeToCompressedStringConverter}}"></TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                            <TextBlock RelativePanel.AlignRightWithPanel="True"
-                                       RelativePanel.AlignVerticalCenterWithPanel="True" Text="{x:Bind Id,Mode=OneWay}">
-                            </TextBlock>
-                        </RelativePanel>
-                        <StackPanel Margin="0,10" Grid.Row="1">
-                            <markdown:MarkdownTextBlock
-                                Markdown="{x:Bind Markdown,Mode=OneWay}">
-                            </markdown:MarkdownTextBlock>
-                        </StackPanel>
-                    </Grid>
+                    <controls:ReplyDataTemplate></controls:ReplyDataTemplate>
                 </DataTemplate>
             </ListView.ItemTemplate>
                 <ListView.Footer>
