@@ -17,7 +17,7 @@
             <TextBlock Text="{x:Bind Catagory}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}"/>
         </DataTemplate>
         <CommandBar x:Name="MyCommandBar" >
-            <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
+            <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
         </CommandBar>
     </Page.Resources>
    
