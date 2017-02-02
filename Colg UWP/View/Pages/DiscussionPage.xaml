@@ -57,7 +57,7 @@
         </Grid.RowDefinitions>
 
        
-        <ProgressBar IsIndeterminate="True" Grid.Row="1"
+        <ProgressBar IsIndeterminate="True" 
                      Visibility="{x:Bind VM.ReplyList.IsLoading,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}">
         </ProgressBar>
 
@@ -75,13 +75,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
                 <ListView.Footer>
-                <RelativePanel>
-                    <StackPanel RelativePanel.AlignTopWithPanel="True"
-                                RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                >
-                        <TextBlock HorizontalAlignment="Center" Margin="5">这里是世界的尽头(=ﾟωﾟ)=</TextBlock>
-                    </StackPanel>
-                </RelativePanel>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5">这里是世界的尽头(=ﾟωﾟ)=</TextBlock>
             </ListView.Footer>
         </ListView>
    
