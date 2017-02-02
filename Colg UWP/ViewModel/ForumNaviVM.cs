@@ -19,7 +19,7 @@ namespace Colg_UWP.ViewModel
         public ObservableCollection<ForumContainer> ForumContainers { get; set; }
 
 
-        public async Task InitAsync()
+        public async Task RefreshAsync()
         {
             Forums = await ForumService.GetForumsAsync();
             ForumContainers.Clear();
@@ -37,6 +37,7 @@ namespace Colg_UWP.ViewModel
             Forums = new List<Forum>();
             ForumContainers = new ObservableCollection<ForumContainer>();
             RefreshCommand= new RelayCommand(
+                async () =>await RefreshAsync()
             ,
             ()=>true);
         }

@@ -30,7 +30,7 @@ namespace Colg_UWP.View.Pages
             if (e.NavigationMode == NavigationMode.New)
             {
                 VM = new ForumNaviVM();
-                await VM.InitAsync();
+                await VM.RefreshAsync();
             }
             base.OnNavigatedTo(e);
         }
