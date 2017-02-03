@@ -97,8 +97,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Name="Menu_TitleTextBlock" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0"></TextBlock>
-                    <CommandBar  Name="Main_MenuCommandBar" Grid.Row="2" ></CommandBar>
+                    <TextBlock Name="Main_MenuTitleTextBlock" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0"></TextBlock>
+                    <CommandBar Margin="0,0,0,-48" Name="Main_MenuCommandBar" Grid.Row="2" ></CommandBar>
                     <Frame Grid.Row="1"  Name="Main_MenuFrame" >
                     </Frame>
                 </Grid>
@@ -106,7 +106,7 @@
         </SplitView>
 
         <Frame  Background="Blue" Grid.Row="1" Grid.Column="1" Name="Main_ContentFrame" Navigated="Main_ContentFrame_OnNavigated" ></Frame>
-        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Name="Main_ContentTitleTextBlock"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Name="Main_ContentTitleTextBlock"></TextBlock>
         <CommandBar Name="Main_ContentCommandBar" Grid.Row="2" Grid.Column="1"></CommandBar>
     </Grid>
 </Page>
