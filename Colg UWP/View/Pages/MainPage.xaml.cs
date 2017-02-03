@@ -20,9 +20,9 @@ namespace Colg_UWP.View.Pages
 
         public CommandBar MenuCommandBar => this.Main_MenuCommandBar;
 
-        public TextBlock MenuTitleTextBlock => this.MenuTitleTextBlock;
+        public TextBlock MenuTitleTextBlock => Main_MenuTitleTextBlock;
 
-        public TextBlock ContentTitleTextBlock => this.ContentTitleTextBlock;
+        public TextBlock ContentTitleTextBlock => this.Main_ContentTitleTextBlock;
 
 
         public MainPage()

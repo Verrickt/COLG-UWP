@@ -10,7 +10,6 @@
     xmlns:viewmodel="using:Colg_UWP.ViewModel"
     
     xmlns:model="using:Colg_UWP.Model" 
-    SizeChanged="ForumPage_OnSizeChanged"
     >
     
     <Page.Resources>
