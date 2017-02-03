@@ -14,6 +14,6 @@ namespace Colg_UWP.View.Pages
 
         protected override CommandBar CommandBar => _mainPage.MenuCommandBar;
 
-        protected override TextBlock TitleTextBlock => _mainPage.ContentTitleTextBlock;
+        protected override TextBlock TitleTextBlock => _mainPage.MenuTitleTextBlock;
     }
 }
