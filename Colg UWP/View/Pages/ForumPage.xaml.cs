@@ -27,19 +27,11 @@ namespace Colg_UWP.View.Pages
 
         public ForumVM VM { get; set; }
 
+        public override string Title => VM.Forum.Name;
 
-       
+        public override CommandBar LocalCommandBar => MyCommandBar;
 
-        private void EnableLocalBackRequest()
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
-        }
-
-        private  void DisableLocalBackRequest()
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
-        }
-
+        
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
            
@@ -48,19 +40,6 @@ namespace Colg_UWP.View.Pages
             base.OnNavigatedTo(e);
         }
 
-        private void BackRequested(object sender, BackRequestedEventArgs e)
-        {
-           
-            e.Handled = true;
-        }
-
-      
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-          
-            base.OnNavigatedFrom(e);
-        }
 
 
 
@@ -76,59 +55,6 @@ namespace Colg_UWP.View.Pages
         }
 
 
-        //private void HideInnerFrame()
-        //{
-        //    this.InnerFrame.Visibility=Visibility.Collapsed;
-        //}
 
-        //private void HideDiscussionList()
-        //{
-        //    this.DiscussionListGrid.Visibility=Visibility.Collapsed;
-        //}
-
-        //private void ShowDiscussionList(bool stretch)
-        //{
-        //    DiscussionListGrid.Visibility=Visibility.Visible;
-        //    if (stretch)
-        //    {
-        //        DiscussionListGrid.Width = RelativeLayoutGrid.Width;
-        //    }
-        //    else
-        //    {
-        //        DiscussionListGrid.Width = 450d;
-        //    }
-        //}
-
-        //private void ShowInnerFrame()
-        //{
-        //    InnerFrame.Visibility = Visibility.Visible;
-        //}
-
-      
-
-        private void ForumPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-        //    Size size = e.NewSize;
-        //    if (size.Width > (double)Application.Current.Resources["NormalMinWidth"])
-        //    {
-        //        ShowInnerFrame();
-        //        ShowDiscussionList(false);
-        //    }
-        //    else
-        //    {
-        //        if (!String.IsNullOrEmpty(InnerFrame.CurrentSourcePageType?.Name))
-        //        {
-        //            HideDiscussionList();
-        //            ShowInnerFrame();
-        //        }
-        //        else
-        //        {
-        //            ShowDiscussionList(true);
-        //            HideInnerFrame();
-        //        }
-        //    }
-        }
-
-        public override CommandBar LocalCommandBar =>MyCommandBar;
     }
 }

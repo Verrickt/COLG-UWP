@@ -12,6 +12,8 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class PopularPostPage : MenuPage
     {
+        public override string Title => "热门讨论";
+
         public PopularPostDiscussion VM { get; set; }
 
         public override CommandBar LocalCommandBar => MyCommandBar;
@@ -24,8 +26,12 @@ namespace Colg_UWP.View.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            VM = VM ?? new PopularPostDiscussion();
-            await VM.RefreshAsync();
+            if (VM==null)
+            {
+                VM = new PopularPostDiscussion();
+                await VM.RefreshAsync();
+            }
+
             base.OnNavigatedTo(e);
         }
 
@@ -34,5 +40,6 @@ namespace Colg_UWP.View.Pages
             var discussion = e.ClickedItem as Discussion;
             ContentFrame.Navigate(typeof(DiscussionPage), discussion);
         }
+
     }
 }

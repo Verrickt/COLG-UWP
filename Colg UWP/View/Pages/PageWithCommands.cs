@@ -27,7 +27,7 @@ namespace Colg_UWP.View.Pages
 
         protected virtual CommandBar CommandBar => _mainPage.ContentCommandBar;
 
-        public virtual string Title { get; private set; }
+        public abstract string Title { get; }
 
         private void UpdateCommands(CommandBar target,CommandBar local)
         {
@@ -45,7 +45,10 @@ namespace Colg_UWP.View.Pages
 
         private void UpdateTitle()
         {
-            TitleTextBlock.Text = Title;
+            if (!String.IsNullOrEmpty(Title))
+            {
+                TitleTextBlock.Text = Title;
+            }
         }
 
         public abstract CommandBar LocalCommandBar { get;  }

@@ -22,6 +22,10 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class DiscussionPage : PageWithCommands
     {
+
+        public override string Title => String.Empty;
+
+
         private DiscussionVM _vm;
 
 
@@ -71,5 +75,6 @@ namespace Colg_UWP.View.Pages
         {
             this.Frame.Navigate(typeof(NewReplyPage), VM);
         }
+
     }
 }

@@ -26,6 +26,9 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class LoginPage : MenuPage
     {
+        public override string Title => "登陆";
+
+
         public LoginPage()
         {
             this.InitializeComponent();

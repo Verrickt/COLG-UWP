@@ -14,6 +14,8 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class HomePage : MenuPage
     {
+        public override string Title => "我的主页";
+
         public HomePage()
         {
             this.NavigationCacheMode = NavigationCacheMode.Required;

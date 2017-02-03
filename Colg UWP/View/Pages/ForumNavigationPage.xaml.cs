@@ -14,6 +14,8 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class ForumNavigationPage : MenuPage
     {
+        public override string Title => "板块列表";
+
         public ForumNavigationPage()
         {
             NavigationCacheMode = NavigationCacheMode.Required;

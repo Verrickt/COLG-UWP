@@ -26,6 +26,9 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class MySpace : MenuPage
     {
+        public override string Title => $"{VM.UserData.UserName}的空间";
+
+
         public MySpace()
         {
             this.InitializeComponent();
