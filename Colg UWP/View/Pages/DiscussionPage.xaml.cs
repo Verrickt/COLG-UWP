@@ -23,7 +23,7 @@ namespace Colg_UWP.View.Pages
     public sealed partial class DiscussionPage : PageWithCommands
     {
 
-        public override string Title => String.Empty;
+        public override string Title => $"{VM.Discussion.Subject}";
 
 
         private DiscussionVM _vm;

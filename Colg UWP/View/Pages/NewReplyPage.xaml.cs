@@ -21,8 +21,13 @@ namespace Colg_UWP.View.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewReplyPage : Page
+    public sealed partial class NewReplyPage : PageWithCommands
     {
+
+        public override string Title => $"回复:{VM.Discussion.Subject}";
+        public override CommandBar LocalCommandBar => MyCommandBar;
+
+
         public NewReplyPage()
         {
             this.InitializeComponent();
@@ -46,5 +51,6 @@ namespace Colg_UWP.View.Pages
             }
 
         }
+
     }
 }

@@ -23,7 +23,7 @@ namespace Colg_UWP.View.Pages
             }
         }
 
-        protected virtual TextBlock TitleTextBlock => _mainPage.MenuTitleTextBlock;
+        protected virtual TextBlock TitleTextBlock => _mainPage.ContentTitleTextBlock;
 
         protected virtual CommandBar CommandBar => _mainPage.ContentCommandBar;
 
