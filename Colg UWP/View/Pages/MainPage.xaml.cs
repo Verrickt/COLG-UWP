@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using System.Collections.Generic;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -14,16 +15,11 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public Frame ContentFrame => this.Main_ContentFrame;
+        public Frame Main_ContentFrame => this.ContentFrame;
 
-        public CommandBar ContentCommandBar => this.Main_ContentCommandBar;
 
-        public CommandBar MenuCommandBar => this.Main_MenuCommandBar;
-
-        public TextBlock MenuTitleTextBlock => Main_MenuTitleTextBlock;
-
-        public TextBlock ContentTitleTextBlock => this.Main_ContentTitleTextBlock;
-
+        private Stack<bool> NavigationStack = new Stack<bool>();
+        //keep track of to which frame all the page navigation users triggerd belongs to
 
         public MainPage()
         {
@@ -35,56 +31,64 @@ namespace Colg_UWP.View.Pages
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        private  void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            EnableGlobalBackRequest();
-            Main_MenuFrame.Navigate(typeof(HomePage));
+            MenuFrame.Navigate(typeof(HomePage));
             ContentFrame.Navigate(typeof(DisplayPage));
+            EnableGlobalBackRequest();
         }
 
         private void EnableGlobalBackRequest()
         {
-            Main_MenuFrame.Navigated += MainMenuFrameNavigated;
+            MenuFrame.Navigated += MenuFrame_OnNavigated;
+            ContentFrame.Navigated += ContentFrame_OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
         private void DisableGlobalBackRequest()
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
-            Main_MenuFrame.Navigated -= MainMenuFrameNavigated;
+            MenuFrame.Navigated -= MenuFrame_OnNavigated;
+            ContentFrame.Navigated -= ContentFrame_OnNavigated;
         }
 
-        private void MainMenuFrameNavigated(object sender, NavigationEventArgs e)
+        private void MenuFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
+            if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
+            {
+                NavigationStack.Push(true);
+            }
             UpdateBackButtonVisibility();
         }
 
-        private void Main_ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
+        private void ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
+            if (e.NavigationMode==NavigationMode.New||e.NavigationMode==NavigationMode.Forward)
+            {
+                NavigationStack.Push(false);
+            }
             UpdateBackButtonVisibility();
         }
 
         private void UpdateBackButtonVisibility()
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                _canGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+                NavigationStack.Count>0 ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-           
-            if (ContentFrame.CanGoBack)
+
+            var isLastPageMenuPage = NavigationStack.Pop();
+
+            if (isLastPageMenuPage)
             {
-                ContentFrame.GoBack();
+                MenuFrame.GoBack();
             }
             else
             {
-                if (Main_MenuFrame.CanGoBack)
-                {
-                    Main_MenuFrame.GoBack();
-                }
+                ContentFrame.GoBack();
             }
-
             e.Handled = true;
         }
 
@@ -93,7 +97,7 @@ namespace Colg_UWP.View.Pages
             DisableGlobalBackRequest();
         }
 
-        private void Menu_ItemClick(object sender, ItemClickEventArgs e)
+        private void MenuList_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clicked = e.ClickedItem as MenuVM;
             bool 
@@ -111,13 +115,15 @@ namespace Colg_UWP.View.Pages
             }
             else
             {
-                Main_MenuFrame.Navigate(clicked.TargetPage);
+                MenuFrame.Navigate(clicked.TargetPage);
             }
           
         }
 
       
 
-        private bool _canGoBack => Main_ContentFrame.CanGoBack || Main_MenuFrame.CanGoBack;
+        
+
+      
     }
 }
