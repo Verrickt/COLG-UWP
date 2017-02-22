@@ -34,7 +34,7 @@ namespace Colg_UWP.View.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             MenuFrame.Navigate(typeof(HomePage));
-            ContentFrame.Navigate(typeof(DisplayPage));
+            ContentFrame.Navigate(typeof(PlaceHolderPage));
             EnableGlobalBackRequest();
         }
 
