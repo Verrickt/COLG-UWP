@@ -58,13 +58,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <RelativePanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"  >
+        
+        <RelativePanel Grid.Row="0" Background="{ThemeResource SystemControlBackgroundAltMediumHighBrush}"  >
             <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0" Name="Humburger" Click="Humburger_Click" Height="48" Width="48"  RelativePanel.AlignVerticalCenterWithPanel="True">
                 <Button.Content>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" ></FontIcon>
@@ -73,25 +69,22 @@
             <TextBlock RelativePanel.RightOf="Humburger" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="0" Margin="12,0,0,0"  Name="Main_MenuTitleTextBlock" ></TextBlock>
         </RelativePanel>
 
-        <SplitView Background="Green" Name="MySplitView" Grid.Row="1" Grid.Column="0"  OpenPaneLength="240" DisplayMode="CompactOverlay" CompactPaneLength="48">
+        <SplitView  Name="MySplitView" Grid.Row="1" Grid.Column="0"  OpenPaneLength="240" DisplayMode="CompactOverlay" CompactPaneLength="48">
             <SplitView.Pane>
                 <StackPanel>
-                    <ListView  Name="Menu" IsItemClickEnabled="True" ItemClick="Menu_ItemClick" SelectionMode="None" ItemsSource="{Binding TopMenuItems}">
+                    <ListView  Name="MenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick" SelectionMode="None" ItemsSource="{Binding TopMenuItems}">
                         <ListView.ItemTemplate>
                             <DataTemplate >
                                 <RelativePanel Width="240" Height="48"  >
                                     <Grid RelativePanel.AlignVerticalCenterWithPanel="True" Name="GlyphGrid" RelativePanel.AlignLeftWithPanel="True" Width="48" Height="48">
                                         <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="{Binding Glyph}" ></FontIcon>
                                     </Grid>
-                                    <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GlyphGrid" Margin="24,0,0,0" Text="{Binding DisplayName }" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GlyphGrid"  Text="{Binding DisplayName }" VerticalAlignment="Center"></TextBlock>
                                 </RelativePanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
-                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                                <Setter Property="Margin" Value="0,0,0,0"></Setter>
                                 <Setter Property="Padding" Value="0,0,0,0"></Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
@@ -99,21 +92,20 @@
                     </ListView>
                 </StackPanel>
             </SplitView.Pane>
-            <SplitView.Content>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <CommandBar Margin="0,0,0,-48" Name="Main_MenuCommandBar" Grid.Row="1" ></CommandBar>
-                    <Frame Grid.Row="0"  Name="Main_MenuFrame" >
+           <SplitView.Content>
+               <Grid Margin="0,-48,0,0">
+                   <Grid.ColumnDefinitions>
+                       <ColumnDefinition MaxWidth="800"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Frame Background="Red" Grid.Column="0"  Name="MenuFrame"  >
                     </Frame>
+                    <Frame  Background="Blue" Grid.Column="1" Name="ContentFrame"  ></Frame>
                 </Grid>
+               
             </SplitView.Content>
         </SplitView>
-
-        <Frame  Background="Blue" Grid.Row="1" Grid.Column="1" Name="Main_ContentFrame" Navigated="Main_ContentFrame_OnNavigated" ></Frame>
-        <TextBlock  Style="{StaticResource TitleTextBlockStyle}" Grid.Row="0" Grid.Column="1" Margin="12,0,0,0" Name="Main_ContentTitleTextBlock"></TextBlock>
-        <CommandBar Name="Main_ContentCommandBar" Grid.Row="2" Grid.Column="1"></CommandBar>
+            
+      
     </Grid>
 </Page>
