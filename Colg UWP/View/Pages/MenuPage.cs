@@ -8,12 +8,19 @@ using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.View.Pages
 {
-    public abstract class MenuPage:PageWithCommands
+    public  class MenuPage:Page
     {
-        protected Frame ContentFrame => _mainPage.ContentFrame;
+        private MainPage _mainPage
+        {
+            get
+            {
+                var frame =
+                    (Frame)Window.Current.Content;
+                return
+                    (MainPage)frame.Content;
+            }
+        }
+        protected Frame ContentFrame => _mainPage.Main_ContentFrame;
 
-        protected override CommandBar CommandBar => _mainPage.MenuCommandBar;
-
-        protected override TextBlock TitleTextBlock => _mainPage.MenuTitleTextBlock;
     }
 }

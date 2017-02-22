@@ -14,7 +14,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class HomePage : MenuPage
     {
-        public override string Title => "我的主页";
 
         public HomePage()
         {
@@ -24,7 +23,6 @@ namespace Colg_UWP.View.Pages
 
         public HomeVM VM;
 
-        public override CommandBar LocalCommandBar => MyCommandBar;
 
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

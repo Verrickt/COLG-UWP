@@ -26,8 +26,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class MySpace : MenuPage
     {
-        public override string Title => $"{VM.UserData.UserName}的空间";
-
 
         public MySpace()
         {
@@ -35,7 +33,6 @@ namespace Colg_UWP.View.Pages
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        public override CommandBar LocalCommandBar => MyCommandBar;
 
         public MySpaceVM VM;
 

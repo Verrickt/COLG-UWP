@@ -26,7 +26,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class LoginPage : MenuPage
     {
-        public override string Title => "登陆";
 
 
         public LoginPage()
@@ -34,7 +33,6 @@ namespace Colg_UWP.View.Pages
             this.InitializeComponent();
         }
 
-        public override CommandBar LocalCommandBar => MyCommandBar;
 
         private ViewModel.LoginVM VM;
 

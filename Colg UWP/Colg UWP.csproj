@@ -201,7 +201,6 @@
     <Compile Include="View\Pages\MySpace.xaml.cs">
       <DependentUpon>MySpace.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\PageWithCommands.cs" />
     <Compile Include="View\Pages\PopularPostPage.xaml.cs">
       <DependentUpon>PopularPostPage.xaml</DependentUpon>
     </Compile>

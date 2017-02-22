@@ -14,7 +14,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class ForumNavigationPage : MenuPage
     {
-        public override string Title => "板块列表";
 
         public ForumNavigationPage()
         {
@@ -24,7 +23,6 @@ namespace Colg_UWP.View.Pages
 
         private ForumNaviVM VM;
 
-        public override CommandBar LocalCommandBar => MyCommandBar;
 
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

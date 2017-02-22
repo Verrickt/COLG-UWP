@@ -27,9 +27,7 @@ namespace Colg_UWP.View.Pages
 
         public ForumVM VM { get; set; }
 
-        public override string Title => VM.Forum.Name;
-
-        public override CommandBar LocalCommandBar => MyCommandBar;
+        
 
         
         protected override void OnNavigatedTo(NavigationEventArgs e)

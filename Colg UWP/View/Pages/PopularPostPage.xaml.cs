@@ -12,11 +12,9 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class PopularPostPage : MenuPage
     {
-        public override string Title => "热门讨论";
 
         public PopularPostDiscussion VM { get; set; }
 
-        public override CommandBar LocalCommandBar => MyCommandBar;
 
         public PopularPostPage()
         {

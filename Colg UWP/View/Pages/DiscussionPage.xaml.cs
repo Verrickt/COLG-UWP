@@ -20,10 +20,8 @@ namespace Colg_UWP.View.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DiscussionPage : PageWithCommands
+    public sealed partial class DiscussionPage : Page
     {
-
-        public override string Title => $"{VM.Discussion.Subject}";
 
 
         private DiscussionVM _vm;
@@ -52,7 +50,6 @@ namespace Colg_UWP.View.Pages
             base.OnNavigatedTo(e);
         }
 
-        public override CommandBar LocalCommandBar => MyCommandBar;
         private void Replys_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             ListView listview = sender as ListView;
