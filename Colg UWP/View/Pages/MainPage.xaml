@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Loaded="Page_Loaded"
     Unloaded="Page_Unloaded"
-    >
+    SizeChanged="MainPage_OnSizeChanged">
     <Page.DataContext>
         <viewmodel:MainPageVM x:Name="VM"></viewmodel:MainPageVM>
     </Page.DataContext>
@@ -20,24 +20,47 @@
             <Setter Property="HorizontalAlignment" Value="Left"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
+        <DataTemplate x:Key="MenuItemDateTemplate" x:DataType="viewmodel:MenuVM">
+            <RelativePanel Width="240" Height="48">
+                <Grid RelativePanel.AlignVerticalCenterWithPanel="True" Name="GlyphGrid"
+                      RelativePanel.AlignLeftWithPanel="True" Width="48" Height="48">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{x:Bind Glyph}"></FontIcon>
+                </Grid>
+                <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GlyphGrid"
+                           Text="{x:Bind DisplayName }" VerticalAlignment="Center">
+                </TextBlock>
+            </RelativePanel>
+        </DataTemplate>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Padding" Value="0,0,0,0"></Setter>
+        </Style>
+
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup >
+            <VisualStateGroup>
                 <VisualState x:Name="Wide">
                     <VisualState.Setters>
-                        <Setter Target="MySplitView.(SplitView.DisplayMode)" Value="CompactInline"/>
-                        <Setter Target="MySplitView.(SplitView.IsPaneOpen)" Value="True"/>
+                        <Setter Target="MySplitView.(SplitView.DisplayMode)" Value="CompactInline" />
+                        <Setter Target="MySplitView.(SplitView.IsPaneOpen)" Value="True" />
+                        <Setter Target="MenuFrame.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="ContentFrame.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="ContentFrame.(Grid.Column)" Value="1"/>
+                        <Setter Target="MenuFrame.(Grid.Column)" Value="0"/>
 
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}"/>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="Mormal">
                     <VisualState.Setters>
-                        <Setter Target="MySplitView.(SplitView.DisplayMode)" Value="CompactOverlay"/>
-                        <Setter Target="MySplitView.(SplitView.IsPaneOpen)" Value="False"/>
+                        <Setter Target="MySplitView.(SplitView.DisplayMode)" Value="CompactOverlay" />
+                        <Setter Target="MySplitView.(SplitView.IsPaneOpen)" Value="False" />
+                        <Setter Target="MenuFrame.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="MenuFrame.(Grid.Column)" Value="0"/>
+                        <Setter Target="ContentFrame.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ContentFrame.(Grid.Column)" Value="0"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -45,8 +68,12 @@
                 </VisualState>
                 <VisualState x:Name="Narrow">
                     <VisualState.Setters>
-                        <Setter Target="MySplitView.(SplitView.DisplayMode)" Value="Overlay"/>
-                        <Setter Target="MySplitView.(SplitView.IsPaneOpen)" Value="False"/>
+                        <Setter Target="MySplitView.(SplitView.DisplayMode)" Value="Overlay" />
+                        <Setter Target="MySplitView.(SplitView.IsPaneOpen)" Value="False" />
+                        <Setter Target="MenuFrame.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="MenuFrame.(Grid.Column)" Value="0"/>
+                        <Setter Target="ContentFrame.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ContentFrame.(Grid.Column)" Value="0"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -59,53 +86,57 @@
             <RowDefinition Height="48"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <RelativePanel Grid.Row="0" Background="{ThemeResource SystemControlBackgroundAltMediumHighBrush}"  >
-            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0" Name="Humburger" Click="Humburger_Click" Height="48" Width="48"  RelativePanel.AlignVerticalCenterWithPanel="True">
-                <Button.Content>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" ></FontIcon>
-                </Button.Content>
-            </Button>
-            <TextBlock RelativePanel.RightOf="Humburger" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="0" Margin="12,0,0,0"  Name="Main_MenuTitleTextBlock" ></TextBlock>
-        </RelativePanel>
 
-        <SplitView  Name="MySplitView" Grid.Row="1" Grid.Column="0"  OpenPaneLength="240" DisplayMode="CompactOverlay" CompactPaneLength="48">
+
+        <SplitView Name="MySplitView" Grid.Row="1" Grid.Column="0" OpenPaneLength="240" DisplayMode="CompactOverlay"
+                   CompactPaneLength="48">
             <SplitView.Pane>
-                <StackPanel>
-                    <ListView  Name="MenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick" SelectionMode="None" ItemsSource="{Binding TopMenuItems}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate >
-                                <RelativePanel Width="240" Height="48"  >
-                                    <Grid RelativePanel.AlignVerticalCenterWithPanel="True" Name="GlyphGrid" RelativePanel.AlignLeftWithPanel="True" Width="48" Height="48">
-                                        <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="{Binding Glyph}" ></FontIcon>
-                                    </Grid>
-                                    <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GlyphGrid"  Text="{Binding DisplayName }" VerticalAlignment="Center"></TextBlock>
-                                </RelativePanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Padding" Value="0,0,0,0"></Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListView Name="TopMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
+                              SelectionMode="None" ItemsSource="{x:Bind VM.TopMenuItems}"
+                              ItemTemplate="{StaticResource MenuItemDateTemplate}">
 
                     </ListView>
-                </StackPanel>
-            </SplitView.Pane>
-           <SplitView.Content>
-               <Grid Margin="0,-48,0,0">
-                   <Grid.ColumnDefinitions>
-                       <ColumnDefinition MaxWidth="800"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Frame Background="Red" Grid.Column="0"  Name="MenuFrame"  >
-                    </Frame>
-                    <Frame  Background="Blue" Grid.Column="1" Name="ContentFrame"  ></Frame>
+                    <local:ForumNavigationPage Grid.Row="1"></local:ForumNavigationPage>
+                    <ListView Grid.Row="2" Name="BottomMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
+                              SelectionMode="None" ItemsSource="{x:Bind VM.BottomMenuItems}"
+                              ItemTemplate="{StaticResource MenuItemDateTemplate}">
+
+                    </ListView>
                 </Grid>
-               
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid Margin="0,-48,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="MenuFrameColumn" Width="*" MaxWidth="600"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Frame   Grid.Column="0" Name="MenuFrame">
+                    </Frame>
+                    <Frame  Grid.Column="1" Name="ContentFrame">
+                    </Frame>
+                </Grid>
+
             </SplitView.Content>
         </SplitView>
-            
-      
+        <RelativePanel Grid.Row="0" >
+            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0"
+                    Name="Humburger" Click="Humburger_Click" Height="48" Width="48"
+                    RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Button.Content>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"></FontIcon>
+                </Button.Content>
+            </Button>
+            <TextBlock RelativePanel.RightOf="Humburger" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="0"
+                       Margin="12,0,0,0" Name="Main_MenuTitleTextBlock">
+            </TextBlock>
+        </RelativePanel>
+
+
     </Grid>
 </Page>
