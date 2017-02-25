@@ -10,12 +10,13 @@ using Colg_UWP.Service;
 namespace Colg_UWP.View.Pages
 {
     using ViewModel;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public Frame Main_ContentFrame => this.ContentFrame;
+        public Frame Main_ContentFrame => ContentFrame;
 
 
         private Stack<bool> NavigationStack = new Stack<bool>();
@@ -23,7 +24,7 @@ namespace Colg_UWP.View.Pages
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void Humburger_Click(object sender, RoutedEventArgs e)
@@ -40,16 +41,11 @@ namespace Colg_UWP.View.Pages
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
-     
-
-       
 
         private void MenuFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
-            {
                 NavigationStack.Push(true);
-            }
             if (MenuFrame.Visibility == Visibility.Collapsed)
             {
                 MenuFrame.Visibility = Visibility.Visible;
@@ -60,56 +56,45 @@ namespace Colg_UWP.View.Pages
 
         private void ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
-            if (e.NavigationMode==NavigationMode.New||e.NavigationMode==NavigationMode.Forward)
-            {
+            if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
                 NavigationStack.Push(false);
-            }
             if (ContentFrame.Visibility == Visibility.Collapsed)
             {
                 MenuFrame.Visibility = Visibility.Collapsed;
                 ContentFrame.Visibility = Visibility.Visible;
             }
             if (e.NavigationMode == NavigationMode.Back)
-            {
                 if (ContentFrame.BackStackDepth == 0)
                 {
-                    double width = this.ActualWidth;
-                    double wideMinWidth = (double)Application.Current.Resources["WideMinWidth"];
+                    double width = ActualWidth;
+                    double wideMinWidth = (double) Application.Current.Resources["WideMinWidth"];
 
                     if (width < wideMinWidth)
                     {
                         MenuFrame.Visibility = Visibility.Visible;
                         ContentFrame.Visibility = Visibility.Collapsed;
                     }
-                    
                 }
-                
-            }
 
-            
-           
+
             UpdateBackButtonVisibility();
         }
 
         private void UpdateBackButtonVisibility()
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                NavigationStack.Count>0 ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationStack.Count > 0
+                ? AppViewBackButtonVisibility.Visible
+                : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            
             bool isLastPageMenuPage = NavigationStack.Pop();
 
             if (isLastPageMenuPage)
-            {
-                    MenuFrame.GoBack(); 
-            }
+                MenuFrame.GoBack();
             else
-            {
-                    ContentFrame.GoBack(); 
-            }
+                ContentFrame.GoBack();
             e.Handled = true;
         }
 
@@ -122,11 +107,11 @@ namespace Colg_UWP.View.Pages
 
         private void MenuList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var clicked = e.ClickedItem as MenuVM;
-            bool 
-                keepPaneOpen= MySplitView.DisplayMode==SplitViewDisplayMode.CompactInline;
+            MenuVM clicked = e.ClickedItem as MenuVM;
+            bool
+                keepPaneOpen = MySplitView.DisplayMode == SplitViewDisplayMode.CompactInline;
             MySplitView.IsPaneOpen = keepPaneOpen;
-            if (clicked.TargetPage==null)
+            if (clicked.TargetPage == null)
             {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 new ContentDialog()
@@ -140,14 +125,13 @@ namespace Colg_UWP.View.Pages
             {
                 MenuFrame.Navigate(clicked.TargetPage);
             }
-          
         }
 
 
         private void MainPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             double width = e.NewSize.Width;
-            double wideWidth = (double)Application.Current.Resources["WideMinWidth"];
+            double wideWidth = (double) Application.Current.Resources["WideMinWidth"];
 
             if (width >= wideWidth)
             {
@@ -167,7 +151,6 @@ namespace Colg_UWP.View.Pages
                     MenuFrame.Visibility = Visibility.Visible;
                 }
             }
-
         }
     }
 }

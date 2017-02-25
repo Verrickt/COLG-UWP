@@ -22,8 +22,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class DiscussionPage : Page
     {
-
-
         private DiscussionVM _vm;
 
 
@@ -41,9 +39,9 @@ namespace Colg_UWP.View.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-                VM = VM ?? new DiscussionVM();
-                var post = e.Parameter as Discussion;
-                VM.Discussion = post;
+            VM = VM ?? new DiscussionVM();
+            var post = e.Parameter as Discussion;
+            VM.Discussion = post;
             base.OnNavigatedTo(e);
         }
 
@@ -63,12 +61,10 @@ namespace Colg_UWP.View.Pages
             Windows.System.Launcher.LaunchUriAsync(new Uri(e.Link));
         }
 
-        
 
         private void ReplyButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(NewReplyPage), VM);
         }
-
     }
 }
