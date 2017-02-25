@@ -14,51 +14,79 @@
         <DataTemplate x:Key="ArticleTemplate" x:DataType="model:Article" >
             <controls:ArticleTemplate></controls:ArticleTemplate>
         </DataTemplate>
-            <Style TargetType="GridViewItem">
-                <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="MinHeight" Value="200"></Setter>
-            </Style>
+        <Style TargetType="GridViewItem">
+            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="MinHeight" Value="200"></Setter>
+        </Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle }">
-    
-</Style>
+
+        </Style>
         <CommandBar x:Name="MyCommandBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.Resources>
-  
 
-        <Pivot  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
 
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock Margin="5,0,0,0" >首页</TextBlock>
-                </PivotItem.Header>
-                <GridView SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.News,Mode=OneWay}" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" SelectionMode="None">
-                </GridView>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock> 资讯</TextBlock>
-                </PivotItem.Header>
-                <GridView Name="HotNews" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" IsItemClickEnabled="True" SelectionMode="None">
+    <Pivot  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Target="textBlock.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>5,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="textBlock.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-                 
+        <PivotItem>
+            <PivotItem.Header>
+                <TextBlock x:Name="textBlock" Margin="5,0,0,0" >首页</TextBlock>
+            </PivotItem.Header>
+            <GridView SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.News,Mode=OneWay}" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" SelectionMode="None">
+            </GridView>
+        </PivotItem>
+        <PivotItem>
+            <PivotItem.Header>
+                <TextBlock> 资讯</TextBlock>
+            </PivotItem.Header>
+            <GridView Name="HotNews" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" IsItemClickEnabled="True" SelectionMode="None">
 
-                </GridView>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock >前瞻</TextBlock>
-                </PivotItem.Header>
-                <GridView Name="Prospective" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
 
-                  
-                </GridView>
-            </PivotItem>
-        </Pivot>
+
+            </GridView>
+        </PivotItem>
+        <PivotItem>
+            <PivotItem.Header>
+                <TextBlock >前瞻</TextBlock>
+            </PivotItem.Header>
+            <GridView Name="Prospective" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
+
+
+            </GridView>
+        </PivotItem>
+    </Pivot>
 </local:MenuPage>
 
 
