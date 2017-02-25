@@ -41,12 +41,9 @@ namespace Colg_UWP.View.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode!=NavigationMode.Back)
-            {
                 VM = VM ?? new DiscussionVM();
                 var post = e.Parameter as Discussion;
                 VM.Discussion = post;
-            }
             base.OnNavigatedTo(e);
         }
 
