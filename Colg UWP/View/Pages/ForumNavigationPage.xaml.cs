@@ -29,8 +29,7 @@ namespace Colg_UWP.View.Pages
         {
             if (e.NavigationMode == NavigationMode.New)
             {
-                VM = new ForumNaviVM();
-                await VM.RefreshAsync();
+              
             }
             base.OnNavigatedTo(e);
         }
@@ -43,17 +42,13 @@ namespace Colg_UWP.View.Pages
         }
 
 
-        private void ZoomInView_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //var gridview = sender as GridView;
-            //var wrapgrid = gridview.ItemsPanelRoot as ItemsWrapGrid;
-            //int margin = 10;
-            //int n = (int) (e.NewSize.Width/(300 + margin));
-            //if (n!=0)
-            //{
-            //    wrapgrid.ItemWidth = e.NewSize.Width/n - margin;
-            //}
-        }
+        
 
+    
+        private async void ForumNavigationPage_OnLoading(FrameworkElement sender, object args)
+        {
+            VM = new ForumNaviVM();
+            await VM.RefreshAsync();
+        }
     }
 }

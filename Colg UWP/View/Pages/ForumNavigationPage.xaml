@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:model="using:Colg_UWP.Model">
+    xmlns:model="using:Colg_UWP.Model"
+    Loading="ForumNavigationPage_OnLoading">
     <Page.Resources>
         <CollectionViewSource x:Name="ForumSource" 
                               IsSourceGrouped="True" 
@@ -23,7 +24,7 @@
    
         <SemanticZoom >
             <SemanticZoom.ZoomedInView>
-                <ListView Name="ZoomInView" SizeChanged="ZoomInView_OnSizeChanged"
+                <ListView Name="ZoomInView" 
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   ItemsSource="{x:Bind ForumSource.View,Mode=OneWay}"
                   SelectionMode="None" IsItemClickEnabled="True"
