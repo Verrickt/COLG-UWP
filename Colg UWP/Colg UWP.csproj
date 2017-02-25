@@ -178,8 +178,8 @@
     <Compile Include="View\Pages\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\DisplayPage.xaml.cs">
-      <DependentUpon>DisplayPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\PlaceHolderPage.xaml.cs">
+      <DependentUpon>PlaceHolderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\ForumNavigationPage.xaml.cs">
       <DependentUpon>ForumNavigationPage.xaml</DependentUpon>
@@ -330,7 +330,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\DisplayPage.xaml">
+    <Page Include="View\Pages\PlaceHolderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

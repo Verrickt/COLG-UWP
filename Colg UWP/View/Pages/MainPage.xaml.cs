@@ -34,29 +34,26 @@ namespace Colg_UWP.View.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             MenuFrame.Navigate(typeof(HomePage));
-            ContentFrame.Navigate(typeof(PlaceHolderPage));
-            EnableGlobalBackRequest();
-        }
-
-        private void EnableGlobalBackRequest()
-        {
             MenuFrame.Navigated += MenuFrame_OnNavigated;
+            ContentFrame.Navigate(typeof(PlaceHolderPage));
             ContentFrame.Navigated += ContentFrame_OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
 
-        private void DisableGlobalBackRequest()
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
-            MenuFrame.Navigated -= MenuFrame_OnNavigated;
-            ContentFrame.Navigated -= ContentFrame_OnNavigated;
-        }
+     
+
+       
 
         private void MenuFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
             {
                 NavigationStack.Push(true);
+            }
+            if (MenuFrame.Visibility == Visibility.Collapsed)
+            {
+                MenuFrame.Visibility = Visibility.Visible;
+                ContentFrame.Visibility = Visibility.Collapsed;
             }
             UpdateBackButtonVisibility();
         }
@@ -67,6 +64,30 @@ namespace Colg_UWP.View.Pages
             {
                 NavigationStack.Push(false);
             }
+            if (ContentFrame.Visibility == Visibility.Collapsed)
+            {
+                MenuFrame.Visibility = Visibility.Collapsed;
+                ContentFrame.Visibility = Visibility.Visible;
+            }
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                if (ContentFrame.BackStackDepth == 0)
+                {
+                    double width = this.ActualWidth;
+                    double wideMinWidth = (double)Application.Current.Resources["WideMinWidth"];
+
+                    if (width < wideMinWidth)
+                    {
+                        MenuFrame.Visibility = Visibility.Visible;
+                        ContentFrame.Visibility = Visibility.Collapsed;
+                    }
+                    
+                }
+                
+            }
+
+            
+           
             UpdateBackButtonVisibility();
         }
 
@@ -78,23 +99,25 @@ namespace Colg_UWP.View.Pages
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-
-            var isLastPageMenuPage = NavigationStack.Pop();
+            
+            bool isLastPageMenuPage = NavigationStack.Pop();
 
             if (isLastPageMenuPage)
             {
-                MenuFrame.GoBack();
+                    MenuFrame.GoBack(); 
             }
             else
             {
-                ContentFrame.GoBack();
+                    ContentFrame.GoBack(); 
             }
             e.Handled = true;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            DisableGlobalBackRequest();
+            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
+            MenuFrame.Navigated -= MenuFrame_OnNavigated;
+            ContentFrame.Navigated -= ContentFrame_OnNavigated;
         }
 
         private void MenuList_ItemClick(object sender, ItemClickEventArgs e)
@@ -120,10 +143,31 @@ namespace Colg_UWP.View.Pages
           
         }
 
-      
 
-        
+        private void MainPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double width = e.NewSize.Width;
+            double wideWidth = (double)Application.Current.Resources["WideMinWidth"];
 
-      
+            if (width >= wideWidth)
+            {
+                ContentFrame.Visibility = Visibility.Visible;
+                MenuFrame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if (ContentFrame.CanGoBack)
+                {
+                    ContentFrame.Visibility = Visibility.Visible;
+                    MenuFrame.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ContentFrame.Visibility = Visibility.Collapsed;
+                    MenuFrame.Visibility = Visibility.Visible;
+                }
+            }
+
+        }
     }
 }
