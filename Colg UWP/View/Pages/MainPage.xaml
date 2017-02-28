@@ -102,7 +102,6 @@
                               ItemTemplate="{StaticResource MenuItemDateTemplate}">
 
                     </ListView>
-                    <local:ForumNavigationPage Grid.Row="1"></local:ForumNavigationPage>
                     <ListView Grid.Row="2" Name="BottomMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
                               SelectionMode="None" ItemsSource="{x:Bind VM.BottomMenuItems}"
                               ItemTemplate="{StaticResource MenuItemDateTemplate}">
