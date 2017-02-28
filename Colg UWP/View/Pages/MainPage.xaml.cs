@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,7 +21,7 @@ namespace Colg_UWP.View.Pages
         public Frame Main_ContentFrame => ContentFrame;
 
 
-        private Stack<bool> NavigationStack = new Stack<bool>();
+        private Stack<bool> _navigationStack = new Stack<bool>();
         //keep track of to which frame all the page navigation users triggerd belongs to
 
         public MainPage()
@@ -35,8 +37,8 @@ namespace Colg_UWP.View.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             MenuFrame.Navigate(typeof(HomePage));
-            MenuFrame.Navigated += MenuFrame_OnNavigated;
             ContentFrame.Navigate(typeof(PlaceHolderPage));
+            MenuFrame.Navigated += MenuFrame_OnNavigated;
             ContentFrame.Navigated += ContentFrame_OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
         }
@@ -45,7 +47,7 @@ namespace Colg_UWP.View.Pages
         private void MenuFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
-                NavigationStack.Push(true);
+                _navigationStack.Push(true);
             if (MenuFrame.Visibility == Visibility.Collapsed)
             {
                 MenuFrame.Visibility = Visibility.Visible;
@@ -57,7 +59,7 @@ namespace Colg_UWP.View.Pages
         private void ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
-                NavigationStack.Push(false);
+                _navigationStack.Push(false);
             if (ContentFrame.Visibility == Visibility.Collapsed)
             {
                 MenuFrame.Visibility = Visibility.Collapsed;
@@ -66,10 +68,7 @@ namespace Colg_UWP.View.Pages
             if (e.NavigationMode == NavigationMode.Back)
                 if (ContentFrame.BackStackDepth == 0)
                 {
-                    double width = ActualWidth;
-                    double wideMinWidth = (double) Application.Current.Resources["WideMinWidth"];
-
-                    if (width < wideMinWidth)
+                    if (MenuFrame.Visibility==Visibility.Collapsed)
                     {
                         MenuFrame.Visibility = Visibility.Visible;
                         ContentFrame.Visibility = Visibility.Collapsed;
@@ -82,19 +81,26 @@ namespace Colg_UWP.View.Pages
 
         private void UpdateBackButtonVisibility()
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationStack.Count > 0
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = _navigationStack.Count > 0
                 ? AppViewBackButtonVisibility.Visible
                 : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            bool isLastPageMenuPage = NavigationStack.Pop();
+
+
+
+            bool isLastPageMenuPage = _navigationStack.Pop();
 
             if (isLastPageMenuPage)
+            {
                 MenuFrame.GoBack();
+            }
             else
+            {
                 ContentFrame.GoBack();
+            }
             e.Handled = true;
         }
 
@@ -153,4 +159,5 @@ namespace Colg_UWP.View.Pages
             }
         }
     }
+
 }
