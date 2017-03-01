@@ -8,37 +8,86 @@
     mc:Ignorable="d"
     xmlns:control="using:Colg_UWP.View.Controls"
     xmlns:viewmodel="using:Colg_UWP.ViewModel"
-    
-    xmlns:model="using:Colg_UWP.Model" 
-    >
-    
+
+    xmlns:model="using:Colg_UWP.Model">
+
     <Page.Resources>
-        <CommandBar x:Name="MyCommandBar"
-                    >
-            <AppBarButton IsEnabled="False" Icon="Add" Label="发帖"></AppBarButton>
-            <AppBarButton Icon="Refresh" Label="刷新"
-                              Command="{x:Bind VM.RefreshCommand}"
-                              ></AppBarButton>
-        </CommandBar>
-       
+
     </Page.Resources>
-        <Grid  
-            VerticalAlignment="Stretch"
-            >
-           
-            <ProgressBar  IsIndeterminate="True" Visibility="{x:Bind VM.DiscussionList.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
-            <ListView    x:Name="DiscussionList" 
-                      ItemsSource="{x:Bind VM.DiscussionList, Mode=OneWay}" 
-                      ItemClick="DiscussionList_OnItemClick"
-                       ScrollViewer.VerticalScrollMode="Auto"
-                          IsItemClickEnabled="True"
-                         ItemContainerStyle="{StaticResource DiscussionItemStyle}"
-                          >
-                <ListView.ItemTemplate>
-                    <DataTemplate  x:DataType="model:Discussion">
-                        <control:DiscussionDataTemplate/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid  >
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup" >
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="NewDiscussionButton.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CommandBar x:Name="TopCommandBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton  IsEnabled="False" Name="NewDiscussionButton" Icon="Add" Label="发帖"></AppBarButton>
+                <AppBarButton Icon="Refresh" Label="刷新" Name="RefreshButton"
+                              Command="{x:Bind VM.RefreshCommand}">
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.Content>
+                <TextBlock Margin="12,14" Text="{x:Bind VM.Forum.Name,Mode=OneWay}" TextTrimming="CharacterEllipsis"></TextBlock>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <ProgressBar Grid.Row="1" IsIndeterminate="True"
+                     Visibility="{x:Bind VM.DiscussionList.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+        <ListView Grid.Row="1" x:Name="DiscussionList"
+                  ItemsSource="{x:Bind VM.DiscussionList, Mode=OneWay}"
+                  ItemClick="DiscussionList_OnItemClick"
+                  ScrollViewer.VerticalScrollMode="Auto"
+                  IsItemClickEnabled="True"
+                  ItemContainerStyle="{StaticResource DiscussionItemStyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Discussion">
+                    <control:DiscussionDataTemplate />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <CommandBar Grid.Row="2" x:Name="BottomCommandBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton IsEnabled="False" Icon="Add" Label="发帖"></AppBarButton>
+                <AppBarButton Icon="Refresh" Label="刷新"
+                              Command="{x:Bind VM.RefreshCommand}">
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+            
+        </CommandBar>
+    </Grid>
 </local:MenuPage>
+
+
+
+
+
+
+

@@ -11,12 +11,52 @@
     mc:Ignorable="d"
     >
 <Page.Resources>
-        <CommandBar x:Name="MyCommandBar">
-            <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
-        </CommandBar>
+       
        </Page.Resources>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <ListView  Name="DiscussionList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="None"
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <CommandBar x:Name="TopCommandBar" Grid.Row="0">
+            <CommandBar.Content>
+                <TextBlock Margin="12,14">热门讨论</TextBlock>
+            </CommandBar.Content>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="RefreshButton" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+        <ListView Grid.Row="1"  Name="DiscussionList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="None"
                        IsItemClickEnabled="True" ItemClick="DiscussionList_OnItemClick"
                         ItemContainerStyle="{StaticResource DiscussionItemStyle}"
                        >
@@ -26,6 +66,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-        </Grid>
+        <CommandBar x:Name="BottomCommandBar" Grid.Row="2">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton  Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Grid>
 </local:MenuPage>
+

@@ -17,22 +17,6 @@
             <MenuFlyoutItem IsEnabled="False" x:Name="ReadPosterOnly" Text="只看他"></MenuFlyoutItem>
         </MenuFlyout>
 
-        <CommandBar x:Name="MyCommandBar" ClosedDisplayMode="Compact"
-                    
-                    >
-            <AppBarButton  Name="RefreshButton"
-                               Label="刷新" Icon="Refresh"
-                               Command="{x:Bind VM.RefreshCommand,Mode=OneWay}">
-
-
-            </AppBarButton>
-            <AppBarButton  Name="ReplyButton"
-                               Label="回复" Icon="Send"
-                               Click="ReplyButton_OnClick">
-
-            </AppBarButton>
-
-        </CommandBar>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -50,18 +34,71 @@
     </Page.Resources>
 
 
-    <Grid 
-          HorizontalAlignment="Stretch">
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="ReplyButton.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                   <VisualState.Setters>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-       
-        <ProgressBar IsIndeterminate="True" 
+        <CommandBar Grid.Row="0" x:Name="TopCommandBar" ClosedDisplayMode="Compact"
+                    >
+          
+            <CommandBar.PrimaryCommands>
+                <AppBarButton  Name="RefreshButton"
+                               Label="刷新" Icon="Refresh"
+                               Command="{x:Bind VM.RefreshCommand,Mode=OneWay}">
+
+
+                </AppBarButton>
+                <AppBarButton  Name="ReplyButton"
+                               Label="回复" Icon="Send"
+                               Click="ReplyButton_OnClick">
+
+                </AppBarButton>
+                </CommandBar.PrimaryCommands>
+            <CommandBar.Content>
+                <TextBlock Margin="12,14" Text="{x:Bind VM.Discussion.Subject,Mode=OneWay}"
+                           TextTrimming="CharacterEllipsis"
+                           ></TextBlock>
+            </CommandBar.Content>
+
+        </CommandBar>
+
+
+
+        <ProgressBar Grid.Row="1" IsIndeterminate="True" 
                      Visibility="{x:Bind VM.ReplyList.IsLoading,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}">
         </ProgressBar>
 
-        <ListView x:Name="ReplyList"
+        <ListView Grid.Row="1" x:Name="ReplyList"
                   ItemsSource="{x:Bind VM.ReplyList,Mode=OneWay}"
                   IsItemClickEnabled="True"
                   SelectionMode="Single"
@@ -78,10 +115,45 @@
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5">这里是世界的尽头(=ﾟωﾟ)=</TextBlock>
             </ListView.Footer>
         </ListView>
-   
+
+        <CommandBar Grid.Row="2" x:Name="BottomCommandBar" ClosedDisplayMode="Compact"
+                    >
+
+            <CommandBar.PrimaryCommands>
+                <AppBarButton 
+                               Label="刷新" Icon="Refresh"
+                               Command="{x:Bind VM.RefreshCommand,Mode=OneWay}">
+
+
+                </AppBarButton>
+                <AppBarButton  
+                               Label="回复" Icon="Send"
+                               Click="ReplyButton_OnClick">
+
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+           
+
+        </CommandBar>
     </Grid>
 
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

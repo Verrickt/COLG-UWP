@@ -7,20 +7,87 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-        <CommandBar x:Name="MyCommandBar" ClosedDisplayMode="Compact">
-            <AppBarButton Icon="Send" Label="发送" Click="Post_OnClick"></AppBarButton>
-        </CommandBar>
+     
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-  
-<TextBox Name="Reply" Text="{x:Bind VM.ReplyMessage,Mode=TwoWay}"
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="BottomPostButton.(UIElement.Visibility)" Value="Visible"/>
+                        <Setter Target="TopPostButton.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Target="BottomPostButton.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"></RowDefinition>
+    <RowDefinition Height="*">
+    
+</RowDefinition>
+         <RowDefinition Height="Auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+        <CommandBar x:Name="TopCommandBar" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="TopPostButton" Icon="Send" Label="发送" Click="Post_OnClick"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.Content>
+                <TextBlock Margin="12,14" TextTrimming="CharacterEllipsis" >
+                    <Run Text="回复:"></Run><Run Text="{x:Bind VM.Discussion.Subject}"></Run>
+
+                </TextBlock>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <TextBox Grid.Row="1" Name="Reply" Text="{x:Bind VM.ReplyMessage,Mode=TwoWay}"
          TextWrapping="Wrap"
         AcceptsReturn="True"
           >
 </TextBox>
 
-      
+        <CommandBar Grid.Row="2"  x:Name="BottomCommandBar" ClosedDisplayMode="Compact">
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton Icon="Emoji2"  >
+                        <AppBarButton.Flyout>
+                            <Flyout>
+                                <TextBlock>233</TextBlock>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                    <AppBarButton Icon="Important" >
+                        <AppBarButton.Flyout>
+                            <Flyout>
+                                <TextBlock>表情仍在施工中</TextBlock>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                </StackPanel>
+            </CommandBar.Content>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="BottomPostButton" Icon="Send" Label="发送" Click="Post_OnClick"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
     </Grid>
    
 </Page>

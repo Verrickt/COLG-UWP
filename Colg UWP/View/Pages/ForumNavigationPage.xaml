@@ -17,12 +17,49 @@
         <DataTemplate x:Key="ZoomedInGroupHeaderTemplate" x:DataType="model:ForumContainer">
             <TextBlock Text="{x:Bind Catagory}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}"/>
         </DataTemplate>
-        <CommandBar x:Name="MyCommandBar" >
-            <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
-        </CommandBar>
+       
     </Page.Resources>
-   
-        <SemanticZoom >
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Visible"/>
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <CommandBar x:Name="TopCommandBar" >
+            <CommandBar.Content>
+                <TextBlock Margin="12,14">论坛</TextBlock>
+            </CommandBar.Content>
+            <AppBarButton Name="RefreshButton" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
+        </CommandBar>
+        <SemanticZoom Grid.Row="1" >
             <SemanticZoom.ZoomedInView>
                 <ListView Name="ZoomInView" 
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
@@ -91,6 +128,11 @@
                 </ListView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
+        <CommandBar Grid.Row="2" x:Name="BottomCommandBar" >
+           
+            <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
+        </CommandBar>
+    </Grid>
 </local:MenuPage>
 
 
