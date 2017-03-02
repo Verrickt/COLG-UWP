@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls.Primitives;
 using Colg_UWP.Util;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
@@ -13,6 +15,7 @@ namespace Colg_UWP.ViewModel
     public class LoginVM : VMBase
     {
         private ObservableCollection<LoginData> _savedLogins;
+        private LoginData _quickLoginData;
 
         public ObservableCollection<LoginData> SavedLogins
         {
@@ -20,9 +23,14 @@ namespace Colg_UWP.ViewModel
             set { _savedLogins = value; }
         }
 
-        public LoginDataVM CurrentLogin { get; set; } = new LoginDataVM();
+        public LoginDataVM CurrentLoginVM { get; set; } = new LoginDataVM();
 
-       
+        public LoginData QuickLoginData
+        {
+            get { return _quickLoginData; }
+            set { SetProperty(ref _quickLoginData,value); }
+        }
+
         public List<string> SecurityQuestions => new List<string>()
         {
             "安全提问(未设置请忽略)",
@@ -36,63 +44,72 @@ namespace Colg_UWP.ViewModel
             "驾驶执照最后四位数字"
         };
 
+        public void RemoveSavedLogin(LoginData data)
+        {
+            LoginDataManager.RemoveLoginData(data);
+            UpdateSavedLogin();
+        }
+
         public LoginVM()
         {
-            SavedLogins = new ObservableCollection<LoginData>( LoginDataManager.GetLoginDataList());
+            SavedLogins = new ObservableCollection<LoginData>();
+            UpdateSavedLogin();
+        }
 
+        private void UpdateSavedLogin()
+        {
+            SavedLogins.Clear();
+            LoginDataManager.GetLoginDataList().ToList().ForEach(
+                ld=>SavedLogins.Add(ld)
+                );
+        }
+
+        public async Task<bool> QuickLoginAsync()
+        {
+            LoginDataVM quickLoginData = new LoginDataVM(QuickLoginData);
+            return await quickLoginData.LoginAsync();
         }
     }
 
     public class LoginDataVM : VMBase
     {
-        private LoginData _data = new LoginData();
-        private string _answer;
-        private string _username;
-        private string _password;
-        private int _questionId;
-
-        public string Username
-        {
-            get { return _username; }
-            set { SetProperty(ref _username,value); }
-        }
-
-        public string Password
-        {
-            get { return _password; }
-            set { SetProperty(ref _password, value); }
-        }
-
-        public int QuestionID
-        {
-            get { return _questionId; }
-            set { SetProperty(ref _questionId,value); }
-        }
-
-        public string Answer
-        {
-            get { return _answer; }
-            set { SetProperty(ref _answer,value); }
-        }
+        private LoginData _data;
+        
+        public LoginData Data { get { return _data; }
+            set { SetProperty(ref _data,value);} }
 
         public LoginDataVM()
         {
-            QuestionID = -1;
-            Answer = String.Empty;
+            _data = new LoginData();
+            _data.QuestionId = -1;
+            _data.QuestionAnswer = String.Empty;
+        }
+
+        public LoginDataVM(LoginData data)
+        {
+            _data = data;
         }
 
         public async Task<bool> LoginAsync()
         {
-            _data.UserName = Username;
-            _data.Password = Password;
-            if (QuestionID<0)
+            if (String.IsNullOrWhiteSpace(_data.UserName)||String.IsNullOrEmpty(_data.Password))
             {
-                QuestionID = 0;
+                await new MessageDialog("用户名或密码不能为空！").ShowAsync();
+                return false;
             }
-            _data.QuestionId = QuestionID;
-            _data.QuestionAnswer = Answer;
+            if (_data.QuestionId<0)
+            {
+                _data.QuestionId = 0;
+            }
             var (isSuccess,message)=await LoginService.LoginAsync(_data);
-            InAppNotifier.Show(message);
+            if (!isSuccess)
+            {
+                await new MessageDialog("请检查登录信息。确认无误后请再次尝试", "登录失败").ShowAsync();
+            }
+            else
+            {
+                InAppNotifier.Show("登录成功");
+            }
             return isSuccess;
         }
     }
