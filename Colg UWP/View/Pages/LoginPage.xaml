@@ -11,15 +11,21 @@
     Loaded="LoginPage_OnLoaded"
     mc:Ignorable="d"
     >
-<Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         <CommandBar x:Name="MyCommandBar" >
-            <AppBarButton Icon="Refresh" Label="刷新"></AppBarButton>
+           <CommandBar.Content>
+               <TextBlock Margin="12,14" Text="登录"></TextBlock>
+           </CommandBar.Content>
         </CommandBar>
-    </Page.Resources>
-        <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <RelativePanel Grid.Row="1" >
             <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-            <TextBlock HorizontalAlignment="Center" Text="快速登录" Visibility="{x:Bind SavedLoginDatas.Visibility,Mode=OneWay}" />
-            <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" 
+                <TextBlock HorizontalAlignment="Center" Text="快速登录" Visibility="{x:Bind SavedLoginDatas.Visibility,Mode=OneWay}" />
+                <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" 
                   SelectedItem="{x:Bind VM.QuickLoginData,Mode=TwoWay,Converter={StaticResource GenericObjectConverter}}"  
                           SelectionMode="Single"
                           SelectionChanged="SavedLoginDatas_OnSelectionChanged"
@@ -29,17 +35,17 @@
                           ScrollViewer.VerticalScrollMode="Enabled"
                       Margin="10,5"
                       >
-                    
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:LoginData">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="48"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
 
-                            </Grid.ColumnDefinitions>
-                            <uwptoolkit:ImageEx
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:LoginData">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <uwptoolkit:ImageEx
                                 Grid.Column="0"
                                 Width="48"
                                 Height="48"
@@ -49,39 +55,40 @@
                                 PlaceholderStretch="UniformToFill"
                                 
                                 ></uwptoolkit:ImageEx>
-                            <TextBlock Margin="15,0" TextTrimming="CharacterEllipsis" Grid.Column="1" 
+                                <TextBlock Margin="15,0" TextTrimming="CharacterEllipsis" Grid.Column="1" 
                    Style="{StaticResource SubheaderTextBlockStyle}"
                    Text="{x:Bind UserName,Mode=OneWay}" ></TextBlock>
-                            <Button Grid.Column="2" Height="48" Width="48" 
+                                <Button Grid.Column="2" Height="48" Width="48" 
                     Name="Delete"  Background="Transparent"
                                     Click="Delete_OnClick"
                     >
-                                <SymbolIcon Symbol="Delete"></SymbolIcon>
-                                
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                   <ListView.ItemContainerStyle>
-                       <Style TargetType="ListViewItem">
-                           <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                    </Style>
-                   </ListView.ItemContainerStyle>
+                                    <SymbolIcon Symbol="Delete"></SymbolIcon>
+
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
                 <StackPanel>
                     <TextBox Text="{x:Bind VM.CurrentLoginVM.Data.UserName,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
                     </TextBox>
-                <PasswordBox Password="{x:Bind VM.CurrentLoginVM.Data.Password,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
+                    <PasswordBox Password="{x:Bind VM.CurrentLoginVM.Data.Password,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
                     <ComboBox Name="SecurityQuestionComboBox" Margin="10,5" 
                           HorizontalAlignment="Stretch" 
                           SelectedIndex="{x:Bind VM.CurrentLoginVM.Data.QuestionId,Mode=TwoWay}"
                           ItemsSource="{x:Bind VM.SecurityQuestions}"   
                           PlaceholderText="安全提问(未设置请忽略)"></ComboBox>
-                <TextBox  Margin="10,5"  Text="{x:Bind VM.CurrentLoginVM.Data.QuestionAnswer,Mode=TwoWay}"  PlaceholderText="问题答案"></TextBox>
+                    <TextBox  Margin="10,5"  Text="{x:Bind VM.CurrentLoginVM.Data.QuestionAnswer,Mode=TwoWay}"  PlaceholderText="问题答案"></TextBox>
                     <StackPanel  Margin="10,5" Orientation="Horizontal">
                         <Button Content="登录" Name="LoginButton" Click="LoginButton_OnClick" ></Button>
-                </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </RelativePanel>
+    </Grid>
 </local:MenuPage>
