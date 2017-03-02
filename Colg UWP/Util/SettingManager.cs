@@ -19,8 +19,6 @@ namespace Colg_UWP.Util
         private static Dictionary<string, ApplicationDataContainer> ContianerMapper = new Dictionary
             <string, ApplicationDataContainer>()
         {
-            {SettingNames.LoginName,_loginContainer},
-            {SettingNames.UserTriggeredLoginStatus,_loginContainer }
         };
 
         public static void Save<T>(string name,T value)
@@ -60,7 +58,5 @@ namespace Colg_UWP.Util
 
     public class SettingNames
     {
-        public const string LoginName = "LoginName";
-        public const string UserTriggeredLoginStatus = "UserTriggeredLoginStatus";
     }
 }

@@ -33,7 +33,6 @@ namespace Colg_UWP.Service
                 loginData.IsActive = true;
                 UserService.UpdateUserInfo(json["data"]);
                 await UserService.UpdateUserCreditsAsync().ConfigureAwait(false);
-                SettingManager.Save(SettingNames.UserTriggeredLoginStatus, true);
                 LoginDataManager.RemoveLoginData(loginData.UserName);
                 LoginDataManager.AddLoginData(loginData);
                 await LoginDataManager.SaveLoginDatasAsync().ConfigureAwait(false);
@@ -47,10 +46,9 @@ namespace Colg_UWP.Service
         public static async Task<(bool IsSuccess, string ErrorMessage)> LogoutAsync()
         {
             var json = await GetJson(ApiUrl.Logout).ConfigureAwait(false);
-            var username = SettingManager.Read<string>(SettingNames.LoginName);
-
-            SettingManager.Save<string>(SettingNames.LoginName, string.Empty);
-            SettingManager.Save(SettingNames.UserTriggeredLoginStatus, false);
+            var userData = LoginDataManager.GetLoginDataList().Single(i => i.IsActive);
+            userData.IsActive = false;
+            await LoginDataManager.SaveLoginDatasAsync().ConfigureAwait(false);
             return GetOperationResult(json);
         }
 
