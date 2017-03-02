@@ -25,8 +25,8 @@
                        
                        ></Image>
                     <StackPanel  Margin="25,0" >
-                        <TextBlock Name="UserName" HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.UserData.UserName,Mode=OneWay}"></TextBlock>
-                        <TextBlock Name="GroupTitle" HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.UserData.GroupTitle,Mode=OneWay}" ></TextBlock>
+                        <TextBlock Name="UserName" HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.User.UserName,Mode=OneWay}"></TextBlock>
+                        <TextBlock Name="GroupTitle" HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.User.GroupTitle,Mode=OneWay}" ></TextBlock>
                         <Button Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="LogOutButton" Click="LogOutButton_OnClick" >
                             <StackPanel>
                                 <TextBlock  Style="{StaticResource BodyTextBlockStyle}">退出登录</TextBlock>

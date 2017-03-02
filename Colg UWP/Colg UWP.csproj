@@ -119,8 +119,8 @@
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\ArticleContainer.cs" />
     <Compile Include="Model\Forum.cs" />
-    <Compile Include="Model\UserData.cs" />
-    <Compile Include="Model\LoginData.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\LoginCredential.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Resource\BooleanToVisibilityConverter.cs" />
     <Compile Include="Resource\DateTimeToDiffConverter.cs" />

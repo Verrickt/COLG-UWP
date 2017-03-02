@@ -12,23 +12,23 @@ namespace Colg_UWP.Util
     {
         public const string _fileName = "UserData";
 
-        private static UserData _userData = new UserData();
+        private static User _user = new User();
 
-        public static  UserData GetUserData()
+        public static  User GetUserData()
         {
-            return _userData;
+            return _user;
         }
 
         public static async Task InitializationAsync()
         {
-            _userData = await StorageHelper.ReadAsync<UserData>(_fileName)
+            _user = await StorageHelper.ReadAsync<User>(_fileName)
             ??
-            _userData;
+            _user;
         }
 
         public static async Task SaveUserData()
         {
-            await StorageHelper.SaveAsync(_userData, _fileName).ConfigureAwait(false);
+            await StorageHelper.SaveAsync(_user, _fileName).ConfigureAwait(false);
         }
     }
 }

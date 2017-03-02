@@ -14,22 +14,22 @@ namespace Colg_UWP.ViewModel
 {
     public class LoginVM : VMBase
     {
-        private ObservableCollection<LoginData> _savedLogins;
-        private LoginData _quickLoginData;
+        private ObservableCollection<Credential> _savedLogins;
+        private Credential _quickCredential;
        
 
-        public ObservableCollection<LoginData> SavedLogins
+        public ObservableCollection<Credential> SavedLogins
         {
             get { return _savedLogins; }
             set { _savedLogins = value; }
         }
 
-        public LoginDataVM LoginDataVM { get; set; } = new LoginDataVM();
+        public CredentialVM CredentialVM { get; set; } = new CredentialVM();
 
-        public LoginData QuickLoginData
+        public Credential QuickCredential
         {
-            get { return _quickLoginData; }
-            set { SetProperty(ref _quickLoginData,value); }
+            get { return _quickCredential; }
+            set { SetProperty(ref _quickCredential,value); }
         }
 
         public List<string> SecurityQuestions => new List<string>()
@@ -45,15 +45,15 @@ namespace Colg_UWP.ViewModel
             "驾驶执照最后四位数字"
         };
 
-        public void RemoveSavedLogin(LoginData data)
+        public void RemoveSavedLogin(Credential credential)
         {
-            LoginDataManager.RemoveLoginData(data);
+            LoginDataManager.RemoveLoginData(credential);
             UpdateSavedLogin();
         }
 
         public LoginVM()
         {
-            SavedLogins = new ObservableCollection<LoginData>();
+            SavedLogins = new ObservableCollection<Credential>();
             UpdateSavedLogin();
         }
 
@@ -67,13 +67,13 @@ namespace Colg_UWP.ViewModel
 
         public async Task<bool> QuickLoginAsync()
         {
-            return await LoginDataVM.QuickLoginAsync(QuickLoginData);
+            return await CredentialVM.QuickLoginAsync(QuickCredential);
         }
     }
 
-    public class LoginDataVM : VMBase
+    public class CredentialVM : VMBase
     {
-        private LoginData _data;
+        private Credential _credential;
 
         private bool _undergoingLogin=false;
 
@@ -83,34 +83,34 @@ namespace Colg_UWP.ViewModel
             set { SetProperty(ref _undergoingLogin, value); }
         }
 
-        public LoginData Data { get { return _data; }
-            set { SetProperty(ref _data,value);} }
+        public Credential Credential { get { return _credential; }
+            set { SetProperty(ref _credential,value);} }
 
-        public LoginDataVM()
+        public CredentialVM()
         {
-            _data = new LoginData();
-            _data.QuestionId = -1;
-            _data.QuestionAnswer = String.Empty;
+            _credential = new Credential();
+            _credential.QuestionId = -1;
+            _credential.QuestionAnswer = String.Empty;
 
         }
 
        
 
-        public async Task<bool> LoginAsync(LoginData data=null)
+        public async Task<bool> LoginAsync(Credential credential=null)
         {
-            LoginData actualData = data ?? _data;
+            Credential actualCredential = credential ?? _credential;
             UndergoingLogin = true;
-            if (String.IsNullOrWhiteSpace(actualData.UserName)||String.IsNullOrEmpty(actualData.Password))
+            if (String.IsNullOrWhiteSpace(actualCredential.LoginName)||String.IsNullOrEmpty(actualCredential.Password))
             {
                 await new MessageDialog("用户名或密码不能为空！").ShowAsync();
                 UndergoingLogin = false;
                 return false;
             }
-            if (actualData.QuestionId<0)
+            if (actualCredential.QuestionId<0)
             {
-                actualData.QuestionId = 0;
+                actualCredential.QuestionId = 0;
             }
-            var (isSuccess,message)=await LoginService.LoginAsync(actualData);
+            var (isSuccess,message)=await LoginService.LoginAsync(actualCredential);
             if (!isSuccess)
             {
                 await new MessageDialog("请检查登录信息。确认无误后请再次尝试", "登录失败").ShowAsync();
@@ -124,9 +124,9 @@ namespace Colg_UWP.ViewModel
             return isSuccess;
         }
 
-        public async Task<bool> QuickLoginAsync(LoginData data)
+        public async Task<bool> QuickLoginAsync(Credential credential)
         {
-            return await LoginAsync(data);
+            return await LoginAsync(credential);
         }
     }
 }

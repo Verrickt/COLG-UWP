@@ -9,9 +9,9 @@ namespace Colg_UWP.Util
 {
     public  class LoginDataManager
     {
-        private static List<LoginData> _loginDatas= new List<LoginData>();
+        private static List<Credential> _loginDatas= new List<Credential>();
 
-        public static  IReadOnlyList<LoginData> GetLoginDataList()
+        public static  IReadOnlyList<Credential> GetLoginDataList()
         {
            return _loginDatas.AsReadOnly();
         }
@@ -20,7 +20,7 @@ namespace Colg_UWP.Util
         public static async Task InitializtionAsync()
         {
             _loginDatas =
-                 await StorageHelper.ReadAsync<List<LoginData>>
+                 await StorageHelper.ReadAsync<List<Credential>>
                 (_fileName)
              ?? _loginDatas;
         }
@@ -30,18 +30,18 @@ namespace Colg_UWP.Util
             await StorageHelper.SaveAsync(_loginDatas, _fileName);
         }
 
-        public static void AddLoginData(LoginData data)
+        public static void AddLoginData(Credential credential)
         {
-            _loginDatas.Add(data);
+            _loginDatas.Add(credential);
         }
 
-        public static void RemoveLoginData(LoginData data)
+        public static void RemoveLoginData(Credential credential)
         {
-            _loginDatas.Remove(data);
+            _loginDatas.Remove(credential);
         }
         public static void RemoveLoginData(string username)
         {
-            RemoveLoginData(_loginDatas.SingleOrDefault(d => d.UserName == username));
+            RemoveLoginData(_loginDatas.SingleOrDefault(d => d.LoginName == username));
         }
     }
 }

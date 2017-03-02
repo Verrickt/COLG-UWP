@@ -11,11 +11,11 @@ namespace Colg_UWP.Service
 {
     public class UserService : ApiBaseService
     {
-        private static UserData _userData;
+        private static User _user;
 
         static UserService()
         {
-            _userData = UserDataManager.GetUserData();
+            _user = UserDataManager.GetUserData();
         }
 
         public static async Task UpdateUserCreditsAsync()
@@ -24,10 +24,10 @@ namespace Colg_UWP.Service
             var variable = json["Variables"].Value<JObject>();
             var credits =
                 GetUserCredits(variable.Properties().Where(x => x.Name.Contains("credit")).Select(x => x.First));
-            _userData.Credits.Clear();
+            _user.Credits.Clear();
             string formhash = variable["formhash"].ToString();
             ReplyService.Formhash = formhash;
-            _userData.Credits.AddRange(credits);
+            _user.Credits.AddRange(credits);
         }
 
         public static void UpdateUserInfo(JToken json)
@@ -44,13 +44,13 @@ namespace Colg_UWP.Service
                 timeRegisted = DateTimeOffset.FromUnixTimeSeconds(regDate).ToLocalTime();
             }
             ReplyService.Formhash = formhash;
-            _userData.UserID = userid;
-            _userData.AvatarUrl = avatar;
-            _userData.GroupTitle = _userData.GroupTitle ?? grouptitle;
-            _userData.HomeUrl = null;
-            _userData.UserName = username;
-            _userData.ReadPermission = readAccessLevel;
-            _userData.TimeRegisted = _userData.TimeRegisted??timeRegisted;
+            _user.ID = userid;
+            _user.Avatar = avatar;
+            _user.GroupTitle = _user.GroupTitle ?? grouptitle;
+            _user.HomeUrl = null;
+            _user.UserName = username;
+            _user.ReadPermission = readAccessLevel;
+            _user.TimeRegisted = _user.TimeRegisted??timeRegisted;
         }
 
         public static async Task UpdateUserInfoAsync()

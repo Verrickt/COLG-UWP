@@ -12,20 +12,20 @@ namespace Colg_UWP.ViewModel
 {
     public class MySpaceVM:VMBase
     {
-        private UserData _userData;
+        private User _user;
 
-        public UserData UserData
+        public User User
         {
-            get { return _userData; }
-            set { SetProperty(ref _userData, value); }
+            get { return _user; }
+            set { SetProperty(ref _user, value); }
         }
 
         public ObservableCollection<string> Credits { get; set; }
 
         public MySpaceVM()
         {
-            UserData = UserDataManager.GetUserData();
-            Credits = new ObservableCollection<string>(UserData.Credits);
+            User = UserDataManager.GetUserData();
+            Credits = new ObservableCollection<string>(User.Credits);
 
         }
 

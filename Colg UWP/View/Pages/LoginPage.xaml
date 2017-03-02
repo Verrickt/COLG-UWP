@@ -51,7 +51,7 @@
             <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                 <TextBlock HorizontalAlignment="Center" Text="快速登录" Visibility="{x:Bind SavedLoginDatas.Visibility,Mode=OneWay}" />
                 <ListView Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedLogins,Mode=OneWay}" 
-                  SelectedItem="{x:Bind VM.QuickLoginData,Mode=TwoWay,Converter={StaticResource GenericObjectConverter}}"  
+                  SelectedItem="{x:Bind VM.QuickCredential,Mode=TwoWay,Converter={StaticResource GenericObjectConverter}}"  
                           SelectionMode="Single"
                           SelectionChanged="SavedLoginDatas_OnSelectionChanged"
                           HorizontalContentAlignment="Center"
@@ -62,7 +62,7 @@
                       >
 
                     <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="model:LoginData">
+                        <DataTemplate x:DataType="model:Credential">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="48"></ColumnDefinition>
@@ -74,7 +74,7 @@
                                 Grid.Column="0"
                                 Width="48"
                                 Height="48"
-                                Source="{x:Bind AvatarUrl}"
+                                Source="{x:Bind Avatar}"
                                 Stretch="UniformToFill"
                                 PlaceholderSource="../../Assets/ImagePlaceHolder.jpg"
                                 PlaceholderStretch="UniformToFill"
@@ -82,7 +82,7 @@
                                 ></uwptoolkit:ImageEx>
                                 <TextBlock Margin="15,0" TextTrimming="CharacterEllipsis" Grid.Column="1" 
                    Style="{StaticResource SubheaderTextBlockStyle}"
-                   Text="{x:Bind UserName,Mode=OneWay}" ></TextBlock>
+                   Text="{x:Bind LoginName,Mode=OneWay}" ></TextBlock>
                                 <Button Grid.Column="2" Height="48" Width="48" 
                     Name="Delete"  Background="Transparent"
                                     Click="Delete_OnClick"
@@ -100,15 +100,15 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
                 <StackPanel>
-                    <TextBox Text="{x:Bind VM.LoginDataVM.Data.UserName,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
+                    <TextBox Text="{x:Bind VM.CredentialVM.Credential.LoginName,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
                     </TextBox>
-                    <PasswordBox Password="{x:Bind VM.LoginDataVM.Data.Password,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
+                    <PasswordBox Password="{x:Bind VM.CredentialVM.Credential.Password,Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" ></PasswordBox>
                     <ComboBox Name="SecurityQuestionComboBox" Margin="10,5" 
                           HorizontalAlignment="Stretch" 
-                          SelectedIndex="{x:Bind VM.LoginDataVM.Data.QuestionId,Mode=TwoWay}"
+                          SelectedIndex="{x:Bind VM.CredentialVM.Credential.QuestionId,Mode=TwoWay}"
                           ItemsSource="{x:Bind VM.SecurityQuestions}"   
                           PlaceholderText="安全提问(未设置请忽略)"></ComboBox>
-                    <TextBox  Margin="10,5"  Text="{x:Bind VM.LoginDataVM.Data.QuestionAnswer,Mode=TwoWay}"  PlaceholderText="问题答案"></TextBox>
+                    <TextBox  Margin="10,5"  Text="{x:Bind VM.CredentialVM.Credential.QuestionAnswer,Mode=TwoWay}"  PlaceholderText="问题答案"></TextBox>
                     <StackPanel  Margin="10,5" Orientation="Horizontal">
                         <Button Content="登录" Name="LoginButton" Click="LoginButton_OnClick" ></Button>
                     </StackPanel>
@@ -118,7 +118,7 @@
                           RelativePanel.AlignHorizontalCenterWithPanel="True"
                           Height="48"
                           Width="48"
-                          IsActive="{x:Bind VM.LoginDataVM.UndergoingLogin,Mode=OneWay}"
+                          IsActive="{x:Bind VM.CredentialVM.UndergoingLogin,Mode=OneWay}"
                           ></ProgressRing>
         </RelativePanel>
     </Grid>

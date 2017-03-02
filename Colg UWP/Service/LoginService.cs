@@ -12,16 +12,16 @@ namespace Colg_UWP.Service
 {
     public class LoginService:ApiBaseService
     {
-        public static async Task<(bool IsSuccess,string ErrorMessage)> LoginAsync(LoginData loginData)
+        public static async Task<(bool IsSuccess,string ErrorMessage)> LoginAsync(Credential credential)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>
             {
-                {"username", loginData.UserName},
-                {"password", loginData.Password},
-                {"questionid", loginData.QuestionId.ToString()},
-                {"answer", loginData.QuestionAnswer}
+                {"username", credential.LoginName},
+                {"password", credential.Password},
+                {"questionid", credential.QuestionId.ToString()},
+                {"answer", credential.QuestionAnswer}
             };
-            Util.Logging.WriteLine($"Login with {loginData}");
+            Util.Logging.WriteLine($"Login with {credential}");
 
 
             var json = await GetJson(ApiUrl.Login, dictionary).ConfigureAwait(false);
@@ -30,11 +30,11 @@ namespace Colg_UWP.Service
 
             if (result.IsSuccess)
             {
-                loginData.IsActive = true;
+                credential.IsActive = true;
                 UserService.UpdateUserInfo(json["data"]);
                 await UserService.UpdateUserCreditsAsync().ConfigureAwait(false);
-                LoginDataManager.RemoveLoginData(loginData.UserName);
-                LoginDataManager.AddLoginData(loginData);
+                LoginDataManager.RemoveLoginData(credential.LoginName);
+                LoginDataManager.AddLoginData(credential);
                 await LoginDataManager.SaveLoginDatasAsync().ConfigureAwait(false);
             }
 
@@ -55,10 +55,10 @@ namespace Colg_UWP.Service
         public static async Task<(bool IsSuccess, string ErrorMessage)> AutoLoginAsync()
         {
             var list =  LoginDataManager.GetLoginDataList();
-            var loginData = list.SingleOrDefault(ld => ld.IsActive);
-            if (loginData!=null)
+            var credential = list.SingleOrDefault(ld => ld.IsActive);
+            if (credential!=null)
             {
-                return await LoginAsync(loginData).ConfigureAwait(false);
+                return await LoginAsync(credential).ConfigureAwait(false);
             }
             return (IsSuccess:false,ErrorMessage:"username doesn't exist");
         }

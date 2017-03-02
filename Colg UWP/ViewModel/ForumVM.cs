@@ -12,11 +12,11 @@ namespace Colg_UWP.ViewModel
         public Forum Forum { get { return _forum; } set { SetProperty(ref _forum, value);Refresh(); } }
         private IncrementalList<Discussion,Forum> _discussionList;
 
-        private static UserData _userData { get; set; }
+        private static User _user { get; set; }
 
         static ForumVM()
         {
-            _userData = UserDataManager.GetUserData();
+            _user = UserDataManager.GetUserData();
         }
 
         public ForumVM()
@@ -26,7 +26,7 @@ namespace Colg_UWP.ViewModel
 
         public bool CheckForPermission(int readPermission)
         {
-            if (readPermission <= 0 || _userData.ReadPermission >= readPermission)
+            if (readPermission <= 0 || _user.ReadPermission >= readPermission)
             {
                 return true;
             }

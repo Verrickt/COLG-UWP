@@ -39,7 +39,7 @@ namespace Colg_UWP.View.Pages
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var succeed = await VM.LoginDataVM.LoginAsync();
+            var succeed = await VM.CredentialVM.LoginAsync();
 
             if (succeed)
             {
@@ -99,8 +99,8 @@ namespace Colg_UWP.View.Pages
         private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
              var button = sender as Button;
-             var loginData = button.DataContext as LoginData;
-             VM.RemoveSavedLogin(loginData);
+             var credential = button.DataContext as Credential;
+             VM.RemoveSavedLogin(credential);
 
         }
     }
