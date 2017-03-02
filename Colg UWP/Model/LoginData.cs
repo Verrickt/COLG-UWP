@@ -15,7 +15,7 @@ namespace Colg_UWP.Model
         public int QuestionId { get; set; }
         public string QuestionAnswer { get; set; }
 
-        public bool IsActive { get; set; }//indicated weather this logindata is used now
+        public bool IsActive { get; set; }//indicated whether this logindata is used now
 
         public override string ToString()
         {
