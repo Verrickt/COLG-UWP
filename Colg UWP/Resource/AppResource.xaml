@@ -10,7 +10,7 @@
     <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></local:BooleanToVisibilityConverter>
     <local:DateTimeToDiffConverter x:Key="DateTimeToDiff"></local:DateTimeToDiffConverter>
     <local:DateTimeToCompressedStringConverter x:Key="DateTimeToCompressedStringConverter"></local:DateTimeToCompressedStringConverter>
-
+    <local:IntToVisibilityConverter x:Key="IntToVisibilityConverter"></local:IntToVisibilityConverter>
     <Style x:Key="DiscussionItemStyle" TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
