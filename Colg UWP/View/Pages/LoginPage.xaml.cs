@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Colg_UWP.Model;
 using Colg_UWP.Util;
 using Colg_UWP.Service;
 using Colg_UWP.ViewModel;
@@ -38,7 +39,7 @@ namespace Colg_UWP.View.Pages
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var succeed = await VM.CurrentLogin.LoginAsync();
+            var succeed = await VM.CurrentLoginVM.LoginAsync();
 
             if (succeed)
             {
@@ -59,9 +60,9 @@ namespace Colg_UWP.View.Pages
         }
 
 
-        private async void LoginPage_OnLoaded(object sender, RoutedEventArgs e)
+        private  void LoginPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (SettingManager.Read<bool>(SettingNames.UserTriggeredLoginStatus))
+            if (LoginDataManager.GetLoginDataList().Any(i=>i.IsActive))
             {
                 JumpToUserSpace();
             }
@@ -80,14 +81,27 @@ namespace Colg_UWP.View.Pages
 
         private async void SavedLoginDatas_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var res = await VM.QuickLogin();
-            //string title = res ? "登录成功" : "登录失败";
-            //InAppNotifier.Show(title, null);
-            //if (res)
-            //{
-            //    JumpToUserSpace();
-            //}
+
+
+
+            bool succeed = await VM.QuickLoginAsync();
+
+            if (succeed)
+            {
+                JumpToUserSpace();
+            }
+
         }
 
+
+      
+
+        private void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+             var button = sender as Button;
+             var loginData = button.DataContext as LoginData;
+             VM.RemoveSavedLogin(loginData);
+
+        }
     }
 }
