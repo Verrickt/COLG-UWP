@@ -16,6 +16,7 @@ namespace Colg_UWP.ViewModel
     {
         private ObservableCollection<LoginData> _savedLogins;
         private LoginData _quickLoginData;
+       
 
         public ObservableCollection<LoginData> SavedLogins
         {
@@ -23,7 +24,7 @@ namespace Colg_UWP.ViewModel
             set { _savedLogins = value; }
         }
 
-        public LoginDataVM CurrentLoginVM { get; set; } = new LoginDataVM();
+        public LoginDataVM LoginDataVM { get; set; } = new LoginDataVM();
 
         public LoginData QuickLoginData
         {
@@ -66,15 +67,22 @@ namespace Colg_UWP.ViewModel
 
         public async Task<bool> QuickLoginAsync()
         {
-            LoginDataVM quickLoginData = new LoginDataVM(QuickLoginData);
-            return await quickLoginData.LoginAsync();
+            return await LoginDataVM.QuickLoginAsync(QuickLoginData);
         }
     }
 
     public class LoginDataVM : VMBase
     {
         private LoginData _data;
-        
+
+        private bool _undergoingLogin=false;
+
+        public bool UndergoingLogin
+        {
+            get { return _undergoingLogin; }
+            set { SetProperty(ref _undergoingLogin, value); }
+        }
+
         public LoginData Data { get { return _data; }
             set { SetProperty(ref _data,value);} }
 
@@ -83,34 +91,42 @@ namespace Colg_UWP.ViewModel
             _data = new LoginData();
             _data.QuestionId = -1;
             _data.QuestionAnswer = String.Empty;
+
         }
 
-        public LoginDataVM(LoginData data)
-        {
-            _data = data;
-        }
+       
 
-        public async Task<bool> LoginAsync()
+        public async Task<bool> LoginAsync(LoginData data=null)
         {
-            if (String.IsNullOrWhiteSpace(_data.UserName)||String.IsNullOrEmpty(_data.Password))
+            LoginData actualData = data ?? _data;
+            UndergoingLogin = true;
+            if (String.IsNullOrWhiteSpace(actualData.UserName)||String.IsNullOrEmpty(actualData.Password))
             {
                 await new MessageDialog("用户名或密码不能为空！").ShowAsync();
+                UndergoingLogin = false;
                 return false;
             }
-            if (_data.QuestionId<0)
+            if (actualData.QuestionId<0)
             {
-                _data.QuestionId = 0;
+                actualData.QuestionId = 0;
             }
-            var (isSuccess,message)=await LoginService.LoginAsync(_data);
+            var (isSuccess,message)=await LoginService.LoginAsync(actualData);
             if (!isSuccess)
             {
                 await new MessageDialog("请检查登录信息。确认无误后请再次尝试", "登录失败").ShowAsync();
+                UndergoingLogin = false;
             }
             else
             {
                 InAppNotifier.Show("登录成功");
             }
+            UndergoingLogin = false;
             return isSuccess;
+        }
+
+        public async Task<bool> QuickLoginAsync(LoginData data)
+        {
+            return await LoginAsync(data);
         }
     }
 }

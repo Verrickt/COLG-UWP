@@ -39,7 +39,7 @@ namespace Colg_UWP.View.Pages
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var succeed = await VM.CurrentLoginVM.LoginAsync();
+            var succeed = await VM.LoginDataVM.LoginAsync();
 
             if (succeed)
             {
