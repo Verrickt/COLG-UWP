@@ -53,6 +53,15 @@ namespace Colg_UWP.Service
             _userData.TimeRegisted = _userData.TimeRegisted??timeRegisted;
         }
 
+        public static async Task UpdateUserInfoAsync()
+        {
+            var json = await GetJson(ApiUrl.ForumList()).ConfigureAwait(false);//request forumlist to get avatar 
+            var variable = json["Variables"];
+            await UpdateUserCreditsAsync();
+            UpdateUserInfo(variable);
+
+        }
+
         private static IEnumerable<string> GetUserCredits(IEnumerable<JToken> tokens)
 
         {
