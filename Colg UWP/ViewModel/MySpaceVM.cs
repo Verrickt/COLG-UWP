@@ -34,7 +34,7 @@ namespace Colg_UWP.ViewModel
         {
             var(result,message)=await LoginService.LogoutAsync();
 
-            InAppNotifier.Show(message);
+            InAppNotifier.Show(result ? "注销成功" : "注销失败");
 
             return result;
         }
