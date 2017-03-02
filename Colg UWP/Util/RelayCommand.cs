@@ -31,4 +31,30 @@ namespace Colg_UWP.Util
             _action();
         }
     }
+
+    public class RelayCommand<T>:ICommand
+    {
+        private Action<T> _action { get; set; }
+
+        private Func<bool> _canExecute { get; set; }
+
+
+        public RelayCommand(Action<T> action, Func<bool> canExecute)
+        {
+            _action = action;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _action((T)parameter);
+        }
+
+        public event EventHandler CanExecuteChanged;
+    }
 }
