@@ -54,7 +54,7 @@ namespace Colg_UWP.ViewModel
             ReplyMessage = String.Empty;
             RefreshCommand = new RelayCommand(Refresh);
             JumpToReplyPageCommand = new RelayCommand<Frame>(
-               (frame) => frame.Navigate(typeof(NewReplyPage)),
+               (frame) => frame.Navigate(typeof(NewReplyPage),this),
                () => UserDataManager.GetActiveUser() != null
                );
 
