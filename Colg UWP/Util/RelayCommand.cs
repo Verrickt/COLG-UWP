@@ -21,9 +21,14 @@ namespace Colg_UWP.Util
             _canExecute = canExecute;
         }
 
+        public RelayCommand(Action action):this(action,null)
+        {
+            
+        }
+
         public bool CanExecute(object parameter)
         {
-            return _canExecute();
+            return _canExecute?.Invoke() ?? true;
         }
 
         public void Execute(object parameter)
@@ -45,14 +50,24 @@ namespace Colg_UWP.Util
             _canExecute = canExecute;
         }
 
+        public RelayCommand(Action<T> action): this(action, null)
+        {
+            
+        }
+
         public bool CanExecute(object parameter)
         {
-            return _canExecute();
+            return _canExecute?.Invoke() ?? true;
         }
 
         public void Execute(object parameter)
         {
             _action((T)parameter);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this,new EventArgs());
         }
 
         public event EventHandler CanExecuteChanged;

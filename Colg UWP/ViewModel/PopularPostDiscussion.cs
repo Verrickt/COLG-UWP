@@ -16,7 +16,7 @@ namespace Colg_UWP.ViewModel
         public PopularPostDiscussion()
         {
             PopularPosts = new ObservableCollection<Discussion>();
-            RefreshCommand = new RelayCommand(async()=>await RefreshAsync(),()=>true);
+            RefreshCommand = new RelayCommand(async()=>await RefreshAsync());
         }
 
         public async Task RefreshAsync()

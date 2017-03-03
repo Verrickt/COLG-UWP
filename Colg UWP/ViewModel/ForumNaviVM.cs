@@ -36,10 +36,9 @@ namespace Colg_UWP.ViewModel
         {
             Forums = new List<Forum>();
             ForumContainers = new ObservableCollection<ForumContainer>();
-            RefreshCommand= new RelayCommand(
-                async () =>await RefreshAsync()
-            ,
-            ()=>true);
+            RefreshCommand = new RelayCommand(
+                async () => await RefreshAsync());
+
         }
 
     }
