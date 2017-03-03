@@ -1,10 +1,15 @@
-﻿using Windows.UI.Text.Core;
+﻿using System;
+using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Colg_UWP.Model;
 using Colg_UWP.Util;
+using Colg_UWP.View.Pages;
 
 namespace Colg_UWP.ViewModel
 {
     using IncrementalLoading;
+    using Windows.UI.Xaml.Controls;
+
     public class ForumVM : VMBase
     {
         public string ForumId { get; set; }
@@ -12,27 +17,24 @@ namespace Colg_UWP.ViewModel
         public Forum Forum { get { return _forum; } set { SetProperty(ref _forum, value);Refresh(); } }
         private IncrementalList<Discussion,Forum> _discussionList;
 
-        private static User _user { get; set; }
 
-        static ForumVM()
-        {
-            _user = UserDataManager.GetActiveUser();
-        }
+
 
         public ForumVM()
         {
             RefreshCommand = new RelayCommand(Refresh, () => true);
         }
 
-        public bool CheckForPermission(int readPermission)
+        public async Task<bool> CheckForPermission(int readPermission)
         {
-            if (readPermission <= 0 || _user.ReadPermission >= readPermission)
+            User user = UserDataManager.GetActiveUser();
+            if (readPermission <= 0 || user?.ReadPermission >= readPermission)
             {
                 return true;
             }
             else
             {
-                InAppNotifier.Show($"抱歉，本帖要求阅读权限高于{readPermission}才能浏览");
+                await new MessageDialog($"抱歉，本帖要求阅读权限高于{readPermission}才能浏览").ShowAsync();
                 return false;
             }
         }

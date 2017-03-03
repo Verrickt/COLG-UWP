@@ -41,13 +41,12 @@ namespace Colg_UWP.View.Pages
 
 
 
-        private void DiscussionList_OnItemClick(object sender, ItemClickEventArgs e)
+        private async void DiscussionList_OnItemClick(object sender, ItemClickEventArgs e)
         {
             var discussion = e.ClickedItem as Model.Discussion;
 
-            if (VM.CheckForPermission(discussion.ReadPermission))
+            if (await VM.CheckForPermission(discussion.ReadPermission))
             {
-               
                 ContentFrame.Navigate(typeof(DiscussionPage), discussion);
             }
         }
