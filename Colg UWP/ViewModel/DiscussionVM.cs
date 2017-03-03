@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Colg_UWP.Util;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
+using Colg_UWP.View.Pages;
 
 namespace Colg_UWP.ViewModel
 {
@@ -10,7 +12,6 @@ namespace Colg_UWP.ViewModel
 
     public class DiscussionVM : VMBase
     {
-        public string DiscussionID { get; set; }
 
         public Discussion Discussion
         {
@@ -19,6 +20,7 @@ namespace Colg_UWP.ViewModel
             {
                 SetProperty(ref _discussion, value);
                 Refresh();
+                JumpToReplyPageCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -40,16 +42,22 @@ namespace Colg_UWP.ViewModel
 
         public RelayCommand RefreshCommand { get; set; }
 
+        public RelayCommand<Frame> JumpToReplyPageCommand { get; set; }
+
+
         private IncrementalList<Reply, Discussion> _replyList;
         private string _replyMessage;
-       
-
        
 
         public DiscussionVM()
         {
             ReplyMessage = String.Empty;
-            RefreshCommand = new RelayCommand(Refresh, () => true);
+            RefreshCommand = new RelayCommand(Refresh);
+            JumpToReplyPageCommand = new RelayCommand<Frame>(
+               (frame) => frame.Navigate(typeof(NewReplyPage)),
+               () => UserDataManager.GetActiveUser() != null
+               );
+
         }
 
         private void Refresh()

@@ -80,7 +80,8 @@
                 </AppBarButton>
                 <AppBarButton  Name="ReplyButton"
                                Label="回复" Icon="Send"
-                               Click="ReplyButton_OnClick">
+                               Command="{x:Bind VM.JumpToReplyPageCommand}"
+                                CommandParameter="{x:Bind Frame}">
 
                 </AppBarButton>
                 </CommandBar.PrimaryCommands>
@@ -128,7 +129,9 @@
                 </AppBarButton>
                 <AppBarButton  
                                Label="回复" Icon="Send"
-                               Click="ReplyButton_OnClick">
+                               Command="{x:Bind VM.JumpToReplyPageCommand}"
+                                CommandParameter="{x:Bind Frame}"
+                    >
 
                 </AppBarButton>
             </CommandBar.PrimaryCommands>

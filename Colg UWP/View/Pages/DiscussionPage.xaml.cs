@@ -62,9 +62,6 @@ namespace Colg_UWP.View.Pages
         }
 
 
-        private void ReplyButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(NewReplyPage), VM);
-        }
+      
     }
 }
