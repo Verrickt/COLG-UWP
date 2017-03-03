@@ -23,7 +23,7 @@ namespace Colg_UWP.Service
         {
             var json = await GetJson(ApiUrl.PostList(forumId, page)).ConfigureAwait(false);
             var variable = json["Variables"].Value<JObject>();
-            UserService.UpdateUserInfo(variable);
+            UserService.UpdateUserInfo(variable, UserDataManager.GetActiveUser());
             Dictionary<string, string> catagoryDict = null;
             var forumThreads = variable["forum_threadlist"].ToArray();
             var catagoryObj = variable["threadtypes"];

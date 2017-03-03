@@ -16,10 +16,13 @@ namespace Colg_UWP.Model
         public int ReadPermission { get; set; }
         public List<string> Credits { get; set; }
         public DateTimeOffset? TimeRegisted { get; set; }
+        public bool IsActive { get; set; }
+        public Credential Credential { get; set; }
 
         public User()
         {
              Credits = new List<string>();
+             Credential = new Credential();
         }
 
         public override string ToString()

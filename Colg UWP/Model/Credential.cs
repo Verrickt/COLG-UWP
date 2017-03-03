@@ -8,13 +8,12 @@ namespace Colg_UWP.Model
 {
     public class Credential
     {
-        public string LoginName { get; set; }
-        public string Password { get; set; }
-        public string Avatar{ get; set; }
-        public int QuestionId { get; set; }
-        public string QuestionAnswer { get; set; }
+        public string LoginName { get; set; } = String.Empty;
+        public string Password { get; set; } = String.Empty;
+        public int QuestionId { get; set; } = -1;
+        public string QuestionAnswer { get; set; } = String.Empty;
 
-        public bool IsActive { get; set; }//indicated whether this logindata is used now
+
 
         public override string ToString()
         {

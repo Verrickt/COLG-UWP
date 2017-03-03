@@ -14,22 +14,21 @@ namespace Colg_UWP.ViewModel
 {
     public class LoginVM : VMBase
     {
-        private ObservableCollection<Credential> _savedLogins;
-        private Credential _quickCredential;
+        private ObservableCollection<User> _savedUsers;
+        private User _quickLoginUser;
        
 
-        public ObservableCollection<Credential> SavedLogins
+        public ObservableCollection<User> SavedUsers
         {
-            get { return _savedLogins; }
-            set { _savedLogins = value; }
+            get { return _savedUsers; }
+            set { _savedUsers = value; }
         }
 
-        public CredentialVM CredentialVM { get; set; } = new CredentialVM();
 
-        public Credential QuickCredential
+        public User QuickLoginUser
         {
-            get { return _quickCredential; }
-            set { SetProperty(ref _quickCredential,value); }
+            get { return _quickLoginUser; }
+            set { SetProperty(ref _quickLoginUser,value); }
         }
 
         public List<string> SecurityQuestions => new List<string>()
@@ -45,37 +44,13 @@ namespace Colg_UWP.ViewModel
             "驾驶执照最后四位数字"
         };
 
-        public void RemoveSavedLogin(Credential credential)
-        {
-            LoginDataManager.RemoveLoginData(credential);
-            UpdateSavedLogin();
-        }
+        public User NewUser { get; set; } = new User();
 
-        public LoginVM()
-        {
-            SavedLogins = new ObservableCollection<Credential>();
-            UpdateSavedLogin();
-        }
+      
 
-        private void UpdateSavedLogin()
-        {
-            SavedLogins.Clear();
-            LoginDataManager.GetLoginDataList().ToList().ForEach(
-                ld=>SavedLogins.Add(ld)
-                );
-        }
 
-        public async Task<bool> QuickLoginAsync()
-        {
-            return await CredentialVM.QuickLoginAsync(QuickCredential);
-        }
-    }
 
-    public class CredentialVM : VMBase
-    {
-        private Credential _credential;
-
-        private bool _undergoingLogin=false;
+        private bool _undergoingLogin = false;
 
         public bool UndergoingLogin
         {
@@ -83,34 +58,29 @@ namespace Colg_UWP.ViewModel
             set { SetProperty(ref _undergoingLogin, value); }
         }
 
-        public Credential Credential { get { return _credential; }
-            set { SetProperty(ref _credential,value);} }
 
-        public CredentialVM()
+        public void RemoveUser(User user)
         {
-            _credential = new Credential();
-            _credential.QuestionId = -1;
-            _credential.QuestionAnswer = String.Empty;
-
+            UserDataManager.RemoveUser(user);
+            UpdateSavedUser();
         }
 
-       
-
-        public async Task<bool> LoginAsync(Credential credential=null)
+        public async Task<bool> LoginAsync(User anotheruser=null)
         {
-            Credential actualCredential = credential ?? _credential;
+            var actualUser = anotheruser??NewUser;
+            var credential = actualUser.Credential;
             UndergoingLogin = true;
-            if (String.IsNullOrWhiteSpace(actualCredential.LoginName)||String.IsNullOrEmpty(actualCredential.Password))
+            if (String.IsNullOrWhiteSpace(credential.LoginName) || String.IsNullOrEmpty(credential.Password))
             {
                 await new MessageDialog("用户名或密码不能为空！").ShowAsync();
                 UndergoingLogin = false;
                 return false;
             }
-            if (actualCredential.QuestionId<0)
+            if (credential.QuestionId < 0)
             {
-                actualCredential.QuestionId = 0;
+                credential.QuestionId = 0;
             }
-            var (isSuccess,message)=await LoginService.LoginAsync(actualCredential);
+            var (isSuccess, message) = await LoginService.LoginAsync(actualUser);
             if (!isSuccess)
             {
                 await new MessageDialog("请检查登录信息。确认无误后请再次尝试", "登录失败").ShowAsync();
@@ -124,9 +94,30 @@ namespace Colg_UWP.ViewModel
             return isSuccess;
         }
 
-        public async Task<bool> QuickLoginAsync(Credential credential)
+        public async Task<bool> QuickLoginAsync()
         {
-            return await LoginAsync(credential);
+            return await LoginAsync(QuickLoginUser);
         }
+
+
+
+
+        public LoginVM()
+        {
+            SavedUsers = new ObservableCollection<User>();
+            UpdateSavedUser();
+        }
+
+        private void UpdateSavedUser()
+        {
+            SavedUsers.Clear();
+            UserDataManager.GetUsers().ToList().ForEach(
+                ld=>SavedUsers.Add(ld)
+                );
+        }
+
+      
     }
+
+ 
 }

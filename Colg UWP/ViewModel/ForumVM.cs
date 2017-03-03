@@ -16,7 +16,7 @@ namespace Colg_UWP.ViewModel
 
         static ForumVM()
         {
-            _user = UserDataManager.GetUserData();
+            _user = UserDataManager.GetActiveUser();
         }
 
         public ForumVM()

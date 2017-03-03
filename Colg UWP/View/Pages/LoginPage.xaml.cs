@@ -39,7 +39,7 @@ namespace Colg_UWP.View.Pages
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var succeed = await VM.CredentialVM.LoginAsync();
+            var succeed = await VM.LoginAsync();
 
             if (succeed)
             {
@@ -62,7 +62,7 @@ namespace Colg_UWP.View.Pages
 
         private  void LoginPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (LoginDataManager.GetLoginDataList().Any(i=>i.IsActive))
+            if (UserDataManager.GetActiveUser()!=null)
             {
                 JumpToUserSpace();
             }
@@ -99,8 +99,8 @@ namespace Colg_UWP.View.Pages
         private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
              var button = sender as Button;
-             var credential = button.DataContext as Credential;
-             VM.RemoveSavedLogin(credential);
+             var user = button.DataContext as User;
+             VM.RemoveUser(user);
 
         }
     }

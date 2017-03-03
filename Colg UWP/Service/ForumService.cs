@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Colg_UWP.Util;
 
 namespace Colg_UWP.Service
 {
@@ -19,7 +20,7 @@ namespace Colg_UWP.Service
                 List<Forum> forums = new List<Forum>();
                 Dictionary<string, string> catagorys = new Dictionary<string, string>();
                 var variable = json["Variables"];
-                UserService.UpdateUserInfo(variable);
+                UserService.UpdateUserInfo(variable,UserDataManager.GetActiveUser());
                 var catagoryObj = variable["catlist"].ToArray();
                 foreach (var catagory in catagoryObj)
                 {

@@ -109,7 +109,6 @@
     <Compile Include="Util\ExtensionMethods.cs" />
     <Compile Include="Util\HttpClientManager.cs" />
     <Compile Include="Util\Logging.cs" />
-    <Compile Include="Util\LoginDataManager.cs" />
     <Compile Include="Util\RelayCommand.cs" />
     <Compile Include="Util\SettingManager.cs" />
     <Compile Include="Util\StorageHelper.cs" />
@@ -120,7 +119,7 @@
     <Compile Include="Model\ArticleContainer.cs" />
     <Compile Include="Model\Forum.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\LoginCredential.cs" />
+    <Compile Include="Model\Credential.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Resource\BooleanToVisibilityConverter.cs" />
     <Compile Include="Resource\DateTimeToDiffConverter.cs" />
@@ -172,9 +171,6 @@
     </Compile>
     <Compile Include="View\Controls\ToastNotification.xaml.cs">
       <DependentUpon>ToastNotification.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Controls\UserLoginTemplate.xaml.cs">
-      <DependentUpon>UserLoginTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
@@ -321,10 +317,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\ToastNotification.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Controls\UserLoginTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

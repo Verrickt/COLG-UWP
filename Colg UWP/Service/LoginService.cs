@@ -12,8 +12,9 @@ namespace Colg_UWP.Service
 {
     public class LoginService:ApiBaseService
     {
-        public static async Task<(bool IsSuccess,string ErrorMessage)> LoginAsync(Credential credential)
+        public static async Task<(bool IsSuccess,string ErrorMessage)> LoginAsync(User user)
         {
+            var credential = user.Credential;
             Dictionary<string, string> dictionary = new Dictionary<string, string>
             {
                 {"username", credential.LoginName},
@@ -30,12 +31,11 @@ namespace Colg_UWP.Service
 
             if (result.IsSuccess)
             {
-                credential.IsActive = true;
-                UserService.UpdateUserInfo(json["data"]);
-                await UserService.UpdateUserCreditsAsync().ConfigureAwait(false);
-                LoginDataManager.RemoveLoginData(credential.LoginName);
-                LoginDataManager.AddLoginData(credential);
-                await LoginDataManager.SaveLoginDatasAsync().ConfigureAwait(false);
+                user.IsActive = true;
+                UserService.UpdateUserInfo(json["data"],user);
+                await UserService.UpdateUserInfoAsync(user).ConfigureAwait(false);
+                UserDataManager.AddOrUpdateUser(user);
+                await UserDataManager.SaveUserData();
             }
 
             Logging.WriteLineIf(result.IsSuccess,"Login success","Login failed");
@@ -45,22 +45,22 @@ namespace Colg_UWP.Service
 
         public static async Task<(bool IsSuccess, string ErrorMessage)> LogoutAsync()
         {
+            var activeUser = UserDataManager.GetActiveUser();
             var json = await GetJson(ApiUrl.Logout).ConfigureAwait(false);
-            var userData = LoginDataManager.GetLoginDataList().Single(i => i.IsActive);
-            userData.IsActive = false;
-            await LoginDataManager.SaveLoginDatasAsync().ConfigureAwait(false);
+            activeUser.IsActive = false;
+            await UserDataManager.SaveUserData();
             return GetOperationResult(json);
         }
 
         public static async Task<(bool IsSuccess, string ErrorMessage)> AutoLoginAsync()
         {
-            var list =  LoginDataManager.GetLoginDataList();
-            var credential = list.SingleOrDefault(ld => ld.IsActive);
-            if (credential!=null)
+            var activeUser = UserDataManager.GetActiveUser();
+            if (activeUser!=null)
             {
-                return await LoginAsync(credential).ConfigureAwait(false);
+                return await LoginAsync(activeUser).ConfigureAwait(false);
             }
-            return (IsSuccess:false,ErrorMessage:"username doesn't exist");
+            Logging.WriteLine("Auto login failed. No active user");
+            return (IsSuccess:false,ErrorMessage:"No active user!!");
         }
         private static (bool IsSuccess, string ErrorMessage) GetOperationResult(JToken json)
         {

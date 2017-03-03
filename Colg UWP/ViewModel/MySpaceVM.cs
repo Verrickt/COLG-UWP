@@ -24,7 +24,7 @@ namespace Colg_UWP.ViewModel
 
         public MySpaceVM()
         {
-            User = UserDataManager.GetUserData();
+            User = UserDataManager.GetActiveUser();
             Credits = new ObservableCollection<string>(User.Credits);
 
         }

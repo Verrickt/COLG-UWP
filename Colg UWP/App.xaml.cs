@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -43,7 +42,6 @@ namespace Colg_UWP
             Frame rootFrame = Window.Current.Content as Frame;
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-
                 var statusBar = StatusBar.GetForCurrentView();
                 statusBar.HideAsync();
             }
@@ -74,7 +72,6 @@ namespace Colg_UWP
                     // configuring the new page by passing required information as a navigation
                     // parameter
                     rootFrame.Navigate(typeof(View.Pages.MainPage), e.Arguments);
-
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -109,26 +106,23 @@ namespace Colg_UWP
 
         private async Task InitializeTask()
         {
-            await Task.WhenAll(
-                new[]
-                {
-                    Util.Logging.InitializationAsync(),
-                    Util.UserDataManager.InitializationAsync(),
-                    Util.LoginDataManager.InitializtionAsync()
-                }
-            );
+            var tasks = new[]
+            {
+                Util.Logging.InitializationAsync(),
+                Util.UserDataManager.InitializationAsync(),
+            };
+            await Task.WhenAll(tasks);
             await Service.LoginService.AutoLoginAsync();
+            //only autologin after UserDataManager has finished initialization.
         }
 
         private async Task SuspendingTask()
         {
-            await Task.WhenAll(new []
-            {
-                 Util.UserDataManager.SaveUserData(),
-                Util.LoginDataManager.SaveLoginDatasAsync()
-            });
+            var tasks =
+                new[]
+                    {Util.UserDataManager.SaveUserData()};
+            await Task.WhenAll(tasks
+            );
         }
-
-
     }
 }
