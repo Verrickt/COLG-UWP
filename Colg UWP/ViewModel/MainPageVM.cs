@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Colg_UWP.Util;
+using Colg_UWP.View.Pages;
+using System.Collections.Generic;
+using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.ViewModel
 {
@@ -23,14 +26,25 @@ namespace Colg_UWP.ViewModel
             {
                 return new List<MenuVM>()
                 {
-                    new MenuVM() {DisplayName="登陆",Glyph="\uE1E2" },
                      new MenuVM() {DisplayName="设置",Glyph="\uE115" },
-                    new MenuVM() {DisplayName="关于",Glyph= "\uE946" },
                     new MenuVM() {DisplayName="评价",Glyph= "\uE8E1" }
 
 
                 };
             }
+        }
+
+        public RelayCommand<Frame> JumpToUserAccountPage { get; set; }
+
+        public MainPageVM()
+        {
+            JumpToUserAccountPage = new RelayCommand<Frame>(
+                (frame) =>
+                {
+                    var targetPage = UserDataManager.GetActiveUser() == null ? typeof(LoginPage) :
+                    typeof(MySpace);
+                    frame.Navigate(targetPage);
+                });
         }
     }
 }
