@@ -17,5 +17,8 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0,2"></Setter>
     </Style>
+    <Style TargetType="CommandBar">
+        <Setter Property="IsDynamicOverflowEnabled" Value="False"></Setter>
+    </Style>
 </ResourceDictionary>
 
