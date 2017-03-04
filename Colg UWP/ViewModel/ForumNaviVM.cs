@@ -27,8 +27,8 @@ namespace Colg_UWP.ViewModel
             {
                 Catagory = catagory,
                 Forums
-             = new List<Forum>(grouped)
-            }).OrderBy(x=>x.Catagory[0]);
+             = new List<Forum>(grouped.OrderBy(f=>f.Name[0]))
+            });
             containers.ToList().ForEach(c=>ForumContainers.Add(c));
         }
 
