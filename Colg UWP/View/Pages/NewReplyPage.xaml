@@ -60,7 +60,8 @@
         </CommandBar>
 
         <TextBox Grid.Row="1" Name="Reply" Text="{x:Bind VM.ReplyMessage,Mode=TwoWay}"
-         TextWrapping="Wrap"
+         BorderThickness="0"
+                 TextWrapping="Wrap"
         AcceptsReturn="True"
           >
 </TextBox>

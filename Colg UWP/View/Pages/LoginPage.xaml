@@ -58,7 +58,7 @@
                           Visibility="{x:Bind VM.SavedUsers.Count,Converter={StaticResource IntToVisibilityConverter},Mode=OneWay}"
                           Height="48"
                           ScrollViewer.VerticalScrollMode="Enabled"
-                      Margin="10,5"
+                      Margin="10,0"
                       >
 
                     <ListView.ItemTemplate>
@@ -84,7 +84,8 @@
                    Style="{StaticResource SubheaderTextBlockStyle}"
                    Text="{x:Bind UserName,Mode=OneWay}" ></TextBlock>
                                 <Button Grid.Column="2" Height="48" Width="48" 
-                    Name="Delete"  Background="Transparent"
+                    Name="Delete"  Background="Transparent" BorderThickness="0"
+                                        Foreground="Red"
                                     Click="Delete_OnClick"
                     >
                                     <SymbolIcon Symbol="Delete"></SymbolIcon>
@@ -93,11 +94,7 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                  
                 </ListView>
                 <StackPanel>
                     <TextBox Text="{x:Bind VM.NewUser.Credential.LoginName,Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" Name="UserName" PlaceholderText="用户名" >
