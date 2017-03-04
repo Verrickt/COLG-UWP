@@ -116,8 +116,18 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Frame   Grid.Column="0" Name="MenuFrame">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <PopupThemeTransition />
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
                     </Frame>
                     <Frame  Grid.Column="1" Name="ContentFrame">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition></NavigationThemeTransition>
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
                     </Frame>
                 </Grid>
 
