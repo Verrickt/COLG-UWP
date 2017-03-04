@@ -41,8 +41,22 @@ namespace Colg_UWP.View.Pages
             MenuFrame.Navigated += MenuFrame_OnNavigated;
             ContentFrame.Navigated += ContentFrame_OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            UpdateUserInfo();
+
         }
 
+        private void UpdateUserInfo()
+        {
+            var activeUser = Util.UserDataManager.GetActiveUser();
+            string username = activeUser?.UserName;
+            string avatar = activeUser?.Avatar;
+            UserNameTextBlock.Text = username ?? "登录";
+            var str = AvatarImageEx.Source?.ToString();
+            if (str != avatar)
+            {
+                AvatarImageEx.Source = avatar;
+            }
+        }
 
         private void MenuFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
@@ -54,6 +68,8 @@ namespace Colg_UWP.View.Pages
                 ContentFrame.Visibility = Visibility.Collapsed;
             }
             UpdateBackButtonVisibility();
+            UpdateIsPaneOpen();
+            UpdateUserInfo();
         }
 
         private void ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
@@ -75,7 +91,7 @@ namespace Colg_UWP.View.Pages
                     }
                 }
 
-
+            UpdateIsPaneOpen();
             UpdateBackButtonVisibility();
         }
 
@@ -114,12 +130,6 @@ namespace Colg_UWP.View.Pages
         private void MenuList_ItemClick(object sender, ItemClickEventArgs e)
         {
             MenuVM clicked = e.ClickedItem as MenuVM;
-            bool
-                keepPaneOpen = MySplitView.DisplayMode == SplitViewDisplayMode.CompactInline;
-            if (!keepPaneOpen)
-            {
-                MySplitView.IsPaneOpen = false;
-            }
             if (clicked.TargetPage == null)
             {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -133,6 +143,16 @@ namespace Colg_UWP.View.Pages
             else
             {
                 MenuFrame.Navigate(clicked.TargetPage);
+            }
+        }
+
+        private void UpdateIsPaneOpen()
+        {
+            bool
+                keepPaneOpen = MySplitView.DisplayMode == SplitViewDisplayMode.CompactInline;
+            if (!keepPaneOpen)
+            {
+                MySplitView.IsPaneOpen = false;
             }
         }
 

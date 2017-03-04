@@ -60,18 +60,6 @@ namespace Colg_UWP.View.Pages
         }
 
 
-        private  void LoginPage_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (UserDataManager.GetActiveUser()!=null)
-            {
-                JumpToUserSpace();
-            }
-            else
-            {
-                this.Bindings.Update();
-            }
-        }
-
         private void JumpToUserSpace()
         {
             this.Frame.GoBack();

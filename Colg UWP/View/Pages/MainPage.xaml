@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodel="using:Colg_UWP.ViewModel"
+    xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls="using:Colg_UWP.View.Controls"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
     Unloaded="Page_Unloaded"
@@ -21,20 +23,25 @@
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
         <DataTemplate x:Key="MenuItemDateTemplate" x:DataType="viewmodel:MenuVM">
-            <RelativePanel Width="240" Height="48">
-                <Grid RelativePanel.AlignVerticalCenterWithPanel="True" Name="GlyphGrid"
-                      RelativePanel.AlignLeftWithPanel="True" Width="48" Height="48">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{x:Bind Glyph}"></FontIcon>
-                </Grid>
-                <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="GlyphGrid"
+                <TextBlock Grid.Column="1"
                            Text="{x:Bind DisplayName }" VerticalAlignment="Center">
                 </TextBlock>
-            </RelativePanel>
+            </Grid>
         </DataTemplate>
         <Style TargetType="ListViewItem">
             <Setter Property="Padding" Value="0,0,0,0"></Setter>
         </Style>
-
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+        </Style>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
@@ -96,13 +103,46 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <ListView Name="TopMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
                               SelectionMode="None" ItemsSource="{x:Bind VM.TopMenuItems}"
                               ItemTemplate="{StaticResource MenuItemDateTemplate}">
 
                     </ListView>
-                    <ListView Grid.Row="2" Name="BottomMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
+                    <StackPanel Grid.Row="2" >
+                        <Button Command="{x:Bind VM.JumpToUserAccountPage}" CommandParameter="{x:Bind MenuFrame}"  >
+                            <Grid Width="240" Height="48">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Border BorderThickness="1.5"
+                                        Height="27"
+                                        Width="27"
+                                    BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}">
+                                    <uwptoolkit:ImageEx
+                                    Height="24"
+                                    Width="24"
+                                    
+                                    PlaceholderSource="../../Assets/ImagePlaceHolder.jpg"
+                                    PlaceholderStretch="UniformToFill"
+                                    Name="AvatarImageEx"
+                                    ></uwptoolkit:ImageEx>
+                                </Border>
+                                <TextBlock Grid.Column="1" Name="UserNameTextBlock" TextTrimming="CharacterEllipsis"
+                           Text="登录" VerticalAlignment="Center">
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Rectangle Width="240" Height="1" 
+                                   Opacity="20"
+                                   Margin="10,2"
+                                   
+                                   Fill="{ThemeResource SystemControlBackgroundChromeWhiteBrush}"></Rectangle>
+                    </StackPanel>
+                    <ListView Grid.Row="3" Name="BottomMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
                               SelectionMode="None" ItemsSource="{x:Bind VM.BottomMenuItems}"
                               ItemTemplate="{StaticResource MenuItemDateTemplate}">
 
@@ -134,11 +174,11 @@
             </SplitView.Content>
         </SplitView>
         <RelativePanel Grid.Row="0" >
-            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0"
+            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
                     Name="Humburger" Click="Humburger_Click" Height="48" Width="48"
                     RelativePanel.AlignVerticalCenterWithPanel="True">
                 <Button.Content>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"></FontIcon>
+                    <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"></FontIcon>
                 </Button.Content>
             </Button>
             <TextBlock RelativePanel.RightOf="Humburger" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="0"
