@@ -115,8 +115,8 @@ namespace Colg_UWP.View.Pages
         {
             MenuVM clicked = e.ClickedItem as MenuVM;
             bool
-                keepPaneClose = MySplitView.DisplayMode == SplitViewDisplayMode.Overlay;
-            if (keepPaneClose)
+                keepPaneOpen = MySplitView.DisplayMode == SplitViewDisplayMode.CompactInline;
+            if (!keepPaneOpen)
             {
                 MySplitView.IsPaneOpen = false;
             }

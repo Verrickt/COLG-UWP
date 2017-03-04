@@ -60,7 +60,7 @@
         </CommandBar>
 
         <TextBox Grid.Row="1" Name="Reply" Text="{x:Bind VM.ReplyMessage,Mode=TwoWay}"
-         BorderThickness="0"
+         BorderThickness="0" Margin="5,10"
                  TextWrapping="Wrap"
         AcceptsReturn="True"
           >
@@ -69,17 +69,10 @@
         <CommandBar Grid.Row="2"  x:Name="BottomCommandBar" ClosedDisplayMode="Compact">
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal">
-                    <AppBarButton Icon="Emoji2"  >
+                    <AppBarButton Icon="Emoji2" >
                         <AppBarButton.Flyout>
-                            <Flyout>
-                                <TextBlock>233</TextBlock>
-                            </Flyout>
-                        </AppBarButton.Flyout>
-                    </AppBarButton>
-                    <AppBarButton Icon="Important" >
-                        <AppBarButton.Flyout>
-                            <Flyout>
-                                <TextBlock>表情仍在施工中</TextBlock>
+                            <Flyout Placement="Top">
+                                <TextBlock>仍在施工中，敬请期待</TextBlock>
                             </Flyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
