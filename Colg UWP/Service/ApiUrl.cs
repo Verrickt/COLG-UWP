@@ -6,6 +6,17 @@ namespace Colg_UWP.Service
     {
         private static string _baseUrl = "http://bbs.colg.cn/api/mobile/index.php?mobile=no&version=4";
 
+
+        /// <summary>
+        /// field required in body:
+        /// subject 
+        /// message 
+        /// mobile type : 2
+        /// typeid :thread type 
+        /// formhash
+        /// </summary>
+
+
         private static string _postNewDiscussion = _baseUrl+"&module=newthread&fid={0}&topicsubmit=1";
 
         private static int _itemsPerPage = 15;
@@ -15,7 +26,7 @@ namespace Colg_UWP.Service
         private static string _newsList = "http://www.colg.cn/api/newslist?pid={0}&page={1}";
         private static string _validateLogin = _baseUrl+"&module=credit";
         private static string _postNewReply =_baseUrl+"&module=sendreply&tid={0}&extra=&replysubmit=1";
-
+        private static string _favDiscussion = _baseUrl + "&module=myfavthread";
 
         /// <summary>
         /// Requires 
@@ -35,6 +46,13 @@ namespace Colg_UWP.Service
         private static string _logout =
             _baseUrl+"&module=login&action=logout";
 
+
+
+        /// <summary>
+        /// all the my posts that get replied
+        /// </summary>
+
+        private static string _notelist = "&module=mynotelist";
 
         /// <summary>
         /// Check all user groups
