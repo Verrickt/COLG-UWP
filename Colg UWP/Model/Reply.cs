@@ -10,5 +10,6 @@ namespace Colg_UWP.Model
         public string Message { get; set; }
         public string Markdown { get; set; }
         public string Avatar { get; set; }
+        public string Position { get; set; }
     }
 }

@@ -32,14 +32,14 @@ namespace Colg_UWP.Service
             }
         }
 
-        public static async Task<(bool status,string message)> PostNewReplyAsync(string tid, string reply,string quotetid = null)
+        public static async Task<(bool status,string message)> PostNewReplyAsync(string discussionID, string reply,string quotetid = null)
         {
-            string url = quotetid == null ? ApiUrl.PostNewReply(tid) : ApiUrl.PostNewReplyWithQuote(tid, quotetid);
+            string url = quotetid == null ? ApiUrl.PostNewReply(discussionID) : ApiUrl.PostNewReplyWithQuote(discussionID, quotetid);
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 {"formhash",_formhash },
                 {"mobiletype","2" },
-                {"message",reply }
+                {"message",reply },
             };
             var json = await GetJson(url, parameters).ConfigureAwait(false);
             string message= json["Message"]["messageval"]?.ToString();
@@ -52,13 +52,14 @@ namespace Colg_UWP.Service
             List<Reply> replys = new List<Reply>();
             foreach (var reply in postlist)
             {
-                string replyId = (string)reply["position"];
+                string position = (string)reply["position"];
                 string author = (string)reply["author"];
                 string timeStr = reply["dateline"].Value<string>();
                 DateTime timeReplied = DateTime.Parse($"{timeStr} +08:00").ToLocalTime();
                 string html = reply["message"].Value<string>();
                 string avatar = reply["authoravatar"].Value<string>();
                 string authorId = reply["authorid"].Value<string>();
+                string replyId = (string) reply["pid"];
                 string markdown = Html2Markdown.ToMarkdown(html);
                 replys.Add(new Reply
                 {
@@ -68,7 +69,8 @@ namespace Colg_UWP.Service
                     Message = html,
                     Markdown = markdown,
                     Avatar = avatar,
-                    AuthorId = authorId
+                    AuthorId = authorId,
+                    Position = position
                 });
             }
             return replys;
