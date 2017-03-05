@@ -15,6 +15,14 @@ namespace Colg_UWP.Service
         private static string _newsList = "http://www.colg.cn/api/newslist?pid={0}&page={1}";
         private static string _validateLogin = _baseUrl+"&module=credit";
         private static string _postNewReply =_baseUrl+"&module=sendreply&tid={0}&extra=&replysubmit=1";
+
+
+        /// <summary>
+        /// Requires 
+        /// mobiletype = 2, reppid = DiscussionID,reppost = DiscussionID,message = text to reply
+        /// </summary>
+
+
         private static string _postNewReplyQuote = _baseUrl + "&module=sendreply&tid={0}&extra=&replysubmit=1&repquote={1}";
         /// <summary>
         /// 首页 热门讨论及热点
@@ -27,6 +35,21 @@ namespace Colg_UWP.Service
         private static string _logout =
             _baseUrl+"&module=login&action=logout";
 
+
+        /// <summary>
+        /// Check all user groups
+        /// </summary>
+        private static string _userGroup = _baseUrl+"&module=usergroups";
+
+
+        /// <summary>
+        /// Sign up on mobile. Requires formhash on body
+        /// </summary>
+        private static string _mobileSign = _baseUrl+ "&module=mobilesign";
+
+
+        public static string MobileSign = _mobileSign;
+        public static string UserGroup=>_userGroup;
         public static string ForumList() => _forumList;
         public static string PostList(string fid, int page) => String.Format(_discussionList, fid, page, _itemsPerPage);
         public static string ReplyList(string tid, int page) => String.Format(_replyList, tid, page, _itemsPerPage);
