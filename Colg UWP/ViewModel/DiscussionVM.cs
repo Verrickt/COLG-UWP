@@ -26,13 +26,7 @@ namespace Colg_UWP.ViewModel
 
         private Discussion _discussion;
 
-        public string ReplyMessage
-        {
-            get { return _replyMessage; }
-            set { SetProperty(ref _replyMessage, value); }
-        }
 
-        public string QuotedId { get; set; } = null;
 
         public IncrementalList<Reply, Discussion> ReplyList
         {
@@ -51,10 +45,9 @@ namespace Colg_UWP.ViewModel
 
         public DiscussionVM()
         {
-            ReplyMessage = String.Empty;
             RefreshCommand = new RelayCommand(Refresh);
             JumpToReplyPageCommand = new RelayCommand<Frame>(
-               (frame) => frame.Navigate(typeof(NewReplyPage),this),
+               (frame) => frame.Navigate(typeof(NewReplyPage),new ReplyVM(Discussion)),
                () => UserDataManager.GetActiveUser() != null
                );
 
@@ -69,19 +62,6 @@ namespace Colg_UWP.ViewModel
 
         
 
-        public async Task<bool> PostNewReplyAsync()
-        {
-            (bool status,string message)= await ReplyService.PostNewReplyAsync(Discussion.Id, ReplyMessage);
-
-            if (!status)
-            {
-                InAppNotifier.Show(message);
-            }
-            else
-            {
-                ReplyMessage = string.Empty;
-            }
-            return status;
-        }
+    
     }
 }

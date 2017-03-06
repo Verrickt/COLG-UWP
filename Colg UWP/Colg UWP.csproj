@@ -150,10 +150,8 @@
     <Compile Include="ViewModel\PopularPostDiscussion.cs" />
     <Compile Include="ViewModel\DiscussionVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
+    <Compile Include="ViewModel\ReplyVM.cs" />
     <Compile Include="ViewModel\VMBase.cs" />
-    <Compile Include="View\Controls\CommentBox.xaml.cs">
-      <DependentUpon>CommentBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Controls\InAppNotification.xaml.cs">
       <DependentUpon>InAppNotification.xaml</DependentUpon>
     </Compile>
@@ -292,10 +290,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="View\Controls\CommentBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Controls\InAppNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

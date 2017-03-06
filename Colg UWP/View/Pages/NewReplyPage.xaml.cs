@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Colg_UWP.Model;
 using Colg_UWP.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -31,24 +32,15 @@ namespace Colg_UWP.View.Pages
             this.InitializeComponent();
         }
 
-        public DiscussionVM VM;
+        private ReplyVM VM;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            VM = e.Parameter as DiscussionVM;
+            VM = e.Parameter as ReplyVM;
+            Bindings.Update();
             base.OnNavigatedTo(e);
         }
 
-
-        private async void Post_OnClick(object sender, RoutedEventArgs e)
-        {
-            var result = await VM.PostNewReplyAsync();
-            if (result)
-            {
-                this.Frame.GoBack();
-            }
-
-        }
 
     }
 }

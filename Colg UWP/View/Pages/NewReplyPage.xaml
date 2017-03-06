@@ -49,7 +49,9 @@
 
         <CommandBar x:Name="TopCommandBar" >
             <CommandBar.PrimaryCommands>
-                <AppBarButton Name="TopPostButton" Icon="Send" Label="发送" Click="Post_OnClick"></AppBarButton>
+                <AppBarButton Name="TopPostButton" Icon="Send" Label="发送" Command="{x:Bind VM.PostNewReplayCommand}"
+                              CommandParameter="{x:Bind Frame}"
+                              ></AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.Content>
                 <TextBlock Margin="12,14" TextTrimming="CharacterEllipsis" >
@@ -59,10 +61,12 @@
             </CommandBar.Content>
         </CommandBar>
 
-        <TextBox Grid.Row="1" Name="Reply" Text="{x:Bind VM.ReplyMessage,Mode=TwoWay}"
+        <TextBox Grid.Row="1" Name="Reply" DataContext="{x:Bind VM}" 
+                 Text="{Binding ReplyText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 PlaceholderText="请遵守版规"
          BorderThickness="0" Margin="5,10"
                  TextWrapping="Wrap"
-        AcceptsReturn="True"
+                 AcceptsReturn="True"
           >
 </TextBox>
 
@@ -79,7 +83,9 @@
                 </StackPanel>
             </CommandBar.Content>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Name="BottomPostButton" Icon="Send" Label="发送" Click="Post_OnClick"></AppBarButton>
+                <AppBarButton Name="BottomPostButton" Icon="Send" Label="发送" Command="{x:Bind VM.PostNewReplayCommand}"
+                              CommandParameter="{x:Bind Frame}"
+                              ></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Grid>
