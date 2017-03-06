@@ -24,6 +24,7 @@ namespace Colg_UWP.View.Pages
     {
         private DiscussionVM _vm;
 
+        private Reply reply;
 
         public DiscussionPage()
         {
@@ -40,16 +41,11 @@ namespace Colg_UWP.View.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             VM = VM ?? new DiscussionVM();
-            var post = e.Parameter as Discussion;
-            VM.Discussion = post;
+            VM.Discussion = e.Parameter as Discussion;
             base.OnNavigatedTo(e);
         }
 
-        private void Replys_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            ListView listview = sender as ListView;
-            ReplyFlyout.ShowAt(listview, e.GetPosition(listview));
-        }
+       
 
         private void GoToTop_Click(object sender, RoutedEventArgs e)
         {
@@ -62,6 +58,16 @@ namespace Colg_UWP.View.Pages
         }
 
 
-      
+        private void ReplyListItem_OnRightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            FrameworkElement element= sender as FrameworkElement;
+            reply = (Reply) element.DataContext;
+            ReplyFlyout.ShowAt(element, e.GetPosition(element));
+        }
+
+        private void Reply_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NewReplyPage), new ReplyVM(VM.Discussion,reply));
+        }
     }
 }

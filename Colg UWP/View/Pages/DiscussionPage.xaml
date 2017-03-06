@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <MenuFlyout x:Name="ReplyFlyout">
-            <MenuFlyoutItem IsEnabled="False" x:Name="Reply" Text="回复"></MenuFlyoutItem>
+            <MenuFlyoutItem  x:Name="Reply" Text="回复" Click="Reply_OnClick"></MenuFlyoutItem>
             <MenuFlyoutItem IsEnabled="False" x:Name="PosterHomePage" Text="进入空间"></MenuFlyoutItem>
             <MenuFlyoutItem IsEnabled="False" x:Name="ReadPosterOnly" Text="只看他"></MenuFlyoutItem>
         </MenuFlyout>
@@ -101,15 +101,14 @@
 
         <ListView Grid.Row="1" x:Name="ReplyList"
                   ItemsSource="{x:Bind VM.ReplyList,Mode=OneWay}"
-                  IsItemClickEnabled="True"
-                  SelectionMode="Single"
-                  RightTapped="Replys_RightTapped"
+                  IsItemClickEnabled="False"
+                  SelectionMode="None"
                    >
-         
+           
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Reply" >
-                    <controls:ReplyDataTemplate></controls:ReplyDataTemplate>
+                        <controls:ReplyDataTemplate RightTapped="ReplyListItem_OnRightTapped"></controls:ReplyDataTemplate>
                 </DataTemplate>
             </ListView.ItemTemplate>
                 <ListView.Footer>
