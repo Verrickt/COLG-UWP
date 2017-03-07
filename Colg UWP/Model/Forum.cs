@@ -19,11 +19,11 @@ namespace Colg_UWP.Model
         public string Catagory { get; set; }
         public string PostToday { get; set; }
 
-       
+        public Dictionary<string,string> PostTypes { get; set; }
 
         public Forum()
         {
-            LoadMore = () => DiscussionService.GetDiscussionsAsync(Id, Page++);
+            LoadMore = () => DiscussionService.GetDiscussionsAsync(this, Page++);
         }
 
         

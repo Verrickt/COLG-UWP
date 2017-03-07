@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Web.Http;
 using Colg_UWP.Util;
 
 namespace Colg_UWP.Service
@@ -19,9 +20,9 @@ namespace Colg_UWP.Service
             var threads = json["threads"].ToArray();
             return GetDiscussionsFromArrayAsync(threads, null);
         }
-        public static async Task<(int,List<Discussion>)> GetDiscussionsAsync(string forumId, int page)
+        public static async Task<(int,List<Discussion>)> GetDiscussionsAsync(Forum forum, int page)
         {
-            var json = await GetJson(ApiUrl.PostList(forumId, page)).ConfigureAwait(false);
+            var json = await GetJson(ApiUrl.PostList(forum.Id, page)).ConfigureAwait(false);
             var variable = json["Variables"].Value<JObject>();
             UserService.UpdateUserInfo(variable, UserDataManager.GetActiveUser());
             Dictionary<string, string> catagoryDict = null;
@@ -31,10 +32,14 @@ namespace Colg_UWP.Service
             {
                 catagoryDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(catagoryObj["types"]?.ToString());
             }
+            forum.PostTypes = catagoryDict ?? new Dictionary<string, string>();
             int newCount = Convert.ToInt32(variable["forum"]["threads"].ToString());
             var items =  GetDiscussionsFromArrayAsync(forumThreads, catagoryDict);
             return (newCount, items);
         }
+
+       
+
         private static List<Discussion> GetDiscussionsFromArrayAsync(JToken[] array, Dictionary<string, string> catagoryDict)
         {
             List<Discussion> discussionList = new List<Discussion>();
