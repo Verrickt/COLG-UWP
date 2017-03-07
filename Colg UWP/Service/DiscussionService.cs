@@ -38,7 +38,24 @@ namespace Colg_UWP.Service
             return (newCount, items);
         }
 
-       
+        public static async Task<(bool,string)> PostNewDiscussionAsync(string fid,string typeId,string subject,string message)
+        {
+            var url = ApiUrl.PostNewDiscussion(fid);
+            var parameters = new Dictionary<string, string>()
+            {
+                {"mobiletype","2" },
+                {"formhash","" },
+                {"subject",subject },
+                {"message",message },
+                {"typeid",typeId??string.Empty },
+
+            };
+            var json = await ApiBaseService.GetJson(url, parameters);
+
+            return (false, "error"); 
+
+        }
+
 
         private static List<Discussion> GetDiscussionsFromArrayAsync(JToken[] array, Dictionary<string, string> catagoryDict)
         {
