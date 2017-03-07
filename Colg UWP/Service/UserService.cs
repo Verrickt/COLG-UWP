@@ -24,7 +24,7 @@ namespace Colg_UWP.Service
                     GetUserCredits(variable.Properties().Where(x => x.Name.Contains("credit")).Select(x => x.First));
                 user.Credits.Clear();
                 string formhash = variable["formhash"].ToString();
-                ReplyService.Formhash = formhash;
+                user.FormHash = formhash;
                 user.Credits.AddRange(credits); 
             }
         }
@@ -45,7 +45,7 @@ namespace Colg_UWP.Service
                 {
                     timeRegisted = DateTimeOffset.FromUnixTimeSeconds(regDate).ToLocalTime();
                 }
-                ReplyService.Formhash = formhash;
+                user.FormHash = formhash;
                 user.ID = userid;
                 user.Avatar = avatar;
                 user.GroupTitle = grouptitle;

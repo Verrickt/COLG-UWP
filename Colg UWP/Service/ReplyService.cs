@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Colg_UWP.Model;
+using Colg_UWP.Util;
 using Newtonsoft.Json.Linq;
 
 namespace Colg_UWP.Service
@@ -20,24 +21,14 @@ namespace Colg_UWP.Service
             return (newCount, replys);
         }
 
-        private static string _formhash;
-
-        public static string Formhash
-        {
-            set {
-                if (String.IsNullOrEmpty(_formhash))
-                {
-                    _formhash = value;
-                }
-            }
-        }
+       
 
         public static async Task<(bool status,string message)> PostNewReplyAsync(string discussionID, string reply,string quotetid = null)
         {
             string url = quotetid == null ? ApiUrl.PostNewReply(discussionID) : ApiUrl.PostNewReplyWithQuote(discussionID, quotetid);
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                {"formhash",_formhash },
+                {"formhash",UserDataManager.GetActiveUser().FormHash },
                 {"mobiletype","2" },
                 {"message",reply },
             };

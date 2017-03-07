@@ -18,6 +18,7 @@ namespace Colg_UWP.Model
         public DateTimeOffset? TimeRegisted { get; set; }
         public bool IsActive { get; set; }
         public Credential Credential { get; set; }
+        public string FormHash { get; set; }
 
         public User()
         {

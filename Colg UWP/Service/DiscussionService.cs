@@ -44,7 +44,7 @@ namespace Colg_UWP.Service
             var parameters = new Dictionary<string, string>()
             {
                 {"mobiletype","2" },
-                {"formhash","" },
+                {"formhash",UserDataManager.GetActiveUser().FormHash},
                 {"subject",subject },
                 {"message",message },
                 {"typeid",typeId??string.Empty },
