@@ -141,6 +141,7 @@
     <Compile Include="Service\ReplyService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModel\ArticleVM.cs" />
+    <Compile Include="ViewModel\NewDiscussionVM.cs" />
     <Compile Include="ViewModel\ForumNaviVM.cs" />
     <Compile Include="ViewModel\ForumVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
@@ -172,6 +173,9 @@
     </Compile>
     <Compile Include="View\Pages\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\NewDiscussionPage.xaml.cs">
+      <DependentUpon>NewDiscussionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\PlaceHolderPage.xaml.cs">
       <DependentUpon>PlaceHolderPage.xaml</DependentUpon>
@@ -315,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\ArticlePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\NewDiscussionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
