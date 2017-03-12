@@ -17,12 +17,16 @@ namespace Colg_UWP.ViewModel
         public Forum Forum { get { return _forum; } set { SetProperty(ref _forum, value);Refresh(); } }
         private IncrementalList<Discussion,Forum> _discussionList;
 
-
+        public RelayCommand<Frame> JumpToNewDiscussionPageCommand{ get; set; }
 
 
         public ForumVM()
         {
             RefreshCommand = new RelayCommand(Refresh, () => true);
+            JumpToNewDiscussionPageCommand = new RelayCommand<Frame>(
+                frame=>frame.Navigate(typeof(NewDiscussionPage),new NewDiscussionVM(Forum)),
+                ()=>UserDataManager.GetActiveUser()!=null
+                );
         }
 
         public async Task<bool> CheckForPermission(int readPermission)
