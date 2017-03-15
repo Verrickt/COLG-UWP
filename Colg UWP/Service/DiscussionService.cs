@@ -14,6 +14,9 @@ namespace Colg_UWP.Service
 {
     public class DiscussionService:ApiBaseService
     {
+        private static string successMsg = "非常感谢，您的主题已发布，现在将转入主题页，请稍候……[ 点击这里转入主题列表 ]"
+
+
         public static async Task<List<Discussion>> GetPopularDiscussionsAsync()
         {
             var json = await GetJson(ApiUrl.Home());
@@ -50,14 +53,47 @@ namespace Colg_UWP.Service
                 {"typeid",typeId??string.Empty },
 
             };
+
+            
+
             var json = await ApiBaseService.GetJson(url, parameters);
 
-            return (false, "error"); 
+            var msg = json["Message"]["messagestr"].ToString();
+
+            return (msg==DiscussionService.successMsg, msg);
 
         }
+   /*     Content of json
+    *     {
+  "Version": "4",
+  "Charset": "UTF-8",
+  "Variables": {
+    "cookiepre": "5KaR_6d30_",
+    "auth": "618dDj6tlrhltK44AoB57ELQNjj7RVwCohv9F3GmSd3TpVCAnwYzNUMmOx5wFxFz7hU/QdGzRguEYAOMjJ9UfR/4NAQ",
+    "saltkey": "iOaO6TRT",
+    "member_uid": "789572",
+    "member_username": "???",
+    "member_avatar": "???",
+    "groupid": "60",
+    "formhash": "???",
+    "ismoderator": "0",
+    "readaccess": "60",
+    "notice": {
+      "newpush": "0",
+      "newpm": "0",
+      "newprompt": "0",
+      "newmypost": "0"
+    },
+    "tid": "6145075",
+    "pid": "87949289"
+  },
+  "Message": {
+    "messageval": "post_newthread_succeed",
+    "messagestr": "非常感谢，您的主题已发布，现在将转入主题页，请稍候……[ 点击这里转入主题列表 ]"
+  }
+}*/
 
-
-        private static List<Discussion> GetDiscussionsFromArrayAsync(JToken[] array, Dictionary<string, string> catagoryDict)
+    private static List<Discussion> GetDiscussionsFromArrayAsync(JToken[] array, Dictionary<string, string> catagoryDict)
         {
             List<Discussion> discussionList = new List<Discussion>();
             foreach (var thread in array)

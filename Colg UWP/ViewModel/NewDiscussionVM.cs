@@ -74,7 +74,7 @@ namespace Colg_UWP.ViewModel
 
         private async Task<bool> PostNewDiscussionAsync()
         {
-
+            string typeId = null;
             if (Message.Trim().Length<=6||Subject.Trim().Length<=6)
             {
                 await new MessageDialog("主题或信息这么短真的好么").ShowAsync();
@@ -85,9 +85,10 @@ namespace Colg_UWP.ViewModel
                 await new MessageDialog("请先选择帖子类别").ShowAsync();
                 return false;
             }
-
-            string typeId = ReversedDictionary[SelectedDiscussionType];
-
+            if (SelectedDiscussionType!=null)
+            {
+                typeId = ReversedDictionary[SelectedDiscussionType];
+            }
             (var status,var message) = await 
                 DiscussionService.PostNewDiscussionAsync(_forum.Id,typeId, Subject, Message);
 
@@ -95,6 +96,7 @@ namespace Colg_UWP.ViewModel
             {
                 await new MessageDialog(message).ShowAsync();
             }
+
 
             return status;
         }
