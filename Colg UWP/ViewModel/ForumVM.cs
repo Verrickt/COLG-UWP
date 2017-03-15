@@ -53,6 +53,7 @@ namespace Colg_UWP.ViewModel
         private void Refresh()
         {
             Forum.Refresh();
+            JumpToNewDiscussionPageCommand.RaiseCanExecuteChanged();
             DiscussionList = new IncrementalList<Discussion, Forum>(Forum);
         }
 
