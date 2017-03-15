@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using AppStudio.Uwp.Commands;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
+using System.Collections.ObjectModel;
 
 namespace Colg_UWP.ViewModel
 {
@@ -16,15 +17,11 @@ namespace Colg_UWP.ViewModel
         private Forum _forum;
         private string _subject;
         private string _message;
-        private string _selectedDiscussionType;
 
         public RelayCommand<Frame> PostNewDiscussionCommand { get; set; }
 
-        public string SelectedDiscussionType
-        {
-            get { return _selectedDiscussionType; }
-            set { SetProperty(ref _selectedDiscussionType,value); }
-        }
+        public string SelectedDiscussionType { get; set; }
+      
 
         public Forum Forum
         {
@@ -44,9 +41,27 @@ namespace Colg_UWP.ViewModel
             set { SetProperty(ref _message,value); }
         }
 
+        public ObservableCollection<string> DiscussionTypes { get; set; }
+
+
+        /// <summary>
+        /// PostTypes in forum maps typeId to TypeName.
+        /// Reverse it's key and value so we can ask user to select a TypeName and
+        /// get a typeId, makes it easier to call API
+        /// </summary>
+        private Dictionary<string, string> ReversedDictionary;
+
         public NewDiscussionVM(Forum forum)
         {
             Forum = forum;
+            ReversedDictionary= forum.PostTypes.ToDictionary(
+                p => p.Value, p => p.Key);
+
+            DiscussionTypes = new ObservableCollection<string>(
+                ReversedDictionary.Keys);
+
+            SelectedDiscussionType = null;
+
             PostNewDiscussionCommand = new RelayCommand<Frame>(
                 async (frame) => {
                     if (await PostNewDiscussionAsync())
@@ -65,20 +80,20 @@ namespace Colg_UWP.ViewModel
                 await new MessageDialog("主题或信息这么短真的好么").ShowAsync();
                 return false;
             }
-            if (!_forum.PostTypes.ContainsValue(_selectedDiscussionType))
+            if (SelectedDiscussionType!=null&&DiscussionTypes.Count>0)
             {
-                await new MessageDialog("请选择帖子类别").ShowAsync();
+                await new MessageDialog("请先选择帖子类别").ShowAsync();
                 return false;
             }
 
-            string typeId = _forum.PostTypes[_selectedDiscussionType];
+            string typeId = ReversedDictionary[SelectedDiscussionType];
 
             (var status,var message) = await 
                 DiscussionService.PostNewDiscussionAsync(_forum.Id,typeId, Subject, Message);
 
             if (!status)
             {
-                await new MessageDialog(Message).ShowAsync();
+                await new MessageDialog(message).ShowAsync();
             }
 
             return status;
