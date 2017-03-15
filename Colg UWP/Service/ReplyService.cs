@@ -33,12 +33,43 @@ namespace Colg_UWP.Service
                 {"message",reply },
             };
             var json = await GetJson(url, parameters).ConfigureAwait(false);
-            string message= json["Message"]["messageval"]?.ToString();
-            bool status = message== "post_reply_succeed";
-            return (status: status, message: message);
+            string messageval= json["Message"]["messageval"]?.ToString();
+            string messagestr = json["Message"]["messagestr"]?.ToString();
+            bool status = messageval== "post_reply_succeed";
+            return (status: status, message: messagestr);
         }
 
-        private static List<Reply> GetReplyFromArrayAsync(JToken[] postlist)
+//Content of JSON    
+//{
+//  "Version": "4",
+//  "Charset": "UTF-8",
+//  "Variables": {
+//    "auth": "8cedq4494tpFzL8K5fL7rKZbWKn2/4x8EeOCxKGc2k1HLWeBlZEGiA/tY1K86VHtfz2s2neethiIHcJBv+pXcSalLdc",
+//    "saltkey": "iOaO6TRT",
+//    "member_username": "???",
+//    "member_avatar": "???",
+//    "groupid": "60",
+//    "formhash": "84a43774",
+//    "ismoderator": "0",
+//    "readaccess": "60",
+//    "notice": {
+//      "newpush": "0",
+//      "newpm": "0",
+//      "newprompt": "0",
+//      "newmypost": "0"
+//    },
+//    "tid": "???",
+//    "pid": "0",
+//    "noticeauthor": null
+//  },
+//  "Message": {
+//    "messageval": "word_banned",
+//    "messagestr": "抱歉，您填写的内容包含不良信息而无法提交"
+//  }
+//}
+
+
+    private static List<Reply> GetReplyFromArrayAsync(JToken[] postlist)
         {
             List<Reply> replys = new List<Reply>();
             foreach (var reply in postlist)
