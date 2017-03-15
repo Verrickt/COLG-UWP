@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
-using AppStudio.Uwp.Commands;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
 using System.Collections.ObjectModel;
+using Colg_UWP.Util;
 
 namespace Colg_UWP.ViewModel
 {
@@ -96,7 +96,10 @@ namespace Colg_UWP.ViewModel
             {
                 await new MessageDialog(message).ShowAsync();
             }
-
+            else
+            {
+                InAppNotifier.Show("发表成功");
+            }
 
             return status;
         }
