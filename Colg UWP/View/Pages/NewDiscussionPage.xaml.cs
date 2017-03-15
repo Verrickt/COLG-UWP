@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Colg_UWP.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,20 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class NewDiscussionPage : Page
     {
+        public NewDiscussionVM VM{ get; set; }
+
+
         public NewDiscussionPage()
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            VM = e.Parameter as NewDiscussionVM;
+            Bindings.Update();
+            base.OnNavigatedTo(e);
+        }
+
     }
 }
