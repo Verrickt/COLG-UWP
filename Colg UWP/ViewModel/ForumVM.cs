@@ -32,7 +32,7 @@ namespace Colg_UWP.ViewModel
         public async Task<bool> CheckForPermission(int readPermission)
         {
             User user = UserDataManager.GetActiveUser();
-            if (readPermission <= 0 || user?.ReadPermission >= readPermission)
+            if (readPermission <= 0 || user?.UserGroup.ReadPermissionLevel>= readPermission)
             {
                 return true;
             }

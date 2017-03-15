@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Colg_UWP.Service;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -110,6 +111,7 @@ namespace Colg_UWP
             {
                 Util.Logging.InitializationAsync(),
                 Util.UserDataManager.InitializationAsync(),
+                UserService.InitializationAsync()
             };
             await Task.WhenAll(tasks);
             await Service.LoginService.AutoLoginAsync();
