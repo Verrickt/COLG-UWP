@@ -20,9 +20,14 @@
             <Setter Property="MinHeight" Value="200"></Setter>
         </Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle }">
+        </Style>
+        <Style TargetType="GridView">
+            <Setter Property="IsItemClickEnabled" Value="True"></Setter>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"></Setter>
+            <Setter Property="ItemTemplate" Value="{StaticResource ArticleTemplate}"></Setter>
+            <Setter Property="SelectionMode" Value="None"></Setter>
 
         </Style>
-       
     </Page.Resources>
 
 
@@ -70,16 +75,23 @@
 
             <PivotItem>
                 <PivotItem.Header>
-                    <TextBlock  Margin="0,0,0,0" >首页</TextBlock>
+                    <TextBlock  >首页</TextBlock>
                 </PivotItem.Header>
-                <GridView SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.News,Mode=OneWay}" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" SelectionMode="None">
+                <GridView SizeChanged="GridView_SizeChanged"
+                          ItemsSource="{x:Bind VM.News,Mode=OneWay}" 
+                          ItemClick="GridView_ItemClick" 
+                          >
                 </GridView>
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
                     <TextBlock> 资讯</TextBlock>
                 </PivotItem.Header>
-                <GridView Name="HotNews" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" IsItemClickEnabled="True" SelectionMode="None">
+                <GridView Name="HotNews" 
+                          ItemClick="GridView_ItemClick" 
+                          SizeChanged="GridView_SizeChanged" 
+                          ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" 
+                         >
 
 
 
@@ -89,7 +101,10 @@
                 <PivotItem.Header>
                     <TextBlock >前瞻</TextBlock>
                 </PivotItem.Header>
-                <GridView Name="Prospective" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" SizeChanged="GridView_SizeChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource ArticleTemplate}" ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
+                <GridView Name="Prospective"
+                          ItemClick="GridView_ItemClick" 
+                          SizeChanged="GridView_SizeChanged" 
+                          ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
 
 
                 </GridView>

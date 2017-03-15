@@ -68,6 +68,7 @@
                   ItemClick="DiscussionList_OnItemClick"
                   ScrollViewer.VerticalScrollMode="Auto"
                   IsItemClickEnabled="True"
+                  SelectionMode="None"
                   ItemContainerStyle="{StaticResource DiscussionItemStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Discussion">

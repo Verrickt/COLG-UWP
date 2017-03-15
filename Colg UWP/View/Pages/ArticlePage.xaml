@@ -10,23 +10,65 @@
     xmlns:htmlblock="using:AppStudio.Uwp.Controls"
     Loading="Page_Loading">
 
-    <ScrollViewer>
-        <Grid ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters>
+                        <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>48,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CommandBar Name="TopCommandBar" Grid.Row="0">
+            <CommandBar.Content>
+                <TextBlock Margin="12,14" Text="{x:Bind VM.Article.Title}"
+                           TextTrimming="CharacterEllipsis"
+                           ></TextBlock>
+            </CommandBar.Content>
+        </CommandBar>
+        <ScrollViewer Grid.Row="1">
+            <Grid ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
 
-            </Grid.RowDefinitions>
-            <TextBlock Margin="20" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" Text="{x:Bind VM.Article.Title}" Grid.Row="0"></TextBlock>
-            <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal">
-                <TextBlock Margin="10" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind VM.Article.Date,Mode=OneWay}" ></TextBlock>
-                <TextBlock Margin="10" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind VM.Article.Author,Mode=OneWay}"></TextBlock>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"  Text="{x:Bind VM.Article.Title}" Grid.Row="0"></TextBlock>
+                <TextBlock Grid.Row="1" Margin="10,5" 
+                           Style="{StaticResource SubtitleTextBlockStyle}" 
+                            >
+                    <Run Text="发表于"></Run>
+                    <Run Text="{x:Bind VM.Article.Date,Mode=OneWay}"></Run>
+                </TextBlock>
+                <TextBlock Grid.Row="2" Margin="10,5"
+                          Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" >
+                    <Run Text="作者"></Run>
+                    <Run Foreground="DeepSkyBlue" Text="{x:Bind VM.Article.Author,Mode=OneWay}"></Run>
+                </TextBlock>
 
-            </StackPanel>
 
-            <htmlblock:HtmlBlock Margin="10" HorizontalAlignment="Center" Grid.Row="2" Source="{x:Bind VM.Article.Content,Mode=OneWay}" ></htmlblock:HtmlBlock>
-        </Grid>
-    
-    </ScrollViewer>
+                <htmlblock:HtmlBlock Margin="10"  Grid.Row="3" Source="{x:Bind VM.Article.Content,Mode=OneWay}" ></htmlblock:HtmlBlock>
+            </Grid>
+
+        </ScrollViewer>
+    </Grid>
 </Page>

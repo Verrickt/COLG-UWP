@@ -55,7 +55,7 @@
         </Grid.RowDefinitions>
         <CommandBar x:Name="TopCommandBar" >
             <CommandBar.Content>
-                <TextBlock Margin="12,14">论坛</TextBlock>
+                <TextBlock Margin="12,14">板块列表</TextBlock>
             </CommandBar.Content>
             <AppBarButton Name="RefreshButton" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
         </CommandBar>

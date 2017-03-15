@@ -118,9 +118,9 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Border BorderThickness="1.5"
-                                        Height="27"
-                                        Width="27"
+                                <Border BorderThickness="1"
+                                        Height="26"
+                                        Width="26"
                                     BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}">
                                     <uwptoolkit:ImageEx
                                     Height="24"
@@ -137,10 +137,8 @@
                             </Grid>
                         </Button>
                         <Rectangle Width="240" Height="1" 
-                                   Opacity="20"
-                                   Margin="10,2"
                                    
-                                   Fill="{ThemeResource SystemControlBackgroundChromeWhiteBrush}"></Rectangle>
+                                   Fill="{ThemeResource ApplicationForegroundThemeBrush}"></Rectangle>
                     </StackPanel>
                     <ListView Grid.Row="3" Name="BottomMenuList" IsItemClickEnabled="True" ItemClick="MenuList_ItemClick"
                               SelectionMode="None" ItemsSource="{x:Bind VM.BottomMenuItems}"
