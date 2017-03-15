@@ -14,7 +14,7 @@ namespace Colg_UWP.Service
 {
     public class DiscussionService:ApiBaseService
     {
-        private static string successMsg = "非常感谢，您的主题已发布，现在将转入主题页，请稍候……[ 点击这里转入主题列表 ]"
+        private static string successMsg = "非常感谢，您的主题已发布，现在将转入主题页，请稍候……[ 点击这里转入主题列表 ]";
 
 
         public static async Task<List<Discussion>> GetPopularDiscussionsAsync()
