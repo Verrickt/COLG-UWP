@@ -7,6 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        <Style TargetType="FontIcon">
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+
+
+    </UserControl.Resources>
 
     <Grid >
         <Grid.RowDefinitions>
@@ -46,7 +59,9 @@
 
 
             <StackPanel Margin="0,5">
-                <TextBlock TextWrapping="WrapWholeWords" Margin="10,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Header.Title}">
+                <TextBlock TextWrapping="WrapWholeWords"  Margin="10,0" Style="{StaticResource SubtitleTextBlockStyle}"
+                           Foreground="White"
+                           Text="{x:Bind Header.Title}">
                 </TextBlock>
             </StackPanel>
             <RelativePanel  Grid.Row="1" Margin="5,0">
