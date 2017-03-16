@@ -12,7 +12,7 @@ namespace Colg_UWP.Model
         public string ID { get; set; }
         public string HomeUrl { get; set; }
         public string Avatar { get; set; }
-        public List<string> Credits { get; set; }
+        public List<Credit> Credits { get; set; }
         public DateTimeOffset? TimeRegisted { get; set; }
         public bool IsActive { get; set; }
         public Credential Credential { get; set; }
@@ -20,7 +20,7 @@ namespace Colg_UWP.Model
         public UserGroup UserGroup { get; set; }
         public User()
         {
-             Credits = new List<string>();
+             Credits = new List<Credit>();
              Credential = new Credential();
         }
 
@@ -30,6 +30,12 @@ namespace Colg_UWP.Model
                 $"UserName:{UserName} ID:{ID} Avatar:{Avatar}";
         }
     }
+    public class Credit
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
+
     public class UserGroup
     {
         public string Title { get; set; }
@@ -41,7 +47,5 @@ namespace Colg_UWP.Model
     {
         public int? LowerBound{ get; set; }
         public int? UpperBound { get; set; }
-
-       
     }
 }
