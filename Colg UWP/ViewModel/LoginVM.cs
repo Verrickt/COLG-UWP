@@ -9,6 +9,8 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Colg_UWP.Util;
 using Colg_UWP.Model;
 using Colg_UWP.Service;
+using Windows.UI.Xaml.Controls;
+using Colg_UWP.View.Pages;
 
 namespace Colg_UWP.ViewModel
 {
@@ -46,9 +48,9 @@ namespace Colg_UWP.ViewModel
 
         public User NewUser { get; set; } = new User();
 
-      
+        public RelayCommand<Frame> LoginCommand { get; set; }
 
-
+        public RelayCommand<Frame> QuickLoginCommand { get; set; }
 
         private bool _undergoingLogin = false;
 
@@ -59,13 +61,15 @@ namespace Colg_UWP.ViewModel
         }
 
 
+
         public void RemoveUser(User user)
         {
             UserDataManager.RemoveUser(user);
             UpdateSavedUser();
+          
         }
 
-        public async Task<bool> LoginAsync(User anotheruser=null)
+        private async Task<bool> LoginAsync(User anotheruser=null)
         {
             var actualUser = anotheruser??NewUser;
             var credential = actualUser.Credential;
@@ -106,6 +110,27 @@ namespace Colg_UWP.ViewModel
         {
             SavedUsers = new ObservableCollection<User>();
             UpdateSavedUser();
+            LoginCommand = new RelayCommand<Frame>(async (f) =>
+            {
+                if (await LoginAsync())
+                {
+                    GoToUserSpace(f);
+                }
+            });
+            QuickLoginCommand = new RelayCommand<Frame>(async (f) =>
+            {
+                if (await LoginAsync(QuickLoginUser))
+                {
+                    GoToUserSpace(f);
+                }
+            }
+            );
+        }
+
+        private static void GoToUserSpace(Frame f)
+        {
+            f.GoBack();
+            f.Navigate(typeof(MySpace));
         }
 
         private void UpdateSavedUser()

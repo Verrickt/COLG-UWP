@@ -37,17 +37,6 @@ namespace Colg_UWP.View.Pages
 
         private ViewModel.LoginVM VM;
 
-        private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var succeed = await VM.LoginAsync();
-
-            if (succeed)
-            {
-                JumpToUserSpace();
-            }
-
-          
-        }
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -60,29 +49,7 @@ namespace Colg_UWP.View.Pages
         }
 
 
-        private void JumpToUserSpace()
-        {
-            this.Frame.GoBack();
-            this.Frame.Navigate(typeof(MySpace));
-        }
-
-
-        private async void SavedLoginDatas_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-
-
-            bool succeed = await VM.QuickLoginAsync();
-
-            if (succeed)
-            {
-                JumpToUserSpace();
-            }
-
-        }
-
-
-      
+          
 
         private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
