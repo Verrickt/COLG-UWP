@@ -36,15 +36,7 @@ namespace Colg_UWP.View.Pages
 
         public MySpaceVM VM;
 
-        private async void LogOutButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var result = await VM.LogoutAsync();
-            
-            {
-                this.Frame.GoBack();
-                this.Frame.Navigate(typeof(LoginPage));
-            }
-        }
+       
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
