@@ -41,6 +41,8 @@ namespace Colg_UWP.ViewModel
         /// </summary>
         public double? ExpRequired => ExpMax - Exp??null;
 
+        public string TimeRegisted { get; set; }
+
         public MySpaceVM()
         {
             User = UserDataManager.GetActiveUser();
@@ -62,6 +64,7 @@ namespace Colg_UWP.ViewModel
             Credits = new ObservableCollection<Credit>(User.Credits);
             Exp = Credits.Max(k => k.Value);
             ExpMax = User.UserGroup.CreditRange.UpperBound;
+            TimeRegisted = User.TimeRegisted?.ToString("yyyy.MM.dd");
         }
 
         

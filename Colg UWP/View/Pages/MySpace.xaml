@@ -88,16 +88,15 @@
                     </TextBlock>
                     <TextBlock>
                         <Run Text="注册时间" ></Run>
-                        <Run Text="{x:Bind VM.User.TimeRegisted}"></Run>
+                        <Run Text="{x:Bind VM.TimeRegisted}"></Run>
                     </TextBlock>
                     <TextBlock>
-                        <Run>当前积分为</Run>
+                        <Run>当前积分</Run>
                         <Run Text="{x:Bind VM.Exp}"></Run>
                     </TextBlock>
                     <TextBlock Visibility="{x:Bind VM.ExpRequired,Converter={StaticResource NullabilityToVisibilityConverter}}" >
-                        <Run>距离下次升级还有</Run>
+                        <Run>升级还需</Run>
                         <Run Text="{x:Bind VM.ExpRequired}"></Run>
-                        <Run>积分</Run>
                     </TextBlock>
                     <ProgressBar Visibility="{x:Bind VM.ExpRequired,Converter={StaticResource NullabilityToVisibilityConverter}}" Value="{x:Bind VM.Exp}" 
                                  Maximum="{x:Bind VM.ExpMax,Converter={StaticResource GenericObjectConverter}}"
