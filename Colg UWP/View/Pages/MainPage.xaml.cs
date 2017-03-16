@@ -127,23 +127,29 @@ namespace Colg_UWP.View.Pages
             ContentFrame.Navigated -= ContentFrame_OnNavigated;
         }
 
-        private void MenuList_ItemClick(object sender, ItemClickEventArgs e)
+        private async void MenuList_ItemClick(object sender, ItemClickEventArgs e)
         {
             MenuVM clicked = e.ClickedItem as MenuVM;
-            if (clicked.TargetPage == null)
+            if (clicked.TargetUri!=null)
             {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                new ContentDialog()
-                {
-                    Content = "施工中(=ﾟωﾟ)=",
-                    PrimaryButtonText = "Got it"
-                }.ShowAsync();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                await Windows.System.Launcher.LaunchUriAsync(clicked.TargetUri);
             }
             else
             {
-                MenuFrame.Navigate(clicked.TargetPage);
+                if (clicked.TargetPage == null)
+                {
+                    await new ContentDialog()
+                    {
+                        Content = "施工中(=ﾟωﾟ)=",
+                        PrimaryButtonText = "Got it"
+                    }.ShowAsync();
+                }
+                else
+                {
+                    MenuFrame.Navigate(clicked.TargetPage);
+                }
             }
+          
         }
 
         private void UpdateIsPaneOpen()
