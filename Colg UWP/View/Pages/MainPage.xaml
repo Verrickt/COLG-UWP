@@ -94,7 +94,15 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-
+        <RelativePanel Grid.Row="0" Width="240" HorizontalAlignment="Left" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
+                    Name="Humburger" Click="Humburger_Click" Height="48" Width="48"
+                    RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Button.Content>
+                    <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"></FontIcon>
+                </Button.Content>
+            </Button>
+        </RelativePanel>
         <SplitView Name="MySplitView" Grid.Row="1" Grid.Column="0" OpenPaneLength="240" DisplayMode="CompactOverlay"
                    CompactPaneLength="48">
             <SplitView.Pane>
@@ -171,18 +179,7 @@
 
             </SplitView.Content>
         </SplitView>
-        <RelativePanel Grid.Row="0" >
-            <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
-                    Name="Humburger" Click="Humburger_Click" Height="48" Width="48"
-                    RelativePanel.AlignVerticalCenterWithPanel="True">
-                <Button.Content>
-                    <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"></FontIcon>
-                </Button.Content>
-            </Button>
-            <TextBlock RelativePanel.RightOf="Humburger" Style="{StaticResource TitleTextBlockStyle}" Grid.Row="0"
-                       Margin="12,0,0,0" Name="Main_MenuTitleTextBlock">
-            </TextBlock>
-        </RelativePanel>
+        
 
 
     </Grid>
