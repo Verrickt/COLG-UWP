@@ -73,7 +73,7 @@
         <CommandBar Grid.Row="2"  x:Name="BottomCommandBar" ClosedDisplayMode="Compact">
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal">
-                    <AppBarButton Icon="Emoji2" >
+                    <AppBarButton Icon="Emoji2" Label="表情" >
                         <AppBarButton.Flyout>
                             <Flyout Placement="Top">
                                 <TextBlock>仍在施工中，敬请期待</TextBlock>
