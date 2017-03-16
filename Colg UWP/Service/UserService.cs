@@ -23,12 +23,13 @@ namespace Colg_UWP.Service
             {
                 var json = await GetJson(ApiUrl.ValidateLogin).ConfigureAwait(false);
                 var variable = json["Variables"].Value<JObject>();
-                var credits =
+                var pairs =
                     GetUserCredits(variable.Properties().Where(x => x.Name.Contains("credit")).Select(x => x.First));
-                user.Credits.Clear();
+                user.Credits?.Clear();
+                var credits = pairs.Select(pair => new Credit { Name = pair.Key, Value = pair.Value });
+                user.Credits?.AddRange(credits);
                 string formhash = variable["formhash"].ToString();
                 user.FormHash = formhash;
-                user.Credits.AddRange(credits);
             }
         }
 
@@ -51,7 +52,8 @@ namespace Colg_UWP.Service
                 user.FormHash = formhash;
                 user.ID = userid;
                 user.Avatar = avatar;
-                user.UserGroup = user.UserGroup??_userGroups.SingleOrDefault(g => g.Title == grouptitle);
+                user.UserGroup = _userGroups.SingleOrDefault(g => g.Title == grouptitle)??
+                    user.UserGroup;
                 user.HomeUrl = null;
                 user.UserName = username;
                 user.TimeRegisted = user.TimeRegisted ?? timeRegisted;
@@ -94,8 +96,8 @@ namespace Colg_UWP.Service
                     ReadPermissionLevel = readAccess,
                     CreditRange = new CreditRange
                     {
-                        LowerBound = lower == null?(int?)null:int.Parse(lower),
-                        UpperBound = higher == null ? (int?)null : int.Parse(higher)
+                        UpperBound = lower == null?(int?)null:int.Parse(lower),
+                        LowerBound = higher == null ? (int?)null : int.Parse(higher)
                     }
                 }
                     );
@@ -145,16 +147,16 @@ namespace Colg_UWP.Service
 //        }
 //}
 
-        private static IEnumerable<string> GetUserCredits(IEnumerable<JToken> tokens)
+        private static IEnumerable<KeyValuePair<string,int>> GetUserCredits(IEnumerable<JToken> tokens)
 
         {
-            Dictionary<string, string> credits = new Dictionary<string, string>();
+            Dictionary<string, int> credits = new Dictionary<string, int>();
 
             foreach (var token in tokens)
             {
-                credits.Add(token["title"].Value<string>(), token["value"].ToString());
+                credits.Add(token["title"].Value<string>(), int.Parse(token["value"].ToString()));
             }
-            return credits.Select(x => $"{x.Key}:{x.Value}");
+            return credits;
         }
     }
 }
