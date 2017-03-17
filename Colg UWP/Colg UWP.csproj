@@ -103,6 +103,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resource\BooleanNotToVisibilityComverter.cs" />
     <Compile Include="Resource\DateTimeToCompressedStringConverter.cs" />
     <Compile Include="Resource\IntToVisibilityConverter.cs" />
     <Compile Include="Util\InAppNotifier.cs" />
