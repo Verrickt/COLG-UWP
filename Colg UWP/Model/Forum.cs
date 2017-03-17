@@ -23,7 +23,12 @@ namespace Colg_UWP.Model
 
         public Forum()
         {
-            LoadMore = () => DiscussionService.GetDiscussionsAsync(this, Page++);
+            LoadMore = async () =>
+            {
+                var result = await DiscussionService.GetDiscussionsAsync(this, Page);
+                Page++;
+                return result;
+            };
         }
 
         

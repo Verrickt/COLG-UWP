@@ -40,7 +40,12 @@ namespace Colg_UWP.Model
 
         public Discussion()
         {
-            LoadMore = () => ReplyService.GetReplysAsync(Id, Page++);
+            LoadMore = async () =>
+            {
+                var result = await ReplyService.GetReplysAsync(Id, Page).ConfigureAwait(false);
+                Page++;
+                return result;
+            };
         }
     }
 }

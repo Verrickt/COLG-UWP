@@ -21,7 +21,12 @@ namespace Colg_UWP.Model
 
         public ArticleContainer()
         {
-            LoadMore = () => ArticleService.GetArticlesAsync(Id, Page++);
+            LoadMore = async () =>
+             {
+                 var result = await ArticleService.GetArticlesAsync(Id, Page);
+                 Page++;
+                 return result;
+             };
         }
     }
 }
