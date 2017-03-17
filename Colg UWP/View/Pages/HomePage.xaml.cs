@@ -32,6 +32,7 @@ namespace Colg_UWP.View.Pages
                 VM = new HomeVM();
                 await VM.RefreshAsync();
             }
+            Bindings.Update();
             base.OnNavigatedTo(e);
         }
 

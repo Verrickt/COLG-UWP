@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     xmlns:model="using:Colg_UWP.Model"
     xmlns:controls="using:Colg_UWP.View.Controls"
-   
+   xmlns:viewmodel="using:Colg_UWP.ViewModel"
     >
     <Page.Resources>
         <DataTemplate x:Key="ArticleTemplate" x:DataType="model:Article" >
@@ -79,44 +79,30 @@
                 <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-        <Pivot Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  >
+        <Pivot Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  
+               ItemsSource="{x:Bind VM.PivotVMs}"
+               >
 
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock  >首页</TextBlock>
-                </PivotItem.Header>
-                <GridView SizeChanged="GridView_SizeChanged"
-                          ItemsSource="{x:Bind VM.News,Mode=OneWay}" 
-                          ItemClick="GridView_ItemClick" 
-                          >
-                </GridView>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock> 资讯</TextBlock>
-                </PivotItem.Header>
-                <GridView Name="HotNews" 
-                          ItemClick="GridView_ItemClick" 
-                          SizeChanged="GridView_SizeChanged" 
-                          ItemsSource="{x:Bind VM.HotNews,Mode=OneWay}" 
-                         >
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="viewmodel:ArticleContainerVM">
+                    <Grid>
+                        <GridView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SizeChanged="GridView_SizeChanged" 
+                              ItemClick="GridView_ItemClick"
+                              ItemsSource="{x:Bind List,Mode=OneWay}"
+                              ></GridView>
 
-
-
-                </GridView>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock >前瞻</TextBlock>
-                </PivotItem.Header>
-                <GridView Name="Prospective"
-                          ItemClick="GridView_ItemClick" 
-                          SizeChanged="GridView_SizeChanged" 
-                          ItemsSource="{x:Bind VM.Prospective,Mode=OneWay}">
-
-
-                </GridView>
-            </PivotItem>
+                        <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                      IsActive="{x:Bind List.IsLoading,Mode=OneWay}"
+                                      ></ProgressRing>
+                    </Grid>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+            <Pivot.HeaderTemplate >
+                <DataTemplate x:DataType="viewmodel:ArticleContainerVM">
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind Header,Mode=OneWay}"></TextBlock>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+         
         </Pivot>
         <CommandBar x:Name="BottomCommandBar" Grid.Row="2">
            

@@ -6,58 +6,39 @@ namespace Colg_UWP.ViewModel
 {
     using Model;
     using Service;
+    using System.Collections.ObjectModel;
 
     public class HomeVM : VMBase
     {
-        private IncrementalList<Article,ArticleContainer> _news;
-        private IncrementalList<Article, ArticleContainer> _hotNews;
-        private IncrementalList<Article, ArticleContainer> _prospective;
+       
 
-        public IncrementalList<Article, ArticleContainer> News
+        
+        public ObservableCollection<ArticleContainerVM> PivotVMs
         {
-            get { return _news; }
-            set
-            {
-                SetProperty(ref _news, value);
-            }
+            get { return _vms; }
+            set { SetProperty(ref _vms, value); }
         }
-
-        public IncrementalList<Article, ArticleContainer> HotNews
-        {
-            get { return _hotNews; }
-            set
-            {
-                SetProperty(ref _hotNews, value);
-            }
-        }
-
-        public IncrementalList<Article, ArticleContainer> Prospective
-        {
-            get { return _prospective; }
-            set
-            {
-                SetProperty(ref _prospective, value);
-            }
-        }
-
-        private ArticleContainer _newsList;
-        private ArticleContainer _hotNewsList;
-        private ArticleContainer _prospectiveList;
 
         private bool _initialized = false;
-        private List<ArticleContainer> _containers = new List<ArticleContainer>(3);
 
+        private ObservableCollection<ArticleContainerVM> _vms;
+
+        public HomeVM()
+        {
+            PivotVMs = new ObservableCollection<ArticleContainerVM>();
+        }
 
         private async Task InitAsync()
         {
             if (!_initialized)
             {
-                _newsList = _newsList ?? await ArticleService.GetArticleContainerAsync("1");
-                _prospectiveList = _prospectiveList ?? await ArticleService.GetArticleContainerAsync("16");
-                _hotNewsList = _hotNewsList ?? await ArticleService.GetArticleContainerAsync("17");
-                _containers.Add(_newsList);
-                _containers.Add(_prospectiveList);
-                _containers.Add(_hotNewsList);
+                var _newsList =  await ArticleService.GetArticleContainerAsync("1");
+                var _prospectiveList = await ArticleService.GetArticleContainerAsync("16");
+                var _hotNewsList = await ArticleService.GetArticleContainerAsync("17");
+
+                _vms.Add(new ArticleContainerVM(_newsList, "首页"));
+                _vms.Add(new ArticleContainerVM(_hotNewsList, "资讯"));
+                _vms.Add(new ArticleContainerVM(_prospectiveList, "前瞻"));
 
                 _initialized = true;
             }
@@ -67,12 +48,46 @@ namespace Colg_UWP.ViewModel
         public async Task RefreshAsync()
         {
             await InitAsync();
+            foreach (var PivotVM in PivotVMs)
+            {
+                PivotVM.Refresh();
+            }
+        }
+    }
 
-            _containers.ForEach(c=>c.Refresh());
-           
-            News = new IncrementalList<Article, ArticleContainer>(_newsList);
-            Prospective = new IncrementalList<Article, ArticleContainer>(_prospectiveList);
-            HotNews = new IncrementalList<Article, ArticleContainer>(_hotNewsList);
+    /// <summary>
+    /// Wrapper class which is able to be DataBounded to Pivot
+    /// </summary>
+
+    public class ArticleContainerVM : VMBase
+    {
+        private IncrementalList<Article, ArticleContainer> _list;
+
+        public IncrementalList<Article, ArticleContainer> List {
+            get { return _list; }
+            set { SetProperty(ref _list, value); }
+        }
+
+        private string _header;
+
+        public string Header
+        {
+            get { return _header; }
+            set { _header = value; }
+        }
+
+        public void Refresh()
+        {
+            List = new IncrementalList<Article, ArticleContainer>(_container);
+        }
+
+        private ArticleContainer _container;
+
+        public ArticleContainerVM(ArticleContainer container,string header)
+        {
+            _container = container;
+            Header = header;
+            List = new IncrementalList<Article, ArticleContainer>(_container);
         }
     }
 }
