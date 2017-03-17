@@ -25,7 +25,7 @@ namespace Colg_UWP.ViewModel
             {
                 return new List<MenuVM>()
                 {
-                     new MenuVM() {DisplayName="设置",Glyph="\uE115" },
+                     new MenuVM() {DisplayName="设置",Glyph="\uE115",TargetPage=typeof(View.Pages.SettingPage) },
                      new MenuVM() {DisplayName="评价",Glyph= "\uE8E1",TargetUri=new System.Uri($"ms-windows-store:REVIEW?PFN={Windows.ApplicationModel.Package.Current.Id.FamilyName}") },
                      new MenuVM(){DisplayName="反馈",Glyph="\xE939",TargetUri=new System.Uri($"mailto:colg@hohm.in?subject=COLG UWP 用户反馈")}
                 };
