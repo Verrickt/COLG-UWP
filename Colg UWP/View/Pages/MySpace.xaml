@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-   xmlns:model="using:Colg_UWP.Model"
-    >
+   xmlns:model="using:Colg_UWP.Model">
     <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -18,7 +17,7 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="SignoutButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="SignoutButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -26,7 +25,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -39,16 +38,14 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <CommandBar x:Name="TopCommandBar" >
+        <CommandBar x:Name="TopCommandBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton  Label="注销" Name="SignoutButton"
                                Command="{x:Bind VM.SignOutCommand}"
-                               CommandParameter="{x:Bind Frame}"
-                          >
+                               CommandParameter="{x:Bind Frame}">
                     <AppBarButton.Content>
                         <SymbolIcon Symbol="Upload"
-                                RenderTransformOrigin="0.5,0.5"
-                                >
+                                RenderTransformOrigin="0.5,0.5">
                             <SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="90"></RotateTransform>
                             </SymbolIcon.RenderTransform>
@@ -68,20 +65,19 @@
                 <RowDefinition Height="200"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Ellipse Margin="25" Height="100" Width="100"  
-                       >
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{x:Bind VM.User.Avatar}"></ImageBrush>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <StackPanel Grid.Column="1" Margin="5,25" >
-                        <TextBlock Name="UserName" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.User.UserName,Mode=OneWay}"></TextBlock>
-                        <TextBlock Name="GroupTitle" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.User.UserGroup.Title,Mode=OneWay}" ></TextBlock>
+            <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Ellipse Margin="25" Height="100" Width="100">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{x:Bind VM.User.Avatar}"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <StackPanel Grid.Column="1" Margin="5,25">
+                    <TextBlock Name="UserName" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.User.UserName,Mode=OneWay}"></TextBlock>
+                    <TextBlock Name="GroupTitle" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind VM.User.UserGroup.Title,Mode=OneWay}" ></TextBlock>
                     <TextBlock>
                         <Run Text="UID"></Run>
                         <Run Text="{x:Bind VM.User.ID}"></Run>
@@ -94,34 +90,31 @@
                         <Run>当前积分</Run>
                         <Run Text="{x:Bind VM.Exp}"></Run>
                     </TextBlock>
-                    <TextBlock Visibility="{x:Bind VM.ExpRequired,Converter={StaticResource NullabilityToVisibilityConverter}}" >
+                    <TextBlock Visibility="{x:Bind VM.ExpRequired,Converter={StaticResource NullabilityToVisibilityConverter}}">
                         <Run>升级还需</Run>
                         <Run Text="{x:Bind VM.ExpRequired}"></Run>
                     </TextBlock>
-                    <ProgressBar Visibility="{x:Bind VM.ExpRequired,Converter={StaticResource NullabilityToVisibilityConverter}}" Value="{x:Bind VM.Exp}" 
+                    <ProgressBar Visibility="{x:Bind VM.ExpRequired,Converter={StaticResource NullabilityToVisibilityConverter}}" Value="{x:Bind VM.Exp}"
                                  Maximum="{x:Bind VM.ExpMax,Converter={StaticResource GenericObjectConverter}}"
                                 Foreground="White"
                                  Margin="0,5"
-                                 Height="15"
-                                 >
-                        
+                                 Height="15">
                     </ProgressBar>
-                    </StackPanel>
-                </Grid>
+                </StackPanel>
+            </Grid>
             <Grid Grid.Row="1" Margin="15">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
-
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="1" HorizontalAlignment="Left"
                                >我的积分</TextBlock>
-                    <ItemsControl Grid.Row="2" HorizontalAlignment="Center" ItemsSource ="{x:Bind VM.Credits,Mode=OneWay}" >
+                    <ItemsControl Grid.Row="2" HorizontalAlignment="Center" ItemsSource ="{x:Bind VM.Credits,Mode=OneWay}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="model:Credit">
-                                <Grid  >
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="70"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -146,28 +139,24 @@
                                 <Setter Property="Width" Value="200"></Setter>
                             </Style>
                         </ItemsControl.ItemContainerStyle>
-                        
                     </ItemsControl>
                 </Grid>
             </Grid>
             <ProgressRing Height="50" Width="50" Grid.RowSpan="2" IsActive="{x:Bind VM.IsProcessing,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressRing>
         </Grid>
-        <CommandBar Grid.Row="2" x:Name="BottomCommandBar" >
+        <CommandBar Grid.Row="2" x:Name="BottomCommandBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton  Label="注销" 
+                <AppBarButton  Label="注销"
                                 Command="{x:Bind VM.SignOutCommand}"
-                               CommandParameter="{x:Bind Frame}"
-                               >
+                               CommandParameter="{x:Bind Frame}">
                     <AppBarButton.Content>
                         <SymbolIcon Symbol="Upload"
-                                RenderTransformOrigin="0.5,0.5"
-                                >
+                                RenderTransformOrigin="0.5,0.5">
                             <SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="90"></RotateTransform>
                             </SymbolIcon.RenderTransform>
                         </SymbolIcon>
                     </AppBarButton.Content>
-                    
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
