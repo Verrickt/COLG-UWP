@@ -37,7 +37,7 @@
         <Style TargetType="ListViewItem">
             <Setter Property="Padding" Value="0,0,0,0"></Setter>
         </Style>
-        <Style TargetType="Button">
+        <Style x:Key="TransparentButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Padding" Value="0"></Setter>
@@ -112,7 +112,9 @@
 
                     </ListView>
                     <StackPanel Grid.Row="2" >
-                        <Button Command="{x:Bind VM.JumpToUserAccountPage}" CommandParameter="{x:Bind MenuFrame}"  >
+                        <Button Command="{x:Bind VM.JumpToUserAccountPage}"
+                                Style="{StaticResource TransparentButtonStyle}"
+                                CommandParameter="{x:Bind MenuFrame}"  >
                             <Grid Width="240" Height="48">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="48"></ColumnDefinition>
@@ -175,7 +177,9 @@
         <RelativePanel x:Name="relativePanel" Grid.Row="0" Width="48" HorizontalAlignment="Left" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <Button Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
                     Name="Humburger" Click="Humburger_Click" Height="48" Width="48"
-                    RelativePanel.AlignVerticalCenterWithPanel="True">
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    Style="{StaticResource TransparentButtonStyle}"
+                    >
                 <Button.Content>
                     <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"></FontIcon>
                 </Button.Content>
