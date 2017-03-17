@@ -111,7 +111,11 @@
                           PlaceholderText="安全提问(未设置请忽略)"/>
                     <TextBox  Margin="10,5"  Text="{x:Bind VM.NewUser.Credential.QuestionAnswer, Mode=TwoWay}"  PlaceholderText="问题答案"/>
                     <StackPanel  Margin="10,5" Orientation="Horizontal">
-                        <Button Content="登录" Command="{x:Bind VM.LoginCommand}" CommandParameter="{x:Bind Frame}" />
+                        <Button  Content="登录" Command="{x:Bind VM.LoginCommand}" CommandParameter="{x:Bind Frame}" >
+                            <Button.Style>
+                                <Style TargetType="Button"></Style>
+                            </Button.Style>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
