@@ -27,16 +27,16 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image
+        <uwptoolkit:ImageEx
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Source="{x:Bind Header.Image}"
             Grid.RowSpan="2"
             Stretch="UniformToFill"
-          
+            
             >
 
-        </Image>
+        </uwptoolkit:ImageEx>
         <Grid 
                 HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"
