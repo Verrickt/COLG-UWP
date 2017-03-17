@@ -1,18 +1,15 @@
 ﻿using Colg_UWP.Model;
+using Colg_UWP.Util;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Colg_UWP.Util;
-using Newtonsoft.Json;
 
 namespace Colg_UWP.Service
 {
     public class UserService : ApiBaseService
     {
-
         private static List<UserGroup> _userGroups;
 
         public static IEnumerable<UserGroup> UserGroups { get { return _userGroups.AsReadOnly(); } }
@@ -35,7 +32,6 @@ namespace Colg_UWP.Service
 
         public static void UpdateUserInfo(JToken json, User user)
         {
-
             if (user != null)
             {
                 string userid = json.ValueForEitherName("member_uid", "uid");
@@ -52,20 +48,19 @@ namespace Colg_UWP.Service
                 user.FormHash = formhash;
                 user.ID = userid;
                 user.Avatar = avatar;
-                user.UserGroup = _userGroups.SingleOrDefault(g => g.Title == grouptitle)??
+                user.UserGroup = _userGroups.SingleOrDefault(g => g.Title == grouptitle) ??
                     user.UserGroup;
                 user.HomeUrl = null;
                 user.UserName = username;
                 user.TimeRegisted = user.TimeRegisted ?? timeRegisted;
             }
-
         }
 
         public static async Task UpdateUserInfoAsync(User user)
         {
             if (user != null)
             {
-                var json = await GetJson(ApiUrl.ForumList()).ConfigureAwait(false); //request forumlist to get avatar 
+                var json = await GetJson(ApiUrl.ForumList()).ConfigureAwait(false); //request forumlist to get avatar
                 var variable = json["Variables"];
                 await UpdateUserCreditsAsync(user);
                 UpdateUserInfo(variable, user);
@@ -104,58 +99,56 @@ namespace Colg_UWP.Service
                     ReadPermissionLevel = readAccess,
                     CreditRange = new CreditRange
                     {
-                        UpperBound = lower == null?(int?)null:int.Parse(lower),
+                        UpperBound = lower == null ? (int?)null : int.Parse(lower),
                         LowerBound = higher == null ? (int?)null : int.Parse(higher)
                     }
                 }
                     );
-               
             }
-            
         }
 
-//{
-//  "Variables": 
-//        {
-//    "usergroups": 
-//            {
-//      "9": 
-//                {
-//        "type": "member",
-//        "grouptitle": "乞丐",
-//        "creditshigher": "-999999999",
-//        "creditslower": "0",
-//        "stars": "0",
-//        "color": "",
-//        "icon": "",
-//        "readaccess": "0",
-//        "allowgetattach": "1",
-//        "allowgetimage": "1",
-//        "allowmediacode": "0",
-//        "maxsigsize": "0",
-//        "allowbegincode": "0",
-//        "userstatusby": "1"
-//                },
-//      "1": 
-//                {
-//        "type": "system",
-//        "grouptitle": "黄金波比侠",
-//        "stars": "51",
-//        "color": "",
-//        "icon": "",
-//        "readaccess": "200",
-//        "allowgetattach": "1",
-//        "allowgetimage": "1",
-//        "allowmediacode": "1",
-//        "maxsigsize": "2000",
-//        "allowbegincode": "1",
-//        "userstatusby": "1"
-//                }
-//            }
-//        }
-//}
+        //{
+        //  "Variables":
+        //        {
+        //    "usergroups":
+        //            {
+        //      "9":
+        //                {
+        //        "type": "member",
+        //        "grouptitle": "乞丐",
+        //        "creditshigher": "-999999999",
+        //        "creditslower": "0",
+        //        "stars": "0",
+        //        "color": "",
+        //        "icon": "",
+        //        "readaccess": "0",
+        //        "allowgetattach": "1",
+        //        "allowgetimage": "1",
+        //        "allowmediacode": "0",
+        //        "maxsigsize": "0",
+        //        "allowbegincode": "0",
+        //        "userstatusby": "1"
+        //                },
+        //      "1":
+        //                {
+        //        "type": "system",
+        //        "grouptitle": "黄金波比侠",
+        //        "stars": "51",
+        //        "color": "",
+        //        "icon": "",
+        //        "readaccess": "200",
+        //        "allowgetattach": "1",
+        //        "allowgetimage": "1",
+        //        "allowmediacode": "1",
+        //        "maxsigsize": "2000",
+        //        "allowbegincode": "1",
+        //        "userstatusby": "1"
+        //                }
+        //            }
+        //        }
+        //}
 
-        private static IEnumerable<KeyValuePair<string,int>> GetUserCredits(IEnumerable<JToken> tokens)
+        private static IEnumerable<KeyValuePair<string, int>> GetUserCredits(IEnumerable<JToken> tokens)
 
         {
             Dictionary<string, int> credits = new Dictionary<string, int>();

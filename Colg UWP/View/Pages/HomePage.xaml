@@ -8,10 +8,9 @@
     mc:Ignorable="d"
     xmlns:model="using:Colg_UWP.Model"
     xmlns:controls="using:Colg_UWP.View.Controls"
-   xmlns:viewmodel="using:Colg_UWP.ViewModel"
-    >
+   xmlns:viewmodel="using:Colg_UWP.ViewModel">
     <Page.Resources>
-        <DataTemplate x:Key="ArticleTemplate" x:DataType="model:Article" >
+        <DataTemplate x:Key="ArticleTemplate" x:DataType="model:Article">
             <controls:ArticleTemplate></controls:ArticleTemplate>
         </DataTemplate>
         <Style TargetType="GridViewItem">
@@ -33,11 +32,9 @@
                     </TransitionCollection>
                 </Setter.Value>
             </Setter>
-
         </Style>
         <x:Double x:Key="DesiredItemWidth" >200</x:Double>
     </Page.Resources>
-
 
     <Grid>
         <VisualStateManager.VisualStateGroups>
@@ -49,8 +46,8 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Visible"/>
-                        <Setter Target="Refresh.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Visible" />
+                        <Setter Target="Refresh.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -58,7 +55,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -79,43 +76,35 @@
                 <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-        <Pivot Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  
-               ItemsSource="{x:Bind VM.PivotVMs}"
-               >
+        <Pivot Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+               ItemsSource="{x:Bind VM.PivotVMs}">
 
             <Pivot.ItemTemplate>
                 <DataTemplate x:DataType="viewmodel:ArticleContainerVM">
                     <Grid>
-                        <GridView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SizeChanged="GridView_SizeChanged" 
+                        <GridView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SizeChanged="GridView_SizeChanged"
                               ItemClick="GridView_ItemClick"
                               ItemsSource="{x:Bind List,Mode=OneWay}"
                               ></GridView>
 
-                        <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Height="50" Width="50"
                                       IsActive="{x:Bind List.IsLoading,Mode=OneWay}"
                                       ></ProgressRing>
                     </Grid>
                 </DataTemplate>
             </Pivot.ItemTemplate>
-            <Pivot.HeaderTemplate >
+            <Pivot.HeaderTemplate>
                 <DataTemplate x:DataType="viewmodel:ArticleContainerVM">
                     <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind Header,Mode=OneWay}"></TextBlock>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
-         
         </Pivot>
         <CommandBar x:Name="BottomCommandBar" Grid.Row="2">
-           
+
             <CommandBar.PrimaryCommands>
                 <AppBarButton  Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Grid>
 </local:MenuPage>
-
-
-
-
-
-
-

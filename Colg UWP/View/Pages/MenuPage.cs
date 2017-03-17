@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.View.Pages
 {
-    public  class MenuPage:Page
+    public class MenuPage : Page
     {
         private MainPage _mainPage
         {
@@ -20,7 +15,7 @@ namespace Colg_UWP.View.Pages
                     (MainPage)frame.Content;
             }
         }
-        protected Frame ContentFrame => _mainPage.Main_ContentFrame;
 
+        protected Frame ContentFrame => _mainPage.Main_ContentFrame;
     }
 }

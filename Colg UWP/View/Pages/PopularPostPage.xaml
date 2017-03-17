@@ -8,12 +8,10 @@
     xmlns:controls="using:Colg_UWP.View.Controls"
     xmlns:model="using:Colg_UWP.Model"
     xmlns:appstudio="using:AppStudio.Uwp.Controls"
-    mc:Ignorable="d"
-    >
-<Page.Resources>
-       
-       </Page.Resources>
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
+    <Page.Resources>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="Narrow">
@@ -23,7 +21,7 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
 
                     <VisualState.StateTriggers>
@@ -32,7 +30,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
 
                     <VisualState.StateTriggers>
@@ -43,10 +41,9 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <CommandBar x:Name="TopCommandBar" Grid.Row="0">
             <CommandBar.Content>
@@ -58,14 +55,13 @@
         </CommandBar>
         <ListView Grid.Row="1"  Name="DiscussionList"  ItemsSource="{x:Bind VM.PopularPosts,Mode=OneWay}" SelectionMode="None"
                        IsItemClickEnabled="True" ItemClick="DiscussionList_OnItemClick"
-                        ItemContainerStyle="{StaticResource DiscussionItemStyle}"
-                       >
-                       <ListView.ItemTemplate>
-                    <DataTemplate  x:DataType="model:Discussion" >
-                        <controls:DiscussionDataTemplate ></controls:DiscussionDataTemplate>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        ItemContainerStyle="{StaticResource DiscussionItemStyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate  x:DataType="model:Discussion">
+                    <controls:DiscussionDataTemplate ></controls:DiscussionDataTemplate>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <CommandBar x:Name="BottomCommandBar" Grid.Row="2">
             <CommandBar.PrimaryCommands>
                 <AppBarButton  Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
@@ -73,4 +69,3 @@
         </CommandBar>
     </Grid>
 </local:MenuPage>
-

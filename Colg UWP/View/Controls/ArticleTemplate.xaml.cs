@@ -14,7 +14,5 @@ namespace Colg_UWP.View.Controls
             this.InitializeComponent();
             this.DataContextChanged += (s, e) => Bindings.Update();
         }
-
-        
     }
 }

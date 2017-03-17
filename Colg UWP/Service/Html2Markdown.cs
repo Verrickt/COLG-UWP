@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Colg_UWP.Service
 {
-    using HtmlAgilityPack;
     using Colg_UWP.Util;
-  
+    using HtmlAgilityPack;
 
     public static class Html2Markdown
     {
@@ -14,7 +12,7 @@ namespace Colg_UWP.Service
         {
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(html);
-            return ToMarkdown(document.DocumentNode,false,true);
+            return ToMarkdown(document.DocumentNode, false, true);
         }
 
         private static string ToMarkdown(HtmlNode node, bool isQuote, bool isFirst)
@@ -100,7 +98,6 @@ namespace Colg_UWP.Service
                     var remaining = node.ChildNodes.Skip(1).Select(x => ToMarkdown(x, true, false));
                     var whole = first.GetSingle().ConcatMany(remaining, newline.GetSingle(), newline.GetSingle());
                     markdown = string.Join(String.Empty, whole);
-
                 }
                 else
                 {
@@ -139,7 +136,6 @@ namespace Colg_UWP.Service
             {
                 markdown = string.Empty;
             }
-
 
             if (isQuote && markdown == ">")
             {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Colg_UWP.Util
@@ -21,9 +17,8 @@ namespace Colg_UWP.Util
             _canExecute = canExecute;
         }
 
-        public RelayCommand(Action action):this(action,null)
+        public RelayCommand(Action action) : this(action, null)
         {
-            
         }
 
         public bool CanExecute(object parameter)
@@ -37,12 +32,11 @@ namespace Colg_UWP.Util
         }
     }
 
-    public class RelayCommand<T>:ICommand
+    public class RelayCommand<T> : ICommand
     {
         private Action<T> _action { get; set; }
 
         private Func<bool> _canExecute { get; set; }
-
 
         public RelayCommand(Action<T> action, Func<bool> canExecute)
         {
@@ -50,9 +44,8 @@ namespace Colg_UWP.Util
             _canExecute = canExecute;
         }
 
-        public RelayCommand(Action<T> action): this(action, null)
+        public RelayCommand(Action<T> action) : this(action, null)
         {
-            
         }
 
         public bool CanExecute(object parameter)
@@ -67,7 +60,7 @@ namespace Colg_UWP.Util
 
         public void RaiseCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this,new EventArgs());
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
         public event EventHandler CanExecuteChanged;

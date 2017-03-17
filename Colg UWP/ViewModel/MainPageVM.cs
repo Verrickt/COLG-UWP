@@ -19,6 +19,7 @@ namespace Colg_UWP.ViewModel
                 };
             }
         }
+
         public List<MenuVM> BottomMenuItems
         {
             get

@@ -49,7 +49,7 @@
         <StackPanel Grid.Row="1" Margin="10">
             <StackPanel Name="Declaration">
                 <TextBlock Text="声明" Style="{StaticResource MyTitleTextBlockStyle}"></TextBlock>
-                <TextBlock >
+                <TextBlock>
                 <Run Text="本程序为COLG论坛的第三方客户端"></Run>
                 <LineBreak></LineBreak>
                 <Run Text="所有资源均来自于COLG论坛"></Run>
@@ -80,8 +80,6 @@
                 <HyperlinkButton Content="QuinnDamerell/UniversalMarkdown" NavigateUri="https://github.com/QuinnDamerell/UniversalMarkdown"></HyperlinkButton>
                 <HyperlinkButton Content="wasteam/waslibs" NavigateUri="https://github.com/wasteam/waslibs"></HyperlinkButton>
             </StackPanel>
-
         </StackPanel>
-
     </Grid>
 </Page>

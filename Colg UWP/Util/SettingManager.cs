@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Windows.Storage;
 
 namespace Colg_UWP.Util
 {
     public class SettingManager
     {
-        private static readonly  ApplicationDataContainer _rootContainer = ApplicationData.Current.LocalSettings;
+        private static readonly ApplicationDataContainer _rootContainer = ApplicationData.Current.LocalSettings;
 
         private static readonly ApplicationDataContainer _userPreference = _rootContainer.CreateContainer(ContainerNames.UserPreference,
             ApplicationDataCreateDisposition.Always);
+
         private static readonly ApplicationDataContainer _loginContainer = _rootContainer.CreateContainer(ContainerNames.Login,
             ApplicationDataCreateDisposition.Always);
 
@@ -21,7 +18,7 @@ namespace Colg_UWP.Util
         {
         };
 
-        public static void Save<T>(string name,T value)
+        public static void Save<T>(string name, T value)
         {
             var propertySet = ContianerMapper[name].Values;
             if (propertySet.ContainsKey(name))
@@ -47,7 +44,6 @@ namespace Colg_UWP.Util
                 return default(T);
             }
         }
-
     }
 
     public class ContainerNames

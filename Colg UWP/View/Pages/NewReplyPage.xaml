@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-     
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -20,8 +19,8 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="BottomPostButton.(UIElement.Visibility)" Value="Visible"/>
-                        <Setter Target="TopPostButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomPostButton.(UIElement.Visibility)" Value="Visible" />
+                        <Setter Target="TopPostButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -29,7 +28,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomPostButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomPostButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -39,41 +38,37 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"></RowDefinition>
-    <RowDefinition Height="*">
-    
-</RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*">
+            </RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <CommandBar x:Name="TopCommandBar" >
+        <CommandBar x:Name="TopCommandBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="TopPostButton" Icon="Send" Label="发送" Command="{x:Bind VM.PostNewReplayCommand}"
                               CommandParameter="{x:Bind Frame}"
                               ></AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.Content>
-                <TextBlock Margin="12,14" TextTrimming="CharacterEllipsis" >
+                <TextBlock Margin="12,14" TextTrimming="CharacterEllipsis">
                     <Run Text="回复:"></Run><Run Text="{x:Bind VM.Discussion.Subject}"></Run>
-
                 </TextBlock>
             </CommandBar.Content>
         </CommandBar>
 
-        <TextBox Grid.Row="1" Name="Reply" DataContext="{x:Bind VM}" 
+        <TextBox Grid.Row="1" Name="Reply" DataContext="{x:Bind VM}"
                  Text="{Binding ReplyText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                  PlaceholderText="请遵守版规"
          BorderThickness="0" Margin="5,10"
                  TextWrapping="Wrap"
-                 AcceptsReturn="True"
-          >
-</TextBox>
+                 AcceptsReturn="True">
+        </TextBox>
 
         <CommandBar Grid.Row="2"  x:Name="BottomCommandBar" ClosedDisplayMode="Compact">
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal">
-                    <AppBarButton Icon="Emoji2" Label="表情" >
+                    <AppBarButton Icon="Emoji2" Label="表情">
                         <AppBarButton.Flyout>
                             <Flyout Placement="Top">
                                 <TextBlock>仍在施工中，敬请期待</TextBlock>
@@ -89,5 +84,4 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Grid>
-   
 </Page>

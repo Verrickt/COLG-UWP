@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.AppExtensions;
 
 namespace Colg_UWP.Util
 {
     using Model;
+
     public class UserDataManager
     {
         public const string _fileName = "UserData";
-
 
         private static List<User> _users = new List<User>();
 
@@ -19,7 +16,6 @@ namespace Colg_UWP.Util
         {
             return _users.AsReadOnly();
         }
-
 
         public static async Task InitializationAsync()
         {
@@ -45,13 +41,9 @@ namespace Colg_UWP.Util
             _users.Remove(user);
         }
 
-       
-
-       
         public static User GetActiveUser()
         {
             return _users.SingleOrDefault(u => u.IsActive);
         }
     }
-
 }

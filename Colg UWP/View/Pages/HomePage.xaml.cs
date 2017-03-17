@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -14,7 +13,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class HomePage : MenuPage
     {
-
         public HomePage()
         {
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -23,11 +21,9 @@ namespace Colg_UWP.View.Pages
 
         public HomeVM VM;
 
-
-
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode==NavigationMode.New)
+            if (e.NavigationMode == NavigationMode.New)
             {
                 VM = new HomeVM();
                 await VM.RefreshAsync();
@@ -35,7 +31,6 @@ namespace Colg_UWP.View.Pages
             Bindings.Update();
             base.OnNavigatedTo(e);
         }
-
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -50,20 +45,17 @@ namespace Colg_UWP.View.Pages
             double desiredWidth = (double)Resources["DesiredItemWidth"];
             double margin = 5;
             double actualWidth = desiredWidth + margin;
-            int count = (int) (e.NewSize.Width / actualWidth);
-            if (count==0)
+            int count = (int)(e.NewSize.Width / actualWidth);
+            if (count == 0)
             {
                 count = 1;
             }
             wrapgrid.ItemWidth = e.NewSize.Width / count - margin;
-
         }
-
 
         private async void Refresh_Click(object sender, RoutedEventArgs e)
         {
             await VM.RefreshAsync();
         }
-
     }
 }

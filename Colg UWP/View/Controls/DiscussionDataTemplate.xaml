@@ -8,39 +8,33 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-   
 
-    <Grid  Padding="15,0" Background="Transparent"  >
+    <Grid  Padding="15,0" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Margin="0" 
+        <TextBlock Grid.Row="0" Margin="0"
             Text="{x:Bind Disucssion.Subject}" TextWrapping="WrapWholeWords" ></TextBlock>
 
-           
-            <TextBlock Grid.Row="1" Foreground="#999999"  TextWrapping="Wrap">
+        <TextBlock Grid.Row="1" Foreground="#999999"  TextWrapping="Wrap">
                 <Run Text="{x:Bind Disucssion.Author}"></Run>
                 <Run Text="发表于"></Run>
                 <Run Text="{x:Bind Disucssion.TimePosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
-            </TextBlock>
+        </TextBlock>
 
-            <TextBlock Visibility="{x:Bind Disucssion.LastPoster,Converter={StaticResource NullabilityToVisibilityConverter}}" Grid.Row="2" Foreground="#999999" TextWrapping="Wrap">
+        <TextBlock Visibility="{x:Bind Disucssion.LastPoster,Converter={StaticResource NullabilityToVisibilityConverter}}" Grid.Row="2" Foreground="#999999" TextWrapping="Wrap">
                 <Run Text="{x:Bind Disucssion.LastPoster}"></Run>
                 <Run Text="最后回复于"></Run>
                 <Run Text="{x:Bind Disucssion.TimeLastPosted,Converter={StaticResource DateTimeToCompressedStringConverter}}"></Run>
-            </TextBlock>
-
+        </TextBlock>
 
         <TextBlock Grid.Row="3" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}">
                 <Run Text="{x:Bind Disucssion.Reply}"></Run>
                 <Run Text="条回复"></Run>
         </TextBlock>
-
     </Grid>
-
 </UserControl>

@@ -9,15 +9,14 @@
     xmlns:model="using:Colg_UWP.Model"
     Loading="ForumNavigationPage_OnLoading">
     <Page.Resources>
-        <CollectionViewSource x:Name="ForumSource" 
-                              IsSourceGrouped="True" 
+        <CollectionViewSource x:Name="ForumSource"
+                              IsSourceGrouped="True"
                               Source="{x:Bind VM.ForumContainers,Mode=OneWay}" ItemsPath="Forums"
                              ></CollectionViewSource>
 
         <DataTemplate x:Key="ZoomedInGroupHeaderTemplate" x:DataType="model:ForumContainer">
-            <TextBlock Text="{x:Bind Catagory}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+            <TextBlock Text="{x:Bind Catagory}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource SubtitleTextBlockStyle}" />
         </DataTemplate>
-       
     </Page.Resources>
     <Grid>
         <VisualStateManager.VisualStateGroups>
@@ -29,8 +28,8 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Visible"/>
-                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Visible" />
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -38,7 +37,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -49,19 +48,18 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-        <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-
         </Grid.RowDefinitions>
-        <CommandBar x:Name="TopCommandBar" >
+        <CommandBar x:Name="TopCommandBar">
             <CommandBar.Content>
                 <TextBlock Margin="12,14">板块列表</TextBlock>
             </CommandBar.Content>
             <AppBarButton Name="RefreshButton" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
         </CommandBar>
-        <SemanticZoom Grid.Row="1" >
+        <SemanticZoom Grid.Row="1">
             <SemanticZoom.ZoomedInView>
-                <ListView Name="ZoomInView" 
+                <ListView Name="ZoomInView"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   ItemsSource="{x:Bind ForumSource.View,Mode=OneWay}"
                   SelectionMode="None" IsItemClickEnabled="True"
@@ -83,7 +81,6 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
-
                                 </Grid.RowDefinitions>
 
                                 <TextBlock HorizontalAlignment="Left" Margin="5" Text="{x:Bind Name}"
@@ -98,7 +95,6 @@
                                     </StackPanel>
                                 </RelativePanel>
                             </Grid>
-
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.GroupStyle>
@@ -128,16 +124,9 @@
                 </ListView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
-        <CommandBar Grid.Row="2" x:Name="BottomCommandBar" >
-           
+        <CommandBar Grid.Row="2" x:Name="BottomCommandBar">
+
             <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
         </CommandBar>
     </Grid>
 </local:MenuPage>
-
-
-
-
-
-
-

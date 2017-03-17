@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace Colg_UWP.Resource
@@ -16,23 +12,23 @@ namespace Colg_UWP.Resource
                 var toConvert = (DateTime)value;
                 var now = DateTime.Now;
                 var diff = now.Subtract(toConvert);
-                if (diff.Days>365)
+                if (diff.Days > 365)
                 {
                     return ToInterval(diff.Days, 365, "年");
                 }
-                if (diff.Days>30)
+                if (diff.Days > 30)
                 {
                     return ToInterval(diff.Days, 30, "月");
                 }
-                if (diff.Days>1)
+                if (diff.Days > 1)
                 {
                     return ToInterval(diff.Days, 1, "天");
                 }
-                if (diff.Hours>1)
+                if (diff.Hours > 1)
                 {
                     return ToInterval(diff.Hours, 1, "小时");
                 }
-                if (diff.Minutes>1)
+                if (diff.Minutes > 1)
                 {
                     return ToInterval(diff.Minutes, 1, "分钟");
                 }
@@ -40,14 +36,13 @@ namespace Colg_UWP.Resource
             }
             else
                 return value;
-
         }
 
-        private string ToInterval(int value,int upperBound,string unit)
+        private string ToInterval(int value, int upperBound, string unit)
         {
-            if (value>upperBound)
+            if (value > upperBound)
             {
-                return $"{value/upperBound+unit}前";
+                return $"{value / upperBound + unit}前";
             }
             return null;
         }

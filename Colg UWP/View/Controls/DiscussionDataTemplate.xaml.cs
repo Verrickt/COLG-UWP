@@ -10,6 +10,7 @@ namespace Colg_UWP.View.Controls
         {
             get { return this.DataContext as Model.Discussion; }
         }
+
         public DiscussionDataTemplate()
         {
             this.InitializeComponent();

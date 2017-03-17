@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colg_UWP.Model
 {
@@ -12,8 +8,6 @@ namespace Colg_UWP.Model
         public string Password { get; set; } = String.Empty;
         public int QuestionId { get; set; } = -1;
         public string QuestionAnswer { get; set; } = String.Empty;
-
-
 
         public override string ToString()
         {

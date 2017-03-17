@@ -1,18 +1,15 @@
-﻿using Colg_UWP.Util;
-using Colg_UWP.Model;
+﻿using Colg_UWP.Model;
+using Colg_UWP.Util;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Colg_UWP.Service
 {
-    public class LoginService:ApiBaseService
+    public class LoginService : ApiBaseService
     {
-        public static async Task<(bool IsSuccess,string ErrorMessage)> LoginAsync(User user)
+        public static async Task<(bool IsSuccess, string ErrorMessage)> LoginAsync(User user)
         {
             var credential = user.Credential;
             Dictionary<string, string> dictionary = new Dictionary<string, string>
@@ -24,7 +21,6 @@ namespace Colg_UWP.Service
             };
             Util.Logging.WriteLine($"Login with {credential}");
 
-
             var json = await GetJson(ApiUrl.Login, dictionary).ConfigureAwait(false);
 
             var result = GetOperationResult(json);
@@ -32,13 +28,13 @@ namespace Colg_UWP.Service
             if (result.IsSuccess)
             {
                 user.IsActive = true;
-                UserService.UpdateUserInfo(json["data"],user);
+                UserService.UpdateUserInfo(json["data"], user);
                 await UserService.UpdateUserInfoAsync(user).ConfigureAwait(false);
                 UserDataManager.AddOrUpdateUser(user);
                 await UserDataManager.SaveUserData();
             }
 
-            Logging.WriteLineIf(result.IsSuccess,"Login success","Login failed");
+            Logging.WriteLineIf(result.IsSuccess, "Login success", "Login failed");
 
             return result;
         }
@@ -55,17 +51,18 @@ namespace Colg_UWP.Service
         public static async Task<(bool IsSuccess, string ErrorMessage)> AutoLoginAsync()
         {
             var activeUser = UserDataManager.GetActiveUser();
-            if (activeUser!=null)
+            if (activeUser != null)
             {
                 return await LoginAsync(activeUser).ConfigureAwait(false);
             }
             Logging.WriteLine("Auto login failed. No active user");
-            return (IsSuccess:false,ErrorMessage:"No active user!!");
+            return (IsSuccess: false, ErrorMessage: "No active user!!");
         }
+
         private static (bool IsSuccess, string ErrorMessage) GetOperationResult(JToken json)
         {
             bool successed = true;
-            string message="";
+            string message = "";
             var errorCode = Convert.ToInt32(json["error_code"].ToString());
             var errorMsg = json["error_msg"].Value<string>();
             if (errorCode != 0)
@@ -75,6 +72,5 @@ namespace Colg_UWP.Service
             message = errorMsg;
             return (successed, message);
         }
-
     }
 }

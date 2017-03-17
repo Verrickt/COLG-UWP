@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colg_UWP.Model
 {
@@ -18,10 +15,11 @@ namespace Colg_UWP.Model
         public Credential Credential { get; set; }
         public string FormHash { get; set; }
         public UserGroup UserGroup { get; set; }
+
         public User()
         {
-             Credits = new List<Credit>();
-             Credential = new Credential();
+            Credits = new List<Credit>();
+            Credential = new Credential();
         }
 
         public override string ToString()
@@ -30,6 +28,7 @@ namespace Colg_UWP.Model
                 $"UserName:{UserName} ID:{ID} Avatar:{Avatar}";
         }
     }
+
     public class Credit
     {
         public string Name { get; set; }
@@ -45,7 +44,7 @@ namespace Colg_UWP.Model
 
     public class CreditRange
     {
-        public int? LowerBound{ get; set; }
+        public int? LowerBound { get; set; }
         public int? UpperBound { get; set; }
     }
 }

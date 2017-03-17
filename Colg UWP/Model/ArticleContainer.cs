@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Colg_UWP.Service;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Colg_UWP.Service;
 
 namespace Colg_UWP.Model
 {
-    public class ArticleContainer:ModelBase,IIncrementalLoad<Article>
+    public class ArticleContainer : ModelBase, IIncrementalLoad<Article>
     {
         public int MaxCount { get; set; }
 
-        public Func<Task<(int,List<Article>)>> LoadMore
+        public Func<Task<(int, List<Article>)>> LoadMore
         {
-            get;set;
+            get; set;
         }
 
         public void Refresh()

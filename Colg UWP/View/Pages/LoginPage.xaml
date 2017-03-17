@@ -9,12 +9,11 @@
     xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Colg_UWP.View.Pages.LoginPage"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup" >
+            <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="Narrow">
                     <VisualState.Setters>
                         <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
@@ -24,50 +23,45 @@
                         </Setter>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"/>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"/>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-
-
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <CommandBar x:Name="TopCommandBar" >
+        <CommandBar x:Name="TopCommandBar">
             <CommandBar.Content>
-                <TextBlock Margin="12,14" Text="登录"/>
+                <TextBlock Margin="12,14" Text="登录" />
             </CommandBar.Content>
         </CommandBar>
-        <RelativePanel Grid.Row="1" >
+        <RelativePanel Grid.Row="1">
             <StackPanel  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                 <TextBlock HorizontalAlignment="Center" Text="快速登录" Visibility="{x:Bind SavedLoginDatas.Visibility, Mode=OneWay}" />
-                <ListView x:Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedUsers, Mode=OneWay}" 
-                  SelectedItem="{x:Bind VM.QuickLoginUser, Converter={StaticResource GenericObjectConverter}, Mode=TwoWay}"  
+                <ListView x:Name="SavedLoginDatas" ItemsSource="{x:Bind VM.SavedUsers, Mode=OneWay}"
+                  SelectedItem="{x:Bind VM.QuickLoginUser, Converter={StaticResource GenericObjectConverter}, Mode=TwoWay}"
                           SelectionMode="Single"
                           HorizontalContentAlignment="Center"
                           Visibility="{x:Bind VM.SavedUsers.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}"
                           Height="48"
                           ScrollViewer.VerticalScrollMode="Enabled"
-                      Margin="10,0"
-                      >
+                      Margin="10,0">
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:User">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="48"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <uwptoolkit:ImageEx
                                 Grid.Column="0"
@@ -76,19 +70,15 @@
                                 Source="{x:Bind Avatar}"
                                 Stretch="UniformToFill"
                                 PlaceholderSource="../../Assets/ImagePlaceHolder.jpg"
-                                PlaceholderStretch="UniformToFill"
-                                
-                                />
-                                <TextBlock Margin="15,0" TextTrimming="CharacterEllipsis" Grid.Column="1" 
+                                PlaceholderStretch="UniformToFill" />
+                                <TextBlock Margin="15,0" TextTrimming="CharacterEllipsis" Grid.Column="1"
                    Style="{StaticResource SubheaderTextBlockStyle}"
                    Text="{x:Bind UserName, Mode=OneWay}" />
-                                <Button Grid.Column="2" Height="48" Width="48" 
+                                <Button Grid.Column="2" Height="48" Width="48"
                     x:Name="Delete"  Background="Transparent" BorderThickness="0"
                                         Foreground="Red"
-                                    Click="Delete_OnClick"
-                    >
-                                    <SymbolIcon Symbol="Delete"/>
-
+                                    Click="Delete_OnClick">
+                                    <SymbolIcon Symbol="Delete" />
                                 </Button>
                             </Grid>
                         </DataTemplate>
@@ -96,23 +86,21 @@
 
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="SelectionChanged">
-                            <Core:InvokeCommandAction Command="{x:Bind VM.QuickLoginCommand}" CommandParameter="{x:Bind Frame}"/>
+                            <Core:InvokeCommandAction Command="{x:Bind VM.QuickLoginCommand}" CommandParameter="{x:Bind Frame}" />
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
-
                 </ListView>
                 <StackPanel>
                     <TextBox Text="{x:Bind VM.NewUser.Credential.LoginName, Mode=TwoWay}"  Margin="10,5" HorizontalAlignment="Stretch" x:Name="UserName" PlaceholderText="用户名" />
                     <PasswordBox Password="{x:Bind VM.NewUser.Credential.Password, Mode=TwoWay}" Margin="10,5"  HorizontalAlignment="Stretch" x:Name="Password" PlaceholderText="密码" PasswordRevealMode="Peek" />
-                    <ComboBox x:Name="SecurityQuestionComboBox" Margin="10,5" 
-                          HorizontalAlignment="Stretch" 
+                    <ComboBox x:Name="SecurityQuestionComboBox" Margin="10,5"
+                          HorizontalAlignment="Stretch"
                           SelectedIndex="{x:Bind VM.NewUser.Credential.QuestionId, Mode=TwoWay}"
-                          ItemsSource="{x:Bind VM.SecurityQuestions}"   
-                          PlaceholderText="安全提问(未设置请忽略)"/>
-                    <TextBox  Margin="10,5"  Text="{x:Bind VM.NewUser.Credential.QuestionAnswer, Mode=TwoWay}"  PlaceholderText="问题答案"/>
+                          ItemsSource="{x:Bind VM.SecurityQuestions}"
+                          PlaceholderText="安全提问(未设置请忽略)" />
+                    <TextBox  Margin="10,5"  Text="{x:Bind VM.NewUser.Credential.QuestionAnswer, Mode=TwoWay}"  PlaceholderText="问题答案" />
                     <StackPanel  Margin="10,5" Orientation="Horizontal">
-                        <Button  Content="登录" Command="{x:Bind VM.LoginCommand}" CommandParameter="{x:Bind Frame}" >
-                           
+                        <Button  Content="登录" Command="{x:Bind VM.LoginCommand}" CommandParameter="{x:Bind Frame}">
                         </Button>
                     </StackPanel>
                 </StackPanel>
@@ -121,8 +109,7 @@
                           RelativePanel.AlignHorizontalCenterWithPanel="True"
                           Height="48"
                           Width="48"
-                          IsActive="{x:Bind VM.UndergoingLogin, Mode=OneWay}"
-                          />
+                          IsActive="{x:Bind VM.UndergoingLogin, Mode=OneWay}" />
         </RelativePanel>
     </Grid>
 </local:MenuPage>

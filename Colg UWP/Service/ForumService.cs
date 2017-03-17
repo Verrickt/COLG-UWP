@@ -1,16 +1,13 @@
 ﻿using Colg_UWP.Model;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Colg_UWP.Util;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Colg_UWP.Service
 {
-    public class ForumService:ApiBaseService
+    public class ForumService : ApiBaseService
     {
         public static async Task<List<Forum>> GetForumsAsync()
         {
@@ -20,7 +17,7 @@ namespace Colg_UWP.Service
                 List<Forum> forums = new List<Forum>();
                 Dictionary<string, string> catagorys = new Dictionary<string, string>();
                 var variable = json["Variables"];
-                UserService.UpdateUserInfo(variable,UserDataManager.GetActiveUser());
+                UserService.UpdateUserInfo(variable, UserDataManager.GetActiveUser());
                 var catagoryObj = variable["catlist"].ToArray();
                 foreach (var catagory in catagoryObj)
                 {
@@ -51,7 +48,6 @@ namespace Colg_UWP.Service
                         PostToday = postsToday
                     });
                 }
-
 
                 return forums;
             }

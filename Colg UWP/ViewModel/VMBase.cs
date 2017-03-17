@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+
 namespace Colg_UWP.ViewModel
 {
     using System.Runtime.CompilerServices;
+
     public class VMBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -12,14 +14,12 @@ namespace Colg_UWP.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void SetProperty<T>(ref T property, T value,[CallerMemberName] string propertyName=null)
+        protected void SetProperty<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(property, value))
                 return;
             property = value;
             OnPropertyChanged(propertyName);
-
         }
-
     }
 }

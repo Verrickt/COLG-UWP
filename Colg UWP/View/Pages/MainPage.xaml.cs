@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Service;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -19,7 +17,6 @@ namespace Colg_UWP.View.Pages
     public sealed partial class MainPage : Page
     {
         public Frame Main_ContentFrame => ContentFrame;
-
 
         private Stack<bool> _navigationStack = new Stack<bool>();
         //keep track of to which frame all the page navigation users triggerd belongs to
@@ -42,7 +39,6 @@ namespace Colg_UWP.View.Pages
             ContentFrame.Navigated += ContentFrame_OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
             UpdateUserInfo();
-
         }
 
         private void UpdateUserInfo()
@@ -84,7 +80,7 @@ namespace Colg_UWP.View.Pages
             if (e.NavigationMode == NavigationMode.Back)
                 if (ContentFrame.BackStackDepth == 0)
                 {
-                    if (MenuFrame.Visibility==Visibility.Collapsed)
+                    if (MenuFrame.Visibility == Visibility.Collapsed)
                     {
                         MenuFrame.Visibility = Visibility.Visible;
                         ContentFrame.Visibility = Visibility.Collapsed;
@@ -104,9 +100,6 @@ namespace Colg_UWP.View.Pages
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-
-
-
             bool isLastPageMenuPage = _navigationStack.Pop();
 
             if (isLastPageMenuPage)
@@ -130,7 +123,7 @@ namespace Colg_UWP.View.Pages
         private async void MenuList_ItemClick(object sender, ItemClickEventArgs e)
         {
             MenuVM clicked = e.ClickedItem as MenuVM;
-            if (clicked.TargetUri!=null)
+            if (clicked.TargetUri != null)
             {
                 await Windows.System.Launcher.LaunchUriAsync(clicked.TargetUri);
             }
@@ -149,7 +142,6 @@ namespace Colg_UWP.View.Pages
                     MenuFrame.Navigate(clicked.TargetPage);
                 }
             }
-          
         }
 
         private void UpdateIsPaneOpen()
@@ -162,11 +154,10 @@ namespace Colg_UWP.View.Pages
             }
         }
 
-
         private void MainPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             double width = e.NewSize.Width;
-            double wideWidth = (double) Application.Current.Resources["WideMinWidth"];
+            double wideWidth = (double)Application.Current.Resources["WideMinWidth"];
 
             if (width >= wideWidth)
             {
@@ -188,5 +179,4 @@ namespace Colg_UWP.View.Pages
             }
         }
     }
-
 }

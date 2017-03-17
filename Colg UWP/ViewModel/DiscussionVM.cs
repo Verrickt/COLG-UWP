@@ -1,10 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Colg_UWP.Model;
 using Colg_UWP.Util;
-using Colg_UWP.Model;
-using Colg_UWP.Service;
 using Colg_UWP.View.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.ViewModel
 {
@@ -12,7 +9,6 @@ namespace Colg_UWP.ViewModel
 
     public class DiscussionVM : VMBase
     {
-
         public Discussion Discussion
         {
             get { return _discussion; }
@@ -26,8 +22,6 @@ namespace Colg_UWP.ViewModel
 
         private Discussion _discussion;
 
-
-
         public IncrementalList<Reply, Discussion> ReplyList
         {
             get { return _replyList; }
@@ -38,19 +32,16 @@ namespace Colg_UWP.ViewModel
 
         public RelayCommand<Frame> JumpToReplyPageCommand { get; set; }
 
-
         private IncrementalList<Reply, Discussion> _replyList;
         private string _replyMessage;
-       
 
         public DiscussionVM()
         {
             RefreshCommand = new RelayCommand(Refresh);
             JumpToReplyPageCommand = new RelayCommand<Frame>(
-               (frame) => frame.Navigate(typeof(NewReplyPage),new ReplyVM(Discussion)),
+               (frame) => frame.Navigate(typeof(NewReplyPage), new ReplyVM(Discussion)),
                () => UserDataManager.GetActiveUser() != null
                );
-
         }
 
         private void Refresh()
@@ -58,10 +49,5 @@ namespace Colg_UWP.ViewModel
             Discussion.Refresh();
             ReplyList = new IncrementalList<Reply, Discussion>(Discussion);
         }
-
-
-        
-
-    
     }
 }

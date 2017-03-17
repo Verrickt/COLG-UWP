@@ -18,12 +18,12 @@ namespace Colg_UWP.Model
 
         public int MaxCount
         {
-            get { return _reply + 1; }//in case a discussion has no reply 
+            get { return _reply + 1; }//in case a discussion has no reply
             set { _reply = value; }
         }
 
         public int ReadPermission { get; set; }
-        public Func<Task<(int,List<Reply>)>> LoadMore { get; set; }
+        public Func<Task<(int, List<Reply>)>> LoadMore { get; set; }
 
         public int Reply
         {
@@ -32,11 +32,11 @@ namespace Colg_UWP.Model
         }
 
         private int _reply;
+
         public void Refresh()
         {
             Page = 1;
         }
-
 
         public Discussion()
         {

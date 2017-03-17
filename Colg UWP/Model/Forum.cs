@@ -1,14 +1,15 @@
 ﻿using Colg_UWP.Service;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Colg_UWP.Model
 {
-    public class Forum:ModelBase,IIncrementalLoad<Discussion>
+    public class Forum : ModelBase, IIncrementalLoad<Discussion>
     {
         public int MaxCount { get; set; }
-        public Func<Task<(int,List<Discussion>)>> LoadMore { get; set; }
+        public Func<Task<(int, List<Discussion>)>> LoadMore { get; set; }
+
         public void Refresh()
         {
             Page = 1;
@@ -19,7 +20,7 @@ namespace Colg_UWP.Model
         public string Catagory { get; set; }
         public string PostToday { get; set; }
 
-        public Dictionary<string,string> PostTypes { get; set; }
+        public Dictionary<string, string> PostTypes { get; set; }
 
         public Forum()
         {
@@ -30,12 +31,6 @@ namespace Colg_UWP.Model
                 return result;
             };
         }
-
-        
-
-        
-
-       
     }
 
     public class ForumContainer

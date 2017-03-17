@@ -1,13 +1,8 @@
-﻿using Windows.UI.Xaml;
+﻿using Colg_UWP.Model;
+using Colg_UWP.ViewModel;
+using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Util;
-using Colg_UWP.Model;
-using Windows.UI.Core;
-using System;
-using Windows.Foundation;
-using Windows.Storage;
-using Colg_UWP.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -18,7 +13,6 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class ForumPage : MenuPage
     {
-
         public ForumPage()
         {
             this.InitializeComponent();
@@ -27,19 +21,12 @@ namespace Colg_UWP.View.Pages
 
         public ForumVM VM { get; set; }
 
-        
-
-        
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           
             VM = VM ?? new ForumVM();
             VM.Forum = e.Parameter as Forum;
             base.OnNavigatedTo(e);
         }
-
-
-
 
         private async void DiscussionList_OnItemClick(object sender, ItemClickEventArgs e)
         {
@@ -50,8 +37,5 @@ namespace Colg_UWP.View.Pages
                 ContentFrame.Navigate(typeof(DiscussionPage), discussion);
             }
         }
-
-
-
     }
 }

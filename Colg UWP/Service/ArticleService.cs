@@ -3,12 +3,11 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Colg_UWP.Service
 {
-    public class ArticleService:ApiBaseService
+    public class ArticleService : ApiBaseService
     {
         public static async Task<ArticleContainer> GetArticleContainerAsync(string articleKindID)
         {
@@ -16,14 +15,16 @@ namespace Colg_UWP.Service
             int maxCount = Int32.Parse(articleJObject["INFO"]["count"].ToString());
             return new ArticleContainer { Id = articleKindID, MaxCount = maxCount };
         }
-        public static async Task<(int,List<Article>)> GetArticlesAsync(string aid, int page)
+
+        public static async Task<(int, List<Article>)> GetArticlesAsync(string aid, int page)
         {
             var json = await GetJson(ApiUrl.ArticleList(aid, page)).ConfigureAwait(false);
             var newsArray = json["DATA"].ToArray();
-            var items =  GetArticlesFromArrayAsync(newsArray);
+            var items = GetArticlesFromArrayAsync(newsArray);
             int newMaxCount = Int32.Parse(json["INFO"]["count"].ToString());
             return (newMaxCount, items);
         }
+
         public static async Task LoadArticelContentAsync(Article article)
         {
             var json = await GetJson(ApiUrl.ArticleContent(article.Id));
@@ -49,7 +50,7 @@ namespace Colg_UWP.Service
 
                 int firstBracketIndex = title.IndexOf("】");
 
-                title = firstBracketIndex>0?title.Substring(firstBracketIndex+1):title;
+                title = firstBracketIndex > 0 ? title.Substring(firstBracketIndex + 1) : title;
 
                 news.Add(new Article
                 {
@@ -64,6 +65,5 @@ namespace Colg_UWP.Service
             }
             return news;
         }
-
     }
 }

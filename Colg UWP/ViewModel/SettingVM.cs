@@ -2,19 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Search;
 
 namespace Colg_UWP.ViewModel
 {
-    public class SettingVM:VMBase
+    public class SettingVM : VMBase
     {
-        public string CacheSize {
+        public string CacheSize
+        {
             get { return _cacheSize; }
             set { SetProperty(ref _cacheSize, value); }
         }
+
         private StorageFolder temporaryFolder;
 
         private string _cacheSize;
@@ -29,7 +30,6 @@ namespace Colg_UWP.ViewModel
             set { SetProperty(ref _isProcessing, value); }
         }
 
-
         public SettingVM()
         {
             temporaryFolder = ApplicationData.Current.TemporaryFolder;
@@ -38,12 +38,13 @@ namespace Colg_UWP.ViewModel
                 {
                     IsProcessing = true;
                     var items = await GetFilesAsync();
-                    var deleteTasks = items.Select(async x =>await x.DeleteAsync());
+                    var deleteTasks = items.Select(async x => await x.DeleteAsync());
                     await Task.WhenAll(deleteTasks);
                     await UpdateCacheSize();
                     IsProcessing = false;
                 });
         }
+
         public async Task UpdateCacheSize()
         {
             CacheSize = "计算中......";
@@ -56,8 +57,7 @@ namespace Colg_UWP.ViewModel
 
             var size = sizes.Sum(l => (double)l);
 
-            CacheSize = $"{(size/Math.Pow(1024, 2)).ToString("F1")}MB";
-
+            CacheSize = $"{(size / Math.Pow(1024, 2)).ToString("F1")}MB";
         }
 
         private async Task<IEnumerable<StorageFile>> GetFilesAsync()

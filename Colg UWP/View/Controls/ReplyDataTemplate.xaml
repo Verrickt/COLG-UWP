@@ -10,11 +10,11 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid 
+    <Grid
                         BorderBrush=
                         "{ThemeResource SystemControlBackgroundChromeMediumBrush}"
                         BorderThickness="0,0,0,2"
-                        Margin="0" Padding="10" >
+                        Margin="0" Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -26,9 +26,9 @@
                     <Image VerticalAlignment="Center" Height="40" Width="40" Margin="0,0,10,0"
                                            Source="{x:Bind Reply.Avatar,Mode=OneWay}">
                     </Image>
-                    <TextBlock VerticalAlignment="Center" 
+                    <TextBlock VerticalAlignment="Center"
                                                Text="{x:Bind Reply.Author,Mode=OneWay}"></TextBlock>
-                    <TextBlock VerticalAlignment="Center" Margin="5,0" 
+                    <TextBlock VerticalAlignment="Center" Margin="5,0"
                                                Text="{x:Bind Reply.TimeReplied,Mode=OneWay,Converter={StaticResource DateTimeToCompressedStringConverter}}"></TextBlock>
                 </StackPanel>
             </StackPanel>

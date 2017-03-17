@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Colg_UWP.Model;
+﻿using Colg_UWP.Model;
 using Colg_UWP.Service;
 using Colg_UWP.Util;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Colg_UWP.ViewModel
 {
-    public class PopularPostDiscussion:VMBase
+    public class PopularPostDiscussion : VMBase
     {
-        public RelayCommand RefreshCommand{ get; set; }
+        public RelayCommand RefreshCommand { get; set; }
 
         public ObservableCollection<Discussion> PopularPosts;
 
         public PopularPostDiscussion()
         {
             PopularPosts = new ObservableCollection<Discussion>();
-            RefreshCommand = new RelayCommand(async()=>await RefreshAsync());
+            RefreshCommand = new RelayCommand(async () => await RefreshAsync());
         }
 
         public async Task RefreshAsync()
@@ -25,7 +25,5 @@ namespace Colg_UWP.ViewModel
             PopularPosts.Clear();
             list.ForEach(post => PopularPosts?.Add(post));
         }
-
-       
     }
 }

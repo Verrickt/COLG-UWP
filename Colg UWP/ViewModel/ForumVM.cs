@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.UI.Popups;
-using Colg_UWP.Model;
+﻿using Colg_UWP.Model;
 using Colg_UWP.Util;
 using Colg_UWP.View.Pages;
+using System;
+using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 namespace Colg_UWP.ViewModel
 {
@@ -14,25 +14,24 @@ namespace Colg_UWP.ViewModel
     {
         public string ForumId { get; set; }
         private Forum _forum;
-        public Forum Forum { get { return _forum; } set { SetProperty(ref _forum, value);Refresh(); } }
-        private IncrementalList<Discussion,Forum> _discussionList;
+        public Forum Forum { get { return _forum; } set { SetProperty(ref _forum, value); Refresh(); } }
+        private IncrementalList<Discussion, Forum> _discussionList;
 
-        public RelayCommand<Frame> JumpToNewDiscussionPageCommand{ get; set; }
-
+        public RelayCommand<Frame> JumpToNewDiscussionPageCommand { get; set; }
 
         public ForumVM()
         {
             RefreshCommand = new RelayCommand(Refresh, () => true);
             JumpToNewDiscussionPageCommand = new RelayCommand<Frame>(
-                frame=>frame.Navigate(typeof(NewDiscussionPage),new NewDiscussionVM(Forum)),
-                ()=>UserDataManager.GetActiveUser()!=null
+                frame => frame.Navigate(typeof(NewDiscussionPage), new NewDiscussionVM(Forum)),
+                () => UserDataManager.GetActiveUser() != null
                 );
         }
 
         public async Task<bool> CheckForPermission(int readPermission)
         {
             User user = UserDataManager.GetActiveUser();
-            if (readPermission <= 0 || user?.UserGroup.ReadPermissionLevel>= readPermission)
+            if (readPermission <= 0 || user?.UserGroup.ReadPermissionLevel >= readPermission)
             {
                 return true;
             }
@@ -44,6 +43,7 @@ namespace Colg_UWP.ViewModel
         }
 
         public RelayCommand RefreshCommand { get; set; }
+
         public IncrementalList<Discussion, Forum> DiscussionList
         {
             get { return _discussionList; }
@@ -56,7 +56,5 @@ namespace Colg_UWP.ViewModel
             JumpToNewDiscussionPageCommand.RaiseCanExecuteChanged();
             DiscussionList = new IncrementalList<Discussion, Forum>(Forum);
         }
-
-
     }
 }

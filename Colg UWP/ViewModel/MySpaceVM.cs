@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Colg_UWP.Model;
+using Colg_UWP.Service;
+using Colg_UWP.Util;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Colg_UWP.Util;
-using Colg_UWP.Model;
-using Colg_UWP.Service;
 using Windows.UI.Xaml.Controls;
 
 namespace Colg_UWP.ViewModel
@@ -35,11 +32,10 @@ namespace Colg_UWP.ViewModel
         /// </summary>
         public double? ExpMax { get; set; }
 
-
         /// <summary>
         /// Exp required to be prompted
         /// </summary>
-        public double? ExpRequired => ExpMax - Exp??null;
+        public double? ExpRequired => ExpMax - Exp ?? null;
 
         private bool _isProcessing;
 
@@ -48,7 +44,6 @@ namespace Colg_UWP.ViewModel
             get { return _isProcessing; }
             set { SetProperty(ref _isProcessing, value); }
         }
-
 
         public string TimeRegisted { get; set; }
 
@@ -77,10 +72,5 @@ namespace Colg_UWP.ViewModel
             ExpMax = User.UserGroup.CreditRange.UpperBound;
             TimeRegisted = User.TimeRegisted?.ToString("yyyy.MM.dd");
         }
-
-        
-
-
-      
     }
 }

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.System;
-using AppStudio.Uwp;
-using UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding;
 
 namespace Colg_UWP.Util
 {
@@ -26,9 +20,8 @@ namespace Colg_UWP.Util
             WriteLine($"Logging file Path {_file.Path}");
         }
 
-    static Logging()
+        static Logging()
         {
-            
 #if DEBUG
             _isDebugMode = true;
 #endif
@@ -42,7 +35,8 @@ namespace Colg_UWP.Util
             {
                 Debug.WriteLine(str);
             }
-            Task.Run(async() => {
+            Task.Run(async () =>
+            {
                 await FileIO.AppendLinesAsync(_file, str.GetSingle());
             });
         }
@@ -59,18 +53,17 @@ namespace Colg_UWP.Util
         {
             if (condition)
             {
-                WriteLine(content+trueContent);
+                WriteLine(content + trueContent);
             }
             else
             {
-                WriteLine(content+falseContent);
+                WriteLine(content + falseContent);
             }
         }
+
         public static void WriteLineIf(bool condition, string trueContent, string falseContent)
         {
             WriteLine(condition ? trueContent : falseContent);
         }
-
-
     }
 }

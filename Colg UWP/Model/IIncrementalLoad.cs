@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,9 +6,9 @@ namespace Colg_UWP.Model
 {
     public interface IIncrementalLoad<T>
     {
-        int MaxCount { get;  }
+        int MaxCount { get; }
 
-        Func<Task<(int,List<T>)>> LoadMore { get; set; }
+        Func<Task<(int, List<T>)>> LoadMore { get; set; }
 
         void Refresh();
     }

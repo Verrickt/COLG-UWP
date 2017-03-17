@@ -1,17 +1,11 @@
-﻿using Colg_UWP.ViewModel;
+﻿using Colg_UWP.Model;
+using Colg_UWP.ViewModel;
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Windows.UI.ViewManagement;
+using UniversalMarkdown;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Annotations;
-using Colg_UWP.Util;
-using Colg_UWP.Model;
-using UniversalMarkdown;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -45,8 +39,6 @@ namespace Colg_UWP.View.Pages
             base.OnNavigatedTo(e);
         }
 
-       
-
         private void GoToTop_Click(object sender, RoutedEventArgs e)
         {
             ReplyList?.ScrollIntoView(ReplyList?.Items[0]);
@@ -57,17 +49,16 @@ namespace Colg_UWP.View.Pages
             Windows.System.Launcher.LaunchUriAsync(new Uri(e.Link));
         }
 
-
         private void ReplyListItem_OnRightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            FrameworkElement element= sender as FrameworkElement;
-            reply = (Reply) element.DataContext;
+            FrameworkElement element = sender as FrameworkElement;
+            reply = (Reply)element.DataContext;
             ReplyFlyout.ShowAt(element, e.GetPosition(element));
         }
 
         private void Reply_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(NewReplyPage), new ReplyVM(VM.Discussion,reply));
+            Frame.Navigate(typeof(NewReplyPage), new ReplyVM(VM.Discussion, reply));
         }
     }
 }

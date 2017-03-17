@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Colg_UWP.IncrementalLoading;
 using System.Threading.Tasks;
-using Colg_UWP.IncrementalLoading;
 
 namespace Colg_UWP.ViewModel
 {
@@ -10,9 +9,6 @@ namespace Colg_UWP.ViewModel
 
     public class HomeVM : VMBase
     {
-       
-
-        
         public ObservableCollection<ArticleContainerVM> PivotVMs
         {
             get { return _vms; }
@@ -32,7 +28,7 @@ namespace Colg_UWP.ViewModel
         {
             if (!_initialized)
             {
-                var _newsList =  await ArticleService.GetArticleContainerAsync("1");
+                var _newsList = await ArticleService.GetArticleContainerAsync("1");
                 var _prospectiveList = await ArticleService.GetArticleContainerAsync("16");
                 var _hotNewsList = await ArticleService.GetArticleContainerAsync("17");
 
@@ -43,7 +39,6 @@ namespace Colg_UWP.ViewModel
                 _initialized = true;
             }
         }
-
 
         public async Task RefreshAsync()
         {
@@ -63,7 +58,8 @@ namespace Colg_UWP.ViewModel
     {
         private IncrementalList<Article, ArticleContainer> _list;
 
-        public IncrementalList<Article, ArticleContainer> List {
+        public IncrementalList<Article, ArticleContainer> List
+        {
             get { return _list; }
             set { SetProperty(ref _list, value); }
         }
@@ -83,7 +79,7 @@ namespace Colg_UWP.ViewModel
 
         private ArticleContainer _container;
 
-        public ArticleContainerVM(ArticleContainer container,string header)
+        public ArticleContainerVM(ArticleContainer container, string header)
         {
             _container = container;
             Header = header;

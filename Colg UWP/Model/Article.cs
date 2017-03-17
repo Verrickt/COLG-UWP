@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Colg_UWP.Model
 {
-    public class Article:ModelBase
+    public class Article : ModelBase
     {
         public DateTime? Date { get; set; }
         public string Image { get; set; }

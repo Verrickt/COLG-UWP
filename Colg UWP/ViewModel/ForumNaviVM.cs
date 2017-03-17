@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Colg_UWP.Util;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Colg_UWP.Util;
 
 namespace Colg_UWP.ViewModel
 {
@@ -11,13 +11,12 @@ namespace Colg_UWP.ViewModel
 
     public class ForumNaviVM : VMBase
     {
-        private List<Forum> Forums { get;  set; }
+        private List<Forum> Forums { get; set; }
         public Forum SelectedForum { get; set; }
 
         public Util.RelayCommand RefreshCommand { get; set; }
 
         public ObservableCollection<ForumContainer> ForumContainers { get; set; }
-
 
         public async Task RefreshAsync()
         {
@@ -27,9 +26,9 @@ namespace Colg_UWP.ViewModel
             {
                 Catagory = catagory,
                 Forums
-             = new List<Forum>(grouped.OrderBy(f=>f.Name[0]))
+             = new List<Forum>(grouped.OrderBy(f => f.Name[0]))
             });
-            containers.ToList().ForEach(c=>ForumContainers.Add(c));
+            containers.ToList().ForEach(c => ForumContainers.Add(c));
         }
 
         public ForumNaviVM()
@@ -38,8 +37,6 @@ namespace Colg_UWP.ViewModel
             ForumContainers = new ObservableCollection<ForumContainer>();
             RefreshCommand = new RelayCommand(
                 async () => await RefreshAsync());
-
         }
-
     }
 }

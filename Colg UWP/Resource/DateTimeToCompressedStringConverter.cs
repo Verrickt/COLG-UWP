@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colg_UWP.Resource
 {
-    class DateTimeToCompressedStringConverter: Windows.UI.Xaml.Data.IValueConverter
+    internal class DateTimeToCompressedStringConverter : Windows.UI.Xaml.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -15,14 +11,13 @@ namespace Colg_UWP.Resource
                 DateTime time = (DateTime)value;
                 TimeSpan diff = DateTime.Now.Subtract(time);
                 string format;
-                if (diff.TotalDays>365d)
+                if (diff.TotalDays > 365d)
                 {
                     format = "yy/MM/dd HH:mm";
                 }
-                else if (diff.TotalDays>1d)
+                else if (diff.TotalDays > 1d)
                 {
                     format = "MM/dd HH:mm";
-
                 }
                 else
                 {

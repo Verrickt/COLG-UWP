@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Colg_UWP.Model;
+using Colg_UWP.Service;
+using Colg_UWP.Util;
+using Colg_UWP.View.Pages;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls.Primitives;
-using Colg_UWP.Util;
-using Colg_UWP.Model;
-using Colg_UWP.Service;
 using Windows.UI.Xaml.Controls;
-using Colg_UWP.View.Pages;
 
 namespace Colg_UWP.ViewModel
 {
@@ -18,7 +16,6 @@ namespace Colg_UWP.ViewModel
     {
         private ObservableCollection<User> _savedUsers;
         private User _quickLoginUser;
-       
 
         public ObservableCollection<User> SavedUsers
         {
@@ -26,11 +23,10 @@ namespace Colg_UWP.ViewModel
             set { _savedUsers = value; }
         }
 
-
         public User QuickLoginUser
         {
             get { return _quickLoginUser; }
-            set { SetProperty(ref _quickLoginUser,value); }
+            set { SetProperty(ref _quickLoginUser, value); }
         }
 
         public List<string> SecurityQuestions => new List<string>()
@@ -60,18 +56,15 @@ namespace Colg_UWP.ViewModel
             set { SetProperty(ref _undergoingLogin, value); }
         }
 
-
-
         public void RemoveUser(User user)
         {
             UserDataManager.RemoveUser(user);
             UpdateSavedUser();
-          
         }
 
-        private async Task<bool> LoginAsync(User anotheruser=null)
+        private async Task<bool> LoginAsync(User anotheruser = null)
         {
-            var actualUser = anotheruser??NewUser;
+            var actualUser = anotheruser ?? NewUser;
             var credential = actualUser.Credential;
             UndergoingLogin = true;
             if (String.IsNullOrWhiteSpace(credential.LoginName) || String.IsNullOrEmpty(credential.Password))
@@ -102,9 +95,6 @@ namespace Colg_UWP.ViewModel
         {
             return await LoginAsync(QuickLoginUser);
         }
-
-
-
 
         public LoginVM()
         {
@@ -137,12 +127,8 @@ namespace Colg_UWP.ViewModel
         {
             SavedUsers.Clear();
             UserDataManager.GetUsers().ToList().ForEach(
-                ld=>SavedUsers.Add(ld)
+                ld => SavedUsers.Add(ld)
                 );
         }
-
-      
     }
-
- 
 }

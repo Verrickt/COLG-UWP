@@ -12,11 +12,13 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class ArticlePage : Page
     {
-        public ArticleVM VM=new ArticleVM();
+        public ArticleVM VM = new ArticleVM();
+
         public ArticlePage()
         {
             this.InitializeComponent();
         }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (VM == null)

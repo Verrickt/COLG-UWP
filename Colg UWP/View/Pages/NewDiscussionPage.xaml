@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup" >
+            <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="Narrow">
                     <VisualState.Setters>
                         <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
@@ -18,7 +18,7 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="PostNewDiscussionButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="PostNewDiscussionButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -26,7 +26,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -50,7 +50,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Send" Label="发送" Name="PostNewDiscussionButton"
                               Command="{x:Bind VM.PostNewDiscussionCommand}"
-                              
+
                               ></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
@@ -64,20 +64,15 @@
                       Visibility="{x:Bind VM.DiscussionTypes.Count,Converter={StaticResource IntToVisibilityConverter}}"
                       SelectedItem="{x:Bind VM.SelectedDiscussionType,Mode=TwoWay}"
                       MinWidth="200"
-                      Margin="10"
-                      >
+                      Margin="10">
                 <ComboBox.Header>
                     类别
                 </ComboBox.Header>
-                
-
             </ComboBox>
             <TextBox Grid.Row="1"
                      DataContext="{x:Bind VM}"
-                     Text="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                      Margin="10"
-                     
-                     >
+                     Text="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      Margin="10">
                 <TextBox.Header>
                     <TextBlock VerticalAlignment="Center">标题</TextBlock>
                 </TextBox.Header>
@@ -86,12 +81,10 @@
                      DataContext="{x:Bind VM}"
                      Text="{Binding Message,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      AcceptsReturn="True"
-                      Margin="10"
-                     
-                     >
+                      Margin="10">
                 <TextBox.Header>
                     <TextBlock VerticalAlignment="Center"
-                               
+
                                >内容</TextBlock>
                 </TextBox.Header>
             </TextBox>
@@ -100,7 +93,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Send" Label="发送"
                  Command="{x:Bind VM.PostNewDiscussionCommand}"
-                              
+
                               ></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>

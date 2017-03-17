@@ -2,7 +2,7 @@
 
 namespace Colg_UWP.Model
 {
-    public class Reply:ModelBase
+    public class Reply : ModelBase
     {
         public string Author { get; set; }
         public string AuthorId { get; set; }

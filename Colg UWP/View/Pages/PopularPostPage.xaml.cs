@@ -1,7 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Model;
+﻿using Colg_UWP.Model;
 using Colg_UWP.ViewModel;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -12,9 +12,7 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class PopularPostPage : MenuPage
     {
-
         public PopularPostDiscussion VM { get; set; }
-
 
         public PopularPostPage()
         {
@@ -24,7 +22,7 @@ namespace Colg_UWP.View.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (VM==null)
+            if (VM == null)
             {
                 VM = new PopularPostDiscussion();
                 await VM.RefreshAsync();
@@ -38,6 +36,5 @@ namespace Colg_UWP.View.Pages
             var discussion = e.ClickedItem as Discussion;
             ContentFrame.Navigate(typeof(DiscussionPage), discussion);
         }
-
     }
 }

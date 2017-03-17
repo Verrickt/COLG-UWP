@@ -12,11 +12,10 @@
     xmlns:model="using:Colg_UWP.Model">
 
     <Page.Resources>
-
     </Page.Resources>
     <Grid>
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup" >
+            <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="Narrow">
                     <VisualState.Setters>
                         <Setter Target="TopCommandBar.(FrameworkElement.Margin)">
@@ -24,8 +23,8 @@
                                 <Thickness>48,0,0,0</Thickness>
                             </Setter.Value>
                         </Setter>
-                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed"/>
-                        <Setter Target="NewDiscussionButton.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="RefreshButton.(UIElement.Visibility)" Value="Collapsed" />
+                        <Setter Target="NewDiscussionButton.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}"></AdaptiveTrigger>
@@ -33,7 +32,7 @@
                 </VisualState>
                 <VisualState x:Name="Normal">
                     <VisualState.Setters>
-                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="BottomCommandBar.(UIElement.Visibility)" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}"></AdaptiveTrigger>
@@ -84,14 +83,6 @@
                               Command="{x:Bind VM.RefreshCommand}">
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
-            
         </CommandBar>
     </Grid>
 </local:MenuPage>
-
-
-
-
-
-
-

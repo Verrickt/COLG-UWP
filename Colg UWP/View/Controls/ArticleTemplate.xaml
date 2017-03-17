@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"></Setter>
@@ -18,11 +17,9 @@
         <Style TargetType="FontIcon">
             <Setter Property="Foreground" Value="White"></Setter>
         </Style>
-
-
     </UserControl.Resources>
 
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -32,32 +29,27 @@
             VerticalAlignment="Stretch"
             Source="{x:Bind Header.Image}"
             Grid.RowSpan="2"
-            Stretch="UniformToFill"
-            
-            >
-
+            Stretch="UniformToFill">
         </uwptoolkit:ImageEx>
-        <Grid 
-                HorizontalAlignment="Stretch" 
+        <Grid
+                HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"
                Padding="5"
-                Grid.Row="1"
-              >
+                Grid.Row="1">
             <Grid.Background>
-                <LinearGradientBrush  >
+                <LinearGradientBrush>
                     <LinearGradientBrush.RelativeTransform>
-                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="90"/>
+                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="90" />
                     </LinearGradientBrush.RelativeTransform>
-                    <GradientStop Color="#CC000000" Offset="0.937"/>
+                    <GradientStop Color="#CC000000" Offset="0.937" />
 
-                    <GradientStop Color="#55000000"/>
+                    <GradientStop Color="#55000000" />
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-
 
             <StackPanel Margin="0,5">
                 <TextBlock TextWrapping="WrapWholeWords"  Margin="10,0" FontSize="18"

@@ -50,25 +50,21 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-
                 </Grid.RowDefinitions>
                 <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"  Text="{x:Bind VM.Article.Title}" Grid.Row="0"></TextBlock>
-                <TextBlock Grid.Row="1" Margin="10,5" 
-                           Style="{StaticResource SubtitleTextBlockStyle}" 
-                            >
+                <TextBlock Grid.Row="1" Margin="10,5"
+                           Style="{StaticResource SubtitleTextBlockStyle}">
                     <Run Text="发表于"></Run>
                     <Run Text="{x:Bind VM.Article.Date,Mode=OneWay}"></Run>
                 </TextBlock>
                 <TextBlock Grid.Row="2" Margin="10,5"
-                          Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" >
+                          Style="{StaticResource FlyoutPickerTitleTextBlockStyle}">
                     <Run Text="作者"></Run>
                     <Run Foreground="DeepSkyBlue" Text="{x:Bind VM.Article.Author,Mode=OneWay}"></Run>
                 </TextBlock>
 
-
                 <htmlblock:HtmlBlock Margin="10"  Grid.Row="3" Source="{x:Bind VM.Article.Content,Mode=OneWay}" ></htmlblock:HtmlBlock>
             </Grid>
-
         </ScrollViewer>
         <ProgressRing Height="50" Width="50" IsActive="{x:Bind VM.IsLoading,Mode=OneWay}"></ProgressRing>
     </Grid>

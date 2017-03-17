@@ -1,27 +1,25 @@
-﻿using System;
+﻿using Colg_UWP.Util;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using Colg_UWP.Util;
 
 namespace Colg_UWP.Service
 {
-    public  class ApiBaseService:ApiBase
+    public class ApiBaseService : ApiBase
     {
-        protected static async Task<JObject> GetJson(string url,Dictionary<string,string> dictioanry)
+        protected static async Task<JObject> GetJson(string url, Dictionary<string, string> dictioanry)
         {
             try
             {
                 string json;
-                if (dictioanry==null)
+                if (dictioanry == null)
                 {
                     json = await GetPost(url).ConfigureAwait(false);
                 }
                 else
                 {
-                    json = await GetPost(url,dictioanry).ConfigureAwait(false);
-
+                    json = await GetPost(url, dictioanry).ConfigureAwait(false);
                 }
                 if (String.IsNullOrWhiteSpace(json))
                 {

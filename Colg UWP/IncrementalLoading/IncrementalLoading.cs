@@ -8,28 +8,21 @@
 //
 //*********************************************************
 
+using Colg_UWP.Model;
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using Colg_UWP.Model;
-using Colg_UWP.Util;
 using Windows.UI.Popups;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Colg_UWP.IncrementalLoading
 {
-    // This class implements IncrementalLoadingBase. 
-    // To create your own Infinite List, you can create a class like this one that doesn't have 'generator' or 'maxcount', 
+    // This class implements IncrementalLoadingBase.
+    // To create your own Infinite List, you can create a class like this one that doesn't have 'generator' or 'maxcount',
     //  and instead downloads items from a live data source in LoadMoreItemsOverrideAsync.
-    public class IncrementalList<T1,T2> : IncrementalLoadingBase<T1>
-        where T2:IIncrementalLoad<T1>
+    public class IncrementalList<T1, T2> : IncrementalLoadingBase<T1>
+        where T2 : IIncrementalLoad<T1>
     {
-
-
         public Func<Task<(int, List<T1>)>> _loadMore;
-
-        
 
         public IncrementalList(T2 source)
         {
@@ -39,13 +32,18 @@ namespace Colg_UWP.IncrementalLoading
 
         private bool _isLoading { get; set; }
 
-        public bool IsLoading { get { return _isLoading;} set {
-            if (value!=_isLoading)
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
             {
-                _isLoading = value;
-                OnPropertyChanged();
+                if (value != _isLoading)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
             }
-        } }
+        }
 
         private bool _onError { get; set; } = false;
 
@@ -55,20 +53,20 @@ namespace Colg_UWP.IncrementalLoading
 
             int toGenerate = System.Math.Min(count, _maxCount - _count);
 
-            // Wait for work 
+            // Wait for work
             await Task.Delay(10);
 
             // This code simply generates
             try
             {
-                (int newMaxCount,var items) = await _loadMore();
+                (int newMaxCount, var items) = await _loadMore();
                 _count += items.Count;
                 this._maxCount = newMaxCount;
                 return items;
             }
             catch (Exception)
             {
-                await new MessageDialog("网络不给力啊,要不刷新试试?","").ShowAsync();
+                await new MessageDialog("网络不给力啊,要不刷新试试?", "").ShowAsync();
                 _onError = true;
                 Task.Run(async () =>
                 {
@@ -94,10 +92,9 @@ namespace Colg_UWP.IncrementalLoading
 
         #region State
 
+        private int _count = 0;
+        private int _maxCount;
 
-        int _count = 0;
-        int _maxCount;
-
-        #endregion 
+        #endregion State
     }
 }

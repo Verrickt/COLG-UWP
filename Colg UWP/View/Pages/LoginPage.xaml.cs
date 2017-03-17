@@ -1,22 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Popups;
+﻿using Colg_UWP.Model;
+using Colg_UWP.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Model;
-using Colg_UWP.Util;
-using Colg_UWP.Service;
-using Colg_UWP.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,17 +13,12 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class LoginPage : MenuPage
     {
-
-
         public LoginPage()
         {
             this.InitializeComponent();
         }
 
-
         private ViewModel.LoginVM VM;
-
-
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -48,15 +29,11 @@ namespace Colg_UWP.View.Pages
             base.OnNavigatedTo(e);
         }
 
-
-          
-
         private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
-             var button = sender as Button;
-             var user = button.DataContext as User;
-             VM.RemoveUser(user);
-
+            var button = sender as Button;
+            var user = button.DataContext as User;
+            VM.RemoveUser(user);
         }
     }
 }
