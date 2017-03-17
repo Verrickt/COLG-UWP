@@ -150,6 +150,7 @@
                     </ItemsControl>
                 </Grid>
             </Grid>
+            <ProgressRing Height="50" Width="50" Grid.RowSpan="2" IsActive="{x:Bind VM.IsProcessing,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressRing>
         </Grid>
         <CommandBar Grid.Row="2" x:Name="BottomCommandBar" >
             <CommandBar.PrimaryCommands>

@@ -70,5 +70,6 @@
             </Grid>
 
         </ScrollViewer>
+        <ProgressRing Height="50" Width="50" IsActive="{x:Bind VM.IsLoading,Mode=OneWay}"></ProgressRing>
     </Grid>
 </Page>

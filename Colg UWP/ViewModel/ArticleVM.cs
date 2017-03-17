@@ -8,6 +8,13 @@ namespace Colg_UWP.ViewModel
     {
 
 
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
+        }
 
 
         public string ArticleId { get; set; }
@@ -18,7 +25,9 @@ namespace Colg_UWP.ViewModel
         public string ArticleInfo { get { return _articleInfo; } set { SetProperty(ref _articleInfo, value); } }
         public async Task InitAsync()
         {
+            IsLoading = true;
             await Article.LoadContentAsync();
+            IsLoading = false;
         }
     }
 }

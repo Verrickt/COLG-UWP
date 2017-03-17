@@ -41,6 +41,15 @@ namespace Colg_UWP.ViewModel
         /// </summary>
         public double? ExpRequired => ExpMax - Exp??null;
 
+        private bool _isProcessing;
+
+        public bool IsProcessing
+        {
+            get { return _isProcessing; }
+            set { SetProperty(ref _isProcessing, value); }
+        }
+
+
         public string TimeRegisted { get; set; }
 
         public MySpaceVM()
@@ -48,6 +57,7 @@ namespace Colg_UWP.ViewModel
             User = UserDataManager.GetActiveUser();
             SignOutCommand = new RelayCommand<Frame>(async (f) =>
             {
+                IsProcessing = true;
                 var (result, message) = await LoginService.LogoutAsync();
 
                 if (!result)
@@ -60,6 +70,7 @@ namespace Colg_UWP.ViewModel
                     f.GoBack();
                     f.Navigate(typeof(View.Pages.LoginPage));
                 }
+                IsProcessing = false;
             });
             Credits = new ObservableCollection<Credit>(User.Credits);
             Exp = Credits.Max(k => k.Value);
