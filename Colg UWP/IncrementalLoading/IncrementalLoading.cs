@@ -13,6 +13,9 @@ using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Colg_UWP.Model;
+using Colg_UWP.Util;
+using Windows.UI.Popups;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Colg_UWP.IncrementalLoading
 {
@@ -43,7 +46,8 @@ namespace Colg_UWP.IncrementalLoading
                 OnPropertyChanged();
             }
         } }
-        
+
+        private bool _onError { get; set; } = false;
 
         protected async override Task<IList<T1>> LoadMoreItemsOverrideAsync(System.Threading.CancellationToken c, int count)
         {
@@ -64,6 +68,13 @@ namespace Colg_UWP.IncrementalLoading
             }
             catch (Exception)
             {
+                await new MessageDialog("网络不给力啊,要不刷新试试?","").ShowAsync();
+                _onError = true;
+                Task.Run(async () =>
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                    _onError = false;
+                });
                 return new List<T1>();
             }
             finally
@@ -74,6 +85,10 @@ namespace Colg_UWP.IncrementalLoading
 
         protected override bool HasMoreItemsOverride()
         {
+            if (_onError)
+            {
+                return false;
+            }
             return _count < _maxCount;
         }
 
