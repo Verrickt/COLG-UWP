@@ -17,7 +17,7 @@ namespace Colg_UWP.Model
 
         public override string ToString()
         {
-            return $"LoginName {LoginName} Password {Password} QuestionID {QuestionId} Answer {QuestionAnswer}";
+            return $"LoginName {LoginName} QuestionID {QuestionId} Answer {QuestionAnswer}";
         }
     }
 }
