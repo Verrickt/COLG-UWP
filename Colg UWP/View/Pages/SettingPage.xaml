@@ -40,7 +40,7 @@
            
         </CommandBar>
         <StackPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock VerticalAlignment="Center"  >
                     <Run Text="缓存大小"></Run>
                     <Run Text="{x:Bind VM.CacheSize,Mode=OneWay}"></Run>
@@ -49,6 +49,7 @@
                 <ProgressRing 
                 IsActive="{x:Bind VM.IsProcessing,Mode=OneWay}"></ProgressRing>
             </StackPanel>
+           
         </StackPanel>
     </Grid>
 </Page>
