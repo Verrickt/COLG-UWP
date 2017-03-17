@@ -17,7 +17,7 @@
         <Style TargetType="GridViewItem">
             <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
             <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="MinHeight" Value="200"></Setter>
+            <Setter Property="Height" Value="{StaticResource DesiredItemWidth}"></Setter>
         </Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle }">
         </Style>
@@ -35,6 +35,7 @@
             </Setter>
 
         </Style>
+        <x:Double x:Key="DesiredItemWidth" >200</x:Double>
     </Page.Resources>
 
 

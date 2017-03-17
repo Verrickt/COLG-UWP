@@ -5,6 +5,7 @@
     xmlns:local="using:Colg_UWP.View.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uwptoolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     >
     <UserControl.Resources>
@@ -59,7 +60,7 @@
 
 
             <StackPanel Margin="0,5">
-                <TextBlock TextWrapping="WrapWholeWords"  Margin="10,0" Style="{StaticResource SubtitleTextBlockStyle}"
+                <TextBlock TextWrapping="WrapWholeWords"  Margin="10,0" FontSize="20"
                            Foreground="White"
                            Text="{x:Bind Header.Title}">
                 </TextBlock>
