@@ -47,11 +47,15 @@ namespace Colg_UWP.Service
 
                 imageUri = new String(imageUri.TakeWhile(x => x != '&').ToArray());
 
+                int firstBracketIndex = title.IndexOf("】");
+
+                title = firstBracketIndex>0?title.Substring(firstBracketIndex+1):title;
+
                 news.Add(new Article
                 {
                     Id = article,
                     Date = date,
-                    Title = title,
+                    Title = title.Trim(),
                     Image = imageUri,
                     Comments = comments,
                     Remark = remark
