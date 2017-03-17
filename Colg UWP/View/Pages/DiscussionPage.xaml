@@ -112,11 +112,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
                 <ListView.Footer>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5">这里是世界的尽头(=ﾟωﾟ)=</TextBlock>
                         <TextBlock Visibility="{x:Bind VM.ReplyList.IsLoading,Converter={StaticResource BooleanNegationToVisibilityConverter},Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5"
                                    Text="这里是世界的尽头(=ﾟωﾟ)="
                                    
                                    >
+                    <TextBlock.Transitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition ></AddDeleteThemeTransition>
+                        </TransitionCollection>
+                    </TextBlock.Transitions>
+                            
+                        </TextBlock>
             </ListView.Footer>
         </ListView>
 
