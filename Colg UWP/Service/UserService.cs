@@ -74,7 +74,15 @@ namespace Colg_UWP.Service
 
         public static async Task InitializationAsync()
         {
-            await GetUserGroupsAsync().ConfigureAwait(false);
+            _userGroups = new List<UserGroup>();
+            try
+            {
+                await GetUserGroupsAsync().ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Logging.WriteLine($"Failed to fetch usergroup {e.ToString()}");
+            }
         }
 
         private static async Task GetUserGroupsAsync()
@@ -82,7 +90,7 @@ namespace Colg_UWP.Service
             var url = ApiUrl.UserGroup;
             var json = await ApiBaseService.GetJson(url).ConfigureAwait(false);
             var userGroupObj = json["Variables"]["usergroups"].Value<JObject>();
-            _userGroups = new List<UserGroup>();
+            _userGroups.Clear();
             foreach (var token in userGroupObj)
             {
                 var userGroup = token.Value;
