@@ -210,6 +210,9 @@
     <Compile Include="View\Pages\NewReplyPage.xaml.cs">
       <DependentUpon>NewReplyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RichTextblockTest.xaml.cs">
       <DependentUpon>RichTextblockTest.xaml</DependentUpon>
     </Compile>
@@ -364,6 +367,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\NewReplyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

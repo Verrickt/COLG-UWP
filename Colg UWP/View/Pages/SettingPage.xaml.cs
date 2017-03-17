@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Colg_UWP.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace Colg_UWP.View.Pages
         public SettingPage()
         {
             this.InitializeComponent();
+        }
+        private SettingVM VM;
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            VM = VM ?? new SettingVM();
+            await VM.UpdateCacheSize();
+            base.OnNavigatedTo(e);
         }
     }
 }

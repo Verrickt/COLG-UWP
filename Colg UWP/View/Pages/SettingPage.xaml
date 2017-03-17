@@ -40,7 +40,15 @@
            
         </CommandBar>
         <StackPanel Grid.Row="1">
-            <Button></Button>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center"  >
+                    <Run Text="缓存大小"></Run>
+                    <Run Text="{x:Bind VM.CacheSize,Mode=OneWay}"></Run>
+                </TextBlock>
+                <Button Margin="5" Content="清理缓存" Command="{x:Bind VM.ClearCacheCommand}" ></Button>
+                <ProgressRing 
+                IsActive="{x:Bind VM.IsProcessing,Mode=OneWay}"></ProgressRing>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
