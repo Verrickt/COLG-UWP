@@ -26,6 +26,13 @@
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"></Setter>
             <Setter Property="ItemTemplate" Value="{StaticResource ArticleTemplate}"></Setter>
             <Setter Property="SelectionMode" Value="None"></Setter>
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition ></AddDeleteThemeTransition>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
 
         </Style>
     </Page.Resources>
