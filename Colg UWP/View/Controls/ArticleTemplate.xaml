@@ -60,7 +60,7 @@
 
 
             <StackPanel Margin="0,5">
-                <TextBlock TextWrapping="WrapWholeWords"  Margin="10,0" FontSize="20"
+                <TextBlock TextWrapping="WrapWholeWords"  Margin="10,0" FontSize="18"
                            Foreground="White"
                            Text="{x:Bind Header.Title}">
                 </TextBlock>
