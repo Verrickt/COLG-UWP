@@ -5,6 +5,7 @@ namespace Colg_UWP.ViewModel
 {
     using Model;
     using Service;
+    using System;
     using System.Collections.ObjectModel;
 
     public class HomeVM : VMBase
@@ -24,6 +25,15 @@ namespace Colg_UWP.ViewModel
             PivotVMs = new ObservableCollection<ArticleContainerVM>();
         }
 
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
+        }
+
+
         private async Task InitAsync()
         {
             if (!_initialized)
@@ -42,10 +52,23 @@ namespace Colg_UWP.ViewModel
 
         public async Task RefreshAsync()
         {
-            await InitAsync();
-            foreach (var PivotVM in PivotVMs)
+            try
             {
-                PivotVM.Refresh();
+                IsLoading = true;
+                await InitAsync();
+                foreach (var PivotVM in PivotVMs)
+                {
+                    PivotVM.Refresh();
+                }
+            }
+            catch(Exception e)
+            {
+                Logging.WriteLine($"Exception at HomeVM.RefreshAsync{e}");
+                InAppNotifier.Show("网络不给力啊,刷新试试看?");
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
     }
