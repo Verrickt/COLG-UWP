@@ -8,6 +8,7 @@ namespace Colg_UWP.ViewModel
     using Service;
     using System;
     using System.Collections.ObjectModel;
+    using Windows.UI.Popups;
 
     public class HomeVM : VMBase
     {
@@ -67,7 +68,7 @@ namespace Colg_UWP.ViewModel
             catch(Exception e)
             {
                 Logging.WriteLine($"Exception at HomeVM.RefreshAsync{e}");
-                InAppNotifier.Show("网络不给力啊,刷新试试看?");
+                await new MessageDialog("网络不给力啊,刷新试试看?").ShowAsync();
             }
             finally
             {

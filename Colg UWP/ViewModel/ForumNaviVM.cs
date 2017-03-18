@@ -9,6 +9,7 @@ namespace Colg_UWP.ViewModel
     using Service;
     using System;
     using System.Collections.ObjectModel;
+    using Windows.UI.Popups;
 
     public class ForumNaviVM : VMBase
     {
@@ -46,7 +47,7 @@ namespace Colg_UWP.ViewModel
             catch (Exception e)
             {
                 Logging.WriteLine($"Exception at ForumNaviVM.RefreshAsync{e}");
-                InAppNotifier.Show("网络不给力啊,要不刷新试试?");
+                await new MessageDialog("网络不给力啊,刷新试试看?").ShowAsync();
             }
             finally
             {
