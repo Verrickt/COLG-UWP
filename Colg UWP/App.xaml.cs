@@ -44,7 +44,7 @@ namespace Colg_UWP
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 var statusBar = StatusBar.GetForCurrentView();
-                statusBar.HideAsync();
+                await statusBar.HideAsync();
             }
 
             //ApiService.InitAsync();
@@ -110,8 +110,11 @@ namespace Colg_UWP
             {
                 Util.Logging.InitializationAsync(),
                 Util.UserDataManager.InitializationAsync(),
-                UserService.InitializationAsync()
             };
+            //fire and forget. Doesn't really matters.
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            UserService.InitializationAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             await Task.WhenAll(tasks);
             await Service.LoginService.AutoLoginAsync();
             //only autologin after UserDataManager has finished initialization.

@@ -68,11 +68,15 @@ namespace Colg_UWP.IncrementalLoading
             {
                 await new MessageDialog("网络不给力啊,要不刷新试试?", "").ShowAsync();
                 _onError = true;
+
+                //fire and forget
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 Task.Run(async () =>
                 {
                     await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
                     _onError = false;
                 });
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 return new List<T1>();
             }
             finally
