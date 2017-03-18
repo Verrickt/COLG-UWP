@@ -103,7 +103,7 @@
         <CommandBar x:Name="BottomCommandBar" Grid.Row="2">
 
             <CommandBar.PrimaryCommands>
-                <AppBarButton  Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
+                <AppBarButton  Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
         <ProgressRing Grid.Row="1" Height="50" Width="50" IsActive="{x:Bind VM.IsLoading,Mode=OneWay}"></ProgressRing>
