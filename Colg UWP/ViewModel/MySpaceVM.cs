@@ -69,7 +69,7 @@ namespace Colg_UWP.ViewModel
             });
             Credits = new ObservableCollection<Credit>(User.Credits);
             Exp = Credits.Max(k => k.Value);
-            ExpMax = User.UserGroup.CreditRange.UpperBound;
+            ExpMax = User.UserGroup?.CreditRange.UpperBound;
             TimeRegisted = User.TimeRegisted?.ToString("yyyy.MM.dd");
         }
     }
