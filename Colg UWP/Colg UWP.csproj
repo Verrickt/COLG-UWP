@@ -149,7 +149,7 @@
     <Compile Include="ViewModel\MainPageVM.cs" />
     <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="ViewModel\MySpaceVM.cs" />
-    <Compile Include="ViewModel\PopularPostDiscussion.cs" />
+    <Compile Include="ViewModel\PopularDiscussionVM.cs" />
     <Compile Include="ViewModel\DiscussionVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\ReplyVM.cs" />
