@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Colg_UWP
 {
+    using Colg_UWP.Util;
     using ViewModel;
 
     /// <summary>
@@ -25,6 +26,23 @@ namespace Colg_UWP
         {
             InitializeComponent();
         }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            try
+            {
+                await Service.LoginService.AutoLoginAsync();
+            }
+            catch (Exception)
+            {
+                InAppNotifier.Show("自动登录失败");
+            }
+            finally
+            {
+                base.OnNavigatedTo(e);
+            }
+        }
+
 
         private void Humburger_Click(object sender, RoutedEventArgs e)
         {

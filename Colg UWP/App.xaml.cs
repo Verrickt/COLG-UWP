@@ -116,8 +116,7 @@ namespace Colg_UWP
             UserService.InitializationAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             await Task.WhenAll(tasks);
-            await Service.LoginService.AutoLoginAsync();
-            //only autologin after UserDataManager has finished initialization.
+            
         }
 
         private async Task SuspendingTask()
