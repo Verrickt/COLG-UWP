@@ -10,17 +10,14 @@
     mc:Ignorable="d"
     Opacity="0.75"
     IsPrimaryButtonEnabled="False"
-    IsSecondaryButtonEnabled="False"
-    >
+    IsSecondaryButtonEnabled="False">
     <ContentDialog.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
     </ContentDialog.Resources>
-    <StackPanel >
+    <StackPanel>
         <TextBlock Text="{Binding TitleText, ElementName=contentDialog}" ></TextBlock>
         <TextBlock Text="{Binding BodyText, ElementName=contentDialog}" ></TextBlock>
-
     </StackPanel>
-
 </ContentDialog>

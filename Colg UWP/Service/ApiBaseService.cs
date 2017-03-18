@@ -1,25 +1,25 @@
-﻿using System;
+﻿using Colg_UWP.Util;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace Colg_UWP.Service
 {
-    public  class ApiBaseService
+    public class ApiBaseService : ApiBase
     {
-        public static async Task<JObject> GetJson(string url,Dictionary<string,string> dictioanry)
+        protected static async Task<JObject> GetJson(string url, Dictionary<string, string> dictioanry)
         {
             try
             {
                 string json;
-                if (dictioanry==null)
+                if (dictioanry == null)
                 {
-                    json = await ApiBase.GetPost(url).ConfigureAwait(false);
+                    json = await GetPost(url).ConfigureAwait(false);
                 }
                 else
                 {
-                    json = await ApiBase.GetPost(url,dictioanry).ConfigureAwait(false);
-
+                    json = await GetPost(url, dictioanry).ConfigureAwait(false);
                 }
                 if (String.IsNullOrWhiteSpace(json))
                 {
@@ -30,12 +30,14 @@ namespace Colg_UWP.Service
                     return JObject.Parse(json);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Logging.WriteLine($"Exceptoin thown at ApiBaseService.GetJson{Environment.NewLine}" +
+                    $"{e.ToString()}");
                 return null;
             }
         }
 
-        public static async Task<JObject> GetJson(string url) => await GetJson(url, null).ConfigureAwait(false);
+        protected static async Task<JObject> GetJson(string url) => await GetJson(url, null).ConfigureAwait(false);
     }
 }

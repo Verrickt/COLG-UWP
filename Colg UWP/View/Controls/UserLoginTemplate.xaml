@@ -10,8 +10,8 @@
     d:DesignWidth="400">
 
     <StackPanel Orientation="Horizontal">
-        <Image Height="200" Width="200" Source="{x:Bind UserLoginData.AvatarUrl,Mode=OneWay}" Stretch="UniformToFill">
+        <Image Height="200" Width="200" Source="{x:Bind UserCredential.Avatar,Mode=OneWay}" Stretch="UniformToFill">
         </Image>
-        <TextBlock VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind UserLoginData.UserName}"></TextBlock>
+        <TextBlock VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind UserCredential.LoginName}"></TextBlock>
     </StackPanel>
 </UserControl>

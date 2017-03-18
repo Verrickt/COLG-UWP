@@ -19,22 +19,19 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <ProgressBar IsIndeterminate="True" Visibility="{x:Bind VM.ReplyList.IsLoading,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}"></ProgressBar>
-        <markdown:MarkdownTextBlock Markdown="{x:Bind VM.Subject,Mode=OneWay}"></markdown:MarkdownTextBlock>
-        <ListView Grid.Row="1"   x:Name="ReplyList" 
-                  ItemsSource="{x:Bind VM.ReplyList,Mode=OneWay}" 
-                  RightTapped="Replys_RightTapped" 
-                  IncrementalLoadingTrigger="Edge"
-                  >
+        <ListView Grid.Row="1"   x:Name="ReplyList"
+                  ItemsSource="{x:Bind VM.ReplyList,Mode=OneWay}"
+                  RightTapped="Replys_RightTapped"
+                  IncrementalLoadingTrigger="Edge">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                 </Style>
             </ListView.ItemContainerStyle>
 
-
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Reply">
-                    <Grid Margin="5" Padding="10" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" HorizontalAlignment="Stretch" >
+                    <Grid Margin="5" Padding="10" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
@@ -50,16 +47,14 @@
                             <TextBlock RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Text="{x:Bind Id,Mode=OneWay}"></TextBlock>
                         </RelativePanel>
                         <StackPanel Grid.Row="1">
-                            <markdown:MarkdownTextBlock Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Markdown="{x:Bind Markdown,Mode=OneWay}" >
-
+                            <markdown:MarkdownTextBlock Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Markdown="{x:Bind Markdown,Mode=OneWay}">
                             </markdown:MarkdownTextBlock>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
-        <Grid  Visibility="{x:Bind VM.ShowCommentBox,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Margin="10" Grid.Row="2" Name="ReplyGrid">
+        <!--<Grid  Visibility="{x:Bind VM.ShowCommentBox,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Margin="10" Grid.Row="2" Name="ReplyGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -69,17 +64,17 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBox Margin="10,0"  Grid.ColumnSpan="2" Grid.Row="0" BorderThickness="0"
-                     
+
                      Background="White"
                      Height="80" Name="Message" Text="{x:Bind VM.ReplyMessage,Mode=TwoWay}"></TextBox>
             <Button Margin="10,5"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0"   Name="Send"
-                        Click="Send_OnClick" 
+                        Click="Send_OnClick"
                         >发送</Button>
-            <Button 
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            <Button
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Grid.Row="1" Grid.Column="1"
                     Margin="10,5"
                         Name="Cancel" Click="Cancel_OnClick">取消</Button>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

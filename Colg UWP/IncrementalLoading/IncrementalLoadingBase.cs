@@ -8,6 +8,7 @@
 //
 //*********************************************************
 
+using Colg_UWP.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,23 +19,15 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
-using Colg_UWP.Annotations;
 
 namespace Colg_UWP.IncrementalLoading
 {
-    // This class can used as a jumpstart for implementing ISupportIncrementalLoading. 
+    // This class can used as a jumpstart for implementing ISupportIncrementalLoading.
     // Implementing the ISupportIncrementalLoading interfaces allows you to create a list that loads
     //  more data automatically when the user scrolls to the end of of a GridView or ListView.
-    public abstract class IncrementalLoadingBase<T>: IList, ISupportIncrementalLoading, INotifyCollectionChanged,INotifyPropertyChanged
+    public abstract class IncrementalLoadingBase<T> : IList, ISupportIncrementalLoading, INotifyCollectionChanged, INotifyPropertyChanged
     {
         #region IList
-
-        public event EventHandler<DataFilledEventArgs<T>> DataFilled;
-
-        protected void OnDataFilled(T t)
-        {
-            DataFilled?.Invoke(this, new DataFilledEventArgs<T>(t));
-        }
 
         public int Add(object value)
         {
@@ -118,8 +111,8 @@ namespace Colg_UWP.IncrementalLoading
             return _storage.GetEnumerator();
         }
 
-        #endregion 
-    
+        #endregion IList
+
         #region ISupportIncrementalLoading
 
         public bool HasMoreItems
@@ -139,17 +132,17 @@ namespace Colg_UWP.IncrementalLoading
             return AsyncInfo.Run((c) => LoadMoreItemsAsync(c, count));
         }
 
-        #endregion 
+        #endregion ISupportIncrementalLoading
 
         #region INotifyCollectionChanged
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        #endregion 
+        #endregion INotifyCollectionChanged
 
         #region Private methods
 
-        async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken c, uint count)
+        private async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken c, uint count)
         {
             try
             {
@@ -169,7 +162,7 @@ namespace Colg_UWP.IncrementalLoading
             }
         }
 
-        void NotifyOfInsertedItems(int baseIndex, int count)
+        private void NotifyOfInsertedItems(int baseIndex, int count)
         {
             if (CollectionChanged == null)
             {
@@ -183,39 +176,33 @@ namespace Colg_UWP.IncrementalLoading
             }
         }
 
-        #endregion
+        #endregion Private methods
 
         #region Overridable methods
 
         protected abstract Task<IList<T>> LoadMoreItemsOverrideAsync(CancellationToken c, int count);
+
         protected abstract bool HasMoreItemsOverride();
 
-        #endregion 
+        #endregion Overridable methods
 
         #region State
 
-        List<T> _storage = new List<T>();
-        bool _busy = false;
+        private List<T> _storage = new List<T>();
+        private bool _busy = false;
 
-        #endregion
+        #endregion State
 
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        } 
-        #endregion
-    }
-
-    public class DataFilledEventArgs<T>:EventArgs
-    {
-        public T Data { get; set; }
-        public DataFilledEventArgs(T data)
-        {
-            this.Data = data;
         }
+
+        #endregion INotifyPropertyChanged
     }
 }

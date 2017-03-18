@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Colg_UWP.Util;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,37 +11,32 @@ namespace Colg_UWP.ViewModel
 
     public class ForumNaviVM : VMBase
     {
-        private ObservableCollection<ForumContainer> _forumContainers;
-        private List<Forum> Forums { get;  set; }
-
-       
-
+        private List<Forum> Forums { get; set; }
         public Forum SelectedForum { get; set; }
 
-        public ObservableCollection<ForumContainer> ForumContainers
-        {
-            get { return _forumContainers; }
-            set { _forumContainers = value;OnPropertyChanged(); }
-        }
+        public Util.RelayCommand RefreshCommand { get; set; }
 
+        public ObservableCollection<ForumContainer> ForumContainers { get; set; }
 
-        public async Task InitAsync()
+        public async Task RefreshAsync()
         {
-            Forums = await ApiService.ForumListAsync();
+            Forums = await ForumService.GetForumsAsync();
+            ForumContainers.Clear();
             var containers = Forums.GroupBy(x => x.Catagory, (catagory, grouped) => new ForumContainer
             {
                 Catagory = catagory,
                 Forums
-             = new List<Forum>(grouped)
-            }).OrderBy(x=>x.Catagory[0]);
-           ForumContainers = new ObservableCollection<ForumContainer>(containers);
-
+             = new List<Forum>(grouped.OrderBy(f => f.Name[0]))
+            });
+            containers.ToList().ForEach(c => ForumContainers.Add(c));
         }
 
         public ForumNaviVM()
         {
             Forums = new List<Forum>();
             ForumContainers = new ObservableCollection<ForumContainer>();
+            RefreshCommand = new RelayCommand(
+                async () => await RefreshAsync());
         }
     }
 }

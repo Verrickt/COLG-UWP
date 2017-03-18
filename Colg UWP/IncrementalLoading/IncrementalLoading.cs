@@ -8,42 +8,44 @@
 //
 //*********************************************************
 
+using Colg_UWP.Model;
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using Colg_UWP.Model;
+using Windows.UI.Popups;
 
 namespace Colg_UWP.IncrementalLoading
 {
-    // This class implements IncrementalLoadingBase. 
-    // To create your own Infinite List, you can create a class like this one that doesn't have 'generator' or 'maxcount', 
+    // This class implements IncrementalLoadingBase.
+    // To create your own Infinite List, you can create a class like this one that doesn't have 'generator' or 'maxcount',
     //  and instead downloads items from a live data source in LoadMoreItemsOverrideAsync.
-    public class IncrementalList<T1,T2> : IncrementalLoadingBase<T1>
-        where T2:Model.IIncrementalLoadable<T1>
+    public class IncrementalList<T1, T2> : IncrementalLoadingBase<T1>
+        where T2 : IIncrementalLoad<T1>
     {
-       
-
-        public Func<Task<List<T1>>> Generator;
-
-        
+        public Func<Task<(int, List<T1>)>> _loadMore;
 
         public IncrementalList(T2 source)
         {
             this._maxCount = source.MaxCount;
-            this.Generator = source.LoadMore;
+            this._loadMore = source.LoadMore;
         }
 
         private bool _isLoading { get; set; }
 
-        public bool IsLoading { get { return _isLoading;} set {
-            if (value!=_isLoading)
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
             {
-                _isLoading = value;
-                OnPropertyChanged();
+                if (value != _isLoading)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
             }
-        } }
-        
+        }
+
+        private bool _onError { get; set; } = false;
 
         protected async override Task<IList<T1>> LoadMoreItemsOverrideAsync(System.Threading.CancellationToken c, int count)
         {
@@ -51,46 +53,48 @@ namespace Colg_UWP.IncrementalLoading
 
             int toGenerate = System.Math.Min(count, _maxCount - _count);
 
-            // Wait for work 
+            // Wait for work
             await Task.Delay(10);
 
             // This code simply generates
-                List<T1> values =new List<T1>(toGenerate) ;
             try
             {
-                values = await Generator();
-                if (this._count==0)
-                {
-                    T1 t = values[0];
-                    values.RemoveAt(0);
-                    OnDataFilled(t);
-                }
-                _count += values.Count;
-
-                return values;
+                (int newMaxCount, var items) = await _loadMore();
+                _count += items.Count;
+                this._maxCount = newMaxCount;
+                return items;
             }
             catch (Exception)
             {
+                await new MessageDialog("网络不给力啊,要不刷新试试?", "").ShowAsync();
+                _onError = true;
+                Task.Run(async () =>
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                    _onError = false;
+                });
                 return new List<T1>();
             }
             finally
             {
                 IsLoading = false;
-                
             }
         }
 
         protected override bool HasMoreItemsOverride()
         {
+            if (_onError)
+            {
+                return false;
+            }
             return _count < _maxCount;
         }
 
         #region State
 
+        private int _count = 0;
+        private int _maxCount;
 
-        int _count = 0;
-        int _maxCount;
-
-        #endregion 
+        #endregion State
     }
 }

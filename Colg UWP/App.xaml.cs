@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Colg_UWP.Service;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -8,8 +8,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Helper;
-using Colg_UWP.Service;
 
 namespace Colg_UWP
 {
@@ -33,7 +31,7 @@ namespace Colg_UWP
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override  void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             //if (System.Diagnostics.Debugger.IsAttached)
@@ -41,16 +39,15 @@ namespace Colg_UWP
             //    this.DebugSettings.EnableFrameRateCounter = true;
             //}
 #endif
+            await InitializeTask();
             Frame rootFrame = Window.Current.Content as Frame;
-            InAppNotifier.Dispatcher = Window.Current.Dispatcher;
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-
                 var statusBar = StatusBar.GetForCurrentView();
                 statusBar.HideAsync();
             }
 
-            ApiService.InitAsync();
+            //ApiService.InitAsync();
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -76,7 +73,6 @@ namespace Colg_UWP
                     // configuring the new page by passing required information as a navigation
                     // parameter
                     rootFrame.Navigate(typeof(View.Pages.MainPage), e.Arguments);
-
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -88,7 +84,7 @@ namespace Colg_UWP
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
@@ -104,21 +100,30 @@ namespace Colg_UWP
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-            await Task.WhenAll(SuspendingTasks());
+            await SuspendingTask();
             deferral.Complete();
         }
 
-        private List<Task> SuspendingTasks()
+        private async Task InitializeTask()
         {
-            return new List<Task>()
+            var tasks = new[]
             {
-                UserDataManager.SaveUserData(),
-                LoginDataManager.SaveLoginDatas()
-            }
-            ;
+                Util.Logging.InitializationAsync(),
+                Util.UserDataManager.InitializationAsync(),
+                UserService.InitializationAsync()
+            };
+            await Task.WhenAll(tasks);
+            await Service.LoginService.AutoLoginAsync();
+            //only autologin after UserDataManager has finished initialization.
         }
 
-      
-        
+        private async Task SuspendingTask()
+        {
+            var tasks =
+                new[]
+                    {Util.UserDataManager.SaveUserData()};
+            await Task.WhenAll(tasks
+            );
+        }
     }
 }

@@ -6,20 +6,26 @@ namespace Colg_UWP.ViewModel
 
     public class ArticleVM : VMBase
     {
+        private bool _isLoading;
 
-
-
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
+        }
 
         public string ArticleId { get; set; }
-        private News _news;
-        public News News { get { return _news; } set { _news = value; OnPropertyChanged(); } }
+        private Article _article;
+        public Article Article { get { return _article; } set { SetProperty(ref _article, value); } }
         private string _articleInfo = string.Empty;
         private string _uri;
-        public string ArticleInfo { get { return _articleInfo; } set { _articleInfo = value; OnPropertyChanged(); } }
+        public string ArticleInfo { get { return _articleInfo; } set { SetProperty(ref _articleInfo, value); } }
+
         public async Task InitAsync()
         {
-            await News.InitContent();
-            OnPropertyChanged("News");
+            IsLoading = true;
+            await Article.LoadContentAsync();
+            IsLoading = false;
         }
     }
 }

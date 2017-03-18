@@ -19,7 +19,7 @@ namespace Colg_UWP.View.Controls
 {
     public sealed partial class UserLoginTemplate : UserControl
     {
-        private Model.LoginData UserLoginData => this.DataContext as Model.LoginData;
+        private Model.Credential UserCredential => this.DataContext as Model.Credential;
 
         public UserLoginTemplate()
         {

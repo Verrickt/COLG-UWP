@@ -11,7 +11,7 @@ namespace Colg_UWP.View.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HomePage : Page
+    public sealed partial class HomePage : MenuPage
     {
         public HomePage()
         {
@@ -21,40 +21,37 @@ namespace Colg_UWP.View.Pages
 
         public HomeVM VM;
 
-       
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode==NavigationMode.New)
+            if (e.NavigationMode == NavigationMode.New)
             {
                 VM = new HomeVM();
-                VM.RefreshAsync();
+                await VM.RefreshAsync();
             }
+            Bindings.Update();
             base.OnNavigatedTo(e);
         }
 
-
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var clicked = e.ClickedItem as Model.News;
-            this.Frame.Navigate(typeof(ArticlePage), clicked);
+            var clicked = e.ClickedItem as Model.Article;
+            ContentFrame.Navigate(typeof(ArticlePage), clicked);
         }
 
         private void GridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var gridview = sender as GridView;
-            var wrapgrid = (ItemsWrapGrid) gridview.ItemsPanelRoot;
-            double margin = 10;
-            double newWidth = e.NewSize.Width;
-            double itemWidth = wrapgrid.ItemWidth;
-
-            int n = (int) (newWidth/(400d + margin));
-            if (n != 0)
+            var wrapgrid = (ItemsWrapGrid)gridview.ItemsPanelRoot;
+            double desiredWidth = (double)Resources["DesiredItemWidth"];
+            double margin = 5;
+            double actualWidth = desiredWidth + margin;
+            int count = (int)(e.NewSize.Width / actualWidth);
+            if (count == 0)
             {
-                wrapgrid.ItemWidth = newWidth/n - margin;
+                count = 1;
             }
+            wrapgrid.ItemWidth = e.NewSize.Width / count - margin;
         }
-
 
         private async void Refresh_Click(object sender, RoutedEventArgs e)
         {

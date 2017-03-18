@@ -1,34 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using Colg_UWP.Model;
+using Colg_UWP.Service;
+using Colg_UWP.Util;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Colg_UWP.Model;
-using Colg_UWP.Service;
 
 namespace Colg_UWP.ViewModel
 {
-    public class PopularPostDiscussion:VMBase
+    public class PopularPostDiscussion : VMBase
     {
-        private ObservableCollection<Discussion> _popularPosts;
+        public RelayCommand RefreshCommand { get; set; }
 
-        public ObservableCollection<Discussion> PopularPosts
-        {
-            get { return _popularPosts; }
-            set { _popularPosts = value;OnPropertyChanged(); }
-        }
-
-        public Discussion SelectedPost { get; set; }
+        public ObservableCollection<Discussion> PopularPosts;
 
         public PopularPostDiscussion()
         {
-            _popularPosts= new ObservableCollection<Discussion>();
+            PopularPosts = new ObservableCollection<Discussion>();
+            RefreshCommand = new RelayCommand(async () => await RefreshAsync());
         }
 
         public async Task RefreshAsync()
         {
-            List<Discussion> list = await ApiService.PopularPostList();
+            List<Discussion> list = await DiscussionService.GetPopularDiscussionsAsync();
             PopularPosts.Clear();
             list.ForEach(post => PopularPosts?.Add(post));
         }
-
     }
 }

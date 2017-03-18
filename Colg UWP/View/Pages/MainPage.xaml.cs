@@ -1,24 +1,29 @@
-﻿using Windows.UI.Core;
+﻿using System;
+using System.Collections.Generic;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Colg_UWP.Service;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Colg_UWP.View.Pages
 {
     using ViewModel;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public Frame Main_ContentFrame => ContentFrame;
 
+        private Stack<bool> _navigationStack = new Stack<bool>();
+        //keep track of to which frame all the page navigation users triggerd belongs to
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void Humburger_Click(object sender, RoutedEventArgs e)
@@ -26,69 +31,152 @@ namespace Colg_UWP.View.Pages
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            EnableBackRequest();
-            MyFrame.Navigate(typeof(HomePage));
-            Title.Text = VM.TopMenuItems[0].DisplayName;
-            await ApiService.InitAsync();
-            await ApiService.AutoLogin().ConfigureAwait(false);
-
-        }
-
-        public void EnableBackRequest()
-        {
-            MyFrame.Navigated += MyFrame_Navigated;
+            MenuFrame.Navigate(typeof(HomePage));
+            ContentFrame.Navigate(typeof(PlaceHolderPage));
+            MenuFrame.Navigated += MenuFrame_OnNavigated;
+            ContentFrame.Navigated += ContentFrame_OnNavigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            UpdateUserInfo();
         }
 
-        public void DisableBackRequest()
+        private void UpdateUserInfo()
         {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
-            MyFrame.Navigated -= MyFrame_Navigated;
+            var activeUser = Util.UserDataManager.GetActiveUser();
+            string username = activeUser?.UserName;
+            string avatar = activeUser?.Avatar;
+            UserNameTextBlock.Text = username ?? "登录";
+            var str = AvatarImageEx.Source?.ToString();
+            if (str != avatar)
+            {
+                AvatarImageEx.Source = avatar;
+            }
         }
 
-        private void MyFrame_Navigated(object sender, NavigationEventArgs e)
+        private void MenuFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = ((Frame)sender).CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
+                _navigationStack.Push(true);
+            if (MenuFrame.Visibility == Visibility.Collapsed)
+            {
+                MenuFrame.Visibility = Visibility.Visible;
+                ContentFrame.Visibility = Visibility.Collapsed;
+            }
+            UpdateBackButtonVisibility();
+            UpdateIsPaneOpen();
+            UpdateUserInfo();
+        }
+
+        private void ContentFrame_OnNavigated(object sender, NavigationEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward)
+                _navigationStack.Push(false);
+            if (ContentFrame.Visibility == Visibility.Collapsed)
+            {
+                MenuFrame.Visibility = Visibility.Collapsed;
+                ContentFrame.Visibility = Visibility.Visible;
+            }
+            if (e.NavigationMode == NavigationMode.Back)
+                if (ContentFrame.BackStackDepth == 0)
+                {
+                    if (MenuFrame.Visibility == Visibility.Collapsed)
+                    {
+                        MenuFrame.Visibility = Visibility.Visible;
+                        ContentFrame.Visibility = Visibility.Collapsed;
+                    }
+                }
+
+            UpdateIsPaneOpen();
+            UpdateBackButtonVisibility();
+        }
+
+        private void UpdateBackButtonVisibility()
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = _navigationStack.Count > 0
+                ? AppViewBackButtonVisibility.Visible
+                : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = MyFrame;
-            if (rootFrame != null && rootFrame.CanGoBack)
+            bool isLastPageMenuPage = _navigationStack.Pop();
+
+            if (isLastPageMenuPage)
             {
-                e.Handled = true;
-                rootFrame.GoBack();
+                MenuFrame.GoBack();
             }
+            else
+            {
+                ContentFrame.GoBack();
+            }
+            e.Handled = true;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            DisableBackRequest();
+            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
+            MenuFrame.Navigated -= MenuFrame_OnNavigated;
+            ContentFrame.Navigated -= ContentFrame_OnNavigated;
         }
 
-        private void Menu_ItemClick(object sender, ItemClickEventArgs e)
+        private async void MenuList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var clicked = e.ClickedItem as MenuVM;
-            if (MySplitView.DisplayMode!=SplitViewDisplayMode.Inline)
+            MenuVM clicked = e.ClickedItem as MenuVM;
+            if (clicked.TargetUri != null)
             {
-                MySplitView.IsPaneOpen = false;
-            }
-            if (clicked.TargetPageType==null)
-            {
-                new ContentDialog()
-                {
-                    Content = "施工中(=ﾟωﾟ)=",
-                    PrimaryButtonText = "Got it"
-                }.ShowAsync();
+                await Windows.System.Launcher.LaunchUriAsync(clicked.TargetUri);
             }
             else
             {
-                Title.Text = clicked.DisplayName;
-                MyFrame.Navigate(clicked.TargetPageType);
+                if (clicked.TargetPage == null)
+                {
+                    await new ContentDialog()
+                    {
+                        Content = "施工中(=ﾟωﾟ)=",
+                        PrimaryButtonText = "Got it"
+                    }.ShowAsync();
+                }
+                else
+                {
+                    MenuFrame.Navigate(clicked.TargetPage);
+                }
             }
-          
+        }
+
+        private void UpdateIsPaneOpen()
+        {
+            bool
+                keepPaneOpen = MySplitView.DisplayMode == SplitViewDisplayMode.CompactInline;
+            if (!keepPaneOpen)
+            {
+                MySplitView.IsPaneOpen = false;
+            }
+        }
+
+        private void MainPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double width = e.NewSize.Width;
+            double wideWidth = (double)Application.Current.Resources["WideMinWidth"];
+
+            if (width >= wideWidth)
+            {
+                ContentFrame.Visibility = Visibility.Visible;
+                MenuFrame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if (ContentFrame.CanGoBack)
+                {
+                    ContentFrame.Visibility = Visibility.Visible;
+                    MenuFrame.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ContentFrame.Visibility = Visibility.Collapsed;
+                    MenuFrame.Visibility = Visibility.Visible;
+                }
+            }
         }
     }
 }

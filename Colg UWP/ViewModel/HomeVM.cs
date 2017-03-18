@@ -1,61 +1,89 @@
-﻿using System.Threading.Tasks;
-using Colg_UWP.IncrementalLoading;
+﻿using Colg_UWP.IncrementalLoading;
+using System.Threading.Tasks;
 
 namespace Colg_UWP.ViewModel
 {
     using Model;
     using Service;
+    using System.Collections.ObjectModel;
 
     public class HomeVM : VMBase
     {
-        private IncrementalList<News,NewsContainer> _news;
-        private IncrementalList<News, NewsContainer> _hotNews;
-        private IncrementalList<News, NewsContainer> _prospective;
-
-        public IncrementalList<News, NewsContainer> News
+        public ObservableCollection<ArticleContainerVM> PivotVMs
         {
-            get { return _news; }
-            set
+            get { return _vms; }
+            set { SetProperty(ref _vms, value); }
+        }
+
+        private bool _initialized = false;
+
+        private ObservableCollection<ArticleContainerVM> _vms;
+
+        public HomeVM()
+        {
+            PivotVMs = new ObservableCollection<ArticleContainerVM>();
+        }
+
+        private async Task InitAsync()
+        {
+            if (!_initialized)
             {
-                _news = value;
-                OnPropertyChanged();
+                var _newsList = await ArticleService.GetArticleContainerAsync("1");
+                var _prospectiveList = await ArticleService.GetArticleContainerAsync("16");
+                var _hotNewsList = await ArticleService.GetArticleContainerAsync("17");
+
+                _vms.Add(new ArticleContainerVM(_newsList, "首页"));
+                _vms.Add(new ArticleContainerVM(_hotNewsList, "资讯"));
+                _vms.Add(new ArticleContainerVM(_prospectiveList, "前瞻"));
+
+                _initialized = true;
             }
         }
 
-        public IncrementalList<News, NewsContainer> HotNews
-        {
-            get { return _hotNews; }
-            set
-            {
-                _hotNews = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public IncrementalList<News, NewsContainer> Prospective
-        {
-            get { return _prospective; }
-            set
-            {
-                _prospective = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private NewsContainer _newsList;
-        private NewsContainer _hotNewsList;
-        private NewsContainer _prospectiveList;
-
-       
         public async Task RefreshAsync()
         {
-            _newsList =_newsList??await ApiService.NewsByTypeId("1");
-            _prospectiveList = _prospectiveList??await ApiService.NewsByTypeId("16");
-            _hotNewsList = _hotNewsList??await ApiService.NewsByTypeId("17");
-            News = new IncrementalList<News, NewsContainer>(_newsList);
-            Prospective = new IncrementalList<News, NewsContainer>(_prospectiveList);
-            HotNews = new IncrementalList<News, NewsContainer>(_hotNewsList);
+            await InitAsync();
+            foreach (var PivotVM in PivotVMs)
+            {
+                PivotVM.Refresh();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Wrapper class which is able to be DataBounded to Pivot
+    /// </summary>
+
+    public class ArticleContainerVM : VMBase
+    {
+        private IncrementalList<Article, ArticleContainer> _list;
+
+        public IncrementalList<Article, ArticleContainer> List
+        {
+            get { return _list; }
+            set { SetProperty(ref _list, value); }
+        }
+
+        private string _header;
+
+        public string Header
+        {
+            get { return _header; }
+            set { _header = value; }
+        }
+
+        public void Refresh()
+        {
+            List = new IncrementalList<Article, ArticleContainer>(_container);
+        }
+
+        private ArticleContainer _container;
+
+        public ArticleContainerVM(ArticleContainer container, string header)
+        {
+            _container = container;
+            Header = header;
+            List = new IncrementalList<Article, ArticleContainer>(_container);
         }
     }
 }
