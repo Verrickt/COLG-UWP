@@ -62,6 +62,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <ProgressRing Grid.Row="1" IsActive="{x:Bind VM.IsLoading,Mode=OneWay}" Height="50" Width="50"></ProgressRing>
+        
         <CommandBar x:Name="BottomCommandBar" Grid.Row="2">
             <CommandBar.PrimaryCommands>
                 <AppBarButton  Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
