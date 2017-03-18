@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace Colg_UWP.ViewModel
 {
+    using Colg_UWP.Util;
     using Model;
     using Service;
     using System;
@@ -23,6 +24,7 @@ namespace Colg_UWP.ViewModel
         public HomeVM()
         {
             PivotVMs = new ObservableCollection<ArticleContainerVM>();
+            RefreshCommand = new RelayCommand(async()=>await RefreshAsync());
         }
 
         private bool _isLoading;
@@ -33,6 +35,7 @@ namespace Colg_UWP.ViewModel
             set { SetProperty(ref _isLoading, value); }
         }
 
+        public RelayCommand RefreshCommand{ get; set; }
 
         private async Task InitAsync()
         {

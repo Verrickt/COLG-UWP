@@ -73,7 +73,7 @@
                 <TextBlock Margin="12,14">主页</TextBlock>
             </CommandBar.Content>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Click="Refresh_Click"></AppBarButton>
+                <AppBarButton Name="Refresh" Icon="Refresh" Label="刷新" Command="{x:Bind VM.RefreshCommand}"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
         <Pivot Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
