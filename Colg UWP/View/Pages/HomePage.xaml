@@ -86,11 +86,6 @@
                               ItemClick="GridView_ItemClick"
                               ItemsSource="{x:Bind List,Mode=OneWay}"
                               ></GridView>
-
-                        <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center"
-                                      Height="50" Width="50"
-                                      IsActive="{x:Bind List.IsLoading,Mode=OneWay}"
-                                      ></ProgressRing>
                     </Grid>
                 </DataTemplate>
             </Pivot.ItemTemplate>
