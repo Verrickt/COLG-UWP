@@ -16,6 +16,7 @@ namespace Colg_UWP.View.Pages
         public HomePage()
         {
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            VM = new HomeVM();
             this.InitializeComponent();
         }
 
@@ -25,7 +26,6 @@ namespace Colg_UWP.View.Pages
         {
             if (e.NavigationMode == NavigationMode.New)
             {
-                VM = new HomeVM();
                 await VM.RefreshAsync();
             }
             Bindings.Update();
@@ -53,9 +53,6 @@ namespace Colg_UWP.View.Pages
             wrapgrid.ItemWidth = e.NewSize.Width / count - margin;
         }
 
-        private async void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            await VM.RefreshAsync();
-        }
+       
     }
 }

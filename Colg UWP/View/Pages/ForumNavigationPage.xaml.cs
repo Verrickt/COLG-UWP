@@ -16,6 +16,7 @@ namespace Colg_UWP.View.Pages
         public ForumNavigationPage()
         {
             NavigationCacheMode = NavigationCacheMode.Required;
+            VM = new ForumNaviVM();
             InitializeComponent();
         }
 
@@ -23,11 +24,10 @@ namespace Colg_UWP.View.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode == NavigationMode.New)
-            {
-            }
+            await VM.RefreshAsync();
             base.OnNavigatedTo(e);
         }
+
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -35,10 +35,5 @@ namespace Colg_UWP.View.Pages
             Frame.Navigate(typeof(ForumPage), clicked);
         }
 
-        private async void ForumNavigationPage_OnLoading(FrameworkElement sender, object args)
-        {
-            VM = new ForumNaviVM();
-            await VM.RefreshAsync();
-        }
     }
 }

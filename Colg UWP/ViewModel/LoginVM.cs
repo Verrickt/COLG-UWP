@@ -64,6 +64,8 @@ namespace Colg_UWP.ViewModel
 
         private async Task<bool> LoginAsync(User anotheruser = null)
         {
+            bool isSuccess = false;
+            string message;
             var actualUser = anotheruser ?? NewUser;
             var credential = actualUser.Credential;
             UndergoingLogin = true;
@@ -77,18 +79,29 @@ namespace Colg_UWP.ViewModel
             {
                 credential.QuestionId = 0;
             }
-            var (isSuccess, message) = await LoginService.LoginAsync(actualUser);
-            if (!isSuccess)
+            try
             {
-                await new MessageDialog("请检查登录信息。确认无误后请再次尝试", "登录失败").ShowAsync();
+                (isSuccess, message) = await LoginService.LoginAsync(actualUser);
+                if (!isSuccess)
+                {
+                    await new MessageDialog("请检查登录信息。确认无误后请再次尝试", "登录失败").ShowAsync();
+                    UndergoingLogin = false;
+                }
+                else
+                {
+                    InAppNotifier.Show("登录成功");
+                }
+                return isSuccess;
+            }
+            catch(Exception e)
+            {
+                InAppNotifier.Show("登陆失败,请检查网络.");
+                return false;
+            }
+            finally
+            {
                 UndergoingLogin = false;
             }
-            else
-            {
-                InAppNotifier.Show("登录成功");
-            }
-            UndergoingLogin = false;
-            return isSuccess;
         }
 
         public async Task<bool> QuickLoginAsync()

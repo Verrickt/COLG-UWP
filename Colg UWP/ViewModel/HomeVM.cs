@@ -3,9 +3,12 @@ using System.Threading.Tasks;
 
 namespace Colg_UWP.ViewModel
 {
+    using Colg_UWP.Util;
     using Model;
     using Service;
+    using System;
     using System.Collections.ObjectModel;
+    using Windows.UI.Popups;
 
     public class HomeVM : VMBase
     {
@@ -22,7 +25,18 @@ namespace Colg_UWP.ViewModel
         public HomeVM()
         {
             PivotVMs = new ObservableCollection<ArticleContainerVM>();
+            RefreshCommand = new RelayCommand(async()=>await RefreshAsync());
         }
+
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
+        }
+
+        public RelayCommand RefreshCommand{ get; set; }
 
         private async Task InitAsync()
         {
@@ -42,10 +56,23 @@ namespace Colg_UWP.ViewModel
 
         public async Task RefreshAsync()
         {
-            await InitAsync();
-            foreach (var PivotVM in PivotVMs)
+            try
             {
-                PivotVM.Refresh();
+                IsLoading = true;
+                await InitAsync();
+                foreach (var PivotVM in PivotVMs)
+                {
+                    PivotVM.Refresh();
+                }
+            }
+            catch(Exception e)
+            {
+                Logging.WriteLine($"Exception at HomeVM.RefreshAsync{e}");
+                await new MessageDialog("网络不给力啊,刷新试试看?").ShowAsync();
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
     }
