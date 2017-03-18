@@ -12,7 +12,7 @@ namespace Colg_UWP.View.Pages
     /// </summary>
     public sealed partial class PopularPostPage : MenuPage
     {
-        public PopularPostDiscussion VM { get; set; }
+        public PopularDiscussionVM VM { get; set; }
 
         public PopularPostPage()
         {
@@ -24,7 +24,7 @@ namespace Colg_UWP.View.Pages
         {
             if (VM == null)
             {
-                VM = new PopularPostDiscussion();
+                VM = new PopularDiscussionVM();
                 await VM.RefreshAsync();
             }
 
