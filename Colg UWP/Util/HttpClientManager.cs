@@ -5,11 +5,18 @@ namespace Colg_UWP.Util
 {
     public static class HttpClientManager
     {
-        public static HttpClient CreateClient()
+        public static HttpClient ClientForCurrentLifeCycle { get; private set; }
+
+
+       
+
+
+        static HttpClientManager()
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Mozilla", "5.0"));
-            return client;
+            ClientForCurrentLifeCycle = new HttpClient();
+
+
         }
+
     }
 }
