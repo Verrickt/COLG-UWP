@@ -17,7 +17,7 @@ namespace Colg_UWP.Service
 
         protected static async Task<string> GetPost(string uri, Dictionary<string, string> content)
         {
-            using (HttpClient client = HttpClientManager.CreateClient())
+            var client = HttpClientManager.ClientForCurrentLifeCycle;
             using (CancellationTokenSource cts = new CancellationTokenSource())
             {
                 Util.Logging.WriteLine($"Request {Environment.NewLine}{uri}");
