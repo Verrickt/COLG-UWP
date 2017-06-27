@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace Colg_UWP.Resource
+namespace Colg_UWP.Resource.Converters
 {
     public class DateTimeToDiffConverter : IValueConverter
     {

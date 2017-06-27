@@ -103,9 +103,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resource\BooleanNotToVisibilityComverter.cs" />
-    <Compile Include="Resource\DateTimeToCompressedStringConverter.cs" />
-    <Compile Include="Resource\IntToVisibilityConverter.cs" />
+    <Compile Include="Resource\Converters\BooleanNotToVisibilityComverter.cs" />
+    <Compile Include="Resource\Converters\DateTimeToCompressedStringConverter.cs" />
+    <Compile Include="Resource\Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Util\InAppNotifier.cs" />
     <Compile Include="Util\ExtensionMethods.cs" />
     <Compile Include="Util\HttpClientManager.cs" />
@@ -122,8 +122,8 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Credential.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Resource\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Resource\DateTimeToDiffConverter.cs" />
+    <Compile Include="Resource\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Resource\Converters\DateTimeToDiffConverter.cs" />
     <Compile Include="Service\ArticleService.cs" />
     <Compile Include="Service\DiscussionService.cs" />
     <Compile Include="Service\ForumService.cs" />
@@ -133,8 +133,8 @@
     <Compile Include="Model\Reply.cs" />
     <Compile Include="Model\IIncrementalLoad.cs" />
     <Compile Include="Model\Discussion.cs" />
-    <Compile Include="Resource\GenericObjectConverter.cs" />
-    <Compile Include="Resource\NullabilityToVisibilityConverter.cs" />
+    <Compile Include="Resource\Converters\GenericObjectConverter.cs" />
+    <Compile Include="Resource\Converters\NullabilityToVisibilityConverter.cs" />
     <Compile Include="Service\ApiBase.cs" />
     <Compile Include="Service\ApiBaseService.cs" />
     <Compile Include="Service\ApiUrl.cs" />

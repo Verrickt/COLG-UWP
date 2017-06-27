@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace Colg_UWP.Resource
+namespace Colg_UWP.Resource.Converters
 {
     /// <summary>
     /// A converter map any non-zero Int32 value to Visibility.Visible

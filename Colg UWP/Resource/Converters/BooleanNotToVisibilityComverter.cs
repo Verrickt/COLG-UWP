@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace Colg_UWP.Resource
+namespace Colg_UWP.Resource.Converters
 {
     /// <summary>
     /// True => Visibility.Collapsed

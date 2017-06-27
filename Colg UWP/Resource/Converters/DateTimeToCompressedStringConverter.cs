@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Colg_UWP.Resource
+namespace Colg_UWP.Resource.Converters
 {
     internal class DateTimeToCompressedStringConverter : Windows.UI.Xaml.Data.IValueConverter
     {
