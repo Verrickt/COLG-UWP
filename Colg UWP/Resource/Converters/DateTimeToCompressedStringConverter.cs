@@ -2,7 +2,7 @@
 
 namespace Colg_UWP.Resource.Converters
 {
-    internal class DateTimeToCompressedStringConverter : Windows.UI.Xaml.Data.IValueConverter
+    internal class DateTimeToShortStringConverter : Windows.UI.Xaml.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

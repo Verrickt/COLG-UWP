@@ -5,13 +5,7 @@
     <x:Double x:Key="NarrowMinWidth">0</x:Double>
     <x:Double x:Key="NormalMinWidth">720</x:Double>
     <x:Double x:Key="WideMinWidth">1200</x:Double>
-    <converters:NullabilityToVisibilityConverter x:Key="NullabilityToVisibilityConverter"></converters:NullabilityToVisibilityConverter>
-    <converters:GenericObjectConverter x:Key="GenericObjectConverter"></converters:GenericObjectConverter>
-    <converters:BooleanToVisibilityConverter IsInverted="False" x:Key="BooleanToVisibilityConverter"></converters:BooleanToVisibilityConverter>
-    <converters:DateTimeToDiffConverter x:Key="DateTimeToDiff"></converters:DateTimeToDiffConverter>
-    <converters:DateTimeToCompressedStringConverter x:Key="DateTimeToCompressedStringConverter"></converters:DateTimeToCompressedStringConverter>
-    <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"></converters:IntToVisibilityConverter>
-    <converters:BooleanToVisibilityConverter IsInverted="True"  x:Key="BooleanNegationToVisibilityConverter"></converters:BooleanToVisibilityConverter>
+   
     <Style x:Key="DiscussionItemStyle" TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />

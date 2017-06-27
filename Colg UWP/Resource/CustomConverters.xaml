@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Colg_UWP.Resource"
+    xmlns:converters="using:Colg_UWP.Resource.Converters">
+    <converters:NullabilityToVisibilityConverter x:Key="NullabilityToVisibilityConverter"></converters:NullabilityToVisibilityConverter>
+    <converters:GenericObjectConverter x:Key="GenericObjectConverter"></converters:GenericObjectConverter>
+    <converters:BooleanToVisibilityConverter IsInverted="False" x:Key="BooleanToVisibilityConverter"></converters:BooleanToVisibilityConverter>
+    <converters:DateTimeToDiffConverter x:Key="DateTimeToDiff"></converters:DateTimeToDiffConverter>
+    <converters:DateTimeToCompressedStringConverter x:Key="DateTimeToCompressedStringConverter"></converters:DateTimeToCompressedStringConverter>
+    <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"></converters:IntToVisibilityConverter>
+    <converters:BooleanToVisibilityConverter IsInverted="True"  x:Key="BooleanNegationToVisibilityConverter"></converters:BooleanToVisibilityConverter>
+</ResourceDictionary>

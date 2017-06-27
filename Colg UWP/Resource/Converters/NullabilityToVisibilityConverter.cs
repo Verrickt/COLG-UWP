@@ -4,6 +4,9 @@ using Windows.UI.Xaml.Data;
 
 namespace Colg_UWP.Resource.Converters
 {
+    /// <summary>
+    /// A converter maps null to Visiblity.Collapsed and not-null values to Visiblity.Visible
+    /// </summary>
     public class NullabilityToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
