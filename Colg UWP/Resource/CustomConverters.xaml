@@ -7,7 +7,7 @@
     <converters:GenericObjectConverter x:Key="GenericObjectConverter"></converters:GenericObjectConverter>
     <converters:BooleanToVisibilityConverter IsInverted="False" x:Key="BooleanToVisibilityConverter"></converters:BooleanToVisibilityConverter>
     <converters:DateTimeToDiffConverter x:Key="DateTimeToDiff"></converters:DateTimeToDiffConverter>
-    <converters:DateTimeToCompressedStringConverter x:Key="DateTimeToCompressedStringConverter"></converters:DateTimeToCompressedStringConverter>
+    <converters:DateTimeToShortStringConverter x:Key="DateTimeToCompressedStringConverter"></converters:DateTimeToShortStringConverter>
     <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"></converters:IntToVisibilityConverter>
     <converters:BooleanToVisibilityConverter IsInverted="True"  x:Key="BooleanNegationToVisibilityConverter"></converters:BooleanToVisibilityConverter>
 </ResourceDictionary>
