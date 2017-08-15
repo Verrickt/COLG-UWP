@@ -11,8 +11,7 @@
     Loaded="Page_Loaded"
     SizeChanged="MainPage_OnSizeChanged"
     Unloaded="Page_Unloaded"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
     <Page.DataContext>
         <viewmodel:MainPageVM x:Name="VM" />
     </Page.DataContext>
@@ -33,12 +32,62 @@
                 <TextBlock
                     Grid.Column="1"
                     VerticalAlignment="Center"
-                    Text="{x:Bind DisplayName}"
-                    />
+                    Text="{x:Bind DisplayName}" />
             </Grid>
         </DataTemplate>
         <Style TargetType="ListViewItem">
             <Setter Property="Padding" Value="0,0,0,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid>
+                            <Rectangle
+                                x:Name="SelectionIndicator"
+                                Width="6"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Stretch"
+                                Fill="Transparent" />
+                            <ContentPresenter
+                                x:Name="Content"
+                                Grid.Column="0"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Target="SelectionIndicator.Fill" Value="Transparent" />
+                                            <Setter Target="Content.Foreground" Value="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Target="SelectionIndicator.Fill" Value="{ThemeResource SystemControlHighlightListAccentLowBrush}" />
+                                            <Setter Target="Content.Foreground" Value="{ThemeResource SystemControlHighlightListAccentLowBrush}" />
+
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="SelectionIndicator.Fill" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
+
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOverSelected">
+                                        <VisualState.Setters>
+                                            <Setter Target="SelectionIndicator.Fill" Value="{ThemeResource SystemControlHighlightListAccentMediumBrush}" />
+                                            <Setter Target="Content.Foreground" Value="{ThemeResource SystemControlHighlightListAccentMediumBrush}" />
+
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="TransparentButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
@@ -51,6 +100,120 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <SplitView
+            Name="MySplitView"
+            Grid.Row="1"
+            Grid.Column="0"
+            CompactPaneLength="48"
+            DisplayMode="CompactOverlay"
+            OpenPaneLength="240">
+            <SplitView.Pane>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView
+                        Name="TopMenuList"
+                        IsItemClickEnabled="True"
+                        ItemClick="MenuList_ItemClick"
+                        ItemTemplate="{StaticResource MenuItemDateTemplate}"
+                        ItemsSource="{x:Bind VM.TopMenuItems}"
+                        SelectionMode="Single" />
+                    <StackPanel Grid.Row="2">
+                        <Button
+                            Command="{x:Bind VM.JumpToUserAccountPage}"
+                            CommandParameter="{x:Bind MenuFrame}"
+                            Style="{StaticResource TransparentButtonStyle}">
+                            <Grid Width="240" Height="48">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border
+                                    Width="26"
+                                    Height="26"
+                                    BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}"
+                                    BorderThickness="1">
+                                    <uwptoolkit:ImageEx
+                                        Name="AvatarImageEx"
+                                        Width="24"
+                                        Height="24"
+                                        PlaceholderSource="../../Assets/ImagePlaceHolder.jpg"
+                                        PlaceholderStretch="UniformToFill" />
+                                </Border>
+                                <TextBlock
+                                    Name="UserNameTextBlock"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Text="登录"
+                                    TextTrimming="CharacterEllipsis" />
+                            </Grid>
+                        </Button>
+                        <Rectangle
+                            Width="240"
+                            Height="1"
+                            Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
+                    </StackPanel>
+                    <ListView
+                        Name="BottomMenuList"
+                        Grid.Row="3"
+                        IsItemClickEnabled="True"
+                        ItemClick="MenuList_ItemClick"
+                        ItemTemplate="{StaticResource MenuItemDateTemplate}"
+                        ItemsSource="{x:Bind VM.BottomMenuItems}"
+                        SelectionMode="Single" />
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid Margin="0,-48,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            x:Name="MenuFrameColumn"
+                            Width="*"
+                            MaxWidth="600" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Name="MenuFrame" Grid.Column="0">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <PopupThemeTransition />
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                    </Frame>
+                    <Frame Name="ContentFrame" Grid.Column="1">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition />
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                    </Frame>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+        <RelativePanel
+            x:Name="relativePanel"
+            Grid.Row="0"
+            Width="48"
+            HorizontalAlignment="Left"
+            Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <Button
+                Name="Humburger"
+                Width="48"
+                Height="48"
+                Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                Click="Humburger_Click"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                Style="{StaticResource TransparentButtonStyle}">
+                <Button.Content>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+                </Button.Content>
+            </Button>
+        </RelativePanel>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Wide">
@@ -95,130 +258,5 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <SplitView
-            Name="MySplitView"
-            Grid.Row="1"
-            Grid.Column="0"
-            CompactPaneLength="48"
-            DisplayMode="CompactOverlay"
-            OpenPaneLength="240"
-            >
-            <SplitView.Pane>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <ListView
-                        Name="TopMenuList"
-                        IsItemClickEnabled="True"
-                        ItemClick="MenuList_ItemClick"
-                        ItemTemplate="{StaticResource MenuItemDateTemplate}"
-                        ItemsSource="{x:Bind VM.TopMenuItems}"
-                        SelectionMode="None"
-                        />
-                    <StackPanel Grid.Row="2">
-                        <Button
-                            Command="{x:Bind VM.JumpToUserAccountPage}"
-                            CommandParameter="{x:Bind MenuFrame}"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            >
-                            <Grid Width="240" Height="48">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="48" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Border
-                                    Width="26"
-                                    Height="26"
-                                    BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}"
-                                    BorderThickness="1"
-                                    >
-                                    <uwptoolkit:ImageEx
-                                        Name="AvatarImageEx"
-                                        Width="24"
-                                        Height="24"
-                                        PlaceholderSource="../../Assets/ImagePlaceHolder.jpg"
-                                        PlaceholderStretch="UniformToFill"
-                                        />
-                                </Border>
-                                <TextBlock
-                                    Name="UserNameTextBlock"
-                                    Grid.Column="1"
-                                    VerticalAlignment="Center"
-                                    Text="登录"
-                                    TextTrimming="CharacterEllipsis"
-                                    />
-                            </Grid>
-                        </Button>
-                        <Rectangle
-                            Width="240"
-                            Height="1"
-                            Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                            />
-                    </StackPanel>
-                    <ListView
-                        Name="BottomMenuList"
-                        Grid.Row="3"
-                        IsItemClickEnabled="True"
-                        ItemClick="MenuList_ItemClick"
-                        ItemTemplate="{StaticResource MenuItemDateTemplate}"
-                        ItemsSource="{x:Bind VM.BottomMenuItems}"
-                        SelectionMode="None"
-                        />
-                </Grid>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Grid Margin="0,-48,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            x:Name="MenuFrameColumn"
-                            Width="*"
-                            MaxWidth="600"
-                            />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Frame Name="MenuFrame" Grid.Column="0">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <PopupThemeTransition />
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                    </Frame>
-                    <Frame Name="ContentFrame" Grid.Column="1">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition />
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                    </Frame>
-                </Grid>
-            </SplitView.Content>
-        </SplitView>
-        <RelativePanel
-            x:Name="relativePanel"
-            Grid.Row="0"
-            Width="48"
-            HorizontalAlignment="Left"
-            Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
-            >
-            <Button
-                Name="Humburger"
-                Width="48"
-                Height="48"
-                Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                Click="Humburger_Click"
-                RelativePanel.AlignVerticalCenterWithPanel="True"
-                Style="{StaticResource TransparentButtonStyle}"
-                >
-                <Button.Content>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
-                </Button.Content>
-            </Button>
-        </RelativePanel>
     </Grid>
 </Page>
