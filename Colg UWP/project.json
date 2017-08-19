@@ -1,15 +1,15 @@
 ﻿{
   "dependencies": {
-    "HtmlAgilityPack": "1.4.9.5",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
+    "HtmlAgilityPack": "1.5.1",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
     "Microsoft.NETNative.Analyzer": "1.0.0",
-    "Microsoft.Toolkit.Uwp.UI.Controls": "1.4.1",
-    "Newtonsoft.Json": "10.0.2",
-    "System.ValueTuple": "4.3.1",
+    "Microsoft.Toolkit.Uwp.UI.Controls": "1.5.1",
+    "Newtonsoft.Json": "10.0.3",
+    "System.ValueTuple": "4.4.0",
     "WindowsAppStudio.Uwp": "1.5.3"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.10240": {}
   },
   "runtimes": {
     "win10-arm": {},
