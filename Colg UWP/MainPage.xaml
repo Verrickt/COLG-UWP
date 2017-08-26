@@ -140,7 +140,7 @@
                                     BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}"
                                     BorderThickness="1">
                                     <uwptoolkit:ImageEx
-                                        Name="AvatarImageEx"
+                                        x:Name="AvatarImageEx"
                                         Width="24"
                                         Height="24"
                                         PlaceholderSource="../../Assets/ImagePlaceHolder.jpg"
